@@ -7,38 +7,38 @@ function cPayDay(faction, pay, profit, interest, donatormoney, tax, incomeTax, v
 	local info = {}
 	-- output payslip
 	--outputChatBox("-------------------------- PAY SLIP --------------------------", 255, 194, 14)
-	table.insert(info, {"Payslip"})	
+	table.insert(info, {"Dia de Paga"})	
 	table.insert(info, {""})
 	--table.insert(info, {""})
 	-- state earnings/money from faction
 	if not (faction) then
 		if (pay + tax > 0) then
 			--outputChatBox(, 255, 194, 14, true)
-			table.insert(info, {"  State Benefits: $" .. exports.global:formatMoney(pay+tax)})	
+			table.insert(info, {"  Beneficios de estado: $" .. exports.global:formatMoney(pay+tax)})	
 		end
 	else
 		if (pay + tax > 0) then
 			--outputChatBox(, 255, 194, 14, true)
-			table.insert(info, {"  Wage Paid: $" .. exports.global:formatMoney(pay+tax)})
+			table.insert(info, {"  Salario pagado: $" .. exports.global:formatMoney(pay+tax)})
 		end
 	end
 	
 	-- business profit
 	if (profit > 0) then
 		--outputChatBox(, 255, 194, 14, true)
-		table.insert(info, {"  Business Profit: $" .. exports.global:formatMoney(profit)})
+		table.insert(info, {"  Beneficio empresarial: $" .. exports.global:formatMoney(profit)})
 	end
 	
 	-- bank interest
 	if (interest > 0) then
 		--outputChatBox(,255, 194, 14, true)
-		table.insert(info, {"  Bank Interest: $" .. exports.global:formatMoney(interest) .. " (≈" ..("%.2f"):format(Perc) .. "%)"})
+		table.insert(info, {"  Interés bancario: $" .. exports.global:formatMoney(interest) .. " (≈" ..("%.2f"):format(Perc) .. "%)"})
 	end
 	
 	-- donator money (nonRP)
 	if (donatormoney > 0) then
 		--outputChatBox(, 255, 194, 14, true)
-		table.insert(info, {"  Donator Money: $" .. exports.global:formatMoney(donatormoney)})
+		table.insert(info, {"  Dinero del donante: $" .. exports.global:formatMoney(donatormoney)})
 	end
 	
 	-- Above all the + stuff
@@ -47,63 +47,63 @@ function cPayDay(faction, pay, profit, interest, donatormoney, tax, incomeTax, v
 	-- income tax
 	if (tax > 0) then
 		--outputChatBox(, 255, 194, 14, true)
-		table.insert(info, {"  Income Tax of " .. (math.ceil(incomeTax*100)) .. "%: $" .. exports.global:formatMoney(tax)})
+		table.insert(info, {"  Impuesto sobre la Renta de " .. (math.ceil(incomeTax*100)) .. "%: $" .. exports.global:formatMoney(tax)})
 	end
 	
 	if (vtax > 0) then
 		--outputChatBox(, 255, 194, 14, true)
-		table.insert(info, {"  Vehicle Tax: $" .. exports.global:formatMoney(vtax)})
+		table.insert(info, {"  Impuesto sobre vehículos: $" .. exports.global:formatMoney(vtax)})
 	end
 
 	if (totalInsFee > 0) then
-		table.insert(info, {"  Vehicle Insurance: $" .. exports.global:formatMoney(totalInsFee)})
+		table.insert(info, {"  Seguro de vehículo: $" .. exports.global:formatMoney(totalInsFee)})
 	end
 	
 	if (ptax > 0) then
 		--outputChatBox(, 255, 194, 14, true )
-		table.insert(info, {"  Property Expenses: $" .. exports.global:formatMoney(ptax)})
+		table.insert(info, {"  Gastos de propiedad: $" .. exports.global:formatMoney(ptax)})
 	end
 	
 	if (rent > 0) then
 		--outputChatBox(, 255, 194, 14, true)
-		table.insert(info, {"  Apartment Rent: $" .. exports.global:formatMoney(rent)})
+		table.insert(info, {"  Renta del apartamento: $" .. exports.global:formatMoney(rent)})
 	end
 	
 	--outputChatBox("------------------------------------------------------------------", 255, 194, 14)
 	
 	if grossincome == 0 then
 		--outputChatBox(,255, 194, 14, true)
-		table.insert(info, {"  Gross Income: $0"})
+		table.insert(info, {"  Ingresos brutos: $0"})
 	elseif (grossincome > 0) then
 		--outputChatBox(,255, 194, 14, true)
 		--outputChatBox(, 255, 194, 14)
-		table.insert(info, {"  Gross Income: $" .. exports.global:formatMoney(grossincome)})
-		table.insert(info, {"  Remark(s): Transferred to your bank account."})
+		table.insert(info, {"  Ingresos brutos: $" .. exports.global:formatMoney(grossincome)})
+		table.insert(info, {"  Observación(es): Transferido a su cuenta bancaria."})
 	else
 		--outputChatBox(, 255, 194, 14, true)
 		--outputChatBox(, 255, 194, 14)
-		table.insert(info, {"  Gross Income: $" .. exports.global:formatMoney(grossincome)})
-		table.insert(info, {"  Remark(s): Taking from your bank account."})
+		table.insert(info, {"  Ingresos brutos: $" .. exports.global:formatMoney(grossincome)})
+		table.insert(info, {"  Observación(es): Tomando de su cuenta bancaria."})
 	end
 	
 	
 	if (pay + tax == 0) then
 		if not (faction) then
 			--outputChatBox(, 255, 0, 0)
-			table.insert(info, {"  The government could not afford to pay you your state benefits."})
+			table.insert(info, {"  El gobierno no podía permitirse el lujo de pagarle sus beneficios estatales."})
 		else
 			--outputChatBox(, 255, 0, 0)
-			table.insert(info, {"  Your employer could not afford to pay your wages."})
+			table.insert(info, {"  Su empleador no podía permitirse el lujo de pagar su salario."})
 		end
 	end
 	
 	if (rent == -1) then
 		--outputChatBox(, 255, 0, 0)
-		table.insert(info, {"  You were evicted from your apartment, as you can't pay the rent any longer."})
+		table.insert(info, {"  Te han desalojado de tu apartamento porque ya no puedes pagar el alquiler.."})
 	end
 
 	if (totalInsFee == -1) then
-		table.insert(info, {"  Your insurance has been removed because you failed to pay for it."})
+		table.insert(info, {"  Tu seguro ha sido eliminado porque no lo pagaste."})
 	end
 	
 	--outputChatBox("------------------------------------------------------------------", 255, 194, 14)

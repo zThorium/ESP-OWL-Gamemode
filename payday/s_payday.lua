@@ -556,7 +556,7 @@ function adminDoPaydayAll(thePlayer)
 
 	if (logged==1) and (exports.integration:isPlayerLeadAdmin(thePlayer)) then
 		outputChatBox("Pay day has been successfully forced for all players", thePlayer, 0, 255, 0)
-		exports.global:sendMessageToAdmins("[PAYDAY]: " .. exports.global:getPlayerFullIdentity(thePlayer) .. " has forced payday for ALL players")
+		--exports.global:sendMessageToAdmins("[PAYDAY]: " .. exports.global:getPlayerFullIdentity(thePlayer) .. " has forced payday for ALL players")
 		payAllWages(true)
 	end
 end
@@ -573,7 +573,7 @@ function adminDoPaydayOne(thePlayer, commandName, targetPlayerName)
 				if targetPlayer then
 					if getElementData(targetPlayer, "loggedin") == 1 then
 						outputChatBox("Pay day successfully forced for player " .. getPlayerName(targetPlayer):gsub("_", " "), thePlayer, 0, 255, 0)
-						exports.global:sendMessageToAdmins("[PAYDAY]: " .. exports.global:getPlayerFullIdentity(thePlayer) .. " has forced payday for player " .. getPlayerName(targetPlayer))
+						--exports.global:sendMessageToAdmins("[PAYDAY]: " .. exports.global:getPlayerFullIdentity(thePlayer) .. " has forced payday for player " .. getPlayerName(targetPlayer))
 						doPayDayPlayer(targetPlayer, true)
 					else
 						outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
