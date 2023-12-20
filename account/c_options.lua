@@ -90,7 +90,7 @@ function options_showmenu()
 		end, false)
 	wHeight = wHeight + bHeight
 
-	bStatistics = guiCreateButton(margin, wHeight, 230, 30, "Character Statistics", false, wOptions)
+	bStatistics = guiCreateButton(margin, wHeight, 230, 30, "Estadisticas Personaje", false, wOptions)
 	addEventHandler("onClientGUIClick", bStatistics,
 	function ()
 		if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -100,7 +100,7 @@ function options_showmenu()
 	end, false)
 	wHeight = wHeight + bHeight
 
-	bGraphicsSettings = guiCreateButton(margin, wHeight, 230, 30, "Settings", false, wOptions)
+	bGraphicsSettings = guiCreateButton(margin, wHeight, 230, 30, "Ajustes", false, wOptions)
 	--addEventHandler("onClientGUIClick", bGraphicsSettings, options_opengraphicsmenu, false)
 	addEventHandler("onClientGUIClick", bGraphicsSettings,
 	function ()
@@ -112,7 +112,7 @@ function options_showmenu()
 	wHeight = wHeight + bHeight
 
 	if getResourceFromName("donators") then
-		bStore = guiCreateButton(margin, wHeight, 230, 30, "Premium Features", false, wOptions)
+		bStore = guiCreateButton(margin, wHeight, 230, 30, "Caracteristicas", false, wOptions)
 		--addEventHandler("onClientGUIClick", bGraphicsSettings, options_opengraphicsmenu, false)
 		addEventHandler("onClientGUIClick", bStore,
 		function ()
@@ -175,7 +175,7 @@ function options_showmenu()
 	if getResourceFromName('vehicle') and getResourceFromName("vehicle_manager") then
 		local thePlayer = localPlayer
 		if exports.integration:isPlayerVCTMember(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) or exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer) then
-			bVehicleLib = guiCreateButton(margin, wHeight, 230, 30, "Vehicle Library", false, wOptions)
+			bVehicleLib = guiCreateButton(margin, wHeight, 230, 30, "Libreria Vehiculos", false, wOptions)
 			addEventHandler("onClientGUIClick", bVehicleLib,
 				function ()
 					if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -236,7 +236,7 @@ function options_showmenu()
 		wHeight = wHeight + bHeight
 	end
 
-	bLogout = guiCreateButton(margin, wHeight, 230, 30, "Logout", false, wOptions)
+	bLogout = guiCreateButton(margin, wHeight, 230, 30, "Desconectarse", false, wOptions)
 	addEventHandler("onClientGUIClick", bLogout,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -249,7 +249,7 @@ function options_showmenu()
 		end, false)
 	wHeight = wHeight + bHeight
 
-	bClose = guiCreateButton(margin, wHeight, 230, 30, "Close", false, wOptions)
+	bClose = guiCreateButton(margin, wHeight, 230, 30, "Cerrar", false, wOptions)
 	addEventHandler("onClientGUIClick", bClose, options_closemenu, false)
 	wHeight = wHeight + bHeight
 
@@ -286,20 +286,20 @@ function options_opengraphicsmenu()
 
 	guiSetEnabled(wOptions, false)
 
-	wGraphicsMenu = guiCreateWindow(left, top, windowWidth, windowHeight, "Game options", false)
+	wGraphicsMenu = guiCreateWindow(left, top, windowWidth, windowHeight, "Opciones del Juego", false)
 	guiWindowSetSizable(wGraphicsMenu, false)
 	----------
 
-	cMotionBlur = guiCreateCheckBox(10, 25, 180, 17, "Enable motion blur", false, false, wGraphicsMenu)
+	cMotionBlur = guiCreateCheckBox(10, 25, 180, 17, "Habilitar desenfoque de movimiento", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cMotionBlur, options_updateGameConfig)
 	-----------
-	cSkyClouds = guiCreateCheckBox(10, 45, 180, 17, "Enable Sky clouds", false, false, wGraphicsMenu)
+	cSkyClouds = guiCreateCheckBox(10, 45, 180, 17, "Habilitar nubes del cielo", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cSkyClouds, options_updateGameConfig)
 	------------
-	cStreamingAudio = guiCreateCheckBox(10, 65, 180, 17, "Enable streaming audio", false, false, wGraphicsMenu)
+	cStreamingAudio = guiCreateCheckBox(10, 65, 180, 17, "Habilitar la transmisión de audio", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cStreamingAudio, options_updateGameConfig)
 
-	bOverlayDescription = guiCreateButton ( 10, 85, 180, 17*2, "Overlay Description Settings", false, wGraphicsMenu )
+	bOverlayDescription = guiCreateButton ( 10, 85, 180, 17*2, "Configuración de descripción de superposición", false, wGraphicsMenu )
 	addEventHandler("onClientGUIClick", bOverlayDescription, overlayDescSettings)
 
 	--[[lVehicleStreamer = guiCreateCheckBox ( 10, 95, 180, 17, "Vehicle streamer: Disabled", false, false, wGraphicsMenu )
@@ -314,25 +314,25 @@ function options_opengraphicsmenu()
 	sPickupStreamer = guiCreateScrollBar(10, 140, 180, 17, true, false, wGraphicsMenu)
 	addEventHandler("onClientGUIScroll", sPickupStreamer, options_GameConfig_updateScrollbars)]]
 
-	cLogsEnabled = guiCreateCheckBox(10, 160, 180, 17, "Logging of chat", false, false, wGraphicsMenu)
+	cLogsEnabled = guiCreateCheckBox(10, 160, 180, 17, "Registro de chat", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cLogsEnabled, options_updateGameConfig)
 
-	cBubblesEnabled = guiCreateCheckBox(10, 180, 180, 17, "Enable Chat bubbles", false, false, wGraphicsMenu)
+	cBubblesEnabled = guiCreateCheckBox(10, 180, 180, 17, "Habilitar burbujas de chat", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cBubblesEnabled, options_updateGameConfig)
 
-	cIconsEnabled = guiCreateCheckBox(10, 200, 180, 17, "Enable typing icons", false, false, wGraphicsMenu)
+	cIconsEnabled = guiCreateCheckBox(10, 200, 180, 17, "Habilitar iconos de escritura", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cIconsEnabled, options_updateGameConfig)
 
-	cEnableNametags = guiCreateCheckBox(10, 220, 180, 17, "Enable nametags", false, false, wGraphicsMenu)
+	cEnableNametags = guiCreateCheckBox(10, 220, 180, 17, "Habilitar nametags", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cEnableNametags, options_updateGameConfig)
 
-	cEnableRShaders = guiCreateCheckBox(10, 240, 180, 17, "Enable radar shader", false, false, wGraphicsMenu)
+	cEnableRShaders = guiCreateCheckBox(10, 240, 180, 17, "Habilitar radar shader", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cEnableRShaders, options_updateGameConfig)
 
-	cEnableWShaders = guiCreateCheckBox(10, 260, 180, 17, "Enable water shader", false, false, wGraphicsMenu)
+	cEnableWShaders = guiCreateCheckBox(10, 260, 180, 17, "Habilitar water shader", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cEnableWShaders, options_updateGameConfig)
 
-	cEnableVShaders = guiCreateCheckBox(10, 280, 180, 17, "Enable vehicle shader", false, false, wGraphicsMenu)
+	cEnableVShaders = guiCreateCheckBox(10, 280, 180, 17, "Habilitar vehicle shader", false, false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", cEnableVShaders, options_updateGameConfig)
 
 	--[[
@@ -415,7 +415,7 @@ function options_opengraphicsmenu()
 	gameMenuLoaded = true
 	--options_GameConfig_updateScrollbars()
 
-	bGraphicsMenuClose = guiCreateButton(10, 320, 490, 17*2, "Close", false, wGraphicsMenu)
+	bGraphicsMenuClose = guiCreateButton(10, 320, 490, 17*2, "Cerrar", false, wGraphicsMenu)
 	addEventHandler("onClientGUIClick", bGraphicsMenuClose, options_closegraphicsmenu, false)
 end
 
@@ -453,7 +453,7 @@ function overlayDescSettings(button, state)
 			guiSetEnabled(wOptions, false)
 			guiSetEnabled(wGraphicsMenu, false)
 
-			wOverlayDescSettings = guiCreateWindow(left, top, windowWidth, windowHeight, "Overlay Description Options", false)
+			wOverlayDescSettings = guiCreateWindow(left, top, windowWidth, windowHeight, "Opciones de descripción de superposición", false)
 			guiWindowSetSizable(wOverlayDescSettings, false)
 			----------
 			local y = 0
@@ -461,14 +461,14 @@ function overlayDescSettings(button, state)
 			local lane1x = 10
 			local lane2w = lane1w + lane1x
 			local lane2x = lane1x*2 + lane1w
-			cEnableDescription = guiCreateCheckBox(10, 25+y, lane1w, 17, "Enable All Overlay Description", true, false, wOverlayDescSettings)
+			cEnableDescription = guiCreateCheckBox(10, 25+y, lane1w, 17, "Habilitar toda la descripción de superposición", true, false, wOverlayDescSettings)
 			addEventHandler("onClientGUIClick", cEnableDescription, options_updateGameConfig)
 			enable = tonumber( loadSavedData("enableOverlayDescription", "1") or 1)
 			guiCheckBoxSetSelected ( cEnableDescription, enable == 1 and true or false)
 			guiCreateStaticImage ( 10, 25+y+23, windowWidth-20 , 1, ":admin-system/images/whitedot.jpg", false, wOverlayDescSettings )
 			y = y + 30
 
-			cEnableDescriptionVeh = guiCreateCheckBox(10, 25+y, lane1w, 17, "Enable Overlay Description (Vehicle)", true, false, wOverlayDescSettings)
+			cEnableDescriptionVeh = guiCreateCheckBox(10, 25+y, lane1w, 17, "Habilitar descripción superpuesta (vehículo)", true, false, wOverlayDescSettings)
 			addEventHandler("onClientGUIClick", cEnableDescriptionVeh, options_updateGameConfig)
 			enable = tonumber( loadSavedData("enableOverlayDescriptionVeh", "1") or 1 )
 			guiCheckBoxSetSelected ( cEnableDescriptionVeh, enable == 1 and true or false)
@@ -502,11 +502,11 @@ function overlayDescSettings(button, state)
 
 			y = y + 20 + 5
 
-			bgVeh = guiCreateCheckBox ( 10, 25+y+3, 150, 17,  "Enable Background", true, false, wOverlayDescSettings )
+			bgVeh = guiCreateCheckBox ( 10, 25+y+3, 150, 17,  "Habilitar fondo", true, false, wOverlayDescSettings )
 			enable = tonumber( loadSavedData("bgVeh", "1") or 1 )
 			guiCheckBoxSetSelected ( bgVeh, enable == 1 and true or false)
 
-			borderVeh = guiCreateCheckBox ( 10+150, 25+y+3, 150, 17, "Enable Border", true, false, wOverlayDescSettings )
+			borderVeh = guiCreateCheckBox ( 10+150, 25+y+3, 150, 17, "Activar Borde", true, false, wOverlayDescSettings )
 			enable = tonumber( loadSavedData("borderVeh", "1") or 1)
 			guiCheckBoxSetSelected ( borderVeh, enable == 1 and true or false)
 
@@ -517,7 +517,7 @@ function overlayDescSettings(button, state)
 
 			y = y + 40
 
-			cEnableOverlayDescriptionPro = guiCreateCheckBox(10, 25+y, lane1w, 17, "Enable Overlay Description (Property)", true, false, wOverlayDescSettings)
+			cEnableOverlayDescriptionPro = guiCreateCheckBox(10, 25+y, lane1w, 17, "Habilitar descripción de superposición (propiedad)", true, false, wOverlayDescSettings)
 			addEventHandler("onClientGUIClick", cEnableOverlayDescriptionPro, options_updateGameConfig)
 			enable = tonumber( loadSavedData("enableOverlayDescriptionPro", "1") or 1 )
 			guiCheckBoxSetSelected ( cEnableOverlayDescriptionPro, enable == 1 and true or false)
@@ -529,7 +529,7 @@ function overlayDescSettings(button, state)
 
 			y = y + 20
 
-			lFontPro = guiCreateLabel ( 10, 25+y+3, 40, 20,  "Font:", false, wOverlayDescSettings )
+			lFontPro = guiCreateLabel ( 10, 25+y+3, 40, 20,  "Fuente:", false, wOverlayDescSettings )
 			cFontPro = guiCreateComboBox ( 10+40, 25+y, lane1w, 20,  loadSavedData2("cFontPro") , false, wOverlayDescSettings )
 			for key, font in pairs(fonts) do
 				guiComboBoxAddItem(cFontPro, type(font[1]) == "string" and font[1] or "BizNoteFont18")
@@ -549,11 +549,11 @@ function overlayDescSettings(button, state)
 
 			y = y + 20 + 5
 
-			bgPro = guiCreateCheckBox ( 10, 25+y+3, 150, 17,  "Enable Background", true, false, wOverlayDescSettings )
+			bgPro = guiCreateCheckBox ( 10, 25+y+3, 150, 17,  "Activar Fondo", true, false, wOverlayDescSettings )
 			enable = tonumber( loadSavedData("bgPro", "1") or 1 )
 			guiCheckBoxSetSelected ( bgPro, enable == 1 and true or false)
 
-			borderPro = guiCreateCheckBox ( 10+150, 25+y+3, 150, 17, "Enable Border", true,false,  wOverlayDescSettings )
+			borderPro = guiCreateCheckBox ( 10+150, 25+y+3, 150, 17, "Activar Borde", true,false,  wOverlayDescSettings )
 			enable = tonumber( loadSavedData("borderPro", "1") or 1 )
 			guiCheckBoxSetSelected ( borderPro, enable == 1 and true or false)
 
@@ -564,7 +564,7 @@ function overlayDescSettings(button, state)
 
 			y = y + 40
 
-			bCloseOverlayDescSettings = guiCreateButton(10, 70+y, windowWidth+34, 17*2, "Close", false, wOverlayDescSettings)
+			bCloseOverlayDescSettings = guiCreateButton(10, 70+y, windowWidth+34, 17*2, "Cerrar", false, wOverlayDescSettings)
 			addEventHandler("onClientGUIClick", bCloseOverlayDescSettings, fCloseOverlayDescSettings, false)
 		end
 	end
