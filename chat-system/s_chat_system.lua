@@ -96,16 +96,16 @@ function localIC(source, message, language)
 	if playerVehicle then
 		if (exports.vehicle:isVehicleWindowUp(playerVehicle)) then
 			table.insert(affectedElements, playerVehicle)
-			outputChatBox( " [" .. languagename .. "] " .. playerName .. " ((In Car)) says: " .. message, source, unpack(color))
+			outputChatBox( " [" .. languagename .. "] " .. playerName .. " ((En Auto)) dice: " .. message, source, unpack(color))
 		else
-			outputChatBox( " [" .. languagename .. "] " .. playerName .. " says: " .. message, source, unpack(color))
+			outputChatBox( " [" .. languagename .. "] " .. playerName .. " dice: " .. message, source, unpack(color))
 		end
 	else
 		if getElementData(source, "talk_anim") == "1" then
 			exports.global:applyAnimation(source, "GANGS", "prtial_gngtlkA", 1, false, true, false)
 		end
-		outputChatBox( " [" .. languagename .. "] " .. playerName .. " says: " .. message, source, unpack(color))
-		triggerClientEvent(source, "addChatBubble", source, message, "say")
+		outputChatBox( " [" .. languagename .. "] " .. playerName .. " dice: " .. message, source, unpack(color))
+		triggerClientEvent(source, "addChatBubble", source, message, "dice")
 	end
 
 	local dimension = getElementDimension(source)
@@ -150,7 +150,7 @@ function localIC(source, message, language)
 									local message2 = call(getResourceFromName("language-system"), "applyLanguage", source, lp, message, language)
 									local message2 = trunklateText( lp, message2 )
 
-									outputChatBox(" [" .. languagename .. "] " .. playerName .. " ((In Car)) says: " .. message2, lp, unpack(color))
+									outputChatBox(" [" .. languagename .. "] " .. playerName .. " ((En Auto)) dice: " .. message2, lp, unpack(color))
 									table.insert(affectedElements, lp)
 								end
 							end
@@ -193,8 +193,8 @@ function localIC(source, message, language)
 						local message2 = call(getResourceFromName("language-system"), "applyLanguage", source, nearbyPlayer, message, language)
 						local message2 = trunklateText( nearbyPlayer, message2 )
 
-						outputChatBox(" [" .. languagename .. "] " .. playerName .. " says: " .. message2, nearbyPlayer, unpack(color))
-						triggerClientEvent(nearbyPlayer, "addChatBubble", source, message2, "say")
+						outputChatBox(" [" .. languagename .. "] " .. playerName .. " dice: " .. message2, nearbyPlayer, unpack(color))
+						triggerClientEvent(nearbyPlayer, "addChatBubble", source, message2, "dice")
 						table.insert(affectedElements, nearbyPlayer)
 					end
 				end
@@ -223,7 +223,7 @@ function meEmote(source, cmd, ...)
 	if logged == 1 then
 		local message = table.concat({...}, " ")
 		if not (...) then
-			outputChatBox("SYNTAX: /me [Action]", source, 255, 194, 14)
+			outputChatBox("SYNTAX: /me [Acción]", source, 255, 194, 14)
 		else
 			local result, affectedPlayers = exports.global:sendLocalMeAction(source, message, true, true)
 			local dimension = getElementDimension(source)
@@ -257,7 +257,7 @@ zoneDragstrip = createColSphere(225, 2496, 16, 355)
 function radio(source, radioID, message, cmd)
 	local jailed = getElementData(source, "jailed") or 0
 	if jailed > 0 then
-		outputChatBox('You cannot use a radio in jail.', source, 255, 0, 0)
+		outputChatBox('No puedes usar la radio en la carcel.', source, 255, 0, 0)
 		return
 	end
 
@@ -269,7 +269,7 @@ function radio(source, radioID, message, cmd)
 	radioID = tonumber(radioID) or 1
 	
 	if isPedDead(source) then
-		outputChatBox(" You cannot use your radio when dead.", source, 255, 0, 0)
+		outputChatBox(" No puedes usar la radio muerto.", source, 255, 0, 0)
 		return
 	end
 	
@@ -592,15 +592,15 @@ function radio(source, radioID, message, cmd)
 			end
 
 			if channelName == "COUNTY MED" then
-				outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. message, {60,179,113})
+				outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. message, {60,179,113})
 			elseif channelName == "DEPARTMENT" then
-				outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. message, {r,162,b})
+				outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. message, {r,162,b})
 			else
 				if cmd == "rlow" then
-					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " whispers: " .. message, {r,g,b})
+					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " susurra: " .. message, {r,g,b})
 					triggerEvent("sendAme", source, "whispers into their radio.")
 				else
-					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. message, {r,g,b})
+					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. message, {r,g,b})
 				end
 			end
 
@@ -628,11 +628,11 @@ function radio(source, radioID, message, cmd)
 						end
 					end
 					if channelName == "COUNTY MED" then
-						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. trunklateText( value, message2 ), {60,179,113} )
+						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. trunklateText( value, message2 ), {60,179,113} )
 					elseif channelName == "DEPARTMENT" then
-						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. trunklateText( value, message2 ), {r,162,b} )
+						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. trunklateText( value, message2 ), {r,162,b} )
 					else
-						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " says: " .. trunklateText( value, message2 ), {r,g,b} )
+						outputChatBoxCar( getPedOccupiedVehicle( value ), value, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. trunklateText( value, message2 ), {r,g,b} )
 					end
 
 					--if not exports.global:hasItem(value, 88) == false then  ***Earpiece Fix***
@@ -671,9 +671,9 @@ function radio(source, radioID, message, cmd)
 						local message2 = call(getResourceFromName("language-system"), "applyLanguage", source, value, message, language)
 						local text1 = "[" .. languagename .. "] " .. getPlayerName(source) .. " [RADIO]"
 						if cmd == "rlow" then
-							text2 = " whispers: " .. trunklateText( value, message2 )
+							text2 = " susurra: " .. trunklateText( value, message2 )
 						else
-							text2 = " says: " .. trunklateText( value, message2 )
+							text2 = " dice: " .. trunklateText( value, message2 )
 						end
 
 						if outputChatBoxCar( getPedOccupiedVehicle( source ), value, text1, text2, {255, 255, 255} ) then
@@ -2700,9 +2700,9 @@ function interviewChat(thePlayer, commandName, ...)
 				local message = table.concat({...}, " ")
 				local name = getPlayerName(thePlayer)
 
-				local finalmessage = "[NEWS] Interview Guest " .. name .." says: ".. message
+				local finalmessage = "[NEWS] Interview Guest " .. name .." dice: ".. message
 				if exports.factions:isInFactionType(thePlayer, 6)then -- news faction
-					finalmessage = "[NEWS] " .. name .." says: ".. message
+					finalmessage = "[NEWS] " .. name .." dice: ".. message
 				end
 
 				for key, value in ipairs(exports.pool:getPoolElementsByType("player")) do
