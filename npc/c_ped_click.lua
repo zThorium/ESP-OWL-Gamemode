@@ -1,4 +1,4 @@
-local messages = { "F*** off, Punk!", "You're not welcome.", "I'm not selling you anything.", "Find someone else to harrass.", "Get Lost." }
+local messages = { "¡Vete a la mierda, punk!", "No eres bienvenido", "No te vendere nada.", "Encuentra a alguien más a quien acosar.", "Pierdete." }
 
 function pedDamage()
 	if getElementData(source,"shopkeeper") then

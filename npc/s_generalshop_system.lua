@@ -17,7 +17,7 @@ local skins = { { 211, 217 }, { 179 }, false, { 178 }, { 82 }, { 80, 81 }, { 28,
 
 function createShopKeeper(x,y,z,interior,dimension,id,shoptype,rotation, skin, sPendingWage, sIncome, sCapacity, currentCap, sSales, pedName, sContactInfo, faction_belong, faction_access)
 	if not g_shops[shoptype] then
-		outputDebugString("Trying to locate shop #" .. id .. " with invalid shoptype " .. shoptype)
+		outputDebugString("Tratando de localizar la tienda #" .. id .. " con tipo de tienda no válido " .. shoptype)
 		return
 	end
 
@@ -130,9 +130,9 @@ function delNearbyGeneralshops(thePlayer, commandName)
 		end
 
 		if (count==0) then
-			outputChatBox("   Deleted None.", thePlayer, 255, 126, 0)
+			outputChatBox("   Eliminado Ninguno.", thePlayer, 255, 126, 0)
 		else
-			outputChatBox("   Deleted "..count.." None.", thePlayer, 255, 126, 0)
+			outputChatBox("   Eliminado "..count.." Ninguno.", thePlayer, 255, 126, 0)
 		end
 	end
 end
@@ -143,9 +143,9 @@ function createGeneralshop(thePlayer, commandName, shoptype, skin, ...)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		local shoptype = tonumber(shoptype)
 		if not shoptype or not g_shops[shoptype] then
-			outputChatBox("SYNTAX: /" .. commandName .. " [shop type] [skin, -1 = random] [Firstname Lastname, -1 = random]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [tipo tienda] [skin, -1 = aleatorio] [PrimerNombre SegundoNombre, -1 = aleatorio]", thePlayer, 255, 194, 14)
 			for k, v in ipairs(g_shops) do
-				outputChatBox("TYPE " .. k .. " = " .. v.name, thePlayer, 200, 200, 200)
+				outputChatBox("TIPO " .. k .. " = " .. v.name, thePlayer, 200, 200, 200)
 			end
 			return false
 		end
@@ -162,7 +162,7 @@ function createGeneralshop(thePlayer, commandName, shoptype, skin, ...)
 			end
 			local ped = createPed(tonumber(skinTest), 0, 0, 3)
 			if not ped then
-				outputChatBox("Invalid Skin.", thePlayer, 255, 0, 0)
+				outputChatBox("Skin Invalida.", thePlayer, 255, 0, 0)
 				return
 			else
 				destroyElement(ped)
@@ -178,7 +178,7 @@ function createGeneralshop(thePlayer, commandName, shoptype, skin, ...)
 
 		if shoptype == 17 then
 			if dimension == 0 and interior == 0 then
-				outputChatBox("Custom shop must be created in a business interior.", thePlayer, 255, 0, 0)
+				outputChatBox("La tienda personalizada debe crearse en el interior de una empresa.", thePlayer, 255, 0, 0)
 				return false
 			end
 		end
@@ -202,7 +202,7 @@ function createGeneralshop(thePlayer, commandName, shoptype, skin, ...)
 		if (id) then
 			createShopKeeper(x,y,z,interior,dimension,id,tonumber(shoptype),rotation,skin ~= -1 and skin, 0, 0, 10, 0, "", pedName, {"", "", "", ""}, 0, 0)
 		else
-			outputChatBox("Error creating shop.", thePlayer, 255, 0, 0)
+			outputChatBox("Error creando la tienda.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -239,7 +239,7 @@ function getNearbyGeneralshops(thePlayer, commandName)
 			outputChatBox("   None.", thePlayer, 255, 126, 0)
 		end
 	else
-		outputChatBox("Non-staff members can only use this command in their own interiors.", thePlayer, 255, 194, 14)
+		outputChatBox("Los miembros que no pertenecen al personal solo pueden utilizar este comando en sus propios interiores.", thePlayer, 255, 194, 14)
 	end
 end
 addCommandHandler("nearbyshops", getNearbyGeneralshops, false, false)
@@ -250,7 +250,7 @@ function moveNPCshop(thePlayer, commandName, value)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) or (interior and getElementData(interior, "status").owner == getElementData(thePlayer, "dbid"))) then
 
 	if not tonumber(value) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Shop ID]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Tienda ID]", thePlayer, 255, 194, 14)
 		return
 	end
 
@@ -264,10 +264,10 @@ function moveNPCshop(thePlayer, commandName, value)
 		end
 
 	if not foundShop then
-		outputChatBox("No shop founded with ID #"..value, thePlayer, 255, 0, 0)
+		outputChatBox("No se encontro tienda con el ID #"..value, thePlayer, 255, 0, 0)
 		return
 	elseif getElementDimension(foundShop) ~= dim then
-		outputChatBox("The shop must be in the same interior as you are trying to move it to.", thePlayer, 255, 0, 0)
+		outputChatBox("La tienda debe estar en el mismo interior al que estás intentando trasladarla.", thePlayer, 255, 0, 0)
 		return
 	end
 
@@ -292,7 +292,7 @@ addCommandHandler("movenpc", moveNPCshop)
 function gotoShop(thePlayer, commandName, shopID)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not tonumber(shopID) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Shop ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Tienda ID]", thePlayer, 255, 194, 14)
 		else
 			local possibleShops = getElementsByType("ped", resourceRoot)
 			local foundShop = false
@@ -304,7 +304,7 @@ function gotoShop(thePlayer, commandName, shopID)
 			end
 
 			if not foundShop then
-				outputChatBox("No shop founded with ID #"..shopID, thePlayer, 255, 0, 0)
+				outputChatBox("No se encontro tienda con ID #"..shopID, thePlayer, 255, 0, 0)
 				return false
 			end
 
@@ -340,13 +340,13 @@ function startGoingToShop(thePlayer, x,y,z,r,interior,dimension,shopID)
 		setElementInterior(thePlayer, interior)
 		setElementDimension(thePlayer, dimension)
 	end
-	outputChatBox(" You have teleported to shop ID#"..shopID, thePlayer)
+	outputChatBox(" Te has teletransportado a la tienda ID#"..shopID, thePlayer)
 end
 
 function removeGeneralShop(thePlayer, commandName, id)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not (id) or not tonumber(id) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [ID]", thePlayer, 255, 194, 14)
 			return false
 		end
 
@@ -360,7 +360,7 @@ function removeGeneralShop(thePlayer, commandName, id)
 						if (getElementData(thePlayer, "shop:removing") and getElementData(thePlayer, "shop:removing") == dbid) or getElementData(thePed, "shoptype") ~= 17 then
 							destroyElement(thePed)
 							if mysql:query_free("DELETE FROM shops WHERE id='" .. mysql:escape_string(dbid) .. "' LIMIT 1") and	mysql:query_free("DELETE FROM shop_products WHERE npcID='" .. mysql:escape_string(dbid) .. "' ") and mysql:query_free("DELETE FROM shop_contacts_info WHERE npcID='" .. mysql:escape_string(dbid) .. "' ") then
-								outputChatBox("Successfully deleted and removed shop #" .. dbid .. " from the database.", thePlayer, 0, 255, 0)
+								outputChatBox("Tienda eliminada y eliminada con éxito #" .. dbid .. " de la base de datos.", thePlayer, 0, 255, 0)
 							else
 								outputChatBox("Error: shop does not exist.", thePlayer, 255, 0, 0)
 								return false
@@ -369,7 +369,7 @@ function removeGeneralShop(thePlayer, commandName, id)
 							setElementData(thePlayer, "shop:removing", false)
 						else
 							setElementData(thePlayer, "shop:removing", dbid)
-							outputChatBox("Warning: by deleting this shop, all items within it will be deleted and they cannot be restored! Type /" .. commandName .. " " .. dbid .. " to continue.", thePlayer, 255, 0, 0)
+							outputChatBox("Advertencia: al eliminar esta tienda, todos los artículos que contiene se eliminarán y no se podrán restaurar. Escribe /" .. commandName .. " " .. dbid .. " para continuar.", thePlayer, 255, 0, 0)
 							return true
 						end
 					end
@@ -378,7 +378,7 @@ function removeGeneralShop(thePlayer, commandName, id)
 		end
 
 		if (counter == 0) then
-			outputChatBox("Error: shop does not exist.", thePlayer, 255, 0, 0)
+			outputChatBox("Error: Tienda no existe.", thePlayer, 255, 0, 0)
 			return false
 		end
 		return true
@@ -476,15 +476,15 @@ function reloadGeneralShop(thePlayer, commandName, id)
 		if not (id) then
 			id = getElementData(thePlayer, "shop:mostRecentDeleteShop") or false
 			if not id then
-				outputChatBox("SYNTAX: /" .. commandName .. " [ID]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [ID]", thePlayer, 255, 194, 14)
 				return false
 			end
 		end
 
 		if loadOneShop(id) then
-			outputChatBox("Reloaded shop ID#"..id..".",thePlayer, 0,255,0)
+			outputChatBox("Recargada tienda ID#"..id..".",thePlayer, 0,255,0)
 		else
-			outputChatBox("Reloaded shop ID#"..id..".",thePlayer, 255,0,0)
+			outputChatBox("Recargada tienda ID#"..id..".",thePlayer, 255,0,0)
 		end
 	end
 end
@@ -495,14 +495,14 @@ addCommandHandler("reloadped", reloadGeneralShop, false, false)
 function renamePed(thePlayer, commandName, id, ...)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer)) then
 		if not tonumber(id) or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Shop ID] [Firstname LastName]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Tienda ID] [PrimerNombre SegundoNombre]", thePlayer, 255, 194, 14)
 			return false
 		end
 		id = math.floor(tonumber(id))
 		local pedName = table.concat({...}, "_")
 
 		if pedName == "" then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Shop ID] [Firstname LastName]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Tienda ID] [PrimerNombre SegundoNombre]", thePlayer, 255, 194, 14)
 			return false
 		end
 
@@ -513,7 +513,7 @@ function renamePed(thePlayer, commandName, id, ...)
 		end
 
 		if not mysql:query_free("UPDATE `shops` SET `pedName`='"..tostring(pedName):gsub("'","''").."' WHERE `id`='"..tostring(id).."' ") then
-			outputChatBox("Failed to rename this NPC, please report as bug.",thePlayer, 255,0,0)
+			outputChatBox("No se pudo cambiar el nombre de este NPC, infórmalo como error.",thePlayer, 255,0,0)
 			return false
 		end
 
@@ -530,9 +530,9 @@ function renamePed(thePlayer, commandName, id, ...)
 		end
 
 		if loadOneShop(id) then
-			outputChatBox("Renamed shop ID#"..id.." to '"..tostring(pedName):gsub("_"," ").."'.",thePlayer, 0,255,0)
+			outputChatBox("Renombrada tienda ID#"..id.." a '"..tostring(pedName):gsub("_"," ").."'.",thePlayer, 0,255,0)
 		else
-			outputChatBox("Failed to reload this NPC, please report as bug.",thePlayer, 255,0,0)
+			outputChatBox("No se pudo recargar este NPC, infórmalo como error.",thePlayer, 255,0,0)
 		end
 	end
 end
@@ -545,7 +545,7 @@ addCommandHandler("renameshop", renamePed, false, false)
 function clickStoreKeeper()
 	local success, currentUser = canIAccessThisShop(source, client)
 	if not success then
-		outputChatBox(currentUser.." is currently using this NPC, please wait a moment.", client, 255,0,0)
+		outputChatBox(currentUser.." actualmente está usando este NPC, espera un momento.", client, 255,0,0)
 		return false
 	end
 
@@ -623,7 +623,7 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 	local shop = g_shops[ shoptype or -1 ]
 	_G['shop'] = shop
 	if not shop then
-		outputChatBox("Error " .. error .. "-NE, report at bugs.owlgaming.net.", client, 255, 0, 0 )
+		outputChatBox("Error " .. error .. "-NE, reportalo en discord ChileStreet", client, 255, 0, 0 )
 		return
 	end
 
@@ -642,7 +642,7 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 	-- fetch the selected item
 	local item = getItemFromIndex( shoptype, index, true, interior )
 	if not item then
-		outputChatBox("Error " .. error .. "-NEI-" .. index .. ", report at bugs.owlgaming.net.", client, 255, 0, 0 )
+		outputChatBox("Error " .. error .. "-NEI-" .. index .. ", reportalo en discord ChileStreet.", client, 255, 0, 0 )
 		return
 	end
 
@@ -657,13 +657,13 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 
 	--checking age
 	if item.minimum_age and getElementData(client, "age") < item.minimum_age then
-		outputChatBox( "You need to be " .. item.minimum_age .. " years or older to buy this.", client, 255, 0, 0 )
+		outputChatBox( "Necesitas tener " .. item.minimum_age .. " años o más para comprar esto.", client, 255, 0, 0 )
 		return
 	end
 
 	-- check for money
 	if not exports.global:hasMoney( client, price ) then
-		outputChatBox( "You lack the money to buy this " .. item.name .. ".", client, 255, 0, 0 )
+		outputChatBox( "Te falta dinero para comprar esto. " .. item.name .. ".", client, 255, 0, 0 )
 		return
 	end
 
@@ -685,12 +685,12 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 			mysql:free_result(mysqlQ)
 		end
 	elseif itemID == 68 then -- Lottery Tickets / Check and
-		outputChatBox( "This item is temporarily disabled.", client, 255, 0, 0 )
+		outputChatBox( "Este artículo está temporalmente deshabilitado.", client, 255, 0, 0 )
 		--Code for this at the bottom of the file.
 		return
 	elseif itemID == 115 or itemID == 116 then
 		if item.license and getElementData( client, "license.gun" ) ~= 1 then
-			outputChatBox( "You lack a weapon license.", client, 255, 0, 0 )
+			outputChatBox( "Te falta licencia de armas.", client, 255, 0, 0 )
 			return
 		else
 			local characterDatabaseID = getElementData(client, "dbid")
@@ -713,7 +713,7 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 
 	-- Take money and give item
 	if exports.global:takeMoney( client, price ) and exports.global:giveItem( client, itemID, itemValue, item.metadata ) then
-		outputChatBox( "You bought this " .. item.name .. " for $" .. exports.global:formatMoney( price ) .. ".", client, 0, 255, 0 )
+		outputChatBox( "Compraste esto " .. item.name .. " por $" .. exports.global:formatMoney( price ) .. ".", client, 0, 255, 0 )
 	else
 		outputChatBox( "Error!", client, 255, 0, 0 )
 		return
@@ -722,9 +722,9 @@ addEventHandler( "shop:buy", resourceRoot, function( index )
 	-- Some items needs more than just an item in player inventory, here is where to do it
 	if itemID == 2 then
 		mysql:query_free("INSERT INTO `phones` (`phonenumber`, `boughtby`) VALUES ('"..tostring(itemValue).."', '"..mysql:escape_string(tostring(getElementData(client, "account:character:id") or 0)).."')")
-		outputChatBox("Your number is #" .. itemValue .. ".", client, 255, 194, 14 )
+		outputChatBox("Tu numero es #" .. itemValue .. ".", client, 255, 194, 14 )
 	elseif itemID == 114 then -- vehicle mods
-		outputChatBox("To add this item to any vehicle, go into a garage and double-click the item while sitting inside.", client, 255, 194, 14 )
+		outputChatBox("Para agregar este artículo a cualquier vehículo, vaya a un garaje y haga doble clic en el artículo mientras está sentado adentro.", client, 255, 194, 14 )
 	elseif itemID == 115 then -- log weapon purchases
 		exports.logs:dbLog( client, 36, client, "bought WEAPON - " .. itemValue )
 
@@ -773,9 +773,9 @@ function collectMoney(int)
 		if setShopStats(source, 'sPendingWage', 0) and setShopStats(source, 'sIncome', 0) then
 			if faction then
 				if exports.bank:giveBankMoney(faction, profit) then
-					exports.bank:addBankTransactionLog(0, -getElementData(faction, 'id'), profit, 13, 'Income from shopkeeper '..tostring(getPedName(source)), getPedName(source))
+					exports.bank:addBankTransactionLog(0, -getElementData(faction, 'id'), profit, 13, 'Ingresos del vendedor '..tostring(getPedName(source)), getPedName(source))
 					playCollectMoneySound(source)
-					outputChatBox("Total $"..exports.global:formatMoney(profit).." net income has been transferred to "..getTeamName(faction).."'s bank.", client, 0, 255, 0)
+					outputChatBox("Total $"..exports.global:formatMoney(profit).." los ingresos netos han sido transferidos a "..getTeamName(faction)..".", client, 0, 255, 0)
 					if destroyElement(source) then
 						return loadOneShop(ped_id)
 					end
@@ -789,7 +789,7 @@ function collectMoney(int)
 				end
 			end
 		else
-			outputChatBox("Internal error! Could not reset shop stats.", client, 255,0,0)
+			outputChatBox("¡Error interno! No se pudieron restablecer las estadísticas de la tienda.", client, 255,0,0)
 			return false
 		end
 	else
@@ -850,15 +850,15 @@ function checkSupplies(thePlayer)
     local dbid, entrance, exit, inttype,interiorElement = exports.interior_system:findProperty( thePlayer )
 
     if (dbid==0) then
-        outputChatBox("You are not in a business.", thePlayer, 255, 0, 0)
+        outputChatBox("no estas en un negocio.", thePlayer, 255, 0, 0)
     else
         local interiorStatus = getElementData(interiorElement, "status")
         local owner = interiorStatus.owner
 
         if exports.integration:isPlayerTrialAdmin(thePlayer) or tonumber(owner)==getElementData(thePlayer, "dbid") or exports.global:hasItem(thePlayer, 4, dbid) or exports.global:hasItem(thePlayer, 5, dbid) then
-            outputChatBox("You can check supplies of a business by opening the respective shop GUI.", thePlayer, 255, 194, 14)
+            outputChatBox("Puede consultar los suministros de una empresa abriendo la GUI de la tienda respectiva..", thePlayer, 255, 194, 14)
         else
-            outputChatBox("You are not in a business or do you do own the business.", thePlayer, 255, 0, 0)
+            outputChatBox("No está en un negocio o es dueño del negocio..", thePlayer, 255, 0, 0)
         end
     end
 end
@@ -872,7 +872,7 @@ function canIUseThisName(pedName)
 		mysql:free_result(checkName)
 	end
 	if row3 then
-		return false, "An other player's character has already used this name '"..pedName.."'."
+		return false, "El personaje de otro jugador ya ha usado este nombre. '"..pedName.."'."
 	end
 
 	local checkName2 = mysql:query("SELECT `id` FROM `shops` WHERE `pedName`='".. mysql:escape_string( pedName ) .."'")
@@ -882,9 +882,9 @@ function canIUseThisName(pedName)
 		mysql:free_result(checkName2)
 	end
 	if row33 then
-		return false, "An other shop has already used this name '"..pedName.."'."
+		return false, "Otra tienda ya ha usado este nombre. '"..pedName.."'."
 	end
-	return true, "This name is cool"
+	return true, "Este nombre es genial"
 end
 
 function updateShopSupplies(interiorID, supplies, thePlayer, cost, pedName)
@@ -903,8 +903,8 @@ function updateShopSupplies(interiorID, supplies, thePlayer, cost, pedName)
 			status.supplies = toJSON(updateSupplies)
 			setElementData(source, "status", status)
 			exports.bank:takeBankMoney(thePlayer, cost)
-			exports.bank:addBankTransactionLog(getElementData(thePlayer, "dbid"), nil, cost, 0, "SHOP RESTOCK", "Purchased "..tostring(cost).."$ worth of supplies for business ID"..tostring(interiorID), nil, nil)
-			storeKeeperSay(thePlayer, "We have stocked your business with half of your order. The other half has been sent to RS Haul delivery drivers.", pedName)
+			exports.bank:addBankTransactionLog(getElementData(thePlayer, "dbid"), nil, cost, 0, "SHOP RESTOCK", "Comprado "..tostring(cost).."$ valor de suministros para negocios ID"..tostring(interiorID), nil, nil)
+			storeKeeperSay(thePlayer, "Hemos abastecido tu negocio con la mitad de tu pedido. La otra mitad se envió a los repartidores de RS Haul..", pedName)
 		end
 	else
 		outputChatBox(why, thePlayer, 255, 0, 0)

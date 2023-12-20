@@ -43,19 +43,19 @@ function hasSupplies(int, supplies)
 		local interiorType = status.type or -1
 		if interiorType == 1 then -- business
 			local currentSupplies = fromJSON(status.supplies)
-			return (currentSupplies[tostring(supplies)] or 0) >= 1, (currentSupplies[tostring(supplies)] or 0) < 1 and "001 - This item is out of stock."
+			return (currentSupplies[tostring(supplies)] or 0) >= 1, (currentSupplies[tostring(supplies)] or 0) < 1 and "001 - Este artículo está agotado."
 		else
-			return false, "This interior is not a business thus far no transaction can be made here."
+			return false, "Este interior no es un negocio hasta el momento no se puede realizar ninguna transacción aquí.."
 		end
 	else
-		return false, "No transaction can be made here."
+		return false, "No se puede realizar ninguna transacción aquí.."
 	end
 end
 
 function checkSupply(thePlayer, command, supply)
 	--if (getElementData(thePlayer, "scripter_level") or 0) >= 2 then
 		if not supply then
-			outputChatBox("Syntax: " .. command .. " [itemID:itemValue]", thePlayer, 255, 0, 0)
+			outputChatBox("Sintaxis: " .. command .. " [itemID:itemValue]", thePlayer, 255, 0, 0)
 		else
 			local dimension = getElementDimension(thePlayer)
 			local interior = nil
@@ -68,9 +68,9 @@ function checkSupply(thePlayer, command, supply)
 			if interior then
 				local status = getElementData(interior, "status")
 				local supplies = fromJSON(status.supplies)
-				outputChatBox("This interior (" .. getElementData(interior, "dbid") .. ") has " .. tostring(supplies[tostring(supply)]) .. " supplies for '" .. supply .. "'.", thePlayer)
+				outputChatBox("Este interior (" .. getElementData(interior, "dbid") .. ") tiene " .. tostring(supplies[tostring(supply)]) .. " suministros para '" .. supply .. "'.", thePlayer)
 			else
-				outputChatBox("You are not inside of an interior.", thePlayer, 255, 0, 0)
+				outputChatBox("No estás dentro de un interior.", thePlayer, 255, 0, 0)
 			end
 		end
 	--end
@@ -170,21 +170,21 @@ function giveProfit(interior, ped, player, item, price)
 		pedName = string.gsub(pedName,"_", " ")
 		local playerName = getPlayerName(player):gsub("_", " ")
 		if playerGender == 0 then
-			triggerEvent('sendAme', player, "takes out a couple of dollar notes from his wallet, hands it over to "..pedName)
+			triggerEvent('sendAme', player, "saca un par de billetes de un dólar de su billetera y se los entrega a "..pedName)
 		else
-			triggerEvent('sendAme', player, "takes out a couple of dollar notes from her wallet, hands it over to "..pedName)
+			triggerEvent('sendAme', player, "saca un par de billetes de un dólar de su billetera y se los entrega a "..pedName)
 		end
 		local r = getRealTime()
 		local timeString = ("%02d/%02d/%04d %02d:%02d"):format(r.monthday, r.month + 1, r.year+1900, r.hour, r.minute)
-		local ownerNoti = "A customer bought a "..item.name.." for $"..exports.global:formatMoney(price).."."
-		local logString = "- "..timeString.." : A customer bought a "..item.name.." for $"..exports.global:formatMoney(price)..".\n"
+		local ownerNoti = "Un cliente compró un "..item.name.." por $"..exports.global:formatMoney(price).."."
+		local logString = "- "..timeString.." : Un cliente compró un "..item.name.." por $"..exports.global:formatMoney(price)..".\n"
 
-		triggerEvent("sendAme", ped, "gave "..playerName.." a "..item.name..".")
-		storeKeeperSay(player, "Here you are. And..", pedName)
+		triggerEvent("sendAme", ped, "dio "..playerName.." a "..item.name..".")
+		storeKeeperSay(player, "Aquí estás. Y..", pedName)
 		if playerGender == 0 then
-			storeKeeperSay(player, "Thank you, sir. Have a nice day!", pedName)
+			storeKeeperSay(player, "Gracias Señor. ¡Que tenga un lindo día!", pedName)
 		else
-			storeKeeperSay(player, "Thank you, ma'am. Have a nice day!", pedName)
+			storeKeeperSay(player, "TGracias Señora. ¡Que tenga un lindo día!", pedName)
 		end
 
 		--notifyAllShopOwners(ped, ownerNoti.." Come and collect the money when you got time ;)")
@@ -211,7 +211,7 @@ function canPlayerCollectProfit(player, ped, int)
 	-- interior check
 	local is, status = isActiveBusiness(int)
 	if not is then -- if not a business then noone can collect.
-		return false, "You can not collect profits from a non business property."
+		return false, "No se pueden obtener ganancias de una propiedad que no sea comercial."
 	end
 	local faction_id = status and status.faction or 0
 	local owner = status and status.owner or 0
@@ -222,7 +222,7 @@ function canPlayerCollectProfit(player, ped, int)
 		if exports.factions:isPlayerInFaction(player, faction_id) then
 			return true, faction
 		else
-			return false, "You are not a member of "..getTeamName(faction).."."
+			return false, "No eres miembro de "..getTeamName(faction).."."
 		end
 	-- if interior is player owned
 	elseif owner == getElementData(player, 'dbid') then
@@ -230,7 +230,7 @@ function canPlayerCollectProfit(player, ped, int)
 	end
 
 	-- exceptions
-	return false, "You don't have sufficient permissions to perform this action."
+	return false, "No tienes permisos suficientes para realizar esta acción."
 end
 
 function takeBankMoney(thePlayer, amount)
@@ -293,7 +293,7 @@ end
 function getPedName(shopElement)
 	local pedName = getElementData(shopElement, "name")
 	if not pedName or string.sub(tostring(pedName),1,8) == "userdata" then
-		return "The Storekeeper"
+		return "El tendero"
 	else
 		return tostring(pedName):gsub("_", " ")
 	end
@@ -314,10 +314,10 @@ end
 
 function updateShopSalary(thePlayer)
 	outputDebugString("BIZ-SYSTEM SETTINGS: wageRate="..settings.wageRate..", limitDebtAmount="..settings.limitDebtAmount..", warningDebtAmount="..settings.warningDebtAmount.."")
-	outputDebugString("------------START UPDATING SHOP WAGES------------")
+	outputDebugString("------------COMIENZO ACTUALIZACION TIENDA SALARIOS------------")
 	if thePlayer then
 		outputChatBox("BIZ-SYSTEM SETTINGS: wageRate="..settings.wageRate..", limitDebtAmount="..settings.limitDebtAmount..", warningDebtAmount="..settings.warningDebtAmount.."", thePlayer)
-		outputChatBox("------------START UPDATING SHOP WAGES------------", thePlayer)
+		outputChatBox("------------COMIENZO ACTUALIZACION TIENDA SALARIOS------------", thePlayer)
 	end
 	local count = 0
 	local possibleShops = getElementsByType("ped", resourceRoot)
@@ -343,14 +343,14 @@ function updateShopSalary(thePlayer)
 						exports.anticheat:setEld(shop, "sPendingWage", sNewPendingWage, 'all')
 						local update = mysql:query_free("UPDATE `shops` SET `sPendingWage`='"..tostring(sNewPendingWage).."' WHERE `id`='"..tostring(shopID).."' ") or false
 						if update then
-							outputDebugString("Shop ID#"..shopID.." Updated Staff Wage "..sPendingWage.." -> "..sNewPendingWage)
+							outputDebugString("Tienda ID#"..shopID.." Salario personal actualizado "..sPendingWage.." -> "..sNewPendingWage)
 							if thePlayer then
-								outputChatBox("Shop ID#"..shopID.." Updated Staff Wage "..sPendingWage.." -> "..sNewPendingWage, thePlayer)
+								outputChatBox("Tienda ID#"..shopID.." Salario personal actualizado "..sPendingWage.." -> "..sNewPendingWage, thePlayer)
 							end
 						else
-							outputDebugString("Shop ID#"..shopID.." Updated Staff Wage Failed.")
+							outputDebugString("Tienda ID#"..shopID.." Error al actualizar salario del personal.")
 							if thePlayer then
-								outputChatBox("Shop ID#"..shopID.." Updated Staff Wage Failed.", thePlayer)
+								outputChatBox("Tienda ID#"..shopID.." Error al actualizar salario del personal.", thePlayer)
 							end
 							count = count - 1
 						end
@@ -359,16 +359,16 @@ function updateShopSalary(thePlayer)
 						local delete2 = mysql:query_free("DELETE FROM `shop_products` WHERE `npcID`='"..tostring(shopID).."' ") or false
 						if delete and delete2 then
 							notifyAllShopOwners(shop, 2)
-							outputDebugString("Shop ID#"..shopID.." Deleted itself due to the debt exceeds $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
+							outputDebugString("Tienda ID#"..shopID.." Se eliminó debido a que la deuda excede $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
 							if thePlayer then
-								outputChatBox("Shop ID#"..shopID.." Deleted itself due to the debt exceeds $"..exports.global:formatMoney(settings.limitDebtAmount)..".", thePlayer)
+								outputChatBox("Tienda ID#"..shopID.." Se eliminó debido a que la deuda excede $"..exports.global:formatMoney(settings.limitDebtAmount)..".", thePlayer)
 							end
 							destroyElement(shop)
-							exports.global:sendMessageToAdmins("[BIZ-SYSTEM] Shop ID#"..shopID.." Deleted itself due to the debt exceeded $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
+							exports.global:sendMessageToAdmins("[BIZ-SYSTEM] Tienda ID#"..shopID.." Se eliminó por exceso de deuda $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
 						else
-							outputDebugString("Shop ID#"..shopID.." Failed to delete shop eventho the debt exceeded $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
+							outputDebugString("Tienda ID#"..shopID.." No se pudo eliminar la tienda aunque la deuda excedió $"..exports.global:formatMoney(settings.limitDebtAmount)..".")
 							if thePlayer then
-								outputChatBox("Shop ID#"..shopID.." Failed to delete shop eventho the debt exceeded $"..exports.global:formatMoney(settings.limitDebtAmount)..".", thePlayer)
+								outputChatBox("Tienda ID#"..shopID.." No se pudo eliminar la tienda aunque la deuda excedió $"..exports.global:formatMoney(settings.limitDebtAmount)..".", thePlayer)
 							end
 							count = count - 1
 						end
@@ -378,17 +378,17 @@ function updateShopSalary(thePlayer)
 			end
 		end
 	end
-	outputDebugString("------------UPDATED "..count.." SHOP WAGES------------")
+	outputDebugString("------------ACTUALIZADO "..count.." TIENDA SALARIOS------------")
 	if thePlayer then
-		outputChatBox("------------UPDATED "..count.." SHOP WAGES------------", thePlayer)
+		outputChatBox("------------ACTUALIZADO "..count.." TIENDA SALARIOS------------", thePlayer)
 		local adminUsername = getElementData(thePlayer, "account:username")
 		local hiddenAdmin = getElementData(thePlayer, "hiddenadmin")
 		local adminTitle = exports.global:getPlayerAdminTitle(thePlayer)
 
 		if hiddenAdmin == 0 then
-			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") has forced "..count.." custom shops to take wage.")
+			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") ha forzado "..count.." tiendas personalizadas para cobrar salario.")
 		else
-			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: A hidden admin has forced "..count.." custom shops to take wage.")
+			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: Un administrador oculto ha forzado "..count.." tiendas personalizadas para cobrar salario.")
 		end
 	end
 end

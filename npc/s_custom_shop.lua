@@ -75,7 +75,7 @@ function addItemToCustomShop(element, slot, event, worldItem)
 			triggerClientEvent( source, event or "finishItemMove", source )
 			return true
 		end
-		outputChatBox("You must have key to be able to restock.",source, 255,0,0)
+		outputChatBox("Debes tener clave para poder reabastecer.",source, 255,0,0)
 		return false
 	end
 
@@ -111,15 +111,15 @@ function updateItemToShop(source, item, price, desc, npcID, slot, worldItem, sho
 
 	-- ban all weapons except the above, ban all kinds of ammo.
 	if item['id'] == 116 or ( item['id'] == 115 and not allowedWeapons[tonumber( split( item['value'], ":")[1] )] ) then
-		storeKeeperSay(source, "Holyshit! We're not allowed to sell this!", pedName)
+		storeKeeperSay(source, "¡Mierda! ¡No podemos vender esto!", pedName)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 		return false
 	end
 
 	if item['id'] == 3 or item['id'] == 4 or item['id'] == 5 then --Keys , to prevent alt->alt
-		exports.global:sendLocalText(source, "* "..pedName.." laughs at "..playerName..".", 255, 51, 102, 30, {}, true)
-		storeKeeperSay(source, "Haha, do you really think people would buy a crappy key?", pedName)
+		exports.global:sendLocalText(source, "* "..pedName.." se ríe de "..playerName..".", 255, 51, 102, 30, {}, true)
+		storeKeeperSay(source, "Jaja, ¿realmente crees que la gente compraría una llave de mala calidad?", pedName)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 		return false
@@ -127,8 +127,8 @@ function updateItemToShop(source, item, price, desc, npcID, slot, worldItem, sho
 
 	local itemName = exports["item-system"]:getItemName(item['id'], item['value'], item['metadata'])
 	if tonumber(price) < 0 then
-		exports.global:sendLocalText(source, "* "..pedName.." doesn't agree with "..playerName.." on the price of a "..itemName..".", 255, 51, 102, 30, {}, true)
-		storeKeeperSay(source, "One does not simply sell a thing for a negative price, yea?", pedName)
+		exports.global:sendLocalText(source, "* "..pedName.." no está de acuerdo con "..playerName.." sobre el precio de un "..itemName..".", 255, 51, 102, 30, {}, true)
+		storeKeeperSay(source, "Uno no vende simplemente una cosa por un precio negativo, ¿no?", pedName)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 		return false
@@ -157,9 +157,9 @@ function updateItemToShop(source, item, price, desc, npcID, slot, worldItem, sho
 		triggerEvent('sendAme', source, "hands "..pedName.." a "..itemName..".")
 		local playerGender = getElementData(source,"gender")
 		if playerGender == 0 then
-			storeKeeperSay(source, "Alright, I got it, sir.", pedName)
+			storeKeeperSay(source, "Muy bien, lo tengo, señor.", pedName)
 		else
-			storeKeeperSay(source, "Alright, I got it, ma'am.", pedName)
+			storeKeeperSay(source, "Muy bien, lo tengo, señora.", pedName)
 		end
 		setElementData(source, "shop:NoAccess", false, true )
 		local currentCap = tonumber(getElementData(shopElement, "currentCap")) + 1
@@ -178,15 +178,15 @@ function editItemToShop(source, price, desc, proID, itemName, shopElement)
 	local playerName = getPlayerName(source):gsub("_", " ")
 
 	if tonumber(getElementData(shopElement, "sIncome")) < tonumber(getElementData(shopElement, "sPendingWage")) then
-		storeKeeperSay(source, "What about my wage??", pedName)
+		storeKeeperSay(source, "¿Qué pasa con mi salario?", pedName)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 		return false
 	end
 
 	if tonumber(price) < 0 then
-		exports.global:sendLocalText(source, "* "..pedName.." doesn't agree with "..playerName.." on the price of a "..itemName..".", 255, 51, 102, 30, {}, true)
-		storeKeeperSay(source, "One does not simply sell a thing for a negative price, yea?", pedName)
+		exports.global:sendLocalText(source, "* "..pedName.." no está de acuerdo con "..playerName.." sobre el precio de un "..itemName..".", 255, 51, 102, 30, {}, true)
+		storeKeeperSay(source, "Uno no vende simplemente una cosa por un precio negativo, ¿no?", pedName)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 		return false
@@ -200,13 +200,13 @@ function editItemToShop(source, price, desc, proID, itemName, shopElement)
 	if checkingItem then
 		local addToShop = mysql:query_free("UPDATE `shop_products` SET `pPrice`='"..tostring(price).."', `pDesc`='"..tostring(desc):gsub("'","''").."' WHERE `pID`='"..checkingItem.."'") or false
 		if addToShop then
-			triggerEvent("sendAme", source, "discusses with "..pedName.." about a "..itemName..".")
-			storeKeeperSay(source, "Sure..sure..", pedName)
+			triggerEvent("sendAme", source, "discute con "..pedName.." acerca de un "..itemName..".")
+			storeKeeperSay(source, "Seguro..seguro..", pedName)
 			setElementData(source, "shop:NoAccess", false, true )
 			triggerClientEvent(source, "hideGeneralshopUI", source)
 		end
 	else
-		outputChatBox(" "..itemName.." is not existed in the store anymore.", source, 255,0, 0)
+		outputChatBox(" "..itemName.." ya no existe en la tienda.", source, 255,0, 0)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 	end
@@ -232,7 +232,7 @@ function takeOffProductFromShop(source, proID, itemI, itemV, itemName, shopEleme
 
 	if itemI == 115 or itemI == 116 then --weapons and ammo
 		if getElementData( source, "license.gun" ) ~= 1 then
-			storeKeeperSay(source, "Nah, sorry. I can't give you this unless you show me the license..", pedName)
+			storeKeeperSay(source, "No, lo siento. No puedo darte esto a menos que me muestres la licencia.", pedName)
 			setElementData(source, "shop:NoAccess", false, true )
 			triggerClientEvent(source, "hideGeneralshopUI", source)
 			return false
@@ -249,12 +249,12 @@ function takeOffProductFromShop(source, proID, itemI, itemV, itemName, shopEleme
 	if checkingItem then
 		local success, reason = exports["item-system"]:giveItem( source, itemI, itemV, false, false, metadata )
 		if success then
-			exports.global:sendLocalText(source, "* "..playerName.." takes a "..itemName.." from "..pedName..".", 255, 51, 102, 30, {}, true)
+			exports.global:sendLocalText(source, "* "..playerName.." toma un "..itemName.." de "..pedName..".", 255, 51, 102, 30, {}, true)
 			local playerGender = getElementData(source,"gender")
 			if playerGender == 0 then
-				storeKeeperSay(source, "There ya go, sir.", pedName)
+				storeKeeperSay(source, "Ahí tiene, señor.", pedName)
 			else
-				storeKeeperSay(source, "There ya go, ma'am.", pedName)
+				storeKeeperSay(source, "Ahí tiene, señora.", pedName)
 			end
 		else
 			outputChatBox(reason,source, 255, 0, 0)
@@ -273,7 +273,7 @@ function takeOffProductFromShop(source, proID, itemI, itemV, itemName, shopEleme
 			triggerClientEvent(source, "hideGeneralshopUI", source)
 		end
 	else
-		outputChatBox(" "..itemName.." is not existed in the store anymore.", source, 255,0, 0)
+		outputChatBox(" "..itemName.." ya no existe en la tienda.", source, 255,0, 0)
 		setElementData(source, "shop:NoAccess", false, true )
 		triggerClientEvent(source, "hideGeneralshopUI", source)
 	end
@@ -297,7 +297,7 @@ function customShopBuy(proID, itemI, itemV, itemPrice, itemName, payByBank, shop
 
 	if itemI == 115 or itemI == 116 then --weapons and ammo
 		if getElementData( client, "license.gun" ) ~= 1 then
-			storeKeeperSay(client, "Nah, sorry. I can't sell you this unless you can show me the license..", pedName)
+			storeKeeperSay(client, "No, lo siento. No puedo venderte esto a menos que puedas mostrarme la licencia...", pedName)
 			setElementData(client, "shop:NoAccess", false, true )
 			triggerClientEvent(client, "hideGeneralshopUI", client)
 			return false
@@ -318,56 +318,56 @@ function customShopBuy(proID, itemI, itemV, itemPrice, itemName, payByBank, shop
 			if not payByBank then
 				playBuySound(shopElement)
 				if playerGender == 0 then
-					triggerEvent('sendAme', client, "takes out a couple of dollar notes from his wallet, hands it over to "..pedName)
+					triggerEvent('sendAme', client, "saca un par de billetes de un dólar de su billetera y se los entrega a "..pedName)
 				else
-					triggerEvent('sendAme', client, "takes out a couple of dollar notes from her wallet, hands it over to "..pedName)
+					triggerEvent('sendAme', client, "saca un par de billetes de un dólar de su billetera y se los entrega a "..pedName)
 				end
 
 				if exports.global:takeMoney(client, itemPrice) then
 					--
 				else
-					storeKeeperSay(client, "Well, I'm sorry but this seems not enough..", pedName)
+					storeKeeperSay(client, "Bueno, lo siento pero esto parece no ser suficiente...", pedName)
 					exports.global:takeItem( client, itemI, itemV )
 					setElementData(client, "shop:NoAccess", false, true )
 					triggerClientEvent(client, "hideGeneralshopUI", client)
 					return false
 				end
-				ownerNoti = "A customer bought a "..itemName.." for $"..exports.global:formatMoney(itemPrice).."."
-				logString = "- "..timeString.." : A customer bought a "..itemName.." for $"..exports.global:formatMoney(itemPrice)..".\n"
+				ownerNoti = "Un cliente compró un "..itemName.." por $"..exports.global:formatMoney(itemPrice).."."
+				logString = "- "..timeString.." : Un cliente compró un "..itemName.." por $"..exports.global:formatMoney(itemPrice)..".\n"
 			else
 				playBuySound(shopElement)
 				if playerGender == 0 then
-					triggerEvent('sendAme', client, "takes out a credit card from his wallet, hands it over to "..pedName)
+					triggerEvent('sendAme', client, "saca una tarjeta de crédito de su billetera y se la entrega a "..pedName)
 				else
-					triggerEvent('sendAme', client, "takes out a credit card from her wallet, hands it over to "..pedName)
+					triggerEvent('sendAme', client, "saca una tarjeta de crédito de su billetera y se la entrega a "..pedName)
 				end
 
 				if exports.bank:takeBankMoney(client, itemPrice) then
 					exports.bank:addBankTransactionLog(getElementData(client, "dbid"), nil, itemPrice, 0, "Purchase", "Purchased "..itemName.." for "..itemPrice.."$ from "..getElementData(shopElement, "name"), nil, nil)
 				else
-					storeKeeperSay(client, "Well, I'm sorry but this seems not enough..", pedName)
+					storeKeeperSay(client, "Bueno, lo siento pero esto parece no ser suficiente..", pedName)
 					exports.global:takeItem( client, itemI, itemV )
 					setElementData(client, "shop:NoAccess", false, true )
 					triggerClientEvent(client, "hideGeneralshopUI", client)
 					return false
 				end
-				ownerNoti = getPlayerName(client):gsub("_", " ").."(Debit Card) bought a "..itemName.." for $"..exports.global:formatMoney(itemPrice).."."
+				ownerNoti = getPlayerName(client):gsub("_", " ").."(Tarjeta Debito) compro un "..itemName.." por $"..exports.global:formatMoney(itemPrice).."."
 
-				logString = "- "..timeString.." : "..getPlayerName(client):gsub("_", " ").."(Debit Card) bought a "..itemName.." for $"..exports.global:formatMoney(itemPrice)..".\n"
+				logString = "- "..timeString.." : "..getPlayerName(client):gsub("_", " ").."(Tarjeta Debito) compro un "..itemName.." por $"..exports.global:formatMoney(itemPrice)..".\n"
 			end
 
 			local additionalText = ""
 			if payByBank then
-				additionalText = " and returns the debit card"
+				additionalText = " y devuelve la tarjeta de débito"
 			end
 
-			triggerEvent("sendAme", shopElement, "gave "..playerName.." a "..itemName..additionalText..".")
+			triggerEvent("sendAme", shopElement, "dio a "..playerName.." un "..itemName..additionalText..".")
 
-			storeKeeperSay(client, "Here you are. And..", pedName)
+			storeKeeperSay(client, "Aquí estás. Y..", pedName)
 			if playerGender == 0 then
-				storeKeeperSay(client, "Thank you, sir. Have a nice day!", pedName)
+				storeKeeperSay(client, "Gracias Señor. ¡Que tenga un lindo día!", pedName)
 			else
-				storeKeeperSay(client, "Thank you, ma'am. Have a nice day!", pedName)
+				storeKeeperSay(client, "Gracias Señora. ¡Que tenga un lindo día!", pedName)
 			end
 
 		else
@@ -439,20 +439,21 @@ function notifyAllShopOwners(shopElement, content)
 	local maxDebt = exports.global:formatMoney(settings.limitDebtAmount)
 	local warningDebt = exports.global:formatMoney(settings.warningDebtAmount)
 	local contentList = {
-		{	-- 1. Ask for money when debt exceeds $1500
-			"Hey boss, You owe me at least $"..warningDebt.." now, wanna pay me or not..?",
-			"Well, I don't want to be a dick but you owe me at least $"..warningDebt.." now..",
-			"Come here and solve the fucking wage.. You owe me at least $"..warningDebt.." now.",
-			"If you don't come and solve my damn wage, I'll quit..",
-			"Boss! solve my wage now!!!",
+		{	-- 1. Pedir dinero cuando la deuda supera los $1500
+		    "Hey jefe, me debes al menos $"..warningDebt.." ahora, ¿quieres pagarme o no?",
+		    "Bueno, no quiero ser un idiota, pero me debes al menos $"..warningDebt.." ahora.",
+		    "Ven aquí y resuelve el maldito salario... Me debes al menos $"..warningDebt.." ahora.",
+		    "Si no vienes y resuelves mi maldito salario, renunciaré...",
+		    "¡Jefe! ¡Resuelve mi salario ahora!",
 		},
-		{ 	-- 2. Quit
-			"Hey boss, I quit my job, have fun with your empty shop..",
-			"Bye bye boss, and sorry for your empty shop.. LOL",
-			"I quit my job and you still owe me the fucking $"..maxDebt.."..",
-			"Hey son of a bitch, you owe me fucking $"..maxDebt.." and don't wanna pay?? Say goodbye to your stuff then..",
-			"Hi boss, I'm sorry that I have to quit my job, your business is just not profitable..",
+		{	-- 2. Renunciar
+		    "Hola jefe, renuncio a mi trabajo, diviértete con tu tienda vacía...",
+		    "Adiós jefe, y lo siento por tu tienda vacía... JAJA",
+		    "Renuncié a mi trabajo y aún me debes los malditos $"..maxDebt.."...",
+		    "Oye hijo de puta, me debes malditos $"..maxDebt.." y ¿no quieres pagar? Despídete de tus cosas entonces...",
+		    "Hola jefe, lamento tener que renunciar a mi trabajo, tu negocio simplemente no es rentable...",
 		},
+
 	}
 	local contentTemp = nil
 	if tonumber(content) then
@@ -480,9 +481,9 @@ function notifyAllShopOwners(shopElement, content)
 					local languagename = call(getResourceFromName("language-system"), "getLanguageName", language)
 					local ownerName = getPlayerName(owner):gsub("_", " ")
 
-					exports.global:sendLocalText(owner, "*"..ownerName.." receives a text message.", 255, 51, 102, 30, {}, true)
+					exports.global:sendLocalText(owner, "*"..ownerName.." recibe un mensaje de texto.", 255, 51, 102, 30, {}, true)
 
-					outputChatBox("["..languagename.."] SMS from "..pedName.." at "..bizName..": "..content, owner, 120, 255, 80)
+					outputChatBox("["..languagename.."] SMS de "..pedName.." en "..bizName..": "..content, owner, 120, 255, 80)
 					effectedPlayers = effectedPlayers + 1
 				end
 			end
@@ -535,8 +536,8 @@ function resetPendingWage(thePlayer)
 
 		outputDebugString("BIZ-SYSTEM SETTINGS: wageRate="..settings.wageRate..", limitDebtAmount="..settings.limitDebtAmount..", warningDebtAmount="..settings.warningDebtAmount.."")
 		outputChatBox("BIZ-SYSTEM SETTINGS: wageRate="..settings.wageRate..", limitDebtAmount="..settings.limitDebtAmount..", warningDebtAmount="..settings.warningDebtAmount.."", thePlayer)
-		outputDebugString("------------START RESETING SHOP WAGES------------")
-		outputChatBox("------------START RESETING SHOP WAGES------------", thePlayer)
+		outputDebugString("------------START REINICIO TIENDA SALARIOS------------")
+		outputChatBox("------------START REINICIO TIENDA SALARIOS------------", thePlayer)
 		local count = 0
 		local possibleShops = getElementsByType("ped")
 		for _, shop in ipairs(possibleShops) do
@@ -549,15 +550,15 @@ function resetPendingWage(thePlayer)
 						outputDebugString("Shop ID#"..shopID.." Reset Staff Wage "..sPendingWage.." -> 0")
 						outputChatBox("Shop ID#"..shopID.." Reset Staff Wage "..sPendingWage.." -> 0", thePlayer)
 						if hiddenAdmin == 0 then
-							notifyAllShopOwners(shop, "(("..adminTitle.." "..adminUsername.." has reset this shop's wage to $0.))")
+							notifyAllShopOwners(shop, "(("..adminTitle.." "..adminUsername.." ha restablecido el salario de esta tienda a $0.))")
 						else
-							notifyAllShopOwners(shop, "((A hidden admin has reset this shop's wage to $0.))")
+							notifyAllShopOwners(shop, "((Un administrador oculto ha restablecido el salario de esta tienda a $0.))")
 						end
 						count = count + 1
 						exports.anticheat:setEld(shop, "sPendingWage", 0, 'all')
 					else
-						outputDebugString("Shop ID#"..shopID.." Reset Staff Wage Failed.")
-						outputChatBox("Shop ID#"..shopID.." Reset Staff Wage Failed.", thePlayer)
+						outputDebugString("Shop ID#"..shopID.." Error al restablecer el salario del personal.")
+						outputChatBox("Shop ID#"..shopID.." Error al restablecer el salario del personal.", thePlayer)
 					end
 				end
 			end
@@ -566,9 +567,9 @@ function resetPendingWage(thePlayer)
 		outputChatBox("------------RESET "..count.." SHOP WAGES------------", thePlayer)
 
 		if hiddenAdmin == 0 then
-			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") has reset "..count.." custom shop wages to $0.")
+			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") reinicio "..count.." salarios de tienda personalizada a $0.")
 		else
-			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: A hidden admin has reset "..count.." custom shop wages to $0.")
+			exports.global:sendMessageToAdmins("[BIZ-SYSTEM]: Un administrador oculto se ha reiniciado "..count.." salarios de la tienda personalizada a $0.")
 		end
 	end
 end
@@ -617,9 +618,9 @@ function showCustomShopStatus(thePlayer)
 				local sProfit = sIncome-sNewPendingWage
 				local currentCap = tonumber(getElementData(shop, "currentCap")) or 0
 
-				outputDebugString("CShop ID#"..shopID..": Cap: "..currentCap.."/"..sCapacity..", Income: $"..sIncome..", Wage: $"..sPendingWage.." (->$"..sNewPendingWage.."), Profit: $"..sProfit..".")
+				outputDebugString("CShop ID#"..shopID..": Cap: "..currentCap.."/"..sCapacity..", Ingreso: $"..sIncome..", Salario: $"..sPendingWage.." (->$"..sNewPendingWage.."), Ganancia: $"..sProfit..".")
 				if thePlayer then
-					outputChatBox("CShop ID#"..shopID..": Cap: "..currentCap.."/"..sCapacity..", Income: $"..sIncome..", Wage: $"..sPendingWage.." (->$"..sNewPendingWage.."), Profit: $"..sProfit..".", thePlayer)
+					outputChatBox("CShop ID#"..shopID..": Cap: "..currentCap.."/"..sCapacity..", Ingreso: $"..sIncome..", Salario: $"..sPendingWage.." (->$"..sNewPendingWage.."), Ganancia: $"..sProfit..".", thePlayer)
 				end
 				count = count + 1
 			end
