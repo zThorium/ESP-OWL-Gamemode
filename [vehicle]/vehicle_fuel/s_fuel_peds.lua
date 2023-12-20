@@ -19,21 +19,21 @@ function startTalkToPed ()
 	end
 
 	if not (isPedInVehicle(thePlayer)) or (isPedInVehicle(thePlayer) and getVehicleType(getPedOccupiedVehicle(thePlayer)) == "BMX") then
-		processMessage(thePed, "Hey, what could I do for you?.")
- 		setConvoState(thePlayer, 3)
-		local responseArray = { "Could you fill my fuelcan?", "Eh.. nothing actually", "Do you have a cigarette for me?", "I like your suit." }
+		processMessage(thePed, "Oye, ¿en qué puedo ayudarte?")
+		setConvoState(thePlayer, 3)
+		local responseArray = { "¿Podrías llenar mi bidón de gasolina?", "Eh... en realidad nada", "¿Tienes un cigarrillo para mí?", "Me gusta tu traje." }
 		triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 	else
 		local theVehicle = getPedOccupiedVehicle(thePlayer)
 		if (exports.vehicle:isVehicleWindowUp(theVehicle)) then
-			outputChatBox("You might want to lower your window first, before talking to anyone outside the vehicle", thePlayer, 255,0,0)
+			outputChatBox("Quizás quieras bajar la ventana primero antes de hablar con alguien fuera del vehículo", thePlayer, 255, 0, 0)
 			return
 		end
-		-- processMeMessage(thePed, "leans against " .. getPlayerName(thePlayer):gsub("_"," ") .. "'s vehicle.", thePlayer )
-		triggerEvent('sendAme', thePed, "leans against " .. getPlayerName(thePlayer):gsub("_"," ") .. "'s vehicle.")
-		processMessage(thePed, "Hey, how could I help you?")
- 		setConvoState(thePlayer, 1)
-		local responseArray = { "Ehm, I'd like some gas please.", "No thanks.", "Do you have a cigarette for me?", "Stop leaning against my vehicle." }
+		-- processMeMessage(thePed, "se apoya contra el vehículo de " .. getPlayerName(thePlayer):gsub("_"," "), thePlayer )
+		triggerEvent('sendAme', thePed, "se apoya contra el vehículo de " .. getPlayerName(thePlayer):gsub("_", " "))
+		processMessage(thePed, "Oye, ¿cómo puedo ayudarte?")
+		setConvoState(thePlayer, 1)
+		local responseArray = { "Ehm, me gustaría algo de gasolina, por favor.", "No, gracias.", "¿Tienes un cigarrillo para mí?", "Deja de apoyarte en mi vehículo." }
 		triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 	end
 end
@@ -61,7 +61,7 @@ function talkToPed(answer, answerStr)
 	if (convState == 1) then -- "Hey, how could I help you?"
 		local languageSkill = exports['language-system']:getSkillFromLanguage(thePlayer, 1)
 		if (languageSkill < 60) or (currLang ~= 1) then
-			processMessage(thePed, "Uh, sorry, I only speak English.")
+			processMessage(thePed, "Lo siento, sólo hablo español.")
 			setConvoState(thePlayer, 0)
 			return
 		end
@@ -74,38 +74,38 @@ function talkToPed(answer, answerStr)
 			end
 			local theVehicle = getPedOccupiedVehicle(thePlayer)
 			if (getElementData(theVehicle, "engine") == 1) then
-				processMessage(thePed, "Could you please turn your engine off?")
-				local responseArray = { "Sure, no problemo.", "Can't you do it with the engine running?", "Eh, WHAT?" }
+				processMessage(thePed, "¿Podrías apagar tu motor, por favor?")
+				local responseArray = { "Claro, no hay problema.", "¿No puedes hacerlo con el motor encendido?", "¿Eh, QUÉ?" }
 				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 				setConvoState(thePlayer, 2)
 				return
 			elseif getElementData(theVehicle, 'fuel') > (getMaxFuel(getElementModel(theVehicle))-1) then
-				processMessage(thePed, "Looks pretty full to me.")
+				processMessage(thePed, "Parece bastante lleno para mí.")
 			else
-				processMessage(thePed, "Sure... How would you like to pay?")
+				processMessage(thePed, "Claro... ¿Cómo te gustaría pagar?")
 				if getATMCardFromATMMachine(thePlayer) then
-					local responseArray = { "Cash please!", "I'll use my bank account.", "Sorry what?" }
+					local responseArray = { "¡En efectivo, por favor!", "Usaré mi cuenta bancaria.", "Lo siento, ¿qué?" }
 					triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 				else
-					local responseArray = { "Cash please!", false, "Sorry what?" }
+					local responseArray = { "¡En efectivo, por favor!", false, "Lo siento, ¿qué?" }
 					triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 				end
 				setConvoState(thePlayer, 4)
-				--processMessage(thePed, "Sure... we could arrange that.")
-				--pedWillFillVehicle(thePlayer, thePed)
+				-- processMessage(thePed, "Claro... podríamos arreglar eso.")
+				-- pedWillFillVehicle(thePlayer, thePed)
 			end
-		elseif (answer == 2) then -- "No thanks."
-			processMessage(thePed, "Okay, fine. Hop by when you need some fuel.")
+		elseif (answer == 2) then -- "No gracias."
+			processMessage(thePed, "Está bien, perfecto. Pasa cuando necesites combustible.")
 			setConvoState(thePlayer, 0)
-		elseif (answer == 3) then -- "Do you have a sigarette for me?"
-			processMessage(thePed, "Uhm, no. You could check the twenty-four seven.")
+		elseif (answer == 3) then -- "¿Tienes un cigarrillo para mí?"
+			processMessage(thePed, "Ehm, no. Podrías revisar el veinticuatro siete.")
 			setConvoState(thePlayer, 0)
-		elseif (answer == 4) then -- stop leaning against my car
-			processMessage(thePed, "Okay, okay... Take it easy.")
-			--processMeMessage(thePed, "pushes himself up again, standing on his feet.", thePlayer )
-			triggerEvent('sendAme', thePed, "pushes himself up again, standing on his feet.")
-			processMessage(thePed, "Well, should I fill it up or not?.")
-			local responseArray = {  "Go ahead.", "No, not anymore." }
+		elseif (answer == 4) then -- deja de apoyarte en mi coche
+			processMessage(thePed, "Vale, vale... Tranquilo.")
+			-- processMeMessage(thePed, "se levanta de nuevo, poniéndose de pie.", thePlayer)
+			triggerEvent('sendAme', thePed, "se levanta de nuevo, poniéndose de pie.")
+			processMessage(thePed, "Bueno, ¿debería llenarlo o no?")
+			local responseArray = { "Adelante.", "No, ya no." }
 			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 			setConvoState(thePlayer, 1)
 		end
@@ -116,90 +116,90 @@ function talkToPed(answer, answerStr)
 				setConvoState(thePlayer, 0)
 				return
 			end
-			local theVehicle = getPedOccupiedVehicle(thePlayer)
-			-- processMeMessage(thePlayer, "shuts down the engine.",thePlayer )
-			triggerEvent('sendAme', thePlayer, "shuts down the engine.")
-			setElementData(theVehicle, "engine", 0)
-			setVehicleEngineState(theVehicle, false)
-			
-			if exports.global:hasItem(theVehicle, 3, getElementData(theVehicle, "dbid")) and exports.global:takeItem(theVehicle, 3, getElementData(theVehicle, "dbid")) then
-				exports.global:giveItem(thePlayer, 3, getElementData(theVehicle, "dbid"))
-			end
+		local theVehicle = getPedOccupiedVehicle(thePlayer)
+		-- processMeMessage(thePlayer, "apaga el motor.", thePlayer)
+		triggerEvent('sendAme', thePlayer, "apaga el motor.")
+		setElementData(theVehicle, "engine", 0)
+		setVehicleEngineState(theVehicle, false)
 
-			processMessage(thePed, "Alright thanks! How would you like to pay?")
-			if getATMCardFromATMMachine(thePlayer) then
-				local responseArray = { "Cash please!", "I'll use my bank account.", "Sorry what?" }
-				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
-			else
-				local responseArray = { "Cash please!", false, "Sorry what?" }
-				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
-			end
-			setConvoState(thePlayer, 4)
-		elseif (answer == 2) then -- "Can't you do it with the engine running?"
-			--processMeMessage(thePed, "sighs.",thePlayer )
-			triggerEvent('sendAme', thePed, "sighs.")
-			processMessage(thePed, "Ehm... no. I don't want to die. So, shutting it off or not?")
-			local responseArray = {  "Go ahead.", false, false, "Ugh, shut up then."  }
+		if exports.global:hasItem(theVehicle, 3, getElementData(theVehicle, "dbid")) and exports.global:takeItem(theVehicle, 3, getElementData(theVehicle, "dbid")) then
+			exports.global:giveItem(thePlayer, 3, getElementData(theVehicle, "dbid"))
+		end
+
+		processMessage(thePed, "¡Bien, gracias! ¿Cómo te gustaría pagar?")
+		if getATMCardFromATMMachine(thePlayer) then
+			local responseArray = { "¡En efectivo, por favor!", "Usaré mi cuenta bancaria.", "¿Perdona?" }
+			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
+		else
+			local responseArray = { "¡En efectivo, por favor!", false, "¿Perdona?" }
+			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
+		end
+		setConvoState(thePlayer, 4)
+		elseif (answer == 2) then -- "¿No puedes hacerlo con el motor encendido?"
+			--processMeMessage(thePed, "suspira.", thePlayer)
+			triggerEvent('sendAme', thePed, "suspira.")
+			processMessage(thePed, "Ehm... no. No quiero morir. Entonces, ¿lo apagas o no?")
+			local responseArray = { "Adelante.", false, false, "Ugh, cállate entonces." }
 			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 			setConvoState(thePlayer, 2)
-		elseif (answer == 3) then -- "Eh, WHAT?"
-			processMessage(thePed, "I've asked: Could you turn off your engine?")
-			local responseArray = {  "Ok, okay..", false,false, "Ugh, no."  }
+		elseif (answer == 3) then -- "¿EH, QUÉ?"
+			processMessage(thePed, "He preguntado: ¿Puedes apagar tu motor?")
+			local responseArray = { "Ok, está bien...", false, false, "Ugh, no." }
 			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
 			setConvoState(thePlayer, 2)
-		elseif answer == 4 then -- "Ugh, shut up then." / "Ugh, no."
-			processMessage(thePed, "Okay, okay... Take it easy. Get lost.")
+		elseif answer == 4 then -- "Ugh, cállate entonces." / "Ugh, no."
+			processMessage(thePed, "Vale, vale... Tranquilo. Lárgate.")
 			setConvoState(thePlayer, 0)
 		end
-	elseif (convState == 3) then
-		if answer == 1 then -- Could you fill my fuelcan?
-			if (exports.global:hasItem(thePlayer, 57)) then
-				processMessage(thePed, "Sure. Lets do it!")
-				--processMeMessage(thePed, "attaches the hose to the tanker, rolling it out.",thePlayer )
-				--processMeMessage(thePed, "twists the cap of the fuelcan, hosing in and filling it slowly.",thePlayer )
-				triggerEvent('sendAme', thePed, "attaches the hose to the tanker, rolling it out.")
-				triggerEvent('sendAme', thePed, "twists the cap of the fuelcan, hosing in and filling it slowly.")
-				setTimer(pedWillFillFuelCan, 3500, 1, thePlayer, thePed)
-			else
-				processMessage(thePed, "Uhm.. You'll need an fuelcan for this... You can buy one in the twenty-four seven.")
+		elseif (convState == 3) then
+			if answer == 1 then -- ¿Podrías llenar mi bidón de combustible?
+				if (exports.global:hasItem(thePlayer, 57)) then
+					processMessage(thePed, "¡Claro! ¡Hagámoslo!")
+					--processMeMessage(thePed, "conecta la manguera al surtidor, desenrollándola.", thePlayer)
+					--processMeMessage(thePed, "gira la tapa del bidón de combustible, conectando la manguera y llenándolo lentamente.", thePlayer)
+					triggerEvent('sendAme', thePed, "conecta la manguera al surtidor, desenrollándola.")
+					triggerEvent('sendAme', thePed, "gira la tapa del bidón de combustible, conectando la manguera y llenándolo lentamente.")
+					setTimer(pedWillFillFuelCan, 3500, 1, thePlayer, thePed)
+				else
+					processMessage(thePed, "Uhm... Necesitarás un bidón de combustible para esto... Puedes comprar uno en el twenty-four seven.")
+					setConvoState(thePlayer, 0)
+				end
+			elseif answer == 2 then -- No gracias
+				processMessage(thePed, "Está bien, que tengas un buen día.")
+				setConvoState(thePlayer, 0)
+			elseif answer == 3 then -- ¿Tienes un cigarrillo para mí?
+				processMessage(thePed, "Ehm, no. Podrías revisar el twenty-four seven.")
+				setConvoState(thePlayer, 0)
+			elseif answer == 4 then -- Me gusta tu traje
+				processMessage(thePed, "Eh, gracias... supongo.")
 				setConvoState(thePlayer, 0)
 			end
-		elseif answer == 2 then -- No thanks
-			processMessage(thePed, "Okay, have a pleasant day.")
-			setConvoState(thePlayer, 0)
-		elseif answer == 3 then -- do you have a cigarette for me?
-			processMessage(thePed, "Uhm, no. You could check the twenty-four seven.")
-			setConvoState(thePlayer, 0)
-		elseif answer == 4 then -- I like your suit
-			processMessage(thePed, "Eh, thanks... I guess.")
-			setConvoState(thePlayer, 0)
-		end
-	elseif (convState == 4) then -- How would you like to pay?
-		if answer == 1 or answer == 2 then  -- Bank = 2 Cash = 1
-			if answer == 2 and answerStr ~= "accepted" then
-				triggerClientEvent(thePlayer, "fuel:requestATMInterfacePIN", thePed, thePlayer, exports.global:getElementZoneName(thePlayer))
+		elseif (convState == 4) then -- ¿Cómo te gustaría pagar?
+			if answer == 1 or answer == 2 then -- Banco = 2 Efectivo = 1
+				if answer == 2 and answerStr ~= "accepted" then
+					triggerClientEvent(thePlayer, "fuel:requestATMInterfacePIN", thePed, thePlayer, exports.global:getElementZoneName(thePlayer))
+					setConvoState(thePlayer, 4)
+					return
+				end
+				processMessage(thePed, "¡Perfecto! ¿Cuánto vas a poner?")
+				local responseArray = { "$40", "$60", "$100", "¡Llénela!" }
+				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
+				exports.anticheat:changeProtectedElementDataEx(thePlayer, "ped:Type", answer, false)
+				setConvoState(thePlayer, 5)
+			elseif answer == 3 then
+				processMessage(thePed, "Te pregunté cómo querías pagar tu gasolina.")
+				if getATMCardFromATMMachine(thePlayer) then
+					local responseArray = { "¡En efectivo, por favor!", "Usaré mi cuenta bancaria.", "¿Perdona?", "Mejor olvídalo.." }
+					triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
+				else
+					local responseArray = { "¡En efectivo, por favor!", false, "¿Perdona?", "Mejor olvídalo.." }
+					triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
+				end
 				setConvoState(thePlayer, 4)
-				return
+			elseif answer == 4 then
+				processMessage(thePed, "Está bien, como quieras...")
+				setConvoState(thePlayer, 0)
 			end
-			processMessage(thePed, "Alrighty then, how much are you putting in?")
-			local responseArray = { "$40", "$60", "$100", "Fill her up!" }
-			triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
-			exports.anticheat:changeProtectedElementDataEx(thePlayer, "ped:Type", answer, false)
-			setConvoState(thePlayer, 5)
-		elseif answer == 3 then
-			processMessage(thePed, "I asked you how you want to pay for your gas.")
-			if getATMCardFromATMMachine(thePlayer) then
-				local responseArray = { "Cash please!", "I'll use my bank account.", "Sorry what?", "Just nevermind.." }
-				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
-			else
-				local responseArray = { "Cash please!", false, "Sorry what?", "Just nevermind.." }
-				triggerClientEvent(thePlayer, "fuel:convo", thePed, responseArray)
-			end
-			setConvoState(thePlayer, 4)
-		elseif answer == 4 then
-			processMessage(thePed, "Alright whatever then..")
-			setConvoState(thePlayer, 0)
-		end
 	elseif (convState == 5) then
 		if answer == 1 then
 			exports.anticheat:changeProtectedElementDataEx(thePlayer, "ped:amount", 40, false)
@@ -218,7 +218,7 @@ function talkToPed(answer, answerStr)
 
 		local theVehicle = getPedOccupiedVehicle(thePlayer)
 		if getElementData(theVehicle, 'fuel') > (getMaxFuel(getElementModel(theVehicle))-1) then
-			processMessage(thePed, "Looks pretty full to me.")
+			processMessage(thePed, "Luce bastante lleno para mi.")
 		else
 			pedWillFillVehicle(thePlayer, thePed)
 		end
@@ -234,20 +234,20 @@ function pedWillFillFuelCan(thePlayer, thePed)
 	local posX, posY, posZ = getElementPosition(thePlayer)
 	local pedX, pedY, pedZ = getElementPosition(thePed)
 	if not (getDistanceBetweenPoints3D(posX, posY, posZ, pedX, pedY, pedZ) <= 7) then
-		exports['chat-system']:localShout(thePed, "do", "Fine, no fuel for you!")
+		exports['chat-system']:localShout(thePed, "do", "Bien, no hay combustible para ti!")
 		return
 	end
 
 	local hasItem, itemSlot, itemValue, itemUniqueID = exports.global:hasItem(thePlayer, 57)
 	if not (hasItem) then
-		processMessage(thePed, "Funny...")
+		processMessage(thePed, "Divertido...")
 		--processMeMessage(thePed, "sighs.",thePlayer )
-		triggerEvent('sendAme', thePed, "sighs.")
+		triggerEvent('sendAme', thePed, "suspira.")
 		return
 	end
 
 	if itemValue >= 25 then
-		processMessage(thePed, "Eh... that one is already full.")
+		processMessage(thePed, "Eh... ese ya esta lleno.")
 		return
 	end
 
@@ -258,11 +258,11 @@ function pedWillFillFuelCan(thePlayer, thePed)
 
 	local money = exports.global:getMoney(thePlayer)
 	if tonumber(money) == 0 then
-		processMessage(thePed, "How did you think about paying for this?! Punk!")
+		processMessage(thePed, "¿Cómo se te ocurrió pagar por esto? ¡Aweonao!")
 		return
 	else
 		if not exports.global:takeMoney(thePlayer, fuelCost) then
-			processMessage(thePed, "Yeah, this costs like $" .. fuelCost .. ", y'know?")
+			processMessage(thePed, "Sí, esto cuesta como $" .. fuelCost .. ", ¿sabes?")
 			return
 		end
 		payShopOwner(thePed, fuelCost)
@@ -272,14 +272,14 @@ function pedWillFillFuelCan(thePlayer, thePed)
 	-- since we originally checked because takeMoney rearranges items!
 	local hasItem, itemSlot, itemValue, itemUniqueID = exports.global:hasItem(thePlayer, 57)
 	if not (exports['item-system']:updateItemValue(thePlayer, itemSlot, itemValue + theLitres)) then
-		outputChatBox("Something went wrong, please /report.", thePlayer)
+		outputChatBox("Algo salió mal, por favor /report.", thePlayer)
 		return
 	end
 
 	local info = {
-			{"Gas Station Receipt"},
+			{"Gas Station RecibeEsta"},
 			{""},
-			{"    " .. math.ceil(theLitres) .. " Litres of petrol    -    " .. fuelCost .. "$"},
+			{"    " .. math.ceil(theLitres) .. " Litros de Gasolina    -    " .. fuelCost .. "$"},
 		}
 	triggerClientEvent(thePlayer, "hudOverlay:drawOverlayTopRight", thePlayer, info )
 end
@@ -301,14 +301,14 @@ function pedWillFuelTheVehicle(thePlayer, thePed, amount, moneyType)
 	local posX, posY, posZ = getElementPosition(thePlayer)
 	local pedX, pedY, pedZ = getElementPosition(thePed)
 	if not (getDistanceBetweenPoints3D(posX, posY, posZ, pedX, pedY, pedZ) <= 7) then
-		exports['chat-system']:localShout(thePed, "do", "HEY IDIOT, WANT TO DIE? ASSHOLE!")
+		exports['chat-system']:localShout(thePed, "do", "OYE AWEONAO, ¿QUIERES MORIR? MONO CULIAO!")
 		return
 	end
 
 	local theVehicle = getPedOccupiedVehicle(thePlayer)
 
 	if (getVehicleEngineState(theVehicle) == true) then
-		exports['chat-system']:localShout(thePed, "do", "HEY IDIOT, WANT TO DIE? ASSHOLE!")
+		exports['chat-system']:localShout(thePed, "do", "OYE AWEONAO, ¿QUIERES MORIR? MONO CULIAO!")
 		--processDoMessage(thePlayer, "The vehicle explodes", thePlayer)
 		--blowVehicle (theVehicle, false )
 		return
@@ -336,7 +336,7 @@ function pedWillFuelTheVehicle(thePlayer, thePed, amount, moneyType)
 	if exports.factions:isPlayerInFaction(thePlayer, factionVehicle) and factionsThatPayForFuel[factionVehicle] then
 		local theTeam = exports.factions:getFactionFromID(factionVehicle)
 		if exports.global:takeMoney(theTeam, fuelCost, true) then
-			processMessage(thePed, "I'll send the receipt to your employer.")
+			processMessage(thePed, "Enviaré el recibo a tu empleador.")
 			mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (" .. mysql:escape_string(( -getElementData( theTeam, "id" ) )) .. ", " .. mysql:escape_string(getElementData(thePlayer, "dbid")) .. ", " .. mysql:escape_string(fuelCost) .. ", '"..mysql:escape_string(math.ceil(theLitres) .. " Litres").."', 9)" )
 
 			factionPaid = true
@@ -348,24 +348,24 @@ function pedWillFuelTheVehicle(thePlayer, thePed, amount, moneyType)
 			if not exports.donators:hasPlayerPerk(thePlayer, 7) then
 				if moneyType == 1 then
 					if exports.global:takeMoney(thePlayer, fuelCost) then
-						processMessage(thePed, "Here is your receipt.")
+						processMessage(thePed, "Aquí está tu recibo.")
 					else
-						processMessage(thePed, "How did you think about paying this?! Punk!")
+						processMessage(thePed, "¿Cómo pensaste pagar esto?! ¡Bandido!")
 						return
 					end
 				else
 					if exports.bank:updateBankMoney(thePlayer, getElementData(thePlayer, "dbid"), fuelCost, "minus") then
-						processMessage(thePed, "Here is your receipt.")
+						processMessage(thePed, "Aquí está tu recibo.")
 					else
-						processMessage(thePed, "Your card has been rejected...")
+						processMessage(thePed, "Tu tarjeta ha sido rechazada...")
 						return
 					end
 				end
 			else
-				processMessage(thePed, "Here is your receipt.")
+				processMessage(thePed, "Aquí está tu recibo.")
 			end
 		else
-			processMessage(thePed, "How did you think about paying this?! Punk!")
+			processMessage(thePed, "¿Cómo pensaste pagar esto?! ¡Bandido!")
 			return
 		end
 	end
@@ -376,19 +376,19 @@ function pedWillFuelTheVehicle(thePlayer, thePed, amount, moneyType)
 	triggerClientEvent( thePlayer, "syncFuel", theVehicle, getElementData( theVehicle, 'fuel' ), getElementData( theVehicle, 'battery' ) or 100 )
 
 	local info = {
-			{"Gas Station Receipt"},
+			{"Gas Station RecibeEsta"},
 			{""},
 		}
 
 	if exports.donators:hasPlayerPerk(thePlayer, 7) and not factionPaid then
-		table.insert(info, {"    " .. math.ceil(theLitres) .. " litres of petrol    - (( Free Fuel ))"})
+		table.insert(info, {"    " .. math.ceil(theLitres) .. " litros de gasolina    - (( Litros Gratis ))"})
 	else
-		table.insert(info, {"    " .. math.ceil(theLitres) .. " litres of petrol    -    " .. fuelCost .. "$"})
+		table.insert(info, {"    " .. math.ceil(theLitres) .. " litros de gasolina    -    " .. fuelCost .. "$"})
 		if factionPaid then
 			table.insert(info, {"    Paid by employer "..tostring(exports.factions:getFactionName(factionVehicle))})
 		end
 	end
-	table.insert(info, {"    "..exports.global:getVehicleName(theVehicle).." - "..exports.global:round(newFuel, 2).."/"..exports.global:round(getMaxFuel(theVehicle), 2).." litres"})
+	table.insert(info, {"    "..exports.global:getVehicleName(theVehicle).." - "..exports.global:round(newFuel, 2).."/"..exports.global:round(getMaxFuel(theVehicle), 2).." litros"})
 	triggerClientEvent(thePlayer, "hudOverlay:drawOverlayTopRight", thePlayer, info )
 
 	payShopOwner(thePed, fuelCost)
@@ -397,10 +397,10 @@ end
 function payShopOwner(thePed, fuelCost)
 	-- give shop owner a portion of fuel price
 	local shopLink = tonumber( getElementData( thePed, 'shop_link') )
-	outputDebugString( 'Shop Link: ' .. shopLink )
+	outputDebugString( 'Enlace de tienda: ' .. shopLink )
 	if shopLink > 0 then
 		local money = math.floor( tonumber( fuelCost ) * 0.4 ) -- give 40% to shop owner
-		outputDebugString( 'Money: ' .. money )
+		outputDebugString( 'Dinero: ' .. money )
 		local findShop = exports.mysql:query('SELECT `id`, `sIncome` FROM `shops` WHERE `shoptype` = 15 AND `dimension` = ' .. getElementData( thePed, 'shop_link') .. ' LIMIT 1')
 
 		local row = exports.mysql:fetch_assoc( findShop )
@@ -520,7 +520,7 @@ end
 
 function makeFuelPed(thePlayer, commandName, skin, ...)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [skin, default = 50, -1 = random] [Firstname Lastname, -1 = random]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [skin, default = 50, -1 = aleatorio] [PrimerNombre SegundoNombre, -1 = aleatorio]", thePlayer, 255, 194, 14)
 
 		local skin = tonumber(skin)
 
@@ -531,7 +531,7 @@ function makeFuelPed(thePlayer, commandName, skin, ...)
 		if skin then
 			local ped = createPed(skin, 0, 0, 3)
 			if not ped then
-				outputChatBox("Invalid Skin.", thePlayer, 255, 0, 0)
+				outputChatBox("Skin Invalida.", thePlayer, 255, 0, 0)
 				return
 			else
 				destroyElement(ped)
@@ -558,7 +558,7 @@ function makeFuelPed(thePlayer, commandName, skin, ...)
 		if (id) then
 			createFuelPed(skin ~= -1 and skin or 50, x,y,z,rotation,pedName,interior,dimension,id, 0)
 		else
-			outputChatBox("Error creating fuel ped.", thePlayer, 255, 0, 0)
+			outputChatBox("Error al crear combustible ped.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -583,7 +583,7 @@ addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), on
 function getNearByFuelPeds(thePlayer, commandName) --maxime
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer)) then
 		local posX, posY, posZ = getElementPosition(thePlayer)
-		outputChatBox("Nearby Fuel NPC(s):", thePlayer, 255, 126, 0)
+		outputChatBox("NPC de Combustible cercanos:", thePlayer, 255, 126, 0)
 		local count = 0
 
 		local dimension = getElementDimension(thePlayer)
@@ -599,7 +599,7 @@ function getNearByFuelPeds(thePlayer, commandName) --maxime
 						local dbid = getElementData(thePed, "dbid")
 						local pedName = getElementData(thePed, "name")
 						local shopLink = tonumber(  getElementData(thePed, "shop_link") )
-						outputChatBox("   Fuel NPC ID #" .. dbid .. ", name: "..tostring(pedName):gsub("_", " ") .. ( shopLink > 0 and ' shop link: ' .. shopLink or ''), thePlayer, 255, 126, 0)
+						outputChatBox("   Combustible NPC ID #" .. dbid .. ", nombre: "..tostring(pedName):gsub("_", " ") .. ( shopLink > 0 and ' tienda link: ' .. shopLink or ''), thePlayer, 255, 126, 0)
 						count = count + 1
 					end
 				end
@@ -607,7 +607,7 @@ function getNearByFuelPeds(thePlayer, commandName) --maxime
 		end
 
 		if (count==0) then
-			outputChatBox("   None.", thePlayer, 255, 126, 0)
+			outputChatBox("   Ninguno.", thePlayer, 255, 126, 0)
 		end
 	end
 end
@@ -617,7 +617,7 @@ addCommandHandler("nearbynpcs", getNearByFuelPeds, false, false)
 function gotoFuelPed(thePlayer, commandName, shopID) --maxime
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer)) then
 		if not tonumber(shopID) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Shop ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Tienda ID]", thePlayer, 255, 194, 14)
 		else
 			local possibleShops = getElementsByType("ped", resourceRoot)
 			local foundShop = false
@@ -629,7 +629,7 @@ function gotoFuelPed(thePlayer, commandName, shopID) --maxime
 			end
 
 			if not foundShop then
-				outputChatBox("No shop founded with ID #"..shopID, thePlayer, 255, 0, 0)
+				outputChatBox("No se encontro ninguna tienda con ID #"..shopID, thePlayer, 255, 0, 0)
 				return false
 			end
 
