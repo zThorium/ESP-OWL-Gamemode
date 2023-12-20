@@ -1,6 +1,6 @@
 handlingValues = {
-	{"Max Speed (Km/h)", 0.1, 275, ref = 'maxVelocity'},
-	{"Acceleration", 0.1, 75, ref = 'engineAcceleration'},
+	{"Max Speed (Km/h)", 0.1, 3000, ref = 'maxVelocity'},
+	{"Acceleration", 0.1, 200, ref = 'engineAcceleration'},
 	{"Engine Inertia", 0.1, 30, ref = 'engineInertia'},
 	
 	{"Suspension Height", -0.375, 0.1, ref = 'suspensionLowerLimit'},
@@ -17,7 +17,7 @@ handlingValues = {
 	{"Drag Coefficiency", 0.1, 6, ref = 'dragCoeff'},
 	{"Braking Power", 0.1, 50, ref = 'brakeDeceleration'},
 	{"Braking Bias", 0.1, 1, ref = 'brakeBias'},
-	{"Traction Multiplier", 0.1, 6, ref = 'tractionMultiplier'},
+	{"Traction Multiplier", 0.1, 10, ref = 'tractionMultiplier'},
 	{"Traction Bias", 0.1, 1, ref = 'tractionBias'},
 }
 
