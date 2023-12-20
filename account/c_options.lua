@@ -112,7 +112,7 @@ function options_showmenu()
 	wHeight = wHeight + bHeight
 
 	if getResourceFromName("donators") then
-		bStore = guiCreateButton(margin, wHeight, 230, 30, "Caracteristicas", false, wOptions)
+		bStore = guiCreateButton(margin, wHeight, 230, 30, "Caracteristicas Premium", false, wOptions)
 		--addEventHandler("onClientGUIClick", bGraphicsSettings, options_opengraphicsmenu, false)
 		addEventHandler("onClientGUIClick", bStore,
 		function ()
