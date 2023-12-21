@@ -29,13 +29,13 @@ function getPaperFromTony(button, state, absX, absY, wx, wy, wz, element)
         if(pedName == "Tony Johnston") then
             rcMenu = exports.rightclick:create(pedName)
             showCursor(true)
-            local row = exports.rightclick:addRow("Buy DMV transaction paper - 100$")
+            local row = exports.rightclick:addRow("Comprar papel transferencia de vehiculo - 10000$")
             addEventHandler("onClientGUIClick", row,  function (button, state)
-            	if exports.global:hasMoney(localPlayer, 100) and getElementData(localPlayer, "loggedin") == 1 then
+            	if exports.global:hasMoney(localPlayer, 10000) and getElementData(localPlayer, "loggedin") == 1 then
                 	triggerServerEvent("givePaperToSellVehicle", getResourceRootElement(), localPlayer)
 					showCursor(false)
 				else
-					outputChatBox("You do not have $100.")
+					outputChatBox("No tienes 10000$.")
 					showCursor(false)
                 end
             end, false)
@@ -66,16 +66,16 @@ function cBeginGUI()
 	local y = scrHeight/2 - (height2/2)
 
 	--Buttons
-	plates = guiCreateButton(0.1, 0.1, 0.75, 0.15, "License Plates", true, greetingWindow)
+	plates = guiCreateButton(0.1, 0.1, 0.75, 0.15, "Patentes Custom", true, greetingWindow)
 	addEventHandler("onClientGUIClick", plates, fetchPlateList)
 
-	register = guiCreateButton(0.1, 0.32, 0.75, 0.15, "Registration", true, greetingWindow)
+	register = guiCreateButton(0.1, 0.32, 0.75, 0.15, "Registro", true, greetingWindow)
 	addEventHandler("onClientGUIClick", register, fetchRegisterList)
 
-	insurance = guiCreateButton(0.1, 0.53, 0.75, 0.15, "Insurance", true, greetingWindow)
+	insurance = guiCreateButton(0.1, 0.53, 0.75, 0.15, "Seguro", true, greetingWindow)
 	addEventHandler("onClientGUIClick", insurance, fetchInsuranceList)
 
-	neither = guiCreateButton(0.1, 0.75, 0.75, 0.15, "Neither", true, greetingWindow)
+	neither = guiCreateButton(0.1, 0.75, 0.75, 0.15, "Nada", true, greetingWindow)
 	addEventHandler("onClientGUIClick", neither, closeWindow)
 
 	--Quick Settings
@@ -122,14 +122,14 @@ function PlateWindow(vehicleList)
 	local x = scrWidth/2 - (width/2)
 	local y = scrHeight/2 - (height/2)
 
-	mainVehWindow = guiCreateWindow(x, y, width, height, "Vehicle License Plate: Registration", false)
+	mainVehWindow = guiCreateWindow(x, y, width, height, "Patentes vehículos: Registro", false)
 
-	guiCreateLabel(0.03, 0.08, 2.0, 0.1, "Which vehicle would you like to register plates for?", true, mainVehWindow)
+	guiCreateLabel(0.03, 0.08, 2.0, 0.1, "¿Para qué vehículo desea registrar patentes?", true, mainVehWindow)
 	vehlist = guiCreateGridList(0.03, 0.15, 1, 0.73, true, mainVehWindow)
 
 	ovid = guiGridListAddColumn(vehlist, "ID", 0.1)
-	ov = guiGridListAddColumn(vehlist, "Owned Vehicles", 0.5)
-	ovcp = guiGridListAddColumn(vehlist, "Current Plates", 0.3)
+	ov = guiGridListAddColumn(vehlist, "Vehículos propios", 0.5)
+	ovcp = guiGridListAddColumn(vehlist, "Patentes actuales", 0.3)
 
 
 	for i,r in ipairs(vehicleList) do
@@ -143,7 +143,7 @@ function PlateWindow(vehicleList)
 	end
 
 	--Buttons
-	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Exit Screen", true, mainVehWindow)
+	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Salir", true, mainVehWindow)
 	addEventHandler("onClientGUIClick", close, closeWindow)
 
 	--OnDoubleClick
@@ -167,14 +167,14 @@ function registerWindow(vehicleList)
 	local x = scrWidth/2 - (width/2)
 	local y = scrHeight/2 - (height/2)
 
-	mainVehWindow = guiCreateWindow(x, y, width, height, "Vehicle Registration", false)
+	mainVehWindow = guiCreateWindow(x, y, width, height, "Registro de vehiculos", false)
 
-	guiCreateLabel(0.03, 0.08, 2.0, 0.1, "Which vehicle would you like to register/unregister?", true, mainVehWindow)
+	guiCreateLabel(0.03, 0.08, 2.0, 0.1, "¿Qué vehículo desea dar de alta/baja?", true, mainVehWindow)
 	vehlist = guiCreateGridList(0.03, 0.15, 1, 0.73, true, mainVehWindow)
 
 	ovid = guiGridListAddColumn(vehlist, "ID", 0.1)
-	ov = guiGridListAddColumn(vehlist, "Owned Vehicles", 0.65)
-	ovcp = guiGridListAddColumn(vehlist, "Reg. State", 0.15)
+	ov = guiGridListAddColumn(vehlist, "Vehículos propios", 0.65)
+	ovcp = guiGridListAddColumn(vehlist, "Estado de registro", 0.15)
 
 
 	for i,r in ipairs(vehicleList) do
@@ -187,14 +187,14 @@ function registerWindow(vehicleList)
 		guiGridListSetItemText(vehlist, row, ovid, tostring(vid), false, false)
 		guiGridListSetItemText(vehlist, row, ov, (faction and "Fac#"..faction.." - " or "") .. exports.global:getVehicleName(v) , false, false) --tostring(getVehicleNameFromModel(vm))
 		if plateState == 0 then
-		    guiGridListSetItemText(vehlist, row, ovcp, "Unregistered", false, false)
+		    guiGridListSetItemText(vehlist, row, ovcp, "No registrado", false, false)
 		else
-		    guiGridListSetItemText(vehlist, row, ovcp, "Registered", false, false)
+		    guiGridListSetItemText(vehlist, row, ovcp, "Registrado", false, false)
 		end
 	end
 
 	--Buttons
-	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Exit Screen", true, mainVehWindow)
+	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Salir", true, mainVehWindow)
 	addEventHandler("onClientGUIClick", close, closeWindow)
 
 	--OnDoubleClick
@@ -229,7 +229,7 @@ function editPlateWindow()
 		local y = scrHeight/2 - (height/2)
 
 		efinalWindow = guiCreateStaticImage(x, y, width, height, ":resources/window_body.png", false)
-		local mainT = guiCreateLabel(0.03, 0.08, 0.96, 0.2, "Registering plates for vehicle VIN: " .. svnum .. ".\nPlease enter your new plate:", true, efinalWindow)
+		local mainT = guiCreateLabel(0.03, 0.08, 0.96, 0.2, "Cambiando patentes para el vehiculo ID: " .. svnum .. ".\nPor favor ingresa la nueva patente:", true, efinalWindow)
 		guiLabelSetHorizontalAlign(mainT, "center", true)
 
 		newplates = guiCreateEdit(0.1, 0.3, 0.8, 0.15, "", true, efinalWindow)
@@ -237,12 +237,12 @@ function editPlateWindow()
 
 		addEventHandler("onClientGUIChanged", newplates, checkPlateBox)
 
-		plateCheck = guiCreateLabel(0, 0.5, 1, 0.1, "Please pick a plate you like.", true, efinalWindow)
+		plateCheck = guiCreateLabel(0, 0.5, 1, 0.1, "Por favor elige una patente que te guste", true, efinalWindow)
 		guiLabelSetHorizontalAlign(plateCheck, "center", true)
 
 		--Buttons
 
-		submitNP = guiCreateButton(0.1, 0.60, 0.8, 0.15, "Purchase (Cost: "..cost.." GCs)", true, efinalWindow)
+		submitNP = guiCreateButton(0.1, 0.60, 0.8, 0.15, "Comprar (Costo: "..cost.." GCs)", true, efinalWindow)
 		addEventHandler("onClientGUIClick", submitNP, function ()
 			if source == submitNP then
 				local data = guiGetText(newplates)
@@ -256,7 +256,7 @@ function editPlateWindow()
 		end)
 		guiSetEnabled(submitNP, false)
 
-		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Exit Screen", true, efinalWindow)
+		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Salir", true, efinalWindow)
 		addEventHandler("onClientGUIClick", finalx, closeWindow)
 
 		--Quick Settings
@@ -273,11 +273,11 @@ function checkPlateBox()
 	local theText = string.upper(guiGetText(source))
 		guiSetText(source,theText)
 	if checkPlate(theText) then
-		guiSetText(plateCheck, "'"..theText.."' is a valid plate!")
+		guiSetText(plateCheck, "'"..theText.."' es una patente valida!")
 		guiLabelSetColor(plateCheck, 0, 255, 0)
 		guiSetEnabled(submitNP, true)
 	else
-		guiSetText(plateCheck, "'"..theText.."' is not valid.")
+		guiSetText(plateCheck, "'"..theText.."' no es valida.")
 		guiLabelSetColor(plateCheck, 255, 0, 0)
 		guiSetEnabled(submitNP, false)
 	end
@@ -296,8 +296,8 @@ function updateRegistration()
 		local y = scrHeight/2 - (height/2)
 
 		efinalWindow = guiCreateStaticImage(x, y, width, height, ":resources/window_body.png", false)
-		local mainT = guiCreateLabel(0.03, 0.08, 0.96, 0.2, (state == "Unregistered" and "Registering" or "Unregistering")..(" vehicle VIN: " .. svnum .. "."), true, efinalWindow)
-		taxLabel = guiCreateLabel(0.03, 0.18, 0.96, 0.2, "Vehicle Tax: Loading...", true, efinalWindow)
+		local mainT = guiCreateLabel(0.03, 0.08, 0.96, 0.2, (state == "No registrado" and "Registro de" or "Desregistro de")..(" vehiculo ID: " .. svnum .. "."), true, efinalWindow)
+		taxLabel = guiCreateLabel(0.03, 0.18, 0.96, 0.2, "Impuesto del vehiculo: cargando...", true, efinalWindow)
 		triggerServerEvent("plate:grabTax", resourceRoot, svnum)
 		guiLabelSetHorizontalAlign(mainT, "center", true)
 		guiLabelSetHorizontalAlign(taxLabel, "center", true)
@@ -307,7 +307,7 @@ function updateRegistration()
 		guiSetFont(second, "default-bold-small")
 		--Buttons
 
-		local submitNP2 = guiCreateButton(0.1, 0.60, 0.8, 0.15, (state == "Unregistered" and "Register (Cost: $175)" or "Unregister (Cost: $50)") , true, efinalWindow)
+		local submitNP2 = guiCreateButton(0.1, 0.60, 0.8, 0.15, (state == "No registrado" and "Registrar (Costo: $80000)" or "Desregistrar (Costo: $40000)") , true, efinalWindow)
 		addEventHandler("onClientGUIClick", submitNP2, function ()
 			if source == submitNP2 then
 				triggerServerEvent("sNewReg", getLocalPlayer(),  tonumber(svnum))
@@ -319,13 +319,13 @@ function updateRegistration()
 		end)
 
 
-		if exports.global:hasMoney(localPlayer,  state == "Unregistered" and 175 or 50 ) then
+		if exports.global:hasMoney(localPlayer,  state == "No registrado" and 80000 or 40000 ) then
 			guiSetEnabled(submitNP2, true)
 		else
 			guiSetEnabled(submitNP2, false)
 		end
 
-		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Exit Screen", true, efinalWindow)
+		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Salir", true, efinalWindow)
 		addEventHandler("onClientGUIClick", finalx, closeWindow)
 
 		--Quick Settings
@@ -337,7 +337,7 @@ end
 
 addEvent("plate:updateTaxLabel", true)
 addEventHandler("plate:updateTaxLabel", localPlayer, function(tax)
-	guiSetText(taxLabel, "Vehicle Tax: $" .. exports.global:formatMoney(tax))
+	guiSetText(taxLabel, "Impuesto del vehiculo: $" .. exports.global:formatMoney(tax))
 end)
 
 function setRegValue()
@@ -383,16 +383,16 @@ function insuranceWindow(vehicleList)
 	local x = scrWidth/2 - (width/2)
 	local y = scrHeight/2 - (height/2)
 
-	mainVehWindow = guiCreateWindow(x, y, width, height, "Vehicle Insurances", false)
+	mainVehWindow = guiCreateWindow(x, y, width, height, "Seguros de vehiculos", false)
 
-	local label = guiCreateLabel(0.03, 0.08, 0.94, 0.2, "This is an overview of your current vehicle insurances. \nTo get insurance, contact an insurance company.", true, mainVehWindow)
+	local label = guiCreateLabel(0.03, 0.08, 0.94, 0.2, "Este es un resumen de los seguros actuales de su vehículo. \nPara contratar un seguro, ponte en contacto con una compañía de seguros.", true, mainVehWindow)
 	guiLabelSetHorizontalAlign(label, "left", true)
 
 	vehlist = guiCreateGridList(0.03, 0.25, 1, 0.63, true, mainVehWindow)
 
 	ovid = guiGridListAddColumn(vehlist, "ID", 0.1)
-	ov = guiGridListAddColumn(vehlist, "Vehicle", 0.5)
-	ovcp = guiGridListAddColumn(vehlist, "Insured by", 0.3)
+	ov = guiGridListAddColumn(vehlist, "Vehiculo", 0.5)
+	ovcp = guiGridListAddColumn(vehlist, "Asegurado por", 0.3)
 
 	insuredVehicles = {}
 
@@ -413,7 +413,7 @@ function insuranceWindow(vehicleList)
 	end
 
 	--Buttons
-	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Exit Screen", true, mainVehWindow)
+	close = guiCreateButton(0.50, 0.90, 0.50, 0.10, "Salir", true, mainVehWindow)
 	addEventHandler("onClientGUIClick", close, closeWindow)
 
 	--OnDoubleClick
@@ -453,7 +453,7 @@ function insuranceDetails()
 		mainT = guiCreateLabel(0.03, 0.03, 0.96, 0.57, "", true, efinalWindow)
 		guiLabelSetHorizontalAlign(mainT, "left", true)
 
-		local submitNP2 = guiCreateButton(0.1, 0.60, 0.8, 0.15, "Cancel Insurance", true, efinalWindow)
+		local submitNP2 = guiCreateButton(0.1, 0.60, 0.8, 0.15, "Cancelar seguro", true, efinalWindow)
 		addEventHandler("onClientGUIClick", submitNP2, function ()
 			if source == submitNP2 then
 				if(guiGetText(source) == "Yes") then
@@ -463,7 +463,7 @@ function insuranceDetails()
 					destroyElement(efinalWindow)
 					showCursor(false)
 				else
-					guiSetText(mainT, "Are you sure you want to cancel this insurance policy? If you do, you will no longer have the protection.")
+					guiSetText(mainT, "¿Está seguro de que desea cancelar esta póliza de seguro? Si lo hace, dejará de tener la protección.")
 					guiLabelSetHorizontalAlign(mainT, "center", true)
 					guiLabelSetVerticalAlign(mainT, "center")
 					guiSetText(submitNP2, "Yes")
@@ -472,7 +472,7 @@ function insuranceDetails()
 			end
 		end)
 
-		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Exit Screen", true, efinalWindow)
+		finalx = guiCreateButton(0.1, 0.80, 0.8, 0.15, "Salir", true, efinalWindow)
 		addEventHandler("onClientGUIClick", finalx, closeWindow) --closeInsuranceDetails
 
 		--Quick Settings
@@ -497,8 +497,8 @@ function insuranceDetails()
 		--]]
 
 		local string = ""
-		string = string.."VIN: "..tostring(svnum).."\n"
-		string = string.."Vehicle: "..tostring(carname).."\n"
+		string = string.."ID: "..tostring(svnum).."\n"
+		string = string.."Vehiculo: "..tostring(carname).."\n"
 		local insuranceFactionName = exports.factions:getFactionName(tonumber(data.insurancefaction))
 		local insuranceFactionText = ""
 		if insuranceFactionName then
@@ -506,10 +506,10 @@ function insuranceDetails()
 				insuranceFactionText = " ("..tostring(insuranceFactionName)..")"
 			end
 		end
-		string = string.."Insured By: "..tostring(data.insurancecompanyname)..insuranceFactionText.."\n"
-		string = string.."Customer: "..tostring(data.customername).."\n"
-		string = string.."Insured Since: "..tostring(data.date).."\n"
-		string = string.."Insurance Plan: "..tostring(data.protection).."\n"
+		string = string.."Asegurado por: "..tostring(data.insurancecompanyname)..insuranceFactionText.."\n"
+		string = string.."Cliente: "..tostring(data.customername).."\n"
+		string = string.."Asegurado desde: "..tostring(data.date).."\n"
+		string = string.."Plan seguro: "..tostring(data.protection).."\n"
 		string = string.."Premium: $"..exports.global:formatMoney(tonumber(data.premium)).."\n"
 
 		guiSetText(mainT, tostring(string))
