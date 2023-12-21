@@ -15,7 +15,7 @@ function playerDeath(totalAmmo, killer, killerWeapon)
 			setCameraTarget(source)
 			fadeCamera(source, true)
 
-			exports.logs:dbLog(source, 34, source, "died in admin jail")
+			exports.logs:dbLog(source, 34, source, "murió en jail administrativo")
 		elseif getElementData(source, "jailed") then
 			exports["prison-system"]:checkForRelease(source)
 			--[[ local x, y, z = getElementPosition(source)
@@ -25,7 +25,7 @@ function playerDeath(totalAmmo, killer, killerWeapon)
 			setCameraInterior(source, int)
 			setCameraTarget(source)--]]
 
-			exports.logs:dbLog(source, 34, source, "died in police jail")
+			exports.logs:dbLog(source, 34, source, "murió en jail policial")
 		else
 			local affected = { }
 			table.insert(affected, source)
@@ -33,9 +33,9 @@ function playerDeath(totalAmmo, killer, killerWeapon)
 			if (killer) then
 				if getElementType(killer) == "player" then
 					if (killerWeapon) then
-						killstr = ' got killed by '..getPlayerName(killer):gsub("_", " ").. ' ('..getWeaponNameFromID ( killerWeapon )..')'
+						killstr = ' fue asesinado por '..getPlayerName(killer):gsub("_", " ").. ' ('..getWeaponNameFromID ( killerWeapon )..')'
 					else
-						killstr = ' died'
+						killstr = ' murió'
 					end
 					table.insert(affected, killer)
 				else
@@ -55,8 +55,8 @@ function playerDeath(totalAmmo, killer, killerWeapon)
 			-- end
 			changeDeathViewTimer = setTimer(changeDeathView, 3000, 1, source, victimDropItem)
 
-			outputChatBox("If you were killed due to DM or anything similar, /report to get an admin to revive you.", source)
-			outputChatBox("If you accept your death, you may lose some of your items - unless revived.", source)
+			outputChatBox("Si te mataron debido a DM o algo similar, /report para que un administrador te resucite.", source)
+			outputChatBox("Si acepta su muerte, puede perder algunos de sus artículos, a menos que sea revivido.", source)
 
 			--outputChatBox("Respawn in 10 seconds.", source)
 			--setTimer(respawnPlayer, 10000, 1, source)
@@ -134,7 +134,7 @@ end
 function readLog(thePlayer)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) then
 		local logMeBuffer = getElementData(getRootElement(), "killog") or { }
-		outputChatBox("Recent kill list:", thePlayer, 205, 201, 165)
+		outputChatBox("Lista de muertes recientes:", thePlayer, 205, 201, 165)
 		for a, b in ipairs(logMeBuffer) do
 			outputChatBox("- "..b, thePlayer, 205, 201, 165, true)
 		end
@@ -175,7 +175,7 @@ function respawnPlayer(thePlayer, victimDropItem)
 	if (isElement(thePlayer)) then
 
 		if (getElementData(thePlayer, "loggedin") == 0) then
-			exports.global:sendMessageToAdmins("AC0x0000004: "..getPlayerName(thePlayer):gsub("_", " ").." died while not in character, triggering blackfade.")
+			exports.global:sendMessageToAdmins("AC0x0000004: "..getPlayerName(thePlayer):gsub("_", " ").." murió mientras no estaba en el personaje, lo que provocó un desvanecimiento negro.")
 			return
 		end
 		setPedHeadless(thePlayer, false)
@@ -205,7 +205,7 @@ function respawnPlayer(thePlayer, victimDropItem)
 			end
 		end
 		if count > 0 then
-			outputChatBox("LSFD Employee: We handed your drugs over to the SFPD.", thePlayer, 255, 194, 14)
+			outputChatBox("LSFD Empleado: Entregamos sus drogas al SFPD.", thePlayer, 255, 194, 14)
 		end
 
 		-- take guns
@@ -225,7 +225,7 @@ function respawnPlayer(thePlayer, victimDropItem)
 					if (((weapon >= 16 and weapon <= 40 and (gunlicense == 0 and gunlicense2 == 0) or not exports.weapon:isWeaponCCWP(thePlayer, itemCheck[1], itemCheck[2])) or (weapon == 29 or weapon == 30 or weapon == 32 or weapon ==31 or weapon == 34) and (gunlicense2 == 0)) and (not exports.factions:isInFactionType(thePlayer, 2))) or (weapon >= 35 and weapon <= 38) then
 						if exports['item-system']:takeItemFromSlot(thePlayer, itemSlot-cor) then
 							cor = cor + 1
-							exports.logs:dbLog(thePlayer, 34, thePlayer, "lost a weapon (" ..  itemCheck[2] .. ")")
+							exports.logs:dbLog(thePlayer, 34, thePlayer, "perdió un arma (" ..  itemCheck[2] .. ")")
 							for k = 1, 12 do
 								triggerEvent("createWepObject", thePlayer, thePlayer, k, 0, getSlotFromWeapon(k))
 							end
@@ -248,14 +248,14 @@ function respawnPlayer(thePlayer, victimDropItem)
 						if exports['item-system']:takeItemFromSlot(thePlayer, itemSlot-cor) then
 							cor = cor+1
 							local pack = exports.weapon:getAmmo(cart_id)
-							exports.logs:dbLog(thePlayer, 34, thePlayer, "lost a pack of "..pack.cartridge.." ammo. ("..ammountOfAmmo.." rounds)")
+							exports.logs:dbLog(thePlayer, 34, thePlayer, "perdí un paquete de "..pack.cartridge.." munición. ("..ammountOfAmmo.." rondas)")
 
 							if (removedWeapons == nil) then
 								removedWeapons = ammountOfAmmo .. " " .. pack.cartridge
 								formatedWeapons = ammountOfAmmo .. " " .. pack.cartridge
 							else
-								removedWeapons = removedWeapons .. ", " .. ammountOfAmmo .. " rounds of " .. pack.cartridge
-								formatedWeapons = formatedWeapons .. "\n" .. ammountOfAmmo .. " rounds of " .. pack.cartridge
+								removedWeapons = removedWeapons .. ", " .. ammountOfAmmo .. " rondas de " .. pack.cartridge
+								formatedWeapons = formatedWeapons .. "\n" .. ammountOfAmmo .. " rondas de " .. pack.cartridge
 							end
 						end
 					end
@@ -265,17 +265,17 @@ function respawnPlayer(thePlayer, victimDropItem)
 
 		if (removedWeapons~=nil) then
 			if gunlicense == 0 and factiontype ~= 2 then
-				outputChatBox("LSFD Employee: We have taken away weapons which you did not have a license for. (" .. removedWeapons .. ").", thePlayer, 255, 194, 14)
+				outputChatBox("Empleado de LSFD: Le hemos quitado armas para las que no tenía licencia. (" .. removedWeapons .. ").", thePlayer, 255, 194, 14)
 			else
-				outputChatBox("LSFD Employee: We have taken away weapons which you are not allowed to carry. (" .. removedWeapons .. ").", thePlayer, 255, 194, 14)
+				outputChatBox("Empleado de LSFD: Le hemos quitado las armas que no puede portar. (" .. removedWeapons .. ").", thePlayer, 255, 194, 14)
 			end
 		end
 
 		local death = getElementData(thePlayer, "lastdeath")
 		if removedWeapons ~= nil then
 			logMe(death)
-			exports.global:sendMessageToAdmins("/showkills to view lost weapons.")
-			logMeNoWrn("#FF0033 Lost Weapons: " .. removedWeapons)
+			exports.global:sendMessageToAdmins("/showkills para ver armas perdidas.")
+			logMeNoWrn("#FF0033 Armas Perdidas: " .. removedWeapons)
 		else
 			logMe(death)
 		end
@@ -303,52 +303,47 @@ function respawnPlayer(thePlayer, victimDropItem)
 end
 
 function recoveryPlayer(thePlayer, commandName, targetPlayer, duration)
-	if not (targetPlayer) or not tonumber(duration) or (tonumber(duration) or 0) <= 0 then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID] [Hours]", thePlayer, 255, 194, 14)
-	else
-		local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
-		if targetPlayer then
-			local logged = getElementData(thePlayer, "loggedin")
+    if not (targetPlayer) or not tonumber(duration) or (tonumber(duration) or 0) <= 0 then
+        outputChatBox("SINTAXIS: /" .. commandName .. " [Nombre/ID parcial del jugador] [Horas]", thePlayer, 255, 194, 14)
+    else
+        local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
+        if targetPlayer then
+            local logged = getElementData(thePlayer, "loggedin")
 
-			if (logged==1) then
-				if exports.factions:isInFactionType(thePlayer, 4) or (exports.integration:isPlayerTrialAdmin(thePlayer) == true) then
-					--if (targetPlayer == thePlayer) then
-						local dimension = getElementDimension(thePlayer)
-						--if (dimesion==9) then
-							local totaltime = tonumber(duration)
-							if totaltime < 12 then
-								exports.bank:takeBankMoney(targetPlayer, 100*totaltime, true)
-								exports.global:giveMoney( exports.factions:getFactionFromID(2), 100*totaltime )
+            if (logged == 1) then
+                if exports.factions:isInFactionType(thePlayer, 4) or (exports.integration:isPlayerTrialAdmin(thePlayer) == true) then
+                    local dimension = getElementDimension(thePlayer)
+                    
+                    local totaltime = tonumber(duration)
+                    if totaltime < 12 then
+                        exports.bank:takeBankMoney(targetPlayer, 100 * totaltime, true)
+                        exports.global:giveMoney(exports.factions:getFactionFromID(2), 100 * totaltime)
 
-								local dbid = getElementData(targetPlayer, "dbid")
-								local timeLeft = getRealTime().timestamp + totaltime * 3600
-								mysql:query_free("UPDATE characters SET recovery='1', recoverytime='" .. timeLeft .. "' WHERE id = " .. dbid)
+                        local dbid = getElementData(targetPlayer, "dbid")
+                        local timeLeft = getRealTime().timestamp + totaltime * 3600
+                        mysql:query_free("UPDATE characters SET recovery='1', recoverytime='" .. timeLeft .. "' WHERE id = " .. dbid)
 
-								setElementFrozen(targetPlayer, true)
-								setElementData(targetPlayer, "recovery", true)
-								outputChatBox("You have successfully put " .. targetPlayerName .. " in recovery for " .. duration .. " hour(s) and charged $".. 100*totaltime ..".", thePlayer, 255, 0, 0)
-								exports.global:sendMessageToAdmins("AdmWrn: " .. targetPlayerName .. " was put in recovery for " .. duration .. " hour(s) by " .. getPlayerName(thePlayer):gsub("_"," ") .. ".")
-								outputChatBox("You were put in recovery by " .. getPlayerName(thePlayer) .. " for " .. duration .. " hour(s) and charged $".. 100*totaltime ..".", targetPlayer, 255, 0, 0)
-								exports.logs:dbLog(thePlayer, 4, targetPlayer, "RECOVERY " .. duration)
-							else
-								outputChatBox("You cannnot put someone in recovery for that long.", thePlayer, 255, 0, 0)
-							end
-						--[[else
-							outputChatBox("You must be in the hospital to do this command.", thePlayer, 255, 0, 0)
-						end]]
-					--[[else
-						outputChatBox("You cannot recover yourself.", thePlayer, 255, 0, 0)
-					end]]
-				else
-					outputChatBox("You have no basic medic skills, contact the ES.", thePlayer, 255, 0, 0)
-				end
-			else
-				outputChatBox("The player is not logged in.", thePlayer, 255,0,0)
-			end
-		end
-	end
+                        setElementFrozen(targetPlayer, true)
+                        setElementData(targetPlayer, "recovery", true)
+                        outputChatBox("Has puesto exitosamente a " .. targetPlayerName .. " en recuperación durante " .. duration .. " hora(s) y le cobraste $" .. 100 * totaltime .. ".", thePlayer, 255, 0, 0)
+                        exports.global:sendMessageToAdmins("AdmAdvert: " .. targetPlayerName .. " fue puesto en recuperación durante " .. duration .. " hora(s) por " .. getPlayerName(thePlayer):gsub("_", " ") .. ".")
+                        outputChatBox("Has sido puesto en recuperación por " .. getPlayerName(thePlayer) .. " durante " .. duration .. " hora(s) y te han cobrado $" .. 100 * totaltime .. ".", targetPlayer, 255, 0, 0)
+                        exports.logs:dbLog(thePlayer, 4, targetPlayer, "RECUPERACIÓN " .. duration)
+                    else
+                        outputChatBox("No puedes poner a alguien en recuperación por tanto tiempo.", thePlayer, 255, 0, 0)
+                    end
+                else
+                    outputChatBox("No tienes habilidades médicas básicas, contacta con el personal de Emergencias Sanitarias (ES).", thePlayer, 255, 0, 0)
+                end
+            else
+                outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
+            end
+        end
+    end
 end
-addCommandHandler("recovery", recoveryPlayer)
+
+addCommandHandler("recuperacion", recoveryPlayer)
+
 
 function scanForRecoveryRelease(player, eventname)
 	local tick = getTickCount()
@@ -367,12 +362,12 @@ function scanForRecoveryRelease(player, eventname)
 					setElementFrozen(value, false)
 					setElementData(value, "recovery", false)
 					mysql:query_free("UPDATE characters SET recovery='0', recoverytime=NULL WHERE id = " .. dbid) -- Allow them to move, and revert back to recovery type set to 0.
-					outputChatBox("You are no longer in recovery!", value, 0, 255, 0) -- Let them know about it!
+					outputChatBox("¡Ya no estás en recuperación!", value, 0, 255, 0) -- Let them know about it!
 				else
 					setElementFrozen(value, true) -- If they are still in recovery, then make sure they are frozen (if they login).
 					setElementData(value, "recovery", true)
 					if (player==value) and (eventname=="accounts:characters:spawn") then
-						outputChatBox("You are still in recovery.", value, 255,0,0)
+						outputChatBox("Aun estas en recuperacion.", value, 255,0,0)
 					end
 				end
 			end
@@ -382,31 +377,33 @@ function scanForRecoveryRelease(player, eventname)
 end
 setTimer(scanForRecoveryRelease, 500000, 0) -- Check every 5 minutes.
 
-function checktime( thePlayer)
-	local logged = getElementData(thePlayer, "loggedin")
-	if (logged==1) then
+function checktime(thePlayer)
+    local logged = getElementData(thePlayer, "loggedin")
+    if (logged == 1) then
         local dbid = getElementData(thePlayer, "dbid")
-		local result = mysql:query_fetch_assoc( "SELECT `recovery`, `recoverytime` FROM `characters` WHERE `id`=" .. mysql:escape_string(dbid) ) -- Check to see if the player is listed as a current recovery patient.
-		local inRecovery = tonumber(result["recovery"])
+        local result = mysql:query_fetch_assoc("SELECT `recovery`, `recoverytime` FROM `characters` WHERE `id`=" .. mysql:escape_string(dbid)) -- Verificar si el jugador está registrado como paciente actual en recuperación.
+        local inRecovery = tonumber(result["recovery"])
         if (inRecovery == 1) then
             local recoveryEndsAt = tonumber(result["recoverytime"])
-			local currentTime = getRealTime().timestamp
-			if (recoveryEndsAt <= currentTime) then -- Is the time up? If yes:
-				setElementFrozen(thePlayer, false)
-				setElementData(thePlayer, "recovery", false)
-				mysql:query_free("UPDATE characters SET recovery='0', recoverytime=NULL WHERE id = " .. dbid) -- Allow them to move, and revert back to recovery type set to 0.
-				outputChatBox("You are no longer in recovery!", thePlayer, 0, 255, 0) -- Let them know about it!
-			else
-				recoveryEndsAt = recoveryEndsAt - currentTime
-				local hoursLeft = math.floor(recoveryEndsAt / 3600)
-				recoveryEndsAt = recoveryEndsAt - 3600 * hoursLeft
-				local minutesLeft = math.floor(recoveryEndsAt / 60)
-           		outputChatBox("You have " .. hoursLeft .. " hour(s) and " .. minutesLeft .. " minute(s) of recovery left.", thePlayer)
-           	end
+            local currentTime = getRealTime().timestamp
+            if (recoveryEndsAt <= currentTime) then -- ¿Es el momento? Si sí:
+                setElementFrozen(thePlayer, false)
+                setElementData(thePlayer, "recovery", false)
+                mysql:query_free("UPDATE characters SET recovery='0', recoverytime=NULL WHERE id = " .. dbid) -- Permitirles moverse y volver al tipo de recuperación establecido en 0.
+                outputChatBox("¡Ya no estás en recuperación!", thePlayer, 0, 255, 0) -- ¡Avísales!
+            else
+                recoveryEndsAt = recoveryEndsAt - currentTime
+                local hoursLeft = math.floor(recoveryEndsAt / 3600)
+                recoveryEndsAt = recoveryEndsAt - 3600 * hoursLeft
+                local minutesLeft = math.floor(recoveryEndsAt / 60)
+                outputChatBox("Te quedan " .. hoursLeft .. " hora(s) y " .. minutesLeft .. " minuto(s) de recuperación.", thePlayer)
+            end
         end
     end
 end
-addCommandHandler("recoverytime", checktime)
+
+addCommandHandler("tiemporecuperacion", checktime)
+
 
 function scanForRecoveryReleaseF10(player, eventname)
 	if source and (not player or not isElement(player) or getElementType(player) ~= 'player') then
@@ -425,11 +422,11 @@ function scanForRecoveryReleaseF10(player, eventname)
 				setElementFrozen(player, false)
 				setElementData(player, "recovery", false)
 				mysql:query_free("UPDATE characters SET recovery='0', recoverytime=NULL WHERE id = " .. dbid) -- Allow them to move, and revert back to recovery type set to 0.
-				outputChatBox("You are no longer in recovery!", player, 0, 255, 0) -- Let them know about it!
+				outputChatBox("Ya no estas en recuperacion!", player, 0, 255, 0) -- Let them know about it!
 			else
 				setElementFrozen(player, true) -- If they are still in recovery, then make sure they are frozen (if they login).
 				setElementData(player, "recovery", true)
-				outputChatBox("You are still in recovery.", player, 255,0,0)
+				outputChatBox("Sigues en recuperacion", player, 255,0,0)
 			end
 		end
 	end
@@ -439,65 +436,66 @@ addEventHandler("accounts:characters:spawn", getRootElement(), scanForRecoveryRe
 function prescribe(thePlayer, commandName, ...)
 	if exports.factions:isInFactionType(thePlayer, 4) then
 		if not (...) then
-			outputChatBox("SYNTAX /" .. commandName .. " [prescription value]", thePlayer, 255, 184, 22)
+			outputChatBox("SINTAXIS /" .. nombreComando .. " [valor de la receta]", elJugador, 255, 184, 22)
 		else
 			local itemValue = table.concat({...}, " ")
 			itemValue = tonumber(itemValue) or itemValue
 			if not(itemValue=="") then
 				exports.global:giveItem( thePlayer, 132, itemValue )
-				outputChatBox("The prescription '" .. itemValue .. "' has been processed.", thePlayer, 0, 255, 0)
+				outputChatBox("La receta '" .. valorReceta .. "' ha sido procesada.", elJugador, 0, 255, 0)
 				--exports.global:sendMessageToAdmins(getPlayerName(thePlayer):gsub("_"," ") .. " has made a prescription with the value of: " .. itemValue .. ".")
-				exports.logs:dbLog(thePlayer, 4, thePlayer, "PRESCRIPTION " .. itemValue)
+				exports.logs:dbLog(thePlayer, 4, thePlayer, "RECETA " .. itemValue)
 			end
 		end
 	end
 end
-addCommandHandler("prescribe", prescribe)
+addCommandHandler("recetar", prescribe)
 
 -- /revive
-function revivePlayerFromPK(thePlayer, commandName, targetPlayer)
-	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
-		if not (targetPlayer) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Name / ID]", thePlayer, 255, 194, 14)
+function revivePlayerFromPK(elJugador, nombreComando, jugadorObjetivo)
+	if (exports.integration:isPlayerTrialAdmin(elJugador)) then
+		if not (jugadorObjetivo) then
+			outputChatBox("SINTAXIS: /" .. nombreComando .. " [Nombre parcial del jugador / ID]", elJugador, 255, 194, 14)
 		else
-			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
+			local jugadorObjetivo, nombreJugadorObjetivo = exports.global:findPlayerByPartialNick(elJugador, jugadorObjetivo)
 
-			if targetPlayer then
-				if isPedDead  ( targetPlayer ) then
-					triggerClientEvent(targetPlayer,"es-system:closeRespawnButton",targetPlayer)
+			if jugadorObjetivo then
+				if isPedDead(jugadorObjetivo) then
+					triggerClientEvent(jugadorObjetivo, "es-system:closeRespawnButton", jugadorObjetivo)
 					if isTimer(changeDeathViewTimer) == true then
 						killTimer(changeDeathViewTimer)
 					end
 
-					local x,y,z = getElementPosition(targetPlayer)
-					local int = getElementInterior(targetPlayer)
-					local dim = getElementDimension(targetPlayer)
-					local skin = getElementModel(targetPlayer)
-					--local team = getPlayerTeam(targetPlayer)
+					local x, y, z = getElementPosition(jugadorObjetivo)
+					local int = getElementInterior(jugadorObjetivo)
+					local dim = getElementDimension(jugadorObjetivo)
+					local skin = getElementModel(jugadorObjetivo)
 
-					setPedHeadless(targetPlayer, false)
-					setCameraInterior(targetPlayer, int)
-					setCameraTarget(targetPlayer, targetPlayer)
-					spawnPlayer(targetPlayer, x, y, z, 0)--, team)
+					setPedHeadless(jugadorObjetivo, false)
+					setCameraInterior(jugadorObjetivo, int)
+					setCameraTarget(jugadorObjetivo, jugadorObjetivo)
+					spawnPlayer(jugadorObjetivo, x, y, z, 0)
 
-					setElementModel(targetPlayer,skin)
-					--setPlayerTeam(targetPlayer, team)
-					setElementInterior(targetPlayer, int)
-					setElementDimension(targetPlayer, dim)
-					triggerEvent("updateLocalGuns", targetPlayer)
-					local adminTitle = tostring(exports.global:getPlayerAdminTitle(thePlayer))
-					outputChatBox("You have been revived by "..tostring(exports.global:getPlayerAdminTitle(thePlayer)).." "..tostring(getPlayerName(thePlayer):gsub("_"," "))..".", targetPlayer, 0, 255, 0)
-					outputChatBox("You have revived "..tostring(getPlayerName(targetPlayer):gsub("_"," "))..".", thePlayer, 0, 255, 0)
-					exports.global:sendMessageToAdmins("AdmCmd: "..tostring(exports.global:getPlayerAdminTitle(thePlayer)).." "..getPlayerName(thePlayer).." revived "..tostring(getPlayerName(targetPlayer))..".")
-					exports.logs:dbLog(thePlayer, 4, targetPlayer, "REVIVED from PK")
+					setElementModel(jugadorObjetivo, skin)
+					setElementInterior(jugadorObjetivo, int)
+					setElementDimension(jugadorObjetivo, dim)
+					triggerEvent("updateLocalGuns", jugadorObjetivo)
+
+					local tituloAdmin = tostring(exports.global:getPlayerAdminTitle(elJugador))
+					outputChatBox("Has sido revivido por " .. tituloAdmin .. " " .. tostring(getPlayerName(elJugador):gsub("_", " ")) .. ".", jugadorObjetivo, 0, 255, 0)
+					outputChatBox("Has revivido a " .. tostring(getPlayerName(jugadorObjetivo):gsub("_", " ")) .. ".", elJugador, 0, 255, 0)
+					exports.global:sendMessageToAdmins("CmdAdm: " .. tituloAdmin .. " " .. getPlayerName(elJugador) .. " revivió a " .. tostring(getPlayerName(jugadorObjetivo)) .. ".")
+					exports.logs:dbLog(elJugador, 4, jugadorObjetivo, "REVIVIDO desde PK")
 				else
-					outputChatBox(tostring(getPlayerName(targetPlayer):gsub("_"," ")).." is not dead.", thePlayer, 255, 0, 0)
+					outputChatBox(tostring(getPlayerName(jugadorObjetivo):gsub("_", " ")) .. " no está muerto.", elJugador, 255, 0, 0)
 				end
 			end
 		end
 	end
 end
-addCommandHandler("revive", revivePlayerFromPK, false, false)
+
+addCommandHandler("revivir", revivePlayerFromPK, false, false)
+
 
 local medicalBillFactions = {
 		[164] = true, --ASH
@@ -508,7 +506,7 @@ function medicalBill(thePlayer, commandName, targetPlayer, amount)
 	local dutyFaction = exports.factions:getCurrentFactionDuty(thePlayer)
 	if medicalBillFactions[dutyFaction] then
 		if not (targetPlayer) or not tonumber(amount) or (tonumber(amount) or 0) <= 0 then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID] [Amount]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Nombre parcial del jugador / ID] [Monto]", thePlayer, 255, 194, 14)
 		else
 			amount = tonumber(amount)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
@@ -542,64 +540,65 @@ function medicalBill(thePlayer, commandName, targetPlayer, amount)
 					end
 
 					triggerClientEvent(targetPlayer, "es-system:medicalBillClient", targetPlayer, amount, insurance, dutyFaction, thePlayer, date, rankName)
-					outputChatBox("Medical bill sent to "..tostring(targetPlayerName)..".", thePlayer, 245, 217, 7)
+					outputChatBox("Factura médica enviada a"..tostring(targetPlayerName)..".", thePlayer, 245, 217, 7)
 				else
-					outputChatBox("The player is not logged in.", thePlayer, 255,0,0)
+					outputChatBox("El jugador no esta conectado.", thePlayer, 255,0,0)
 				end
 			else
-				outputChatBox("Player not found.", thePlayer, 255,0,0)
+				outputChatBox("Jugador no encontrado.", thePlayer, 255,0,0)
 			end
 		end
 	end
 end
-addCommandHandler("bill", medicalBill)
+addCommandHandler("factura", medicalBill)
 
-function payMedicalBill(customer, doctor, faction, amount, insurance, action)
-	if not client then client = customer end
-	local toPay = amount - insurance
-	if action == 1 then --pay by cash
-		if exports.global:takeMoney(client, toPay) then
-			local theTeam = exports.factions:getFactionFromID(faction)
-			if exports.global:giveMoney(theTeam, amount) then
-				local name = exports.global:getPlayerName(client):gsub("_", " ")
-				mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (0, " .. mysql:escape_string(-getElementData(theTeam, "id")) .. ", " .. mysql:escape_string(amount) .. ", 'Medical bill for "..name.."', 13)" )
-				outputChatBox("You paid your medical bill ($"..tostring(exports.global:formatMoney(amount))..").", client, 0, 250, 0)
-				outputChatBox(name.." paid their medical bill ($"..tostring(exports.global:formatMoney(amount))..").", doctor, 0, 250, 0)
+function pagarFacturaMedica(cliente, doctor, faccion, monto, seguro, accion)
+	if not client then client = cliente end
+	local aPagar = monto - seguro
+	if accion == 1 then --pagar en efectivo
+		if exports.global:takeMoney(client, aPagar) then
+			local elEquipo = exports.factions:getFactionFromID(faccion)
+			if exports.global:giveMoney(elEquipo, monto) then
+				local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+				mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (0, " .. mysql:escape_string(-getElementData(elEquipo, "id")) .. ", " .. mysql:escape_string(monto) .. ", 'Factura médica para "..nombre.."', 13)" )
+				outputChatBox("Pagaste tu factura médica ($"..tostring(exports.global:formatMoney(monto))..").", client, 0, 250, 0)
+				outputChatBox(nombre.." pagó su factura médica ($"..tostring(exports.global:formatMoney(monto))..").", doctor, 0, 250, 0)
 			end
 		else
-			outputChatBox("You don't have enough cash to pay the bill. Taking from bank account instead.", client, 255, 0, 0)
-			payMedicalBill(client, doctor, faction, amount, insurance, 2)
+			outputChatBox("No tienes suficiente efectivo para pagar la factura. Se tomará del banco en su lugar.", client, 255, 0, 0)
+			pagarFacturaMedica(client, doctor, faccion, monto, seguro, 2)
 
-			local name = exports.global:getPlayerName(client):gsub("_", " ")
-			outputChatBox(name.." could not afford to pay the medical bill.", doctor, 255, 0, 0)
+			local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+			outputChatBox(nombre.." no pudo pagar la factura médica.", doctor, 255, 0, 0)
 		end
-	elseif action == 2 then --pay by bank
-		if exports.bank:hasBankMoney(client, toPay) then
-			if exports.bank:takeBankMoney(client, toPay) then
-				local theTeam = exports.factions:getFactionFromID(faction)
-				if exports.global:giveMoney(theTeam, amount) then
-					local name = exports.global:getPlayerName(client):gsub("_", " ")
-					if insurance > 0 then
-						mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (0, " .. mysql:escape_string(getElementData(client, "dbid")) .. ", " .. mysql:escape_string(insurance) .. ", 'Insurance claim for medical bill', 3)" )
+	elseif accion == 2 then --pagar desde el banco
+		if exports.bank:hasBankMoney(client, aPagar) then
+			if exports.bank:takeBankMoney(client, aPagar) then
+				local elEquipo = exports.factions:getFactionFromID(faccion)
+				if exports.global:giveMoney(elEquipo, monto) then
+					local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+					if seguro > 0 then
+						mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (0, " .. mysql:escape_string(getElementData(client, "dbid")) .. ", " .. mysql:escape_string(seguro) .. ", 'Reclamo de seguro para factura médica', 3)" )
 					end
-					mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (" .. mysql:escape_string(getElementData(client, "dbid")) .. ", " .. mysql:escape_string(-getElementData(theTeam, "id")) .. ", " .. mysql:escape_string(amount) .. ", 'Medical bill', 13)" )
-					outputChatBox("You paid your medical bill ($"..tostring(exports.global:formatMoney(amount))..").", client, 0, 250, 0)
-					outputChatBox(name.." paid their medical bill ($"..tostring(exports.global:formatMoney(amount))..").", doctor, 0, 250, 0)
+					mysql:query_free("INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (" .. mysql:escape_string(getElementData(client, "dbid")) .. ", " .. mysql:escape_string(-getElementData(elEquipo, "id")) .. ", " .. mysql:escape_string(monto) .. ", 'Factura médica', 13)" )
+					outputChatBox("Pagaste tu factura médica ($"..tostring(exports.global:formatMoney(monto))..").", client, 0, 250, 0)
+					outputChatBox(nombre.." pagó su factura médica ($"..tostring(exports.global:formatMoney(monto))..").", doctor, 0, 250, 0)
 				end
 			else
-				outputChatBox("A transaction error occured. Medical bill not paid.", client, 255, 0, 0)
-				local name = exports.global:getPlayerName(client):gsub("_", " ")
-				outputChatBox(name.." could not pay the medical bill due to a transaction error.", doctor, 255, 0, 0)
+				outputChatBox("Ocurrió un error en la transacción. La factura médica no se pagó.", client, 255, 0, 0)
+				local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+				outputChatBox(nombre.." no pudo pagar la factura médica debido a un error en la transacción.", doctor, 255, 0, 0)
 			end
 		else
-			outputChatBox("You cannot afford to pay the medical bill.", client, 255, 0, 0)
-			local name = exports.global:getPlayerName(client):gsub("_", " ")
-			outputChatBox(name.." could not afford to pay the medical bill.", doctor, 255, 0, 0)
+			outputChatBox("No puedes pagar la factura médica.", client, 255, 0, 0)
+			local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+			outputChatBox(nombre.." no pudo pagar la factura médica.", doctor, 255, 0, 0)
 		end
-	elseif action == 3 then --refuse to pay
-		local name = exports.global:getPlayerName(client):gsub("_", " ")
-		outputChatBox(name.." refused to pay the medical bill.", doctor, 255, 0, 0)
+	elseif accion == 3 then --negarse a pagar
+		local nombre = exports.global:getPlayerName(client):gsub("_", " ")
+		outputChatBox(nombre.." se negó a pagar la factura médica.", doctor, 255, 0, 0)
 	end
 end
 addEvent("es-system:payMedicalBill", true)
-addEventHandler("es-system:payMedicalBill", getResourceRootElement(), payMedicalBill)
+addEventHandler("es-system:payMedicalBill", getResourceRootElement(), pagarFacturaMedica)
+
