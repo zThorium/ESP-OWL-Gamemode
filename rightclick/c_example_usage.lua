@@ -3,14 +3,14 @@ function clickObject(button, state, absX, absY, wx, wy, wz, element)
 		local model = getElementModel(element)
 		local rcMenu
 		if(model == 2517) then --If the object is a shower model
-			rcMenu = exports.rightclick:create("Shower")
-			local row = exports.rightclick:addRow("Take a shower")
+			rcMenu = exports.rightclick:create("Ducha")
+			local row = exports.rightclick:addRow("Tomar una ducha")
 			addEventHandler("onClientGUIClick", row,  function (button, state)
 				takeShower(element)
 			end, true)
 		elseif(model == 2964) then --If the object is a pool table model
-			rcMenu = exports.rightclick:create("Pool Table")
-			local row = exports.rightclick:addRow("New Game")
+			rcMenu = exports.rightclick:create("Mesa de Pool")
+			local row = exports.rightclick:addRow("Nuevo juego")
 			addEventHandler("onClientGUIClick", row,  function (button, state)
 				triggerServerEvent("pool-game:newGame", getLocalPlayer(), getLocalPlayer())			
 			end, true)
