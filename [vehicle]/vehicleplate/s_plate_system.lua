@@ -73,16 +73,16 @@ function pedTalk(state)
 	elseif (state == 3) then
 		--exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: That is great! Lets get everything set up for you in our system.", 255, 255, 255, 10)
 	elseif (state == 4) then
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: No? Well I hope you change your mind later. Have a nice day!", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: ¿No? Bueno, espero que luego cambies de opinión. ¡Que tenga un buen día!", 255, 255, 255, 10)
 	elseif (state == 5) then
-		exports.global:sendLocalText(source, " *Gabrielle McCoy begins inputting the information into her computer.", 255, 51, 102)
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: Alright, you should be good to go, I'll send someone out to deal with your vehicles license plate. Have a nice day!", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, " *Gabrielle McCoy comienza a introducir la información en su ordenador.", 255, 51, 102)
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: Muy bien, usted debe ser bueno para ir, voy a enviar a alguien a lidiar con la matrícula de su vehículo. ¡Que tenga un buen día!", 255, 255, 255, 10)
 	elseif (state == 6) then
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: Hmmm. According to our records, that is already a registered license plate.", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: Hmmm. Según nuestros registros, esa ya es una matrícula registrada.", 255, 255, 255, 10)
 	elseif (state == 7) then
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: Well, I'm sorry but your vehicle doesn't require a registered plate or papers.", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: Pues lo siento, pero su vehículo no necesita matrícula ni papeles.", 255, 255, 255, 10)
 	elseif (state == 8) then
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: I'm sorry but are you the owner of this vehicle on papers?", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: Lo siento, pero ¿es usted el propietario de este vehículo en los papeles?", 255, 255, 255, 10)
 	end
 end
 addEvent("platePedTalk", true)
@@ -148,8 +148,8 @@ function setNewReg(car)
 		data = 0
 	end
 
-	if not exports.global:takeMoney(source, data == 1 and 175 or 50) then
-		exports.global:sendLocalText(source, "[English] Gabrielle McCoy says: Could I have $"..(data == 1 and 175 or 50).." please?", 255, 255, 255, 10)
+	if not exports.global:takeMoney(source, data == 1 and 80000 or 40000) then
+		exports.global:sendLocalText(source, "[English] Gabrielle McCoy dice: ¿Me das $"..(data == 1 and 80000 or 40000).." por favor?", 255, 255, 255, 10)
 	end
  
 	exports.anticheat:changeProtectedElementDataEx(tvehicle, "registered", data, true)
@@ -164,7 +164,7 @@ addEventHandler("sNewReg", getRootElement(), setNewReg)
 
 function givePaperToSellVehicle(thePlayer)
 	source = thePlayer
-	exports.global:takeMoney(thePlayer, 100)
+	exports.global:takeMoney(thePlayer, 10000)
 	exports.global:giveItem(thePlayer, 173, 1)
 end
 addEvent("givePaperToSellVehicle", true)
