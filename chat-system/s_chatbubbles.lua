@@ -9,7 +9,7 @@ function sendStatus(thePlayer, commandName, ...)
 	local message = table.concat({...}, " ")
 	setElementData(thePlayer, "chat:status", message)
 
-	outputChatBox("You have enabled a permanent status. To remove it type /status.", thePlayer, 255, 194, 14)
+	outputChatBox("Ha habilitado un estado permanente. Para eliminarlo escribe /status.", thePlayer, 255, 194, 14)
 	outputChatBox(message, thePlayer)
 end
 addCommandHandler("status", sendStatus)
@@ -23,13 +23,13 @@ end)
 -- /ame & /ado
 function writeChatbubbleText( thePlayer, commandName, ... )
 	if not (...) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [text]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [texto]", thePlayer, 255, 194, 14)
 		return
 	end
 
 	local message = table.concat({...}, " ")
 	if getElementData(thePlayer, "statusSpam") == message then
-		outputChatBox("SPAM: Your /" .. commandName .. " has not been shown to prevent spam. Try again in a few seconds.", thePlayer, 255, 0, 0)
+		outputChatBox("SPAM: Tu /" .. commandName .. " No se ha demostrado que prevenga el spam. Vuelve a intentarlo en unos segundos..", thePlayer, 255, 0, 0)
 		return nil
 	else
 		setElementData(thePlayer, "statusSpam", message)

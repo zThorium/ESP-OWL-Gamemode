@@ -42,7 +42,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: RECEPTION (aka. Jessie Smith)
 				if(interact == "ch.reception") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("cityhall:jesped", getLocalPlayer())
 					end, true)
@@ -50,7 +50,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: JOB PINBOARD
 				elseif(interact == "ch.jobboard") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("onEmployment", getLocalPlayer())
 					end, true)
@@ -58,7 +58,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: LICENSE PLATES REGISTRATION
 				elseif(interact == "ch.plates") then --City Hall: License plates registration
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("cBeginPlate", getLocalPlayer(), element)
 					end, true)
@@ -66,7 +66,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: BUSINESS REGISTRY
 				elseif(interact == "ch.bizreg") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("onRegistryPed", getLocalPlayer())
 					end, true)
@@ -74,7 +74,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: POLITICAL PARTY REGISTRY
 				elseif(interact == "ch.politics") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("onPoliticsPed", element)
 					end, true)
@@ -82,7 +82,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--BANK: Banking ped
 				elseif(interact == "bank.banking") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("bank:showGeneralServiceGUI", getLocalPlayer(), getLocalPlayer(), element)
 					end, true)
@@ -90,7 +90,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--BANK: ATM cards ped
 				elseif(interact == "bank.cards") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("bank-system:bankerInteraction", getLocalPlayer(), element)
 					end, true)
@@ -98,7 +98,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				-- PD: Citations
 				elseif(interact == "pd.tickets") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("fetchTickets", localPlayer, ped)
 					end, true)
@@ -106,7 +106,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--FUEL STATION PED
 				elseif(interact == "fuel") then --Fuel station ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("fuel:startConvo", element)
 					end, true)
@@ -114,7 +114,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--TOLL BOOTH PED
 				elseif(interact == "toll") then --Toll booth ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("toll:startConvo", element)
 					end, true)
@@ -122,7 +122,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--SAN RECEPTION PED
 				elseif(interact == "san.reception") then --SAN reception ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("toll:startConvo", element)
 					end, true)
@@ -131,7 +131,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--MISSION: STEVEN PULLMAN
 				elseif(interact == "mission.pullman") then --Mission: Steven Pullman
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent( "startStevieConvo", getLocalPlayer())
 						if (getElementData(element, "activeConvo")~=1) then
@@ -141,14 +141,14 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--MISSION: HUNTER
 				elseif(interact == "mission.hunter") then --Mission: Hunter
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent( "startHunterConvo", getLocalPlayer())
 					end, true)
 				--MISSION: ROOK
 				elseif(interact == "mission.rook") then --Mission: Rook
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent( "startRookConvo", getLocalPlayer())
 					end, true)
@@ -157,7 +157,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--DMV: GET DRIVERS LICENSE
 				elseif(interact == "dmv.license") then --DMV: Get drivers license
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("onLicense", getLocalPlayer(), element)
 					end, true)
@@ -165,7 +165,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--DMV: LICENSE PLATES REGISTRATION
 				elseif(interact == "dmv.plates") then --City Hall: License plates registration
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("cBeginPlate", getLocalPlayer(), element)
 					end, true)
@@ -173,7 +173,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--ELECTION PED
 				elseif(interact == "election") then --Election ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Vote")
+					row.talk = exports.rightclick:addrow("Votar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("electionWantVote", getLocalPlayer())
 					end, true)
@@ -181,7 +181,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--IMPOUND LOT PED
 				elseif(interact == "impound") then --Impound lot ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("onTowMisterTalk", getLocalPlayer())
 					end, true)
@@ -189,7 +189,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--FAA: Theory Exams
 				elseif(interact == "faa.theory") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("onLicense", getLocalPlayer(), element)
 					end, true)
@@ -197,7 +197,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CITY HALL: GUARD
 				elseif(interact == "ch.guard") then --City Hall: guard
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("gateCityHall", getLocalPlayer())
 					end, true)
@@ -205,7 +205,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--GATEANGBASE (AIRMAN CONNOR)
 				elseif(interact == "gateangbase") then --gateangbase (Airman Connor)
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent("gateAngBase", getLocalPlayer())
 					end, true)
@@ -213,7 +213,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--SFES RECEPTION PED
 				elseif(interact == "sfes.reception") then --SFES: reception ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("lses:popupPedMenu", getLocalPlayer(), element)
 					end, true)
@@ -221,7 +221,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--ES HOSPITAL FRONT DESK
 				elseif(interact == "hospital.frontdesk") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("lses:ped:hospitalfrontdesk", getLocalPlayer(), element)
 					end, true)
@@ -229,7 +229,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--Prison arrival
 				elseif(interact == "prison.arrival") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("prison:prisonPedArrival", getLocalPlayer(), element)
 					end, true)
@@ -237,7 +237,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--Prison release
 				elseif(interact == "prison.release") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("prison:prisonPedRelease", getLocalPlayer(), element)
 					end, true)
@@ -245,7 +245,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--MISSION: CLARICE
 				elseif(interact == "mission.clarice") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerServerEvent( "startClariceConvo", getLocalPlayer())
 					end, true)
@@ -264,7 +264,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--MISSION: CONSTRUCTION SITE JOB
 				elseif(interact == "constructionwork") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("onConstructionJobPed", getLocalPlayer(), element)
 					end, true)
@@ -272,12 +272,12 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--CHRISTMAS: SANTA
 				elseif(interact == "santa") then
 					rcMenu = exports.rightclick:create(name)
-					row.get = exports.rightclick:addrow("Get Coke")
+					row.get = exports.rightclick:addrow("Obtener Coca-Cola")
 					addEventHandler("onClientGUIClick", row.get,  function (button, state)
 						triggerServerEvent("xmas:santaGetCoke", getLocalPlayer(), element)
 					end, true)
 					if exports.global:hasItem(getLocalPlayer(), 211) then --has christmas lottery ticket
-						row.claim = exports.rightclick:addrow("Claim Prize")
+						row.claim = exports.rightclick:addrow("Reclamar Premio")
 						addEventHandler("onClientGUIClick", row.claim,  function (button, state)
 							triggerServerEvent("xmas:useChristmasLotteryTicket", getLocalPlayer(), element)
 						end, true)
@@ -286,7 +286,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--ELECTIONS: Ped for vote GUI (anumaz)
 				elseif(interact == "electionsped") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("elections:votegui", getLocalPlayer())
 					end, true)
@@ -294,7 +294,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--SFIA: Pilot mission (anumaz)
 				elseif(interact == "pilotmission") then
 					rcMenu = exports.rightclick:create(name)
-					row.getlisting = exports.rightclick:addrow("Get listing")
+					row.getlisting = exports.rightclick:addrow("Obtener listado")
 					addEventHandler("onClientGUIClick", row.getlisting, function ()
 							triggerEvent("pilotmission:startGUI", getResourceRootElement( getResourceFromName("sfia") ))
 						end, false)
@@ -302,7 +302,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 					local name = string.gsub(getPlayerName(getLocalPlayer()), "_", " ")
 					for k, v in pairs(temp_table) do
 						if v["charactername"] == name then
-							row.gettask = exports.rightclick:addrow("Get task")
+							row.gettask = exports.rightclick:addrow("Obtener tarea")
 							addEventHandler("onClientGUIClick", row.gettask, function ()
 									triggerEvent("pilotmission:domission", getResourceRootElement( getResourceFromName("sfia") ))
 								end, false)
@@ -314,7 +314,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				elseif(interact == "k9") then
 					rcMenu = exports.rightclick:create(getElementData(element, "rpp.npc.name") or "Dog")
 					if getElementData(element, "besitzer") == getPlayerName(getLocalPlayer()) then
-						row.talk = exports.rightclick:addrow("Status")
+						row.talk = exports.rightclick:addrow("Estado")
 						addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 							local currentStatus = getElementData(element, "k9:status")
 							if currentStatus == 1 then
@@ -330,7 +330,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--Locksmith
 				elseif(interact == "locksmith") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("locksmithGUI", localPlayer, localPlayer)
 					end, true)
@@ -338,7 +338,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--FAA RECEPTION PED
 				elseif(interact == "faa.reception") then --FAA: reception ped
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("airport:ped:receptionistFAA", getLocalPlayer(), element)
 					end, true)
@@ -346,7 +346,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--FAA: Gatekeeper LSA
 				elseif(interact == "faa.gatekeeper.lsa") then --FAA: Gatekeeper LSA
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("airport:ped:LSAgatekeeper", getLocalPlayer(), element)
 					end, true)
@@ -354,7 +354,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				--FAA: VMAT spawning
 				elseif(interact == "faa.vmat") then
 					rcMenu = exports.rightclick:create(name)
-					row.talk = exports.rightclick:addrow("Talk")
+					row.talk = exports.rightclick:addrow("Hablar")
 					addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 						triggerEvent("airport:ped:vmat", getLocalPlayer(), element)
 					end, true)
@@ -416,7 +416,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 							local isLeader = exports.factions:hasMemberPermissionTo(localPlayer, factionID, "add_member")
 							if isLeader then
 								rcMenu = exports.rightclick:create(name)
-								row.talk = exports.rightclick:addrow("Talk")
+								row.talk = exports.rightclick:addrow("Hablar")
 								addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 									triggerEvent("createCargoGUI", getLocalPlayer())
 								end, true)

@@ -223,7 +223,7 @@ function meEmote(source, cmd, ...)
 	if logged == 1 then
 		local message = table.concat({...}, " ")
 		if not (...) then
-			outputChatBox("SYNTAX: /me [Acción]", source, 255, 194, 14)
+			outputChatBox("SINTAXIS: /me [Acción]", source, 255, 194, 14)
 		else
 			local result, affectedPlayers = exports.global:sendLocalMeAction(source, message, true, true)
 			local dimension = getElementDimension(source)
@@ -241,7 +241,7 @@ addCommandHandler("Me", meEmote, false, true)
 function outputChatBoxCar( vehicle, target, text1, text2, color )
 	if vehicle and exports.vehicle:isVehicleWindowUp( vehicle ) then
 		if getPedOccupiedVehicle( target ) == vehicle then
-			outputChatBox( text1 .. " ((In Car))" .. text2, target, unpack(color))
+			outputChatBox( text1 .. " ((En Auto))" .. text2, target, unpack(color))
 			return true
 		else
 			return false
@@ -297,9 +297,9 @@ function radio(source, radioID, message, cmd)
 		end
 
 		if theChannel == 1 or theChannel == 0 then
-			outputChatBox("Please Tune your radio first with /tuneradio [channel]", source, 255, 194, 14)
+			outputChatBox("Sintonice su radio primero con /tuneradio [canal]", source, 255, 194, 14)
 		elseif not hasChannelAccess(source, theChannel) then
-			outputChatBox("You are not allowed to access this channel. Please retune your radio.", source, 255, 194, 14)
+			outputChatBox("No tienes permitido acceder a este canal. Por favor vuelva a sintonizar su radio.", source, 255, 194, 14)
 		elseif (theChannel > 1 or radioID < 0) and itemValue > 0 then
 			--triggerClientEvent (source, "playRadioSound", getRootElement())
 			local username = getPlayerName(source)
@@ -598,7 +598,7 @@ function radio(source, radioID, message, cmd)
 			else
 				if cmd == "rlow" then
 					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " susurra: " .. message, {r,g,b})
-					triggerEvent("sendAme", source, "whispers into their radio.")
+					triggerEvent("sendAme", source, "susurra en su radio.")
 				else
 					outputChatBoxCar(getPedOccupiedVehicle( source ), source, "[" .. languagename .. "] [" .. channelName .. "] " .. username, " dice: " .. message, {r,g,b})
 				end
@@ -691,10 +691,10 @@ function radio(source, radioID, message, cmd)
 			end
 			exports.logs:dbLog(source, radioID < 0 and 10 or 9, affectedElements, ( radioID < 0 and "" or ( theChannel .. " " ) ) ..languagename.." "..message)
 		else
-			outputChatBox("Your radio is off. ((/toggleradio))", source, 255, 0, 0)
+			outputChatBox("Tu radio esta apagada. ((/toggleradio))", source, 255, 0, 0)
 		end
 	else
-		outputChatBox("You do not have a radio.", source, 255, 0, 0)
+		outputChatBox("No tienes una radio.", source, 255, 0, 0)
 	end
 end
 
@@ -727,7 +727,7 @@ function msgRadio(thePlayer, commandName, ...)
 		local message = table.concat({...}, " ")
 		radio(thePlayer, 1, message, commandName)
 	else
-		outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 	end
 end
 addCommandHandler("r", msgRadio, false, false)
@@ -741,7 +741,7 @@ for i = 1, 20 do
 				if (...) then
 					radio( thePlayer, i, table.concat({...}, " ") )
 				else
-					outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+					outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 				end
 			end
 		end
@@ -758,7 +758,7 @@ function govAnnouncement(thePlayer, commandName, ...)
 			local factionleader = exports.factions:hasMemberPermissionTo(thePlayer, faction, "add_member")
 
 			if #message == 0 then
-				outputChatBox("SYNTAX: /" .. commandName .. " [message]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 				return false
 			end
 
@@ -777,7 +777,7 @@ function govAnnouncement(thePlayer, commandName, ...)
 					end
 				end
 			else
-				outputChatBox("You do not have permission to use this command.", thePlayer, 255, 0, 0)
+				outputChatBox("No tienes permiso para usar este comando.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
@@ -790,10 +790,10 @@ function playerToggleDonatorChat(thePlayer, commandName)
 	if (logged==1 and hasPerk) then
 		local enabled = getElementData(thePlayer, "donatorchat")
 		if (tonumber(perkValue)==1) then
-			outputChatBox("You have now hidden Donator Chat.", thePlayer, 255, 194, 14)
+			outputChatBox("Ahora has ocultado Donator Chat.", thePlayer, 255, 194, 14)
 			exports.donators:updatePerkValue(thePlayer, 9, 0)
 		else
-			outputChatBox("You have now enabled Donator Chat.", thePlayer, 255, 194, 14)
+			outputChatBox("Ahora has habilitado Donator Chat.", thePlayer, 255, 194, 14)
 			exports.donators:updatePerkValue(thePlayer, 9, 1)
 		end
 	end
@@ -806,7 +806,7 @@ function donatorchat(thePlayer, commandName, ...) -- MAXIME
 	local hasDonChat, togDonChatState = exports.donators:hasPlayerPerk(thePlayer, 10)
 	if hasDonChat or exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local logged = tonumber(getElementData(thePlayer, "loggedin"))
 			if (logged ~= 1) then
@@ -820,7 +820,7 @@ function donatorchat(thePlayer, commandName, ...) -- MAXIME
 			local hidden = getElementData(thePlayer, "hiddenadmin") or 0
 
 			if (tonumber(togDonChatState) == 0) then
-				outputChatBox("[Donator] You're sending a message while having your donator chat channel toggled off.", thePlayer, 200, 200, 200)
+				outputChatBox("[Donante] Estás enviando un mensaje mientras tu canal de chat de donante está desactivado.", thePlayer, 200, 200, 200)
 			end
 
 			for key, value in ipairs(getElementsByType("player")) do
@@ -859,7 +859,7 @@ function departmentradio(thePlayer, commandName, ...)
 			local message = table.concat({...}, " ")
 			radio(thePlayer, -1, message)
 		elseif not tollped then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		end
 	end
 end
@@ -883,7 +883,7 @@ function medicalRadio(thePlayer, commandName, ...)
 			local message = table.concat({...}, " ")
 			radio(thePlayer, -6, message)
 		elseif not tollped then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		end
 	end
 end
@@ -914,12 +914,12 @@ function airradio(thePlayer, commandName, ...)
 
 		if found then
 			if not ... then
-				outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 			else
 				radio(thePlayer, -2, table.concat({...}, " "))
 			end
 		else
-			outputChatBox("You weren't able to speak over the air frequency.", thePlayer, 255, 0, 0)
+			outputChatBox("No pudiste hablar por la frecuencia aérea.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -929,7 +929,7 @@ addCommandHandler("airradio", airradio, false, false)
  --PA (speakers) in vehicles and interiors // Exciter
 function ICpublicAnnouncement(thePlayer, commandName, ...)
 	if not ... then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 	else
 		radio(thePlayer, -3, table.concat({...}, " "))
 	end
@@ -939,7 +939,7 @@ addCommandHandler("pa", ICpublicAnnouncement, false, false)
  --PA (speakers) at airports // Exciter
 function ICAirportAnnouncement(thePlayer, commandName, ...)
 	if not ... then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 	else
 		radio(thePlayer, -4, table.concat({...}, " "))
 	end
@@ -949,7 +949,7 @@ addCommandHandler("airportpa", ICAirportAnnouncement, false, false)
  --PA (speakers) at hospital // Exciter
 function ICHospitalAnnouncement(thePlayer, commandName, ...)
 	if not ... then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 	else
 		radio(thePlayer, -5, table.concat({...}, " "))
 	end
@@ -967,15 +967,15 @@ function globalOOC(thePlayer, commandName, ...)
 
 	if (logged==1) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local oocEnabled = exports.global:getOOCState()
 			message = table.concat({...}, " ")
 			local muted = getElementData(thePlayer, "muted")
 			if (oocEnabled==0) and not exports.integration:isPlayerTrialAdmin(thePlayer) and not exports.integration:isPlayerScripter(thePlayer) then
-				outputChatBox("OOC Chat is currently disabled.", thePlayer, 255, 0, 0)
+				outputChatBox("El chat OOC está actualmente deshabilitado.", thePlayer, 255, 0, 0)
 			elseif (muted==1) then
-				outputChatBox("You are currently muted from the OOC Chat.", thePlayer, 255, 0, 0)
+				outputChatBox("Actualmente estás silenciado en el chat OOC.", thePlayer, 255, 0, 0)
 			else
 				local affectedElements = { }
 				local players = exports.pool:getPoolElementsByType("player")
@@ -1015,10 +1015,10 @@ function playerToggleOOC(thePlayer, commandName)
 		local playerOOCEnabled = getElementData(thePlayer, "globalooc")
 
 		if (playerOOCEnabled==1) then
-			outputChatBox("You have now hidden Global OOC Chat.", thePlayer, 255, 194, 14)
+			outputChatBox("Ahora has ocultado el chat global OOC.", thePlayer, 255, 194, 14)
 			exports.anticheat:changeProtectedElementDataEx(thePlayer, "globalooc", 0, false)
 		else
-			outputChatBox("You have now enabled Global OOC Chat.", thePlayer, 255, 194, 14)
+			outputChatBox("Ahora ha habilitado el chat global OOC.", thePlayer, 255, 194, 14)
 			exports.anticheat:changeProtectedElementDataEx(thePlayer, "globalooc", 1, false)
 		end
 		mysql:query_free("UPDATE account_details SET globalooc=" .. mysql:escape_string(getElementData(thePlayer, "globalooc")) .. " WHERE account_id = " .. mysql:escape_string(getElementData(thePlayer, "account:id")))
@@ -1037,7 +1037,7 @@ function scripterChat(thePlayer, commandName, ...)
 
     if(logged==1) and (exports.integration:isPlayerScripter(thePlayer))  then
         if not (...) then
-            outputChatBox("SYNTAX: /ss [Message]", thePlayer, 255, 194, 14)
+            outputChatBox("SINTAXIS: /ss [Mensaje]", thePlayer, 255, 194, 14)
         else
             local message = table.concat({...}, " ")
             local players = exports.pool:getPoolElementsByType("player")
@@ -1063,14 +1063,14 @@ function vctChat(thePlayer, commandName, ...)
 
     if(logged==1) and (exports.integration:isPlayerVCTMember(thePlayer))  then
         if not (...) then
-            outputChatBox("SYNTAX: /v [Message]", thePlayer, 255, 194, 14)
+            outputChatBox("SINTAXIS: /v [Mensaje]", thePlayer, 255, 194, 14)
         else
             local message = table.concat({...}, " ")
             local players = exports.pool:getPoolElementsByType("player")
             local username = getElementData(thePlayer,"account:username")
 
 			if not vctEnabled then
-				outputChatBox( "VCT chat is disabled by a leader.", thePlayer, 255, 100, 100 )
+				outputChatBox( "El chat VCT está deshabilitado por un líder..", thePlayer, 255, 100, 100 )
 				return
 			end
 
@@ -1105,7 +1105,7 @@ function mappingTeamChat(thePlayer, commandName, ...)
 
     if(logged==1) and (exports.integration:isPlayerMappingTeamMember(thePlayer))  then
         if not (...) then
-            outputChatBox("SYNTAX: /mt [Message]", thePlayer, 255, 194, 14)
+            outputChatBox("SINTAXIS: /mt [Mensaje]", thePlayer, 255, 194, 14)
         else
             local message = table.concat({...}, " ")
             local players = exports.pool:getPoolElementsByType("player")
@@ -1128,7 +1128,7 @@ function fmtChat(thePlayer, commandName, ...)
 
     if(logged==1) and (exports.integration:isPlayerFMTMember(thePlayer))  then
         if not (...) then
-            outputChatBox("SYNTAX: /fmt [Message]", thePlayer, 255, 194, 14)
+            outputChatBox("SINTAXIS: /fmt [Mensaje]", thePlayer, 255, 194, 14)
         else
             local message = table.concat({...}, " ")
             local players = exports.pool:getPoolElementsByType("player")
@@ -1152,11 +1152,11 @@ function ignoreOnePlayer(thePlayer, commandName, targetPlayerNick)
 	local logged = getElementData(thePlayer, "loggedin")
 	if (logged==1) then
 		if not (targetPlayerNick) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Nombre Parcial / ID]", thePlayer, 255, 194, 14)
 		else
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayerNick)
 			if exports.integration:isPlayerStaff(targetPlayer) then
-				outputChatBox("You may not ignore staff.", thePlayer, 255, 0, 0)
+				outputChatBox("No puedes ignorar al staff.", thePlayer, 255, 0, 0)
 				return
 			end
 
@@ -1164,7 +1164,7 @@ function ignoreOnePlayer(thePlayer, commandName, targetPlayerNick)
 			for k, v in ipairs(ignoreList[thePlayer] or {}) do
 				if v == targetPlayer then
 					table.remove(ignoreList[thePlayer], k)
-					outputChatBox("You're no longer ignoring whispers from " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
+					outputChatBox("Ya no estás ignorando los susurros de " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
 					existed = true
 					break
 				end
@@ -1174,8 +1174,8 @@ function ignoreOnePlayer(thePlayer, commandName, targetPlayerNick)
 					ignoreList[thePlayer] = {}
 				end
 				table.insert(ignoreList[thePlayer], targetPlayer)
-				outputChatBox("You're ignoring whispers from " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
-				outputChatBox("Type /ignorelist for a full list of players you're ignoring.", thePlayer, 0, 255, 0)
+				outputChatBox("Estas ignorando susurros de " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
+				outputChatBox("Escribe /ignorelist para una larga lista de quienes ignoras.", thePlayer, 0, 255, 0)
 			end
 		end
 	end
@@ -1222,8 +1222,8 @@ function pmPlayer(thePlayer, commandName, who, ...)
 		who = target
 	else
 		if not (who) or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick] [Message]", thePlayer, 255, 194, 14)
-			outputChatBox("Press 'U' to quickly reply PMs.", thePlayer)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Nombre Parcial] [Mensaje]", thePlayer, 255, 194, 14)
+			outputChatBox("Presiona 'U' para responder rapido PMs.", thePlayer)
 			return false
 		end
 		message = table.concat({...}, " ")
@@ -1251,12 +1251,12 @@ function pmPlayer(thePlayer, commandName, who, ...)
 
 		if (targetPlayer) then
 			if targetPlayer == thePlayer then
-				outputChatBox("You clearly don't need to pm yourself.", thePlayer, 255, 0, 0)
+				outputChatBox("Claramente no necesitas enviarte un mensaje privado.", thePlayer, 255, 0, 0)
 				return false
 			end
 
 			if getElementData(targetPlayer, "loggedin") ~= 1 then
-				outputChatBox("Player is not logged in yet.", thePlayer, 255, 255, 0)
+				outputChatBox("El jugador no ha iniciado sesión todavía.", thePlayer, 255, 255, 0)
 				return false
 			end
 
@@ -1273,7 +1273,7 @@ function pmPlayer(thePlayer, commandName, who, ...)
 					if are_they_friends and allow_friends_pm then
 						-- Let pm go through
 					else
-						outputChatBox("Player is ignoring private messages.", thePlayer, 255, 255, 0)
+						outputChatBox("El jugador está ignorando mensajes privados.", thePlayer, 255, 255, 0)
 						return false
 					end
 				end
@@ -1391,7 +1391,7 @@ function localOOC(thePlayer, commandName, ...)
 	if (logged==1) and not (isPedDead(thePlayer)) then
 		local muted = getElementData(thePlayer, "muted")
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		elseif (muted==1) then
 			outputChatBox("You are muted.", thePlayer, 255, 0, 0)
 		else
@@ -1446,7 +1446,7 @@ function districtIC(thePlayer, commandName, ...)
 
 	if (logged==1) and not (isPedDead(thePlayer)) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local affectedElements = { }
 			local playerName = getPlayerName(thePlayer)
@@ -1485,7 +1485,7 @@ function localDo(thePlayer, commandName, ...)
 
 	if logged==1 then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Action/Event]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Action/Event]", thePlayer, 255, 194, 14)
 		else
 			local message = table.concat({...}, " ")
 			local result, affectedElements = exports.global:sendLocalDoAction(thePlayer, message, true)
@@ -1510,7 +1510,7 @@ function localShout(thePlayer, commandName, ...)
 
 	if not (isPedDead(thePlayer)) and (logged==1) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local playerName = getPlayerName(thePlayer)
 
@@ -1577,7 +1577,7 @@ function megaphoneShout(thePlayer, commandName, ...)
 			local affectedElements = { }
 
 			if not (...) then
-				outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 			else
 				local playerName = getPlayerName(thePlayer)
 				local message = trunklateText(thePlayer, table.concat({...}, " "))
@@ -1718,7 +1718,7 @@ function factionOOC(thePlayer, commandName, ...)
 
 	if (logged==1) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local playerName = getPlayerName(thePlayer)
 			local factionDetails = getElementData(thePlayer, "faction")
@@ -1788,7 +1788,7 @@ function sfpdHq(thePlayer, commandName, ...)
 	if not exports.factions:hasMemberPermissionTo(thePlayer, factionID, "use_hq") then
 		outputChatBox("You do not have permission to use this command.", thePlayer, 255, 0, 0)
 	elseif #message == 0 then
-		outputChatBox("SYNTAX: /hq [message]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /hq [Mensaje]", thePlayer, 255, 194, 14)
 	else
 
 		local teamPlayers = exports.factions:getPlayersInFaction(factionID)
@@ -1809,7 +1809,7 @@ function factionLeaderOOC(thePlayer, commandName, ...)
 
 	if (logged==1) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local playerName = getPlayerName(thePlayer)
 			local factionDetails = getElementData(thePlayer, "faction")
@@ -1908,7 +1908,7 @@ function govooc(thePlayer, commandName, ...)
 			return
 		end
 		if not (...) then
-			outputChatBox("SYNTAX: /gooc [message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /gooc [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local affectedElements = { }
 			local message = table.concat({...}, " ")
@@ -1949,7 +1949,7 @@ function setRadioChannel(thePlayer, commandName, slot, channel)
 	end
 
 	if not (channel) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Radio Slot] [Channel Number]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Radio Slot] [Channel Number]", thePlayer, 255, 194, 14)
 	else
 		if (exports.global:hasItem(thePlayer, 6)) then
 			local count = 0
@@ -1961,22 +1961,22 @@ function setRadioChannel(thePlayer, commandName, slot, channel)
 						if tonumber(v[2]) > 0 then
 							if channel > 1 and channel < 1000000000 and hasChannelAccess(thePlayer, channel) then
 								if exports['item-system']:updateItemValue(thePlayer, k, channel) then
-									outputChatBox("You retuned your radio to channel #" .. channel .. ".", thePlayer)
-									triggerEvent('sendAme', thePlayer, "retunes their radio.")
+									outputChatBox("Has vuelto a sintonizar tu radio al canal #" .. channel .. ".", thePlayer)
+									triggerEvent('sendAme', thePlayer, "vuelve a sintonizar su radio.")
 								end
 							else
-								outputChatBox("You can't tune your radio to that frequency!", thePlayer, 255, 0, 0)
+								outputChatBox("¡No puedes sintonizar tu radio en esa frecuencia!", thePlayer, 255, 0, 0)
 							end
 						else
-							outputChatBox("Your radio is off. ((/toggleradio))", thePlayer, 255, 0, 0)
+							outputChatBox("Tu radio está apagada. ((/toggleradio))", thePlayer, 255, 0, 0)
 						end
 						return
 					end
 				end
 			end
-			outputChatBox("You do not have that many radios.", thePlayer, 255, 0, 0)
+			outputChatBox("No tienes tantas radios..", thePlayer, 255, 0, 0)
 		else
-			outputChatBox("You do not have a radio!", thePlayer, 255, 0, 0)
+			outputChatBox("¡No tienes radio!", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -2007,11 +2007,11 @@ function toggleRadio(thePlayer, commandName, slot)
 		local genderm = getElementData(thePlayer, "gender") == 1 and "her" or "his"
 
 		if titemValue < 0 then
-			outputChatBox("You turned your radio on.", thePlayer, 255, 194, 14)
-			triggerEvent('sendAme', thePlayer, "turns " .. genderm .. " radio on.")
+			outputChatBox("Encendiste tu radio.", thePlayer, 255, 194, 14)
+			triggerEvent('sendAme', thePlayer, "enciende " .. genderm .. " su radio.")
 		else
-			outputChatBox("You turned your radio off.", thePlayer, 255, 194, 14)
-			triggerEvent('sendAme', thePlayer, "turns " .. genderm .. " radio off.")
+			outputChatBox("Apagaste tu radio.", thePlayer, 255, 194, 14)
+			triggerEvent('sendAme', thePlayer, "apaga " .. genderm .. " su radio.")
 		end
 
 		local count = 0
@@ -2029,7 +2029,7 @@ function toggleRadio(thePlayer, commandName, slot)
 			end
 		end
 	else
-		outputChatBox("You do not have a radio!", thePlayer, 255, 0, 0)
+		outputChatBox("¡No tienes radio!", thePlayer, 255, 0, 0)
 	end
 end
 addCommandHandler("toggleradio", toggleRadio, false, false)
@@ -2040,7 +2040,7 @@ function adminChat(thePlayer, commandName, ...)
 
 	if(logged==1) and (exports.integration:isPlayerTrialAdmin(thePlayer))  then
 		if not (...) then
-			outputChatBox("SYNTAX: /a [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /a [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local affectedElements = { }
 			local message = table.concat({...}, " ")
@@ -2074,7 +2074,7 @@ function leadAdminChat(thePlayer, commandName, ...)
 
 	if(logged==1) and (exports.integration:isPlayerLeadAdmin(thePlayer)) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local affectedElements = { }
 			local message = table.concat({...}, " ")
@@ -2162,7 +2162,7 @@ function gmChat(thePlayer, commandName, ...)
 
 	if(logged==1) and (exports.integration:isPlayerTrialAdmin(thePlayer)  or exports.integration:isPlayerSupporter(thePlayer))  then
 		if not (...) then
-			outputChatBox("SYNTAX: /".. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /".. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			if getElementData(thePlayer, "hideg") then
 				setElementData(thePlayer, "hideg", false)
@@ -2204,10 +2204,10 @@ function toggleAdminChat(thePlayer, commandName)
 		local hidea = getElementData(thePlayer, "hidea")
 		if not hidea or hidea == "false" then
 			setElementData(thePlayer, "hidea", "true")
-			outputChatBox("Admin Chat stopped showing on your screen, /toga again to enable it.",thePlayer, 0,255,0)
+			outputChatBox("El chat de administración dejó de aparecer en su pantalla, /toga nuevamente para habilitarlo.",thePlayer, 0,255,0)
 		elseif hidea=="true" then
 			setElementData(thePlayer, "hidea", "false")
-			outputChatBox("Admin Chat started showing on your screen, /toga again to disable it.",thePlayer, 0,255,0)
+			outputChatBox("El chat de administración comenzó a aparecer en su pantalla, /toga nuevamente para desactivarlo.",thePlayer, 0,255,0)
 		end
 	end
 end
@@ -2240,7 +2240,7 @@ function toggleOOC(thePlayer, commandName)
 					local logged = getElementData(arrayPlayer, "loggedin")
 
 					if	(logged==1) then
-						outputChatBox("OOC Chat Enabled by Admin.", arrayPlayer, 0, 255, 0)
+						outputChatBox("Chat OOC habilitado por administrador.", arrayPlayer, 0, 255, 0)
 					end
 				end
 			elseif (oocEnabled==1) then
@@ -2250,7 +2250,7 @@ function toggleOOC(thePlayer, commandName)
 					local logged = getElementData(arrayPlayer, "loggedin")
 
 					if	(logged==1) then
-						outputChatBox("OOC Chat Disabled by Admin.", arrayPlayer, 255, 0, 0)
+						outputChatBox("Chat OOC deshabilitado por administrador.", arrayPlayer, 255, 0, 0)
 					end
 				end
 			end
@@ -2263,7 +2263,7 @@ function toggleOOC(thePlayer, commandName)
 					local admin = getElementData(arrayPlayer, "admin_level")
 
 					if	(logged==1) and (tonumber(admin)>0)then
-						outputChatBox("OOC Chat Enabled Silently by Admin " .. getPlayerName(thePlayer) .. ".", arrayPlayer, 0, 255, 0)
+						outputChatBox("Chat OOC habilitado silenciosamente por administrador " .. getPlayerName(thePlayer) .. ".", arrayPlayer, 0, 255, 0)
 					end
 				end
 			elseif (oocEnabled==1) then
@@ -2274,7 +2274,7 @@ function toggleOOC(thePlayer, commandName)
 					local admin = getElementData(arrayPlayer, "admin_level")
 
 					if	(logged==1) and (tonumber(admin)>0)then
-						outputChatBox("OOC Chat Disabled Silently by Admin " .. getPlayerName(thePlayer) .. ".", arrayPlayer, 255, 0, 0)
+						outputChatBox("Chat OOC desactivado silenciosamente por administrador " .. getPlayerName(thePlayer) .. ".", arrayPlayer, 255, 0, 0)
 					end
 				end
 			end
@@ -2302,7 +2302,7 @@ function togglePM(thePlayer, commandName)
 			exports.donators:updatePerkValue(thePlayer, 1, 1)
 		end
 	else
-		outputChatBox("You don't have this perk activated. Please visit OwlGaming store under F10 menu.", thePlayer)
+		outputChatBox("No tienes este beneficio activado. Visite la tienda en el menú F10.", thePlayer)
 	end
 end
 addEvent("chat:togpm", true)
@@ -2323,7 +2323,7 @@ function toggleAds(thePlayer, commandName)
 			exports.donators:updatePerkValue(thePlayer, 2, 1)
 		end
 	else
-		outputChatBox("You don't have this perk activated. Please visit OwlGaming store under F10 menu.", thePlayer)
+		outputChatBox("No tienes este beneficio activado. Visite la tienda en el menú F10.", thePlayer)
 	end
 end
 addEvent("chat:togad", true)
@@ -2339,7 +2339,7 @@ function payPlayer(thePlayer, commandName, targetPlayerNick, amount)
 
 	if (logged==1) then
 		if not (targetPlayerNick) or not (amount) or not tonumber(amount) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick] [Amount]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Parcial Nombre] [Monto]", thePlayer, 255, 194, 14)
 		else
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayerNick)
 
@@ -2355,16 +2355,16 @@ function payPlayer(thePlayer, commandName, targetPlayerNick, amount)
 					local hoursplayed = getElementData(thePlayer, "hoursplayed")
 
 					if (targetPlayer==thePlayer) then
-						outputChatBox("You cannot pay money to yourself.", thePlayer, 255, 0, 0)
+						outputChatBox("No puedes pagarte dinero a ti mismo.", thePlayer, 255, 0, 0)
 					elseif amount == 0 then
-						outputChatBox("You need to enter an amount larger than 0.", thePlayer, 255, 0, 0)
+						outputChatBox("Debe ingresar una cantidad mayor que 0.", thePlayer, 255, 0, 0)
 					elseif (hoursplayed<5) and (amount>50) and not exports.integration:isPlayerTrialAdmin(thePlayer) and not exports.integration:isPlayerTrialAdmin(targetPlayer) and not exports.integration:isPlayerSupporter(thePlayer) and not exports.integration:isPlayerSupporter(targetPlayer) then
-						outputChatBox("You must play atleast 5 hours before transferring over $50.", thePlayer, 255, 0, 0)
+						outputChatBox("Debes jugar al menos 5 horas antes de transferir más de $50.", thePlayer, 255, 0, 0)
 					elseif exports.global:hasMoney(thePlayer, amount) then
 						if hoursplayed < 5 and not exports.integration:isPlayerTrialAdmin(targetPlayer) and not exports.integration:isPlayerTrialAdmin(thePlayer) and not exports.integration:isPlayerSupporter(targetPlayer) and not exports.integration:isPlayerSupporter(thePlayer) then
 							local totalAmount = ( getElementData(thePlayer, "payAmount") or 0 ) + amount
 							if totalAmount > 200 then
-								outputChatBox( "You can only /pay $200 per five minutes. /report for an admin to transfer a larger amount of cash.", thePlayer, 255, 0, 0 )
+								outputChatBox( "Sólo puedes pagar $200 por cinco minutos. /report para que un administrador transfiera una cantidad mayor de efectivo.", thePlayer, 255, 0, 0 )
 								return
 							end
 							exports.anticheat:changeProtectedElementDataEx(thePlayer, "payAmount", totalAmount, false)
@@ -2393,16 +2393,16 @@ function payPlayer(thePlayer, commandName, targetPlayerNick, amount)
 						if (gender == 1) then
 							genderm = "her"
 						end
-						triggerEvent('sendAme', thePlayer, "takes some dollar notes from " .. genderm .. " wallet and gives them to " .. targetPlayerName .. ".")
-						outputChatBox("You gave $" .. exports.global:formatMoney(amount) .. " to " .. targetPlayerName .. ".", thePlayer)
-						outputChatBox(getPlayerName(thePlayer) .. " gave you $" .. exports.global:formatMoney(amount) .. ".", targetPlayer)
+						triggerEvent('sendAme', thePlayer, "toma algunos billetes de dólar de " .. genderm .. " cartera y se los da a " .. targetPlayerName .. ".")
+						outputChatBox("Diste $" .. exports.global:formatMoney(amount) .. " a " .. targetPlayerName .. ".", thePlayer)
+						outputChatBox(getPlayerName(thePlayer) .. " te dio $" .. exports.global:formatMoney(amount) .. ".", targetPlayer)
 
 						exports.global:applyAnimation(thePlayer, "DEALER", "shop_pay", 4000, false, true, true)
 					else
-						outputChatBox("You do not have enough money.", thePlayer, 255, 0, 0)
+						outputChatBox("No tienes suficiente dinero.", thePlayer, 255, 0, 0)
 					end
 				else
-					outputChatBox("You are too far away from " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
+					outputChatBox("Estás demasiado lejos de " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
 				end
 			end
 		end
@@ -2422,7 +2422,7 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 
 	if (logged==1) then
 		if not (targetPlayerNick) or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID] [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Nombre Parcial / ID] [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayerNick)
 
@@ -2449,7 +2449,7 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 						message2 = trunklateText( targetPlayer, message2 )
 						local message2 = call(getResourceFromName("language-system"), "applyLanguage", thePlayer, targetPlayer, message, language)
 
-						triggerEvent('sendAme', thePlayer, "whispers to " .. targetPlayerName .. ".")
+						triggerEvent('sendAme', thePlayer, "susurra a " .. targetPlayerName .. ".")
 						local r, g, b = 255, 255, 255
 						local focus = getElementData(thePlayer, "focus")
 						if type(focus) == "table" then
@@ -2459,7 +2459,7 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 								end
 							end
 						end
-						outputChatBox("[" .. languagename .. "] " .. name .. " whispers: " .. message, thePlayer, r, g, b)
+						outputChatBox("[" .. languagename .. "] " .. name .. " susurra: " .. message, thePlayer, r, g, b)
 						local r, g, b = 255, 255, 255
 						local focus = getElementData(targetPlayer, "focus")
 						if type(focus) == "table" then
@@ -2469,7 +2469,7 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 								end
 							end
 						end
-						outputChatBox("[" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayer, r, g, b)
+						outputChatBox("[" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayer, r, g, b)
 						for i,p in ipairs(getElementsByType( "player" )) do
 							--if (getElementData(p, "duty_admin") == 1) then
 								if p ~= targetPlayer and p ~= thePlayer then
@@ -2484,11 +2484,11 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 											if playerVeh then
 												if pVeh then
 													if pVeh==playerVeh then
-														outputChatBox("[" .. languagename .. "] " .. name .. " whispers to " .. getPlayerName(targetPlayer):gsub("_"," ") .. ": " .. message2, p, 255, 255, 255)
+														outputChatBox("[" .. languagename .. "] " .. name .. " susurra a " .. getPlayerName(targetPlayer):gsub("_"," ") .. ": " .. message2, p, 255, 255, 255)
 													end
 												end
 											else
-												outputChatBox("[" .. languagename .. "] " .. name .. " whispers to " .. getPlayerName(targetPlayer):gsub("_"," ") .. ": " .. message2, p, 255, 255, 255)
+												outputChatBox("[" .. languagename .. "] " .. name .. " susurra a " .. getPlayerName(targetPlayer):gsub("_"," ") .. ": " .. message2, p, 255, 255, 255)
 											end
 										end
 									end
@@ -2496,10 +2496,10 @@ function localWhisper(thePlayer, commandName, targetPlayerNick, ...)
 							--end
 						end
 					else
-						outputChatBox("You are too far away from " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
+						outputChatBox("Estás demasiado lejos de " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
 					end
 				else
-					outputChatBox("You are too far away from " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
+					outputChatBox("Estás demasiado lejos de " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
 				end
 			end
 		end
@@ -2515,7 +2515,7 @@ function localClose(thePlayer, commandName, ...)
 
 	if (logged==1) and not isPedDead(thePlayer) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local affectedElements = { }
 			local name = getPlayerName(thePlayer)
@@ -2556,20 +2556,20 @@ function localClose(thePlayer, commandName, ...)
 								if pveh then
 									if playerCar == pveh then
 										table.insert(affectedElements, targetPlayers)
-										outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+										outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 									elseif not (exports.vehicle:isVehicleWindowUp(pveh)) then
 										table.insert(affectedElements, targetPlayers)
-										outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+										outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 									end
 								else
 									table.insert(affectedElements, targetPlayers)
-									outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+									outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 								end
 							else
 								if pveh then
 									if pveh == playerCar then
 										table.insert(affectedElements, targetPlayers)
-										outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+										outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 									end
 								end
 							end
@@ -2578,15 +2578,15 @@ function localClose(thePlayer, commandName, ...)
 								if playerCar then
 									if playerCar == pveh then
 										table.insert(affectedElements, targetPlayers)
-										outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+										outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 									end
 								elseif not (exports.vehicle:isVehicleWindowUp(pveh)) then
 									table.insert(affectedElements, targetPlayers)
-									outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+									outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 								end
 							else
 								table.insert(affectedElements, targetPlayers)
-								outputChatBox( " [" .. languagename .. "] " .. name .. " whispers: " .. message2, targetPlayers, r, g, b)
+								outputChatBox( " [" .. languagename .. "] " .. name .. " susurra: " .. message2, targetPlayers, r, g, b)
 							end
 						end
 					end
@@ -2631,7 +2631,7 @@ function StartInterview(thePlayer, commandName, targetPartialPlayer)
 		local factionType = getElementData(theTeam, "type")
 		if exports.factions:isInFactionType(thePlayer, 6)then -- news faction
 			if not (targetPartialPlayer) then
-				outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Nombre Parcial]", thePlayer, 255, 194, 14)
 			else
 				local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPartialPlayer)
 				if targetPlayer then
@@ -2663,7 +2663,7 @@ function endInterview(thePlayer, commandName, targetPartialPlayer)
 	if (logged==1) then
 		if exports.factions:isInFactionType(thePlayer, 6)then -- news faction
 			if not (targetPartialPlayer) then
-				outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. " [Jugador Nombre Parcial]", thePlayer, 255, 194, 14)
 			else
 				local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPartialPlayer)
 				if targetPlayer then
@@ -2695,7 +2695,7 @@ function interviewChat(thePlayer, commandName, ...)
 	if (logged==1) then
 		if(getElementData(thePlayer, "interview"))then
 			if not(...)then
-				outputChatBox("SYNTAX: /" .. commandName .. "[Message]", thePlayer, 255, 194, 14)
+				outputChatBox("SINTAXIS: /" .. commandName .. "[Mensaje]", thePlayer, 255, 194, 14)
 			else
 				local message = table.concat({...}, " ")
 				local name = getPlayerName(thePlayer)
@@ -2723,7 +2723,7 @@ addCommandHandler("i", interviewChat, false, false)
 -- /charity
 function charityCash(thePlayer, commandName, amount)
 	if not (amount) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Amount]", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Amount]", thePlayer, 255, 194, 14)
 	else
 		local donation = tonumber(amount)
 		if (donation<=0) then
@@ -2746,7 +2746,7 @@ function bigEars(thePlayer, commandName, targetPlayerNick)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) then
 		local current = getElementData(thePlayer, "bigears")
 		if not current and not targetPlayerNick then
-			outputChatBox("SYNTAX: /" .. commandName .. " [player]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [player]", thePlayer, 255, 194, 14)
 		elseif current and not targetPlayerNick then
 			exports.anticheat:changeProtectedElementDataEx(thePlayer, "bigears", false, false)
 			outputChatBox("Big Ears turned off.", thePlayer, 255, 0, 0)
@@ -2778,7 +2778,7 @@ function bigEarsFaction(thePlayer, commandName, factionID)
 		factionID = tonumber( factionID )
 		local current = getElementData(thePlayer, "bigearsfaction")
 		if not current and not factionID then
-			outputChatBox("SYNTAX: /" .. commandName .. " [faction id]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [faction id]", thePlayer, 255, 194, 14)
 		elseif current and not factionID then
 			exports.anticheat:changeProtectedElementDataEx(thePlayer, "bigearsfaction", false, false)
 			outputChatBox("Big Ears turned off.", thePlayer, 255, 0, 0)
@@ -2876,7 +2876,7 @@ function staffChat(thePlayer, commandName, ...)
 
 	if(logged==1) and isPlayerStaff(thePlayer)  then
 		if not (...) then
-			outputChatBox("SYNTAX: /".. commandName .. " [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /".. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			if getElementData(thePlayer, "hideStaffChat") then
 				setElementData(thePlayer, "hideStaffChat", false)
@@ -2932,8 +2932,8 @@ function businessOOC(thePlayer, commandName, business, ...)
 
 	if (logged==1) then
 		if not business then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Message]", thePlayer, 255, 194, 14)
-			outputChatBox("OR SYNTAX: /" .. commandName .. " [Business] [Message]", thePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. commandName .. " [Mensaje]", thePlayer, 255, 194, 14)
+			outputChatBox("OR SINTAXIS: /" .. commandName .. " [Business] [Mensaje]", thePlayer, 255, 194, 14)
 		else
 			local playerName = getPlayerName( thePlayer ):gsub( "_", " ")
 			local message = table.concat({...}, " ")

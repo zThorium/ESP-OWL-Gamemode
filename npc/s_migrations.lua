@@ -58,7 +58,7 @@ end
 function commandConvertGenerics(player, cmd)
 	if exports.integration:isPlayerScripter(player) then
 		local seconds = 30
-		outputChatBox(" WARNING: Large script execution will take place in " .. seconds .. " seconds, it will cause major delays for a few minutes.", root, 255, 0, 0)
+		outputChatBox(" ADVERTENCIA: La ejecución de scripts grandes se llevará a cabo en " .. seconds .. " segundos, provocará retrasos importantes durante unos minutos.", root, 255, 0, 0)
 		setElementData(getResourceRootElement(getThisResource()), "debug_enabled", true, true)
 		setTimer(convertGenerics, seconds*1000, 1)
 	end

@@ -24,7 +24,7 @@ wAddingItemsToShop, wOwnerProductView = nil
 
 function addItemToShop(source, item, slot, worldItem, npcID, shopElement )
 	if tonumber(getElementData(shopElement, "currentCap")) >= tonumber(getElementData(shopElement, "sCapacity")) then
-		triggerServerEvent("shop:storeKeeperSay", source, source, "Hey hey! I'm not selling anything more unless you raise my wage!", getElementData(shopElement, "name"))
+		triggerServerEvent("shop:storeKeeperSay", source, source, "¡Oye, oye! ¡No venderé nada más a menos que aumentes mi salario!", getElementData(shopElement, "name"))
 		return false
 	end
 
@@ -38,7 +38,7 @@ function addItemToShop(source, item, slot, worldItem, npcID, shopElement )
 	local X = (screenwidth - Width)/2
 	local Y = (screenheight - Height)/2
 
-	wAddingItemsToShop = guiCreateWindow( X, Y, Width, Height,"Putting a product on sale",false)
+	wAddingItemsToShop = guiCreateWindow( X, Y, Width, Height,"Poner un producto a la venta",false)
 
 	local itemURL = nil
 
@@ -78,7 +78,7 @@ function addItemToShop(source, item, slot, worldItem, npcID, shopElement )
 			triggerServerEvent( "shop:updateItemToShop", source, source, item, price, desc, npcID, slot, worldItem, shopElement )
 			closeAddingItemWindow()
 		else
-			guiSetText(wAddingItemsToShop, "Invalid Price!")
+			guiSetText(wAddingItemsToShop, "¡Precio no válido!")
 			setTimer(function()
 				guiSetText(wAddingItemsToShop,"Putting product ("..itemName..") on sale")
 			end, 3000, 1)
@@ -123,7 +123,7 @@ function ownerProductView(products, proID, shopElement)
 		end
 	end
 
-	wOwnerProductView = guiCreateWindow( X, Y, Width, Height,"Product Management",false)
+	wOwnerProductView = guiCreateWindow( X, Y, Width, Height,"Gestión de productos",false)
 
 	local itemURL = nil
 
@@ -146,14 +146,14 @@ function ownerProductView(products, proID, shopElement)
 	end
 
 	local iProductImage = guiCreateStaticImage(9,27,128,128,itemURL,false,wOwnerProductView)
-	local lProductName = guiCreateLabel(147,27,280,18,"Product Name: "..itemName or ""..".",false,wOwnerProductView)
-	local lAmount = guiCreateLabel(147,45,280,18,"Details: "..itemValue or ""..".",false,wOwnerProductView)
-	local lPrice = guiCreateLabel(147,63,42,18,"Price: $",false,wOwnerProductView)
+	local lProductName = guiCreateLabel(147,27,280,18,"Nombre Producto: "..itemName or ""..".",false,wOwnerProductView)
+	local lAmount = guiCreateLabel(147,45,280,18,"Detalles: "..itemValue or ""..".",false,wOwnerProductView)
+	local lPrice = guiCreateLabel(147,63,42,18,"Precio: $",false,wOwnerProductView)
 	local ePrice = guiCreateEdit(189,62,238,20,item[4] or 0,false,wOwnerProductView)
-	local lDesc = guiCreateLabel(147,81,66,18,"Description: ",false,wOwnerProductView)
+	local lDesc = guiCreateLabel(147,81,66,18,"Descripcion: ",false,wOwnerProductView)
 	local mDesc = guiCreateMemo(147,99,280,56,item[3] or "",false,wOwnerProductView)
 
-	local bTakeOff = guiCreateButton(9,161,142,27,"Take off",false,wOwnerProductView)
+	local bTakeOff = guiCreateButton(9,161,142,27,"Quitar",false,wOwnerProductView)
 	addEventHandler( "onClientGUIClick", bTakeOff, function ()
 		triggerServerEvent( "shop:takeOffProductFromShop", getLocalPlayer(), getLocalPlayer(), proID, item[1], item[2], itemName, shopElement, item[6])
 		guiSetEnabled(wOwnerProductView, false)
@@ -165,7 +165,7 @@ function ownerProductView(products, proID, shopElement)
 	end, false )
 
 
-	local bSave = guiCreateButton(151,161,142,27,"Save",false,wOwnerProductView)
+	local bSave = guiCreateButton(151,161,142,27,"Guardar",false,wOwnerProductView)
 	addEventHandler( "onClientGUIClick", bSave, function ()
 		local price = guiGetText(ePrice):gsub(",","")
 		price = tonumber(price) or false
@@ -175,14 +175,14 @@ function ownerProductView(products, proID, shopElement)
 			guiSetEnabled(wOwnerProductView, false)
 			guiSetEnabled(wCustomShop, false)
 		else
-			guiSetText(wOwnerProductView, "Invalid Price!")
+			guiSetText(wOwnerProductView, "Precio no válido!")
 			setTimer(function()
-				guiSetText(wOwnerProductView,"Product Management")
+				guiSetText(wOwnerProductView,"Gestión de productos")
 			end, 3000, 1)
 		end
 	end, false )
 
-	local bCancel = guiCreateButton(291,161,136,27,"Cancel",false,wOwnerProductView)
+	local bCancel = guiCreateButton(291,161,136,27,"Cancelar",false,wOwnerProductView)
 	addEventHandler( "onClientGUIClick", bCancel, function ()
 		closeOwnerProductView()
 	end, false )
@@ -226,7 +226,7 @@ function customShopBuy(products, proID, shopElement)
 		end
 	end
 
-	wCustomShopBuy = guiCreateWindow( X, Y, Width, Height,"Product Purchase",false)
+	wCustomShopBuy = guiCreateWindow( X, Y, Width, Height,"Compra de producto",false)
 
 	local itemURL = nil
 
@@ -250,11 +250,11 @@ function customShopBuy(products, proID, shopElement)
 	local itemPrice = (tonumber(item[4]) or 0)
 
 	local iProductImage = guiCreateStaticImage(9,27,128,128,itemURL,false,wCustomShopBuy)
-	local lProductName = guiCreateLabel(147,27,280,18,"Product Name: "..itemName or ""..".",false,wCustomShopBuy)
-	local lAmount = guiCreateLabel(147,45,280,18,"Details: "..itemValue or ""..".",false,wCustomShopBuy)
-	local lPrice = guiCreateLabel(147,63,42,18,"Price: $",false,wCustomShopBuy)
+	local lProductName = guiCreateLabel(147,27,280,18,"Nombre Producto: "..itemName or ""..".",false,wCustomShopBuy)
+	local lAmount = guiCreateLabel(147,45,280,18,"Detalles: "..itemValue or ""..".",false,wCustomShopBuy)
+	local lPrice = guiCreateLabel(147,63,42,18,"Precio: $",false,wCustomShopBuy)
 	local ePrice = guiCreateLabel(189,62,238,20,exports.global:formatMoney(itemPrice),false,wCustomShopBuy)
-	local lDesc = guiCreateLabel(147,81,66,18,"Description: ",false,wCustomShopBuy)
+	local lDesc = guiCreateLabel(147,81,66,18,"Descripcion: ",false,wCustomShopBuy)
 	local mDesc = guiCreateMemo(147,99,280,56,item[3] or "",false,wCustomShopBuy)
 
 	guiMemoSetReadOnly(mDesc, true)
@@ -264,7 +264,7 @@ function customShopBuy(products, proID, shopElement)
 
 	--outputDebugString(bankmoney.."..".. money)
 
-	local bPayByBank = guiCreateButton(9,161,142,27,"Pay by Debit Card",false,wCustomShopBuy)
+	local bPayByBank = guiCreateButton(9,161,142,27,"Pagar con tarjeta de débito",false,wCustomShopBuy)
 	if bankmoney >= itemPrice then
 		addEventHandler( "onClientGUIClick", bPayByBank, function ()
 			triggerServerEvent( "shop:customShopBuy", getLocalPlayer(), proID, item[1], item[2], itemPrice,  itemName, true, shopElement, item[6])
@@ -275,7 +275,7 @@ function customShopBuy(products, proID, shopElement)
 		guiSetEnabled(bPayByBank, false)
 	end
 
-	local bPayByCash = guiCreateButton(151,161,142,27,"Pay By Cash",false,wCustomShopBuy)
+	local bPayByCash = guiCreateButton(151,161,142,27,"Pagar en efectivo",false,wCustomShopBuy)
 	if money >= itemPrice then
 		addEventHandler( "onClientGUIClick", bPayByCash, function ()
 			triggerServerEvent( "shop:customShopBuy", getLocalPlayer(), proID, item[1], item[2], itemPrice, itemName, false, shopElement, item[6])
@@ -286,7 +286,7 @@ function customShopBuy(products, proID, shopElement)
 		guiSetEnabled(bPayByCash, false)
 	end
 
-	local bCancel = guiCreateButton(291,161,136,27,"Cancel",false,wCustomShopBuy)
+	local bCancel = guiCreateButton(291,161,136,27,"Cancelar",false,wCustomShopBuy)
 	addEventHandler( "onClientGUIClick", bCancel, function ()
 		closeCustomShopBuy()
 	end, false )

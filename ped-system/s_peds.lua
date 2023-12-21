@@ -550,7 +550,7 @@ addEventHandler("peds:respawnPed", getRootElement(), respawnPed)
 function healPed(player, ped)
 	if(getElementType(ped) == "ped") then
 		if not (exports.factions:isInFactionType(player, 4)) then
-			outputChatBox("You have no basic medic skills, contact the ES.", player, 255, 0, 0)
+			outputChatBox("No tienes conocimientos médicos básicos, contacta con ES.", player, 255, 0, 0)
 		else
 			local foundkit, slot, itemValue = exports.global:hasItem(player, 70)
 			if foundkit then
@@ -562,9 +562,9 @@ function healPed(player, ped)
 					local pedName = getElementData(ped, "rpp.npc.name")
 					local message
 					if pedName then
-						message = "opens his medical kit and treats "..tostring(pedName)
+						message = "abre su botiquín médico y trata "..tostring(pedName)
 					else
-						message = "opens his medical kit and treats the person"
+						message = "abre su botiquín médico y trata a la persona"
 					end
 					exports.global:sendLocalText(source, " *" ..  string.gsub(name, "_", " ").. ( message:sub( 1, 1 ) == "'" and "" or " " ) .. message, 255, 51, 102)
 					if itemValue > 1 then
@@ -572,7 +572,7 @@ function healPed(player, ped)
 					else
 						exports.global:takeItem(thePlayer, 70, itemValue)
 						if not exports.global:hasItem(thePlayer, 70) then
-							outputChatBox("Warning, you're out of first aid kits. re /duty to get new ones.", player, 255, 0, 0)
+							outputChatBox("Advertencia, se te acabaron los botiquines de primeros auxilios. re /duty de conseguir otros nuevos.", player, 255, 0, 0)
 						end
 					end
 					local tax = exports.global:getTaxAmount()
@@ -580,14 +580,14 @@ function healPed(player, ped)
 					exports.global:giveMoney( getTeamFromName("San Fierro Emergency Services"), math.ceil((1-tax)*price) )
 					exports.global:giveMoney( getTeamFromName("Government of San Fierro"), math.ceil(tax*price) )
 					if pedName then
-						outputChatBox("You healed " ..pedName.. " (NPC).", player, 0, 255, 0)
+						outputChatBox("Tu sanaste " ..pedName.. " (NPC).", player, 0, 255, 0)
 					else
-						outputChatBox("You healed a NPC.", player, 0, 255, 0)
+						outputChatBox("Tu sanaste un NPC.", player, 0, 255, 0)
 					end
-					exports.logs:dbLog(player, 35, ped, "HEAL NPC FOR $" .. price)
+					exports.logs:dbLog(player, 35, ped, "HEAL NPC por $" .. price)
 				end
 			else
-				outputChatBox("You need a first aid kit to heal people.", player, 255, 0, 0)
+				outputChatBox("Necesitas un botiquín de primeros auxilios para curar a las personas.", player, 255, 0, 0)
 			end
 		end
 	end
@@ -635,14 +635,14 @@ function deleteDbPed(player, pedID, ped)
 			ped = exports.global:getPoolElement("ped", pedID)
 		end
 		if not ped then
-			outputChatBox("Ped not found!", player, 255, 0, 0)
+			outputChatBox("Ped no encontrado!", player, 255, 0, 0)
 			return false
 		end
 		local pedType = getElementData(ped, "rpp.npc.type")
 		if pedType then
 			if(not allowedFunctionPeds[pedFunction]) then
 				if not exports.integration:isPlayerAdmin(player) then
-					outputChatBox("Only Admin+ can delete this ped type.", player, 255, 0, 0)
+					outputChatBox("Solo administradores pueden eliminar este tipo de peds.", player, 255, 0, 0)
 					return false
 				end
 			end
@@ -650,7 +650,7 @@ function deleteDbPed(player, pedID, ped)
 		mysql:query_free("DELETE FROM peds WHERE id='"..mysql:escape_string(pedID).."'")
 		destroyElement(ped)
 	else
-		outputChatBox("Only admins can delete permanent peds.", player, 255, 0, 0)
+		outputChatBox("Solo los administradores pueden eliminar peds permanentes.", player, 255, 0, 0)
 	end
 end
 
@@ -678,7 +678,7 @@ function savePedToDB(arguments, element)
 				elseif(type(v) == "number") then
 					argument[i] = "'"..tostring(v).."'"
 				else
-					outputChatBox("Error saving ped (invalid value '"..tostring(v).."' for '"..tostring(keys[i]).."').", source, 255, 0, 0)
+					outputChatBox("Error al guardar ped (valor no válido '"..tostring(v).."' para '"..tostring(keys[i]).."').", source, 255, 0, 0)
 					return
 				end
 			end
@@ -750,9 +750,9 @@ function savePedToDB(arguments, element)
 
 			setElementFrozen(element, frozen)
 
-			outputChatBox("Updated the temporary ped.", source, 0, 255, 0)
+			outputChatBox("Actualizado el ped temporal..", source, 0, 255, 0)
 		else
-			outputChatBox("No ped to edit.", source, 255, 0, 0)
+			outputChatBox("No hay ped para editar.", source, 255, 0, 0)
 		end
 	end
 end
@@ -764,10 +764,10 @@ function hideMyID(thePlayer, command)
 		local hideMyID = getElementData(thePlayer, "hidemyid")
 		if hideMyID then
 			setElementData(thePlayer, "hidemyid", false)
-			outputChatBox("Showing ID",thePlayer)
+			outputChatBox("Mostrando ID",thePlayer)
 		else
 			setElementData(thePlayer, "hidemyid", true)
-			outputChatBox("Hiding ID",thePlayer)
+			outputChatBox("Ocultando ID",thePlayer)
 		end
 	end
 end
@@ -778,12 +778,12 @@ function giveFakeName(thePlayer, command)
 		local fakename = getElementData(thePlayer, "fakename")
 		if fakename then
 			setElementData(thePlayer, "fakename", false)
-			outputChatBox("Fake name removed.",thePlayer)
+			outputChatBox("Nombre falso eliminado.",thePlayer)
 		else
 			local gender = tonumber(getElementData("gender",thePlayer)) or 0
 			local fakenameName = getRandomName("full", gender)
 			setElementData(thePlayer, "fakename", tostring(fakenameName))
-			outputChatBox("Fake name set to "..tostring(fakenameName)..".",thePlayer)
+			outputChatBox("Nombre falso seteado a "..tostring(fakenameName)..".",thePlayer)
 		end
 	end
 end

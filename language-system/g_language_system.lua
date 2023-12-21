@@ -1,11 +1,11 @@
 languages = {
-	"English",
+	"Español",
 	"Russian",
 	"German",
 	"French",
 	"Dutch",
 	"Italian",
-	"Spanish",
+	"English",
 	"Gaelic",
 	"Japanese",
 	"Chinese",
