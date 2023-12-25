@@ -11,7 +11,7 @@ function cPayDay(faction, pay, profit, interest, donatormoney, tax, incomeTax, v
 	table.insert(info, {""})
 	--table.insert(info, {""})
 	-- state earnings/money from faction
-	if not (faction) then
+	if not faction then
 		if (pay + tax > 0) then
 			--outputChatBox(, 255, 194, 14, true)
 			table.insert(info, {"  Beneficios de estado: $" .. exports.global:formatMoney(pay+tax)})	
@@ -74,7 +74,7 @@ function cPayDay(faction, pay, profit, interest, donatormoney, tax, incomeTax, v
 	if grossincome == 0 then
 		--outputChatBox(,255, 194, 14, true)
 		table.insert(info, {"  Ingresos brutos: $0"})
-	elseif (grossincome > 0) then
+	elseif (grossincome > 0) then --ACA ENTREA
 		--outputChatBox(,255, 194, 14, true)
 		--outputChatBox(, 255, 194, 14)
 		table.insert(info, {"  Ingresos brutos: $" .. exports.global:formatMoney(grossincome)})

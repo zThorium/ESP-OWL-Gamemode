@@ -39,10 +39,12 @@ function payWage(player, pay, faction, tax)
  	local interest = 0
  	local cP = 0
  	if bankmoney > 0 then
+	--En resumen, la expresión está limitando el valor calculado (2 * sqrt(bankmoney)) a un máximo de 1000. Si el resultado de 2 * sqrt(bankmoney) es mayor que 1000, la expresión devuelve 1000; de lo contrario, devuelve el valor calculado.
 		interest = math.min(1000, math.floor(2 * math.sqrt(bankmoney)))
 		cP = interest / bankmoney * 100
 	end
-
+	
+	--Si existen intereses se ejecuta insercion en wiretransfers
 	if interest ~= 0 then
 		dbExec( exports.mysql:getConn('mta'), "INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (-17, ?, ?, 'BANKINTEREST', 12)", dbid, interest )
 	end
@@ -50,10 +52,11 @@ function payWage(player, pay, faction, tax)
 	bankmoney = bankmoney + math.max( 0, pay ) + interest + donatormoney
 
 	if not faction then
-		if bankmoney > 25000 then
+		if bankmoney > 5000000 then
 			noWage = true
 			pay = 0
 		elseif pay > 0 then
+		--ESTOS SON LOS BENEFICIOS DEL ESTADO
 			governmentIncome = governmentIncome - pay
 			dbExec( exports.mysql:getConn('mta'), "INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (-3, ?, ?, 'STATEBENEFITS', 6)", dbid, pay )
 		else
@@ -128,6 +131,7 @@ function payWage(player, pay, faction, tax)
 	if ptax > 0 then
 		ptax = math.floor( ptax )
 		ptax = math.min( ptax, bankmoney )
+		
 		bankmoney = bankmoney - ptax
 		governmentIncome = governmentIncome + ptax
 		dbExec( exports.mysql:getConn('mta'), "INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (?, -3, ?, 'PROPERTYTAX', 11)", dbid, ptax )
@@ -518,15 +522,11 @@ function doPayDayPlayer(value, isForcePayday)
 
 				govAmount = govAmount + payWage(value, rankWage, foundPackage, taxes)
 			else
-				if unemployedPay >= govAmount then
-					unemployedPay = -1
-				end
+				
 				govAmount = govAmount + payWage( value, unemployedPay, false, 0 )
 			end
 		else
-			if unemployedPay >= govAmount then
-				unemployedPay = -1
-			end
+			
 			govAmount = govAmount + payWage( value, unemployedPay, false, 0 )
 			--outputDebugString(unemployedPay.." "..govAmount)
 		end
@@ -608,6 +608,7 @@ addCommandHandler("timesaved", timeSaved)
 function loadWelfare( )
 	local result = mysql:query_fetch_assoc( "SELECT value FROM settings WHERE name = 'welfare'" )
 	if result then
+		--Aca entendi porque el uso de la variable, en caso de que la consulta no sea exitosa, actualizara su valor, como la consulta funciona bien no actualiza el valor.
 		if not result.value then
 			mysql:query_free( "INSERT INTO settings (name, value) VALUES ('welfare', " .. unemployedPay .. ")" )
 		else
