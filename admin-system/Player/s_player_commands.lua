@@ -1217,7 +1217,7 @@ function setMoney(thePlayer, commandName, target, money, ...)
 
 			if targetPlayer then
 				money = tonumber(money) or 0
-				if money and money > 500000 then
+				if money and money > 999999999999 then
 					outputChatBox("For security reason, you're not allowed to set more than $500,000 at once to a player.", thePlayer, 255, 0, 0)
 					return false
 				end
