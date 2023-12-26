@@ -238,9 +238,9 @@ function carshop_buyVehicle(paymentMethod)
 
 	if not exports.global:canPlayerBuyVehicle(client) then
 		if isOverlayDisabled then
-			outputChatBox("You have already reached the maximum number of vehicles", client, 0, 255, 0)
+			outputChatBox("Ya ha alcanzado el número máximo de vehículos", client, 0, 255, 0)
 		else
-			exports.hud:sendBottomNotification(client, "Maximum vehicle limit", "You have already reached the maximum number of vehicles. /stats for details.")
+			exports.hud:sendBottomNotification(client, "Límite máximo de vehículos", "Ya has alcanzado el número máximo de vehículos. /stats para más detalles.")
 		end
 		return false
 	end
@@ -249,9 +249,9 @@ function carshop_buyVehicle(paymentMethod)
 	if (paymentMethod == "cash") then
 		if not exports.global:hasMoney(client, costCar) or costCar == 0 then
 			if isOverlayDisabled then
-				outputChatBox("You don't have enough money on hand for this pal..", client, 0, 255, 0)
+				outputChatBox("No tienes suficiente dinero a mano para esto...", client, 0, 255, 0)
 			else
-				exports.hud:sendBottomNotification(client, "Money is always a problem..", "You don't have enough money on hand for this pal..")
+				exports.hud:sendBottomNotification(client, "El dinero siempre es un problema..", "No tienes suficiente dinero a mano para esto ..")
 			end
 			return false
 		else
@@ -261,9 +261,9 @@ function carshop_buyVehicle(paymentMethod)
 		local money = getElementData(client, "bankmoney") - costCar
 		if money < 0 or costCar == 0 then
 			if isOverlayDisabled then
-				outputChatBox("You don't have enough money in your bank account for this pal..", client, 0, 255, 0)
+				outputChatBox("No tienes suficiente dinero en tu cuenta bancaria para esto ..", client, 0, 255, 0)
 			else
-				exports.hud:sendBottomNotification(client, "Money is always a problem..", "You don't have enough money in your bank account for this pal..")
+				exports.hud:sendBottomNotification(client, "El dinero siempre es un problema..", "No tienes suficiente dinero en tu cuenta bancaria para esto..")
 			end
 			return false
 		else
@@ -271,12 +271,12 @@ function carshop_buyVehicle(paymentMethod)
 			mysql:query_free("UPDATE characters SET bankmoney=" .. mysql:escape_string((tonumber(money) or 0)) .. " WHERE id=" .. mysql:escape_string(getElementData( client, "dbid" )))
 		end
 	elseif (paymentMethod == "token") then
-		if costCar <= 35000 then
+		if costCar <= 5000000 then
 			if not exports.global:takeItem(client, 263) then
-				outputChatBox("There was an issue processing your request.", client, 255, 0 ,0)
+				outputChatBox("Se ha producido un problema al procesar su solicitud.", client, 255, 0 ,0)
 			end
 		else
-			outputChatBox("You cannot use a token on a car worth over $35,000.", client, 255, 0, 0)
+			outputChatBox("No puedes utilizar tu crédito en un coche cuyo valor supere los 5M $.", client, 255, 0, 0)
 		end
 	else
 		if isOverlayDisabled then
@@ -291,9 +291,9 @@ function carshop_buyVehicle(paymentMethod)
 	if result then
 		if tonumber(result["stock"]) < 1 then
 			if isOverlayDisabled then
-				outputChatBox("Sorry, it appears this one is taken.", client, 0, 255, 0)
+				outputChatBox("Lo siento, parece que este está ocupado.", client, 0, 255, 0)
 			else
-				exports.hud:sendBottomNotification(client, "Stock", "Sorry it appears this model is currently out of stock.")
+				exports.hud:sendBottomNotification(client, "Stock", "Lo sentimos, parece que este modelo está agotado.")
 			end
 			return false
 		end
@@ -333,21 +333,21 @@ function carshop_buyVehicle(paymentMethod)
 	destroyElement(source)
 	exports.vehicle:reloadVehicle(insertid)
 
-	local license = (getElementData(client, "license.car") == 1) and "" or "You don't have a drivers license. You better not drive this on the street."
+	local license = (getElementData(client, "license.car") == 1) and "" or "No tienes carnet de conducir. Será mejor que no conduzcas esto en la calle."
 
 	if isOverlayDisabled then
-		outputChatBox("Congratulations, you just bought a vehicle!", client)
-		outputChatBox("Make sure to /park it at the respawnspot you want within an hour,", client)
-		outputChatBox("otherwise the vehicle will get deleted, non-recoverable.", client)
+		outputChatBox("Enhorabuena, ¡acabas de comprar un vehículo!", client)
+		outputChatBox("Asegúrate de aparcarlo /park en el respawnspot que quieras antes de una hora.,", client)
+		outputChatBox("de lo contrario el vehículo será eliminado, no recuperable.", client)
 		outputChatBox(license, client)
-		outputChatBox("Edit the vehicle description using /ed or /editdescription.", client)
+		outputChatBox("Edita la descripción del vehículo con /ed o /editdescription.", client)
 	else
 		local content = {}
-		table.insert(content, {"Make sure to /park it at the respawnspot you want within an hour or the vehicle will get deleted!"})
+		table.insert(content, {"Asegúrate de aparcarlo /park en el respawnspot que desees en el plazo de una hora o el vehículo será eliminado."})
 		table.insert(content, {license})
-		table.insert(content, {"Edit the vehicle description using /ed or /editdescription."})
+		table.insert(content, {"Edita la descripción del vehículo con /ed o /editdescription."})
 
-		exports.hud:sendBottomNotification(client, "Congratulations, you just bought a vehicle!", content, 30)
+		exports.hud:sendBottomNotification(client, "Enhorabuena, ¡acabas de adquirir un vehículo!", content, 30)
 	end
 
 	local adminID = getElementData(client, "account:id")
@@ -458,7 +458,7 @@ function isAlreadySpawned(shopID, randomID)
 		if isElement(v["vehicle"]) then
 			local id = getElementData(v["vehicle"], "vehicle_shop_id")
 			if id == randomID then
-				outputDebugString("Carshop / Duplicate Spawn, retrying..")
+				outputDebugString("Carshop / Spawn duplicado, reintentando..")
 				return true
 			end
 		end
