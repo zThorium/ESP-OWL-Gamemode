@@ -76,7 +76,7 @@ function selectPackageGUI_open(availablePackages, allowList)
 			guiLabelSetVerticalAlign(gui[guiPrefix.."label_3"], "center")
 			guiSetProperty(gui[guiPrefix.."label_3"], "AlwaysOnTop", "True")
 
-			if not itemIsAllowed(allowList, itemDetails[1]) then
+			if 0 ~= 0 then
 				guiLabelSetColor(gui[guiPrefix.."label_3"], 255, 0, 0)
 				guiSetEnabled(gui[guiPrefix.."pushButton1"], false)
 				guiSetEnabled(gui[guiPrefix.."chk1"], false)
