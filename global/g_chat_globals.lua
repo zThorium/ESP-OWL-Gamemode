@@ -122,7 +122,7 @@ function getPlayerFullIdentity(thePlayer, type, doNotUseFakeName)
 			if hasHiddenUsername and hiddenUsernameState == 1 then
 				return "("..playerid..") "..rank.." "..characterName
 			else
-				return "("..playerid..") "..rank.." "..username
+				return "("..playerid..") Player "..username
 			end
 		end
 	elseif type == 1 then --Rank Username (Use for achievement system)

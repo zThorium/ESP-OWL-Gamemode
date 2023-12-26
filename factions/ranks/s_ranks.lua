@@ -365,7 +365,7 @@ addEventHandler("faction-system.updateRankPermissions", root, function(rankID, p
 	
 	local factionID = tonumber(factionID)
 	local rankName = getRankName(rankID)
-	local newWage = math.min(2500, math.max(0, tonumber(wage) or 0))
+	local newWage = math.min(600000, math.max(0, tonumber(wage) or 0))
 	setAllRankPermissions(rankID, permissions, newWage, factionID)
 	triggerClientEvent("faction-system.cacheRanks", root, FactionRanks)
 	outputChatBox("The permissions for '"..rankName.."' have been successfully updated.", client, 255, 100, 100)
