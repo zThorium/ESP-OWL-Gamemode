@@ -15,7 +15,7 @@ function resetPrice(theVehicle, matching)
 
 			local thePlayer = getVehicleOccupant(theVehicle)
 			if thePlayer then
-				outputChatBox("Vuelve cuando lo hayas pensado!", thePlayer, 255, 194, 14)
+				outputChatBox("Come back when you've thought about it!", thePlayer, 255, 194, 14)
 				triggerClientEvent(thePlayer, 'crusher:hide', thePlayer)
 			end
 		end
@@ -64,19 +64,19 @@ function showMoreInformation(thePlayer, matching, theVehicle)
 			if getElementData(theVehicle, "owner") == getElementData(thePlayer, "dbid") then
 				local price = getVehiclePrice(theVehicle)
 				if getElementData(theVehicle, "requires.vehpos") then
-					outputChatBox("(( Por favor, aparque su vehículo y vuelva. ))", thePlayer, 255, 0, 0)
+					outputChatBox("(( Please park your vehicle and come back. ))", thePlayer, 255, 0, 0)
 				elseif price == 0 and not getElementData(theVehicle, "token") then
-					outputChatBox("Esto " .. exports.global:getVehicleName(theVehicle) .. " no vale nada.", thePlayer, 255, 0, 0 )
-					outputChatBox("(( Póngase en contacto con un administrador para vender su vehículo especial. ))", thePlayer, 255, 194, 14)
+					outputChatBox("This " .. exports.global:getVehicleName(theVehicle) .. " ain't worth anything.", thePlayer, 255, 0, 0 )
+					outputChatBox("(( Contact an admin to sell your special vehicle. ))", thePlayer, 255, 194, 14)
 				elseif getVehicleType(theVehicle) == "Trailer" then
-					outputChatBox("Este " .. exports.global:getVehicleName(theVehicle) .. " no puede ser aplastado.", thePlayer, 255, 0, 0 )
-					outputChatBox("(( Póngase en contacto con un administrador para vender su vehículo especial. ))", thePlayer, 255, 194, 14)
+					outputChatBox("This " .. exports.global:getVehicleName(theVehicle) .. " cannot be crushed.", thePlayer, 255, 0, 0 )
+					outputChatBox("(( Contact an admin to sell your special vehicle. ))", thePlayer, 255, 194, 14)
 				else
 					setElementData(theVehicle, "crushing", price, false)
 					triggerClientEvent(thePlayer, 'crusher:show', theVehicle, price)
 				end
 			else
-				outputChatBox("¿Tienes el registro para eso? Lo siento, hermano, no puedo tocarlo entonces..", thePlayer, 255, 0, 0)
+				outputChatBox("Got the Registration for that? Sorry, Bro', can't touch it then.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
@@ -101,8 +101,8 @@ function crushCar()
 				exports['global']:takeItem( thePlayer, 3, dbid )
 
 				-- notify
-				outputChatBox("Has machacado tu " .. exports.global:getVehicleName(theVehicle) .. " por $" .. exports.global:formatMoney(price) .. ".", thePlayer, 0, 255, 0)
-				exports.global:sendMessageToAdmins("[VEHICULOS] Borrando vehiculo #" .. dbid .. " (Aplastado por " .. getPlayerName(thePlayer):gsub("_", " ") .. ").")
+				outputChatBox("You crushed your " .. exports.global:getVehicleName(theVehicle) .. " for $" .. exports.global:formatMoney(price) .. ".", thePlayer, 0, 255, 0)
+				exports.global:sendMessageToAdmins("[VEHICLE] Removing vehicle #" .. dbid .. " (Crushed by " .. getPlayerName(thePlayer):gsub("_", " ") .. ").")
 
 				-- logs
 				exports.vehicle_manager:addVehicleLogs( dbid, 'crushed', thePlayer )
