@@ -1,7 +1,7 @@
 addEvent("playerKnock", true)
 addEventHandler("playerKnock", root,
     function(x, y, z)
-        outputChatBox(" * Knocks can be heard coming from the door. *      ((" .. getPlayerName(source):gsub("_"," ") .. "))", 255, 51, 102)
+        outputChatBox(" * Se escuchan golpes desde la puerta. *      ((" .. getPlayerName(source):gsub("_"," ") .. "))", 255, 51, 102)
         local sound = playSound3D("knocking.mp3", x, y, z)
         setSoundMaxDistance(sound, 20)
         setElementDimension(sound, getElementDimension(localPlayer))
