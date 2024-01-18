@@ -9,7 +9,7 @@ function displayAchievement(title, desc, gc)
 	local y = scrHeight - h - margin - 20
 	
 	gui.wAchievement = guiCreateStaticImage(x, y, w, h,"achievement.png", false)
-	gui.lTitle = guiCreateLabel(0.18, 0.25, 0.757, 0.2, title and string.upper(title) or "ACHIEVEMENT UNLOCKED!", true, gui.wAchievement)
+	gui.lTitle = guiCreateLabel(0.18, 0.25, 0.757, 0.2, title and string.upper(title) or "LOGRO DESBLOQUEADO!", true, gui.wAchievement)
 	guiSetFont(gui.lTitle, "default-bold-small")
 	guiLabelSetHorizontalAlign(gui.lTitle, "center")
 	
