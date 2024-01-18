@@ -2,12 +2,12 @@ mysql = exports.mysql
 
 function recoveryLicense(licensetext, cost, itemID, npcName)
 	if not exports.global:takeMoney(client, cost) then
-		exports.hud:sendBottomNotification(client, npcName, "Can I have $"..exports.global:formatMoney(cost).." fee for recovering the "..licensetext.." please?")
+		exports.hud:sendBottomNotification(client, npcName, "¿Me podría dar $"..exports.global:formatMoney(cost).." tarifa para recuperar el "..licensetext.." por favor?")
 		return false
 	end
 
 	if exports.global:giveItem(client, itemID, getPlayerName(client):gsub("_", " ")) then
-		exports.hud:sendBottomNotification(client, npcName, "You have paid $"..exports.global:formatMoney(cost).." fee for recovering the "..licensetext..".")
+		exports.hud:sendBottomNotification(client, npcName, "Has pagado $"..exports.global:formatMoney(cost).." de tasa por recuperar el "..licensetext..".")
 	end
 end
 addEvent("license:recover", true)
@@ -16,9 +16,9 @@ addEventHandler("license:recover", root, recoveryLicense)
 function onLicenseServer()
 	local gender = getElementData(source, "gender")
 	if (gender == 0) then
-		exports.global:sendLocalText(source, "Carla Cooper says: Hello Sir, do you want to apply for a license?", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "Carla Cooper dice: Hola señor, ¿quiere solicitar una licencia?", 255, 255, 255, 10)
 	else
-		exports.global:sendLocalText(source, "Carla Cooper says: Hello Ma'am, do you want to apply for a license?", 255, 255, 255, 10)
+		exports.global:sendLocalText(source, "Carla Cooper dice: Hola señora, ¿quiere solicitar una licencia?", 255, 255, 255, 10)
 	end
 end
 addEvent("onLicenseServer", true)
@@ -29,7 +29,7 @@ function payFee(amount, reason)
 		if not reason then
 			reason = "a license"
 		end
-		exports.hud:sendBottomNotification(source, "Department of Motor Vehicles", "You have paid the $"..exports.global:formatMoney(amount).." fee for "..reason..".")
+		exports.hud:sendBottomNotification(source, "Departamento de vehiculos", "Ha pagado la tasa de $"..exports.global:formatMoney(amount).." para "..reason..".")
 	end
 end
 addEvent("payFee", true)

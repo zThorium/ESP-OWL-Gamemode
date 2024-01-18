@@ -30,10 +30,10 @@ addEventHandler('crusher:show', root,
 		setElementData(getLocalPlayer(), "exclusiveGUI", true, false)
 
 		window = guiCreateStaticImage(left, top, windowWidth, windowHeight, ":resources/window_body.png", false)
-		guiCreateLabel(20, 15, windowWidth - 40, 16, 'We are about to crush your vehicle (( delete ))!', false, window)
+		guiCreateLabel(20, 15, windowWidth - 40, 16, 'Estamos a punto de aplastar su vehículo (( eliminar ))!', false, window)
 		guiSetFont(guiCreateLabel(40, 40, windowWidth - 40, 16, exports.global:getVehicleName(source), false, window), 'default-bold-small')
-		guiSetFont(guiCreateLabel(40, 65, windowWidth - 40, 16, 'VIN: ' .. tostring(getElementData(source, 'dbid')), false, window), 'default-bold-small')
-		guiSetFont(guiCreateLabel(40, 90, windowWidth - 40, 16, 'For $' .. exports.global:formatMoney(price), false, window), 'default-bold-small')
+		guiSetFont(guiCreateLabel(40, 65, windowWidth - 40, 16, 'ID: ' .. tostring(getElementData(source, 'dbid')), false, window), 'default-bold-small')
+		guiSetFont(guiCreateLabel(40, 90, windowWidth - 40, 16, 'Por $' .. exports.global:formatMoney(price), false, window), 'default-bold-small')
 
 		local accept = guiCreateButton(10, 110, windowWidth / 2 - 15, 40, "Yes, crush it please!", false, window)
 		guiSetProperty(accept, 'NormalTextColour', 'FFFF0000')
@@ -46,7 +46,7 @@ addEventHandler('crusher:show', root,
 				end
 			end, false)
 
-		local nope = guiCreateButton(windowWidth / 2 + 5, 110, windowWidth / 2 - 15, 40, "No, I want to keep my vehicle.", false, window)
+		local nope = guiCreateButton(windowWidth / 2 + 5, 110, windowWidth / 2 - 15, 40, "No, quiero conservar mi vehículo.", false, window)
 		addEventHandler('onClientGUIClick', nope, closeWindow, false)
 	end)
 
