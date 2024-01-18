@@ -76,7 +76,7 @@ function newCharacter_create(characterName, characterDescription, race, gender, 
 	local id = mysql:query_insert_free("INSERT INTO `characters` SET `charactername`='" .. mysql:escape_string(characterName).. "', `x`='"..location[1].."', `y`='"..location[2].."', `z`='"..location[3].."', `rotation`='"..location[4].."', `interior_id`='"..location[5].."', `dimension_id`='"..location[6].."', `lastarea`='"..exports.global:toSQL(location[7]).."', `gender`='" .. mysql:escape_string(gender) .. "', `skincolor`='" .. mysql:escape_string(race) .. "', `weight`='" .. mysql:escape_string(weight) .. "', `height`='" .. mysql:escape_string(height) .. "', `description`='', `account`='" .. mysql:escape_string(accountID) .. "', `skin`='" .. mysql:escape_string(skin) .. "', `age`='" .. mysql:escape_string(age) .. "', `fingerprint`='" .. mysql:escape_string(fingerprint) .. "', `lang1`='" .. mysql:escape_string(languageselected) .. "', `lang1skill`='100', `currLang`='1' , `month`='" .. mysql:escape_string(month or "1") .. "', `day`='" .. mysql:escape_string(day or "1").."', `walkingstyle`='" .. mysql:escape_string(walkingstyle).."', date_of_birth = '" .. mysql:escape_string(dob) .. "'" )
 
 	if (id) then --
-		exports.logs:dbLog("ac"..tostring(accountID), 27, { "ac"..tostring(accountID), "ch" .. id } , "Created" )
+		exports.logs:dbLog("ac"..tostring(accountID), 27, { "ac"..tostring(accountID), "ch" .. id } , "Creada" )
 
 		exports.anticheat:changeProtectedElementDataEx(client, "dbid", id, false)
 		exports['item-system']:loadItems( client, true )
@@ -122,9 +122,9 @@ function charactersQuotaCheck()
 		local res = dbPoll(qh, 0)
 		if res and #res==1 then
 			local ok = res[1].cap > res[1].cur
-			triggerClientEvent( client, 'account:charactersQuotaCheck', resourceRoot, ok, ok and ("Quota: "..res[1].cur.."/"..res[1].cap) or ("You reached "..res[1].cur.."/"..res[1].cap.." characters.\nTo create more, make a report to admins with a proper reason or use Premium Feature.") )
+			triggerClientEvent( client, 'account:charactersQuotaCheck', resourceRoot, ok, ok and ("Cantidad: "..res[1].cur.."/"..res[1].cap) or ("Alcanzaste "..res[1].cur.."/"..res[1].cap.." personajes.\nPara crear más, envíe un informe a los administradores con el motivo adecuado o utilice la función Premium.") )
 		else
-			triggerClientEvent( client, 'account:charactersQuotaCheck', resourceRoot, false, "Errors occurred while checking characters quota." )
+			triggerClientEvent( client, 'account:charactersQuotaCheck', resourceRoot, false, "Se produjeron errores al comprobar la cantidad de personajes." )
 		end
 	end, { client }, exports.mysql:getConn('mta'), "SELECT COUNT(id) AS cur, (SELECT max_characters FROM account_details WHERE account_details.account_id=?) AS cap FROM characters WHERE account=?", id, id )
 end

@@ -125,7 +125,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("admin-system") and exports['admin-system']:canPlayerAccessStaffManager(localPlayer) then
-		bStaffManager = guiCreateButton(margin, wHeight, 230, 30, "Staff Manager", false, wOptions)
+		bStaffManager = guiCreateButton(margin, wHeight, 230, 30, "Gestión Staff", false, wOptions)
 		addEventHandler("onClientGUIClick", bStaffManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -137,7 +137,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("factions") and exports.factions:canAccessFactionManager( localPlayer ) then
-		bFactionManager = guiCreateButton(margin, wHeight, 230, 30, "Faction Manager", false, wOptions)
+		bFactionManager = guiCreateButton(margin, wHeight, 230, 30, "Gestión de Facción", false, wOptions)
 		addEventHandler("onClientGUIClick", bFactionManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -149,7 +149,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("interior_system") and getResourceFromName("interior-manager") and exports.integration:isPlayerAdmin( localPlayer ) then
-		bInteriorManager = guiCreateButton(margin, wHeight, 230, 30, "Interior Manager", false, wOptions)
+		bInteriorManager = guiCreateButton(margin, wHeight, 230, 30, "Gestión de Interiores", false, wOptions)
 		addEventHandler("onClientGUIClick", bInteriorManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -161,7 +161,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("vehicle") and getResourceFromName("vehicle_manager") and exports.vehicle_manager:canAccessVehicleManager( localPlayer ) then
-		bVehicleManager = guiCreateButton(margin, wHeight, 230, 30, "Vehicle Manager", false, wOptions)
+		bVehicleManager = guiCreateButton(margin, wHeight, 230, 30, "Administrador Vehiculos", false, wOptions)
 		addEventHandler("onClientGUIClick", bVehicleManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -188,7 +188,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("apps") and exports.integration:isPlayerTrialAdmin(localPlayer) or exports.integration:isPlayerSupporter(localPlayer) then
-		bApplicationManager = guiCreateButton(margin, wHeight, 230, 30, "Application Manager", false, wOptions)
+		bApplicationManager = guiCreateButton(margin, wHeight, 230, 30, "Administrador de Aplicaciones", false, wOptions)
 		addEventHandler("onClientGUIClick", bApplicationManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -200,7 +200,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("carradio") then
-		bRadioManager = guiCreateButton(margin, wHeight, 230, 30, "Radio Station Manager", false, wOptions)
+		bRadioManager = guiCreateButton(margin, wHeight, 230, 30, "Administrador Estaciones de Radio", false, wOptions)
 		addEventHandler("onClientGUIClick", bRadioManager,
 		function ()
 			if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -212,7 +212,7 @@ function options_showmenu()
 	end
 
 	if getResourceFromName("announcement") and exports.announcement:canPlayerAccessMotdManager(localPlayer) then
-		bmotd = guiCreateButton(margin, wHeight, 230, 30, "MOTD Manager", false, wOptions)
+		bmotd = guiCreateButton(margin, wHeight, 230, 30, "MOTD Administrador", false, wOptions)
 		addEventHandler("onClientGUIClick", bmotd,
 			function ()
 				if not isPedDead ( localPlayer ) and isCameraOnPlayer() then
@@ -225,7 +225,7 @@ function options_showmenu()
 	
 
 	if getResourceFromName("map_manager") then
-		bHelp = guiCreateButton(margin, wHeight, 230, 30, "Map Manager", false, wOptions)
+		bHelp = guiCreateButton(margin, wHeight, 230, 30, "Gestión de Mapas", false, wOptions)
 		addEventHandler("onClientGUIClick", bHelp,
 			function ()
 				if not isPedDead ( localPlayer ) and isCameraOnPlayer() then

@@ -87,13 +87,13 @@ addEventHandler("accounts:reconnectMe", getRootElement(), reconnectMe)
 function adminLoginToPlayerCharacter(thePlayer, commandName, ...)
     if exports.integration:isPlayerLeadAdmin(thePlayer) then
         if not (...) then
-            outputChatBox("SYNTAX: /" .. commandName .. " [Exact Character Name]", thePlayer, 255, 194, 14, false)
-            outputChatBox("Logs into player's character.", thePlayer, 255, 194, 0, false)
+            outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Personaje Exacto]", thePlayer, 255, 194, 14, false)
+            outputChatBox("Inicia sesión en el personaje del jugador..", thePlayer, 255, 194, 0, false)
         else
             targetChar = table.concat({...}, "_")
             local fetchData = mysql:query_fetch_assoc("SELECT `characters`.`id` AS `targetCharID` , `characters`.`account` AS `targetUserID` FROM `characters` WHERE `charactername`='"..mysql:escape_string(targetChar).."' LIMIT 1")
             if not fetchData then
-                outputChatBox("No character name found.", thePlayer, 255,0,0)
+                outputChatBox("No se encontró ningún nombre de personaje.", thePlayer, 255,0,0)
                 return false
             end
             local qh = dbQuery(exports.mysql:getConn("core"), "SELECT username, admin FROM accounts WHERE id=?", fetchData["targetUserID"])
@@ -109,13 +109,13 @@ function adminLoginToPlayerCharacter(thePlayer, commandName, ...)
                     local adminTitle = exports.global:getPlayerFullIdentity(thePlayer)
                     if targetAdminLevel > theAdminPower then
                         local adminUsername = getElementData(thePlayer, "account:username")
-                        outputChatBox("You can't log into Character of a higher rank admin than you.", thePlayer, 255,0,0)
-                        exports.global:sendMessageToAdmins("[LOGINTO]: " .. tostring(adminTitle) .. " attempted to log into character of higher rank admin ("..targetUsername..").")
+                        outputChatBox("No puedes iniciar sesión en el personaje de un administrador de rango superior al tuyo..", thePlayer, 255,0,0)
+                        exports.global:sendMessageToAdmins("[LOGINTO]: " .. tostring(adminTitle) .. " intentó iniciar sesión en el personaje de un administrador de rango superior. ("..targetUsername..").")
                         return false
                     end
                     exports.logs:dbLog(thePlayer, 4, thePlayer, commandName.." account "..targetUsername)
                     spawnCharacter(targetCharID, targetUserID, thePlayer, targetUsername)
-                    exports.global:sendMessageToAdmins("[LOGINTO]: " .. tostring(adminTitle) .. " has logged into account '"..targetUsername.."'.")
+                    exports.global:sendMessageToAdmins("[LOGINTO]: " .. tostring(adminTitle) .. " ha iniciado sesión en la cuenta '"..targetUsername.."'.")
                 end
             end
         end
@@ -234,10 +234,10 @@ function spawnCharacter(characterID, remoteAccountID, theAdmin, targetAccountNam
             if theAdmin then
                 local adminTitle = exports.global:getPlayerAdminTitle(theAdmin)
                 local adminUsername = getElementData(theAdmin, "account:username")
-                kickPlayer(playerWithNick, getRootElement(), adminTitle.." "..adminUsername.." has logged into your account.")
-                outputChatBox("Account "..targetAccountName.." ("..tostring(characterData["charactername"]):gsub("_"," ")..") has been kicked out of game.", theAdmin, 0, 255, 0 )
+                kickPlayer(playerWithNick, getRootElement(), adminTitle.." "..adminUsername.." ha iniciado sesión en su cuenta.")
+                outputChatBox("Account "..targetAccountName.." ("..tostring(characterData["charactername"]):gsub("_"," ")..") ha sido expulsado del juego.", theAdmin, 0, 255, 0 )
             else
-                kickPlayer(playerWithNick, getRootElement(), "Someone else has logged into your character.")
+                kickPlayer(playerWithNick, getRootElement(), "Alguien más ha iniciado sesión en tu personaje.")
             end
         end
 
@@ -300,7 +300,7 @@ function spawnCharacter(characterID, remoteAccountID, theAdmin, targetAccountNam
 
                 if not foundPackage then
                     triggerEvent("duty:offduty", client)
-                    outputChatBox("You don't have access to the duty you are using anymore - thus, removed.", client, 255, 0, 0)
+                    outputChatBox("Ya no tienes acceso al duty que estás utilizando - por lo tanto, se eliminó.", client, 255, 0, 0)
                 end
             end
 
@@ -464,10 +464,10 @@ function spawnCharacter(characterID, remoteAccountID, theAdmin, targetAccountNam
         if theAdmin then
             local adminTitle = exports.global:getPlayerAdminTitle(theAdmin)
             local adminUsername = getElementData(theAdmin, "account:username")
-            outputChatBox("You've logged into player's character successfully!", theAdmin, 0, 255, 0 )
+            outputChatBox("Has iniciado sesión con éxito en el personaje del jugador.!", theAdmin, 0, 255, 0 )
             local hiddenAdmin = getElementData(theAdmin, "hiddenadmin")
             if hiddenAdmin == 0 then
-                exports.global:sendMessageToAdmins("AdmCmd: " .. tostring(adminTitle) .. " "..adminUsername.." logged into an other account ("..targetAccountName..") "..tostring(characterData["charactername"]):gsub("_"," ")..".")
+                exports.global:sendMessageToAdmins("AdmCmd: " .. tostring(adminTitle) .. " "..adminUsername.." iniciado sesión en otra cuenta ("..targetAccountName..") "..tostring(characterData["charactername"]):gsub("_"," ")..".")
             end
         else
             mysql:query_free("UPDATE characters SET lastlogin=NOW() WHERE id='" .. mysql:escape_string(characterID) .. "'")
@@ -490,7 +490,7 @@ function spawnCharacter(characterID, remoteAccountID, theAdmin, targetAccountNam
         -- blindfolds
         if (tonumber(characterData["blindfold"])==1) then
             setElementDataEx(client, "blindfold", 1)
-            outputChatBox("Your character is blindfolded. If this was an OOC action, please contact an administrator via F2.", client, 255, 194, 15)
+            outputChatBox("Tu personaje tiene los ojos vendados. Si se trató de una acción OOC, comuníquese con un administrador a través de F2.", client, 255, 194, 15)
             fadeCamera(client, false)
         else
             fadeCamera(client, true, 4)
@@ -564,7 +564,7 @@ function Characters_onCharacterChange()
     makeOwlName(client)
     setElementDataEx(client, "legitnamechange", 0)
 
-    exports.logs:dbLog("ac"..tostring(clientAccountID), 27, { "ac"..tostring(clientAccountID), client } , "Went to character selection" )
+    exports.logs:dbLog("ac"..tostring(clientAccountID), 27, { "ac"..tostring(clientAccountID), client } , "Fue a la selección de personajes." )
     triggerEvent("shop:removeMeFromCurrentShopUser",client, client)
     triggerClientEvent(client, "hideGeneralshopUI", client)
     triggerEvent("artifacts:removeAllOnPlayer",client, client)

@@ -41,34 +41,34 @@ function checkValidCharacterName(theText)
 		if char == ' ' then -- it's a space
 			if i == #theText then -- space at the end of name is not allowed
 				valid = false
-				return false, "You cannot have a space at the end\n of the name"
+				return false, "No puedes tener un espacio al final\n de tu nombre"
 			else
 				foundSpace = true -- we have at least two name parts
 			end
 			
 			if #current < 2 then -- check if name's part is at least 2 chars
 				valid = false
-				return false, "Your name cannot be that small"
+				return false, "Tu nombre no puede ser tan pequeño...tulachi"
 			end
 			current = ''
 		elseif lastChar == ' ' then -- this char follows a space, we need a capital letter
 			if char < 'A' or char > 'Z' then
 				valid = false
-				return false, "You did not use capitals at a start of a name."
+				return false, "No usaste mayúsculas al comienzo de un nombre.."
 			end
 			current = current .. char
 		elseif ( char >= 'a' and char <= 'z' ) or ( char >= 'A' and char <= 'Z' ) or (char == "'") then -- can have letters anywhere in the name
 			current = current .. char
 		else -- unrecognized char (numbers, special chars)
 			valid = false
-			return false, "There are unknown characters \nin the text. You can only use\n A-Z, a-z and spaces"
+			return false, "hay personajes desconocidos \nen el texto. Sólo puedes usar\n A-Z, a-z y espacios"
 		end
 		lastChar = char
 	end
 	
 	if valid and foundSpace and #theText <= 22 and #theText >= 2 then
-		return true, "Looking good!" -- passed
+		return true, "Te ves fichon!" -- passed
 	else
-		return false, "Name is too long or too short \n(min 2, max 22)" -- failed for the checks
+		return false, "El nombre es demasiado largo o demasiado corto \n(min 2, max 22)" -- failed for the checks
 	end
 end

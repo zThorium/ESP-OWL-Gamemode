@@ -27,8 +27,8 @@ function resourceStart(resource)
 	--setGameType("")
 	setMapName("Los Santos")
 	setRuleValue("Script Version", exports.global:getScriptVersion())
-	setRuleValue("Author", "OwlGaming - MTA Server Development Team")
-	setRuleValue("Website", "www.owlgaming.net")
+	setRuleValue("Autor", "Thorium - Administración de ChileStreet")
+	setRuleValue("Website", "www.chilestreet.cl")
 	setGlitchEnabled ( "baddrivebyhitbox", false )
 	setFPSLimit(60) -- 72 is the real max before issues arise
 
@@ -89,11 +89,11 @@ function resetNick(oldNick, newNick)
 	exports.anticheat:changeProtectedElementDataEx(client, "legitnamechange", 1)
 	setPlayerName(client, oldNick)
 	exports.anticheat:changeProtectedElementDataEx(client, "legitnamechange", 0)
-	exports.global:sendMessageToAdmins("AdmWrn: " .. tostring(oldNick) .. " tried to change their name to " .. tostring(newNick) .. ".")
+	exports.global:sendMessageToAdmins("AdmWrn: " .. tostring(oldNick) .. " intentó cambiar su nombre a " .. tostring(newNick) .. ".")
 end
 addEvent("resetName", true )
 addEventHandler("resetName", getRootElement(), resetNick)
 
 function makeOwlName(thePlayer)
-	setPlayerName(thePlayer, "Owl.Player."..tostring(math.random(0,9))..tostring(math.random(0,9))..tostring(math.random(0,9))..tostring(math.random(0,9)))
+	setPlayerName(thePlayer, "CLStreet.Player."..tostring(math.random(0,9))..tostring(math.random(0,9))..tostring(math.random(0,9))..tostring(math.random(0,9)))
 end
