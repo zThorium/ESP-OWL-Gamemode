@@ -472,10 +472,10 @@ function respawnPed(player, ped)
 			--if(ped == exports.pool:getElement("ped", tonumber(dbid))) then --extra security check
 				local result = reloadPed(tonumber(dbid))
 				if result then
-					outputDebugString("Successfully respawned ped with dbid "..tostring(dbid))
+					outputDebugString("Ped reaparecido exitosamente con dbid "..tostring(dbid))
 					return true
 				else
-					outputDebugString("Failed to respawn ped with dbid "..tostring(dbid).." (#2)")
+					outputDebugString("No se pudo reaparecer ped con dbid "..tostring(dbid).." (#2)")
 					return false
 				end
 			--else

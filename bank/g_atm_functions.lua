@@ -66,7 +66,7 @@ function updateBankMoney(thePlayer, charID, money, transfer)
 		end
 
 		if not foundFaction then 
-			outputDebugString ("bank / atm / didn't find the faction from id ")
+			outputDebugString ("bank / atm / no encontré la facción de id ")
 			return false
 		end
 

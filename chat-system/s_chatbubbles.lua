@@ -64,7 +64,7 @@ function sendChatBubble(source, command, message, inChatBox)
 	elseif command == "ame" then
 		message = getElementName(source) .. ( message:sub( 1, 1 ) == "'" and "" or " " ) .. message
 	else
-		outputDebugString("Unable to add status message " .. command .. "?")
+		outputDebugString("No se puede agregar el mensaje de estado " .. command .. "?")
 		return
 	end
 
@@ -89,7 +89,7 @@ function getElementName(source)
 	if getElementType(source) == "ped" then
 		local pedName = getElementData(source, "name")
 		if not pedName or string.sub(tostring(pedName),1,8) == "userdata" then
-			return "The Storekeeper"
+			return "El tendero"
 		else
 			return tostring(pedName):gsub("_", " ")
 		end

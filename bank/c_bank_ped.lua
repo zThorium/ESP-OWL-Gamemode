@@ -7,7 +7,7 @@ setPedRotation( atmPed, 90 )
 setElementDimension( atmPed, 1352)
 setElementInterior( atmPed , 56 )
 setElementData( atmPed, "talk", 1, false )
-setElementData( atmPed, "name", "Maxime Du Trieux", false )
+setElementData( atmPed, "name", "Farmacos Estado", false )
 --setPedAnimation ( atmPed, "INT_OFFICE", "OFF_Sit_Bored_Loop", -1, true, false, false )
 setElementFrozen(atmPed, true)
 
@@ -47,43 +47,43 @@ function bankerInteraction(ped)
 	if not (wGui) then
 		showCursor(true)
 		--NEW CARD
-		wGui = guiCreateWindow(X, Y, Width, Height, "'What can I do for you, sir?'", false )
-		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "I want to apply for a new ATM card, please.", true, wGui )
+		wGui = guiCreateWindow(X, Y, Width, Height, "'Que puedo hacer por usted señor?'", false )
+		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Quiero solicitar una nueva tarjeta de cajero automático, por favor.", true, wGui )
 		addEventHandler( "onClientGUIClick", option[1], function()
 			closeBankerInteraction()
 			triggerServerEvent("bank:applyForNewATMCard", localPlayer)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--LOCK CARD
-		option[2] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "I've lost my ATM card\nI'd like to get it locked, please ($0)", true, wGui )
+		option[2] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "He perdido mi tarjeta de cajero automático\nMe gustaría cerrarlo, por favor. ($0)", true, wGui )
 		addEventHandler( "onClientGUIClick", option[2], function()
 			closeBankerInteraction()
 			triggerServerEvent("bank:lockATMCard", localPlayer)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--UNLOCK CARD
-		option[3] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "I've found my ATM card\n Could you re-activate it please? ($0)", true, wGui )
+		option[3] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Encontré mi tarjeta de cajero automático\n ¿Podrías reactivarlo por favor? ($0)", true, wGui )
 		addEventHandler( "onClientGUIClick", option[3], function()
 			closeBankerInteraction()
 			triggerServerEvent("bank:unlockATMCard", localPlayer)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--RECOVER CARD
-		option[4] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "I need to recover my ATM Card\nAnd if you could also tell me the PIN code, it'd be great ($50)", true, wGui )
+		option[4] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Necesito recuperar mi tarjeta de cajero automático\nY si también pudieras decirme el código PIN sería genial. ($45.000)", true, wGui )
 		addEventHandler( "onClientGUIClick", option[4], function()
 			closeBankerInteraction()
 			triggerServerEvent("bank:recoverATMCard", localPlayer)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--DELETE CARD
-		option[5] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "I wanna cancel my ATM Card\nI mean I don't use it anymore ($0)", true, wGui )
+		option[5] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Quiero cancelar mi tarjeta de cajero automático\nQuiero decir que ya no lo uso ($0)", true, wGui )
 		addEventHandler( "onClientGUIClick", option[5], function()
 			closeBankerInteraction()
 			triggerServerEvent("bank:cancelATMCard", localPlayer)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--CANCEL CARD
-		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah, nevermind.", true, wGui )
+		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah no importa.", true, wGui )
 		addEventHandler( "onClientGUIClick", option[6], function()
 			closeBankerInteraction()
 		end, false )

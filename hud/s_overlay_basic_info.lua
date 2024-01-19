@@ -1,6 +1,6 @@
 function showStats(thePlayer, commandName, targetPlayerName)
 	if getElementData(thePlayer, "loggedin") ~= 1 then
-		outputChatBox("You are not logged in.", thePlayer, 255, 0, 0)
+		outputChatBox("No estas logeado.", thePlayer, 255, 0, 0)
 		return
 	end
 
@@ -11,7 +11,7 @@ function showStats(thePlayer, commandName, targetPlayerName)
 			if getElementData(targetPlayer, "loggedin") == 1 then
 				thePlayer = targetPlayer
 			else
-				outputChatBox("Player is not logged in.", showPlayer, 255, 0, 0)
+				outputChatBox("Jugador no esta logeado.", showPlayer, 255, 0, 0)
 				return
 			end
 		else
@@ -29,21 +29,21 @@ function showStats(thePlayer, commandName, targetPlayerName)
 	local gunlicense = getElementData(thePlayer, "license.gun")
 	local gun2license = getElementData(thePlayer, "license.gun2")
 	if (carlicense==1) then
-		carlicense = "Yes"
+		carlicense = "Si"
 	elseif (carlicense==3) then
-		carlicense = "Theory test passed"
+		carlicense = "Teorico Aprobado"
 	else
 		carlicense = "No"
 	end
 	if (bikelicense==1) then
-		bikelicense = "Yes"
+		bikelicense = "Si"
 	elseif (bikelicense==3) then
-		bikelicense = "Theory test passed"
+		bikelicense = "Teorico Aprobado"
 	else
 		bikelicense = "No"
 	end
 	if (boatlicense==1) then
-		boatlicense = "Yes"
+		boatlicense = "Si"
 	else
 		boatlicense = "No"
 	end
@@ -90,17 +90,17 @@ function showStats(thePlayer, commandName, targetPlayerName)
 	end
 	
 	if (fishlicense==1) then
-		fishlicense = "Yes"
+		fishlicense = "Si"
 	else
 		fishlicense = "No"
 	end
 	if (gunlicense==1) then
-		gunlicense = "Yes"
+		gunlicense = "Si"
 	else
 		gunlicense = "No"
 	end
 	if (gun2license==1) then
-		gun2license = "Yes"
+		gun2license = "Si"
 	else
 		gun2license = "No"
 	end
@@ -142,33 +142,33 @@ function showStats(thePlayer, commandName, targetPlayerName)
 	local info = {}
 	if isOverlayDisabled then
 		outputChatBox(getPlayerName(thePlayer):gsub("_", " "), showPlayer , 255, 194, 14)
-		outputChatBox(" Drivers License: " .. carlicense, showPlayer)
-		outputChatBox(" Motorcycle License: " .. bikelicense, showPlayer)
-		outputChatBox(" Boating License: " .. boatlicense, showPlayer)
-		outputChatBox(" Pilots License: " .. pilotlicense, showPlayer)
-		outputChatBox(" Tier 1 Firearms License: " .. gunlicense , showPlayer)
-		outputChatBox(" Tier 2 Firearms License: " .. gun2license , showPlayer)
-		outputChatBox(" Fishing Permit: " .. fishlicense, showPlayer)
-		outputChatBox(" Vehicles (" .. printCar .. "): " .. string.sub(carids, 1, string.len(carids)-2) , showPlayer)
-		outputChatBox(" Properties (" .. numproperties .. "/"..(getElementData(thePlayer, "maxinteriors") or 10).."): " .. string.sub(properties, 1, string.len(properties)-2) , showPlayer)
-		outputChatBox(" Time spent on this character: " .. hoursplayed .. " hours." , showPlayer)
-		outputChatBox(" Languages: " , showPlayer)
+		outputChatBox(" Licencia de conducir: " .. carlicense, showPlayer)
+		outputChatBox(" Licencia de Motocicleta: " .. bikelicense, showPlayer)
+		outputChatBox(" Licencia de Bote: " .. boatlicense, showPlayer)
+		outputChatBox(" Licencia de Piloto: " .. pilotlicense, showPlayer)
+		outputChatBox(" Licencia Nivel 1 Armas: " .. gunlicense , showPlayer)
+		outputChatBox(" Licencia Nivel 2 Armas: " .. gun2license , showPlayer)
+		outputChatBox(" Permiso de Pesca: " .. fishlicense, showPlayer)
+		outputChatBox(" Vehiculos (" .. printCar .. "): " .. string.sub(carids, 1, string.len(carids)-2) , showPlayer)
+		outputChatBox(" Propiedades (" .. numproperties .. "/"..(getElementData(thePlayer, "maxinteriors") or 10).."): " .. string.sub(properties, 1, string.len(properties)-2) , showPlayer)
+		outputChatBox(" Tiempo Jugado Personaje: " .. hoursplayed .. " horas." , showPlayer)
+		outputChatBox(" Lenguajes: " , showPlayer)
 	else
 		info = {
 			{getPlayerName(thePlayer):gsub("_", " ")},
 			{""},
-			{" Date of birth: "..exports.global:getPlayerDoB(thePlayer)},
-			{" Drivers License: " .. carlicense},
-			{" Motorcycle License: " .. bikelicense},
-			{" Boating License: " .. boatlicense},
-			{" Pilots License: " .. pilotlicense},
-			{" Tier 1 Firearms License: " .. gunlicense},
-			{" Tier 2 Firearms License: " .. gun2license},
-			{" Fishing Permit: " .. fishlicense},
-			{" Vehicles (" .. printCar .. "): " .. string.sub(carids, 1, string.len(carids)-2)},
-			{" Properties (" .. numproperties .. "/"..(getElementData(thePlayer, "maxinteriors") or 10).."): " .. string.sub(properties, 1, string.len(properties)-2)},
-			{" Time spent on this character: " .. hoursplayed .. " hours."},
-			{" Languages: "},
+			{" Fecha Cumpleaños: "..exports.global:getPlayerDoB(thePlayer)},
+			{" Licencia de Conducir: " .. carlicense},
+			{" Licencia de Motocicleta: " .. bikelicense},
+			{" Licencia de Bote: " .. boatlicense},
+			{" Licencia de Piloto: " .. pilotlicense},
+			{" Licencia Nivel 1 Armas: " .. gunlicense},
+			{" Licencia Nivel 2 Armas: " .. gun2license},
+			{" Permiso de Pesca: " .. fishlicense},
+			{" Vehiculos (" .. printCar .. "): " .. string.sub(carids, 1, string.len(carids)-2)},
+			{" Propiedades (" .. numproperties .. "/"..(getElementData(thePlayer, "maxinteriors") or 10).."): " .. string.sub(properties, 1, string.len(properties)-2)},
+			{" Tiempo Jugado Personaje: " .. hoursplayed .. " horas."},
+			{" Lenguajes: "},
 		}
 	end
 	--LANGUAGES
@@ -190,26 +190,26 @@ function showStats(thePlayer, commandName, targetPlayerName)
 	local job = getElementData(thePlayer, "job") or 0
 	if job == 0 then
 		if isOverlayDisabled then
-			outputChatBox(" Career: Unemployed", showPlayer)
+			outputChatBox(" Carrera: Desempleado", showPlayer)
 		else
-			table.insert(info, {" Career: Unemployed"})
+			table.insert(info, {" Carrera: Desempleado"})
 		end
 	else
 		local jobName = exports["job-system"]:getJobTitleFromID(job)
 		local joblevel = getElementData(thePlayer, "jobLevel") or 1
 		local jobProgress = getElementData(thePlayer, "jobProgress") or 0
 		if isOverlayDisabled then
-			outputChatBox(" Career: "..jobName, showPlayer)
-			outputChatBox("   - Skill Level: "..joblevel, showPlayer)
-			outputChatBox("   - Progress: "..jobProgress, showPlayer)
+			outputChatBox(" Carrera: "..jobName, showPlayer)
+			outputChatBox("   - Nivel Habilidad: "..joblevel, showPlayer)
+			outputChatBox("   - Progreso: "..jobProgress, showPlayer)
 		else
-			table.insert(info, {" Career: "..jobName})
-			table.insert(info, {"   - Skill Level: "..joblevel})
-			table.insert(info, {"   - Progress: "..jobProgress})
+			table.insert(info, {" Carrera: "..jobName})
+			table.insert(info, {"   - Nivel Habilidad: "..joblevel})
+			table.insert(info, {"   - Progreso: "..jobProgress})
 		end
 	end
 	--CARRIED
-	local carried = " Carried Weight: "..("%.2f/%.2f" ):format( exports["item-system"]:getCarriedWeight( thePlayer ), exports["item-system"]:getMaxWeight( thePlayer ) ).." kg(s)"
+	local carried = " Peso Cargado: "..("%.2f/%.2f" ):format( exports["item-system"]:getCarriedWeight( thePlayer ), exports["item-system"]:getMaxWeight( thePlayer ) ).." kg(s)"
 	if isOverlayDisabled then
 		outputChatBox( carried, showPlayer)
 	else
@@ -220,15 +220,15 @@ function showStats(thePlayer, commandName, targetPlayerName)
 	local bankmoney = getElementData(thePlayer, "bankmoney") or 0
 	local money = getElementData(thePlayer, "money") or 0
 	if isOverlayDisabled then
-		outputChatBox( " Finance: ", showPlayer)
+		outputChatBox( " Finanza: ", showPlayer)
 		outputChatBox( "   - GCs: "..exports.global:formatMoney(currentGC), showPlayer)
-		outputChatBox( "   - Money: $"..exports.global:formatMoney(money), showPlayer)
-		outputChatBox( "   - Bank money: $"..exports.global:formatMoney(bankmoney), showPlayer)
+		outputChatBox( "   - Dinero: $"..exports.global:formatMoney(money), showPlayer)
+		outputChatBox( "   - Dinero Banco: $"..exports.global:formatMoney(bankmoney), showPlayer)
 	else
-		table.insert(info, {" Finance: "})
+		table.insert(info, {" Finanza: "})
 		table.insert(info, {"   - GCs: "..exports.global:formatMoney(currentGC)})
-		table.insert(info, {"   - Money: $"..exports.global:formatMoney(money)})
-		table.insert(info, {"   - Bank money: $"..exports.global:formatMoney(bankmoney)})
+		table.insert(info, {"   - Dinero: $"..exports.global:formatMoney(money)})
+		table.insert(info, {"   - Dinero Banco: $"..exports.global:formatMoney(bankmoney)})
 	end
 	
 	if not isOverlayDisabled then

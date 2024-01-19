@@ -11,7 +11,7 @@ end
 local function printWhoisCharacters(target, data)
 	for i, char in ipairs(data) do
 		local isOnline = exports.global:findPlayerByPartialNick(target, char.charactername, true)
-		outputChatBox("#"..i..": "..(char.charactername and string.gsub(char.charactername, "_", " ") or "N/A").." - "..(isOnline and "Online" or ("Last seen: "..char.lastloginago.." day(s) ago")).." - hoursplayed: ".. char.hoursplayed..", money: $"..exports.global:formatMoney(char.money)..", bank: $"..exports.global:formatMoney(char.bankmoney)..(char.active=="0" and " (Deactivated)" or ""), target)
+		outputChatBox("#"..i..": "..(char.charactername and string.gsub(char.charactername, "_", " ") or "N/A").." - "..(isOnline and "Online" or ("Ultima vez visto: "..char.lastloginago.." dia(s) ")).." - horas jugadas: ".. char.hoursplayed..", dinero: $"..exports.global:formatMoney(char.money)..", banco: $"..exports.global:formatMoney(char.bankmoney)..(char.active=="0" and " (Desactivado)" or ""), target)
 	end
 end
 
@@ -36,14 +36,14 @@ end
 local function printWhoisAccount(target, data, forceShowChars)
 	for i, acc in ipairs(data) do
 		outputChatBox("----------------RESULT #"..i.."----------------", target)
-		outputChatBox("-Username: "..(acc.username or "N/A"), target)
+		outputChatBox("-Usuario: "..(acc.username or "N/A"), target)
 		outputChatBox("-Email: "..(acc.email or "N/A"), target)
-		outputChatBox("-Registration Date: "..(acc.registerdate or "N/A"), target)
-		outputChatBox("-Last login: "..(acc.lastlogin and (acc.lastlogin.." ("..acc.lastloginago.." days ago)") or "N/A"), target)
+		outputChatBox("-Fecha Registro: "..(acc.registerdate or "N/A"), target)
+		outputChatBox("-Ultimo Inicio de Sesión: "..(acc.lastlogin and (acc.lastlogin.." ("..acc.lastloginago.." days ago)") or "N/A"), target)
 		outputChatBox("-Serial: "..(acc.mtaserial or "N/A"), target)
 		outputChatBox("-IP: "..(acc.ip or "N/A"), target)
 		outputChatBox("-Monitor: "..(acc.monitored or "N/A"), target)
-		outputChatBox("-Total Characters: "..(acc.totalchars or "N/A"), target)
+		outputChatBox("-Total Personajes: "..(acc.totalchars or "N/A"), target)
 		if tonumber(acc.totalchars) > 0 and (#data == 1 or forceShowChars) then
 			printWhoisCharacters(target, queryWhoisCharacter(acc.id, "userid"))
 		end
@@ -137,11 +137,11 @@ function awhois(thePlayer, cmd, type, ...)
 		if not type or not (...) then
 			outputChatBox("SYNTAX: /" .. cmd .. " [Type] [Clue]", thePlayer, 255, 194, 14)
 			outputChatBox("[Type]: Type of the clue you're tracing for.", thePlayer, 255, 194, 14)
-			outputChatBox("   0 : in online players by partial charactername or ID", thePlayer, 255, 194, 14)
-			outputChatBox("   1 : by partial username.", thePlayer, 255, 194, 14)
-			outputChatBox("   2 : by partial charactername.", thePlayer, 255, 194, 14)
-			outputChatBox("   3 : by serial.", thePlayer, 255, 194, 14)
-			outputChatBox("   4 : by IP.", thePlayer, 255, 194, 14)
+			outputChatBox("   0 : en jugadores en línea por nombre de personaje parcial o ID", thePlayer, 255, 194, 14)
+			outputChatBox("   1 : por nombre de usuario parcial.", thePlayer, 255, 194, 14)
+			outputChatBox("   2 : por nombre de personaje parcial.", thePlayer, 255, 194, 14)
+			outputChatBox("   3 : por serial.", thePlayer, 255, 194, 14)
+			outputChatBox("   4 : por IP.", thePlayer, 255, 194, 14)
 			outputChatBox("[Clue]: Info you got to start tracing.", thePlayer, 255, 194, 14)
 			return false
 		end
@@ -153,26 +153,26 @@ function awhois(thePlayer, cmd, type, ...)
 			if target then
 				local account = getElementData(target, "account:id")
 				if account then
-					outputChatBox("[1 result(s) found in online players by partial charactername or ID '"..clue.."']", thePlayer)
+					outputChatBox("[1 resultado(s) encontrado(s) en jugadores en línea por nombre de personaje o ID parcial '"..clue.."']", thePlayer)
 					printWhoisAccount(thePlayer, queryWhoisAccount(account, "userid"), true)
 				end
 			end
 		elseif type == "1" then 
 			local results = queryWhoisAccount(clue, "username")
-			outputChatBox("["..(#results >=5 and "5+" or #results).." result(s) found by partial username '"..clue.."']", thePlayer)
+			outputChatBox("["..(#results >=5 and "5+" or #results).." resultado(s) encontrado(s) por nombre de usuario parcial '"..clue.."']", thePlayer)
 			printWhoisAccount(thePlayer, results, true)
 		elseif type == "2" then
 			clue = string.gsub(clue, " ", "_")
 			local results = queryWhoisAccount(clue, "charactername")
-			outputChatBox("["..(#results >=5 and "5+" or #results).." result(s) found by partial charactername '"..clue.."']", thePlayer)
+			outputChatBox("["..(#results >=5 and "5+" or #results).." resultado(s) encontrado(s) por nombre de personaje parcial '"..clue.."']", thePlayer)
 			printWhoisAccount(thePlayer, results)
 		elseif type == "3" then
 			local results = queryWhoisAccount(clue, "serial")
-			outputChatBox("["..(#results >=5 and "5+" or #results).." result(s) found by serial '"..clue.."']", thePlayer)
+			outputChatBox("["..(#results >=5 and "5+" or #results).." resultado(s) encontrado(s) por serial '"..clue.."']", thePlayer)
 			printWhoisAccount(thePlayer, results)
 		elseif type == "4" then
 			local results = queryWhoisAccount(clue, "ip")
-			outputChatBox("["..(#results >=5 and "5+" or #results).." result(s) found by IP adddress '"..clue.."']", thePlayer)
+			outputChatBox("["..(#results >=5 and "5+" or #results).." resultado(s) encontrado(s) por dirección IP '"..clue.."']", thePlayer)
 			printWhoisAccount(thePlayer, results)
 		end
 	end
@@ -190,13 +190,13 @@ local function showIPAlts(thePlayer, ip)
 				if result then
 					local count = 0
 					
-					outputChatBox( " IP Address: " .. ip, thePlayer)
+					outputChatBox( " Dirección IP: " .. ip, thePlayer)
 					while true do
 						local row = mysql:fetch_assoc(result)
 						if not row then break end
 						
 						if result1["lastlogin"] == mysql_null() then
-							result1["lastlogin"] = "Never"
+							result1["lastlogin"] = "Nunca"
 						end
 						
 						local text = " #" .. count .. ": " .. tostring(result1[1]["username"])
@@ -211,7 +211,7 @@ local function showIPAlts(thePlayer, ip)
 					end
 					mysql:free_result( result )
 				else
-					outputChatBox( "Error #9101 - Report on Forums", thePlayer, 255, 0, 0)
+					outputChatBox( "Error #9101 - Avisa en Discord", thePlayer, 255, 0, 0)
 				end
 			end
 		end, {thePlayer, ip}, mysql:getConn("core"), "SELECT `id`, `username` FROM `accounts` WHERE `ip`=? LIMIT 1", ip)
@@ -300,7 +300,7 @@ local function showAlts(thePlayer, id, creation)
 				
 				
 				if (tonumber(name["appstate"])) < 3 then
-					outputChatBox( "This account didn't pass an application yet.", thePlayer, 255, 0, 0 )	
+					outputChatBox( "Esta cuenta aún no aprobó una solicitud.", thePlayer, 255, 0, 0 )	
 				end
 			else
 				outputChatBox( "?", thePlayer )
@@ -322,9 +322,9 @@ local function showAlts(thePlayer, id, creation)
 			
 			local text = "#" .. count .. ": " .. row["charactername"]:gsub("_", " ")
 			if tonumber( row["cked"] ) == 1 then
-				text = text .. " (Missing)"
+				text = text .. " (Desaparecido)"
 			elseif tonumber( row["cked"] ) == 2 then
-				text = text .. " (Buried)"
+				text = text .. " (Enterrado)"
 			end
 			
 			if row['lastlogin'] ~= mysql_null() then
@@ -332,7 +332,7 @@ local function showAlts(thePlayer, id, creation)
 			end
 			
 			if creation and row['creationdate'] ~= mysql_null() then
-				text = text .. " - Created " .. tostring( row['creationdate'] )
+				text = text .. " - Creado " .. tostring( row['creationdate'] )
 			end
 
 			if exports.integration:isPlayerAdmin( thePlayer ) then -- Maxime | Hide faction from Trial and below
@@ -343,7 +343,7 @@ local function showAlts(thePlayer, id, creation)
 					if not row1 then break end
 
 					if not showingFactions then
-						text = text .. " - Factions: "
+						text = text .. " - Facciones: "
 						showingFactions = true 
 					end
 
@@ -359,19 +359,19 @@ local function showAlts(thePlayer, id, creation)
 			local newhours = tonumber(row.hoursplayed) + tonumber(row.hoursplayed)
 			--outputDebugString(newhours)
 			if hours and hours > 0 then
-				text = text .. " - " .. hours .. " hours"
+				text = text .. " - " .. hours .. " horas"
 			end
 			local activated = tonumber(row.active)
 			if activated then
 				if activated == 0 then
-					text = text .. " (Deactivated)"
+					text = text .. " (Desactivado)"
 				end
 			end
 			outputChatBox( text, thePlayer, r, 255, 0)
 		end
 		mysql:free_result( result )
 	else
-		outputChatBox( "Error #9102 - Report on Forums", thePlayer, 255, 0, 0)
+		outputChatBox( "Error #9102 - Avisa en Discord", thePlayer, 255, 0, 0)
 	end
 end
 
@@ -407,13 +407,13 @@ function findAltChars(thePlayer, commandName, ...)
 					return
 				end
 				
-				outputChatBox("Player not found or multiple were found.", thePlayer, 255, 0, 0)
+				outputChatBox("Jugador no encontrado o se encontraron varios.", thePlayer, 255, 0, 0)
 			else
 				local id = getElementData( targetPlayer, "account:id" )
 				if id then
 					showAlts( thePlayer, id, creation )
 				else
-					outputChatBox("Game Account is unknown.", thePlayer, 255, 0, 0)
+					outputChatBox("La cuenta del juego es desconocida.", thePlayer, 255, 0, 0)
 				end
 			end
 		end
@@ -440,14 +440,14 @@ local function showSerialAlts(thePlayer, serial)
 			local text = "#" .. count .. ": " .. username
 			
 			if tonumber( row["appstate"] ) < 3 then
-				text = text .. " (Application not passed)"
+				text = text .. " (Solicitud no aprobada)"
 			end
 
 			outputChatBox( text, thePlayer)
 		end
 		mysql:free_result( result )
 	else
-		outputChatBox( "Error #9101 - Report on bugs.owlgaming.net", thePlayer, 255, 0, 0)
+		outputChatBox( "Error #9101 - Avisa en Discord", thePlayer, 255, 0, 0)
 	end
 end
 
@@ -460,7 +460,7 @@ function findAltAccSerial(thePlayer, commandName, ...)
 			local targetPlayer = exports.global:findPlayerByPartialNick(nil, targetPlayerName)
 			
 			if not targetPlayer then --or getElementData( targetPlayer, "loggedin" ) ~= 1 then
-				outputChatBox("Begining output..", thePlayer, 255, 194, 14)
+				outputChatBox("Salida inicial..", thePlayer, 255, 194, 14)
 				
 				-- select by charactername
 				local result = mysql:query("SELECT a.`mtaserial` FROM `characters` c LEFT JOIN `account_details` a on c.`account`=a.`account_id` WHERE c.`charactername` = '" .. mysql:escape_string(targetPlayerName ) .. "'" )

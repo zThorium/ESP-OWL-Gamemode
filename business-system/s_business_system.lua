@@ -57,7 +57,7 @@ function setBusinessNotification(thePlayer, commandName, ...)
 					local msg = table.concat({...}, " "):gsub("'","''")
 					local limit = string.len(msg) 
 					if limit > 100 then
-						outputChatBox(" Your message ("..limit.."/100) is too long, please shorten it!",thePlayer, 255, 0, 0)
+						outputChatBox(" Tu mensaje ("..limit.."/100) es demasiado largo, ¡cancelalo!",thePlayer, 255, 0, 0)
 						return false
 					end
 					local sucessfullyUpdateToSQL = false
@@ -82,15 +82,15 @@ function setBusinessNotification(thePlayer, commandName, ...)
 					end
 				end
 			else
-				outputChatBox("You're not owner of this business, show me a key at least?", thePlayer, 255, 0, 0)
+				outputChatBox("No eres dueño de este negocio, ¿muéstrame al menos una clave?", thePlayer, 255, 0, 0)
 				return false
 			end
 		else
-			outputChatBox("This isn't a business.", thePlayer, 255, 0, 0)
+			outputChatBox("esto no es un negocio.", thePlayer, 255, 0, 0)
 			return false
 		end
 	else
-		outputChatBox("You must be inside your business.", thePlayer, 255, 0, 0)
+		outputChatBox("Debes estar dentro de tu negocio..", thePlayer, 255, 0, 0)
 	end
 end
 addCommandHandler("setbiznote", setBusinessNotification)

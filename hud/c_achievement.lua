@@ -9,7 +9,7 @@ function displayAchievement(title, name, description, points)
 	wAchievement = guiCreateWindow(x, y, width, height,title, false)
 	imgAchievement = guiCreateStaticImage(0.025, 0.25, 0.15, 0.7, "images/achievement/achievement.png", true, wAchievement)
 	
-	lTitle = guiCreateLabel(0.2, 0.25, 0.6, 0.2, tostring(name) .. " (" .. points .. " Points)", true, wAchievement)
+	lTitle = guiCreateLabel(0.2, 0.25, 0.6, 0.2, tostring(name) .. " (" .. points .. " Puntos)", true, wAchievement)
 	guiSetFont(lTitle, "default-bold-small")
 	guiLabelSetHorizontalAlign(lTitle, "center")
 	

@@ -522,14 +522,14 @@ function drawHUD()
 				if isInBox( cursorX, cursorY, ax, ax + iconW, ay, ay + iconH/2 ) then
 					--ADMIN DUTY 
 					if tooltips[i] == "adminonduty" then
-						tooltip( cursorX, cursorY, "Admin Duty is ON", "Click to go OFF duty")
+						tooltip( cursorX, cursorY, "El servicio administrativo está activado", "Haga clic para salir del servicio")
 						if justClicked then
 							triggerEvent("accounts:settings:updateAccountSettings", localPlayer, "duty_admin", 0)
 							--triggerServerEvent("updateNametagColor", localPlayer)
 							playToggleSound()
 						end
 					elseif tooltips[i] == "adminoffduty" then
-						tooltip( cursorX, cursorY, "Admin Duty is OFF", "Click to go ON duty")
+						tooltip( cursorX, cursorY, "El servicio administrativo está desactivado", "Haga clic para comenzar a trabajar")
 						if justClicked then
 							triggerEvent("accounts:settings:updateAccountSettings", localPlayer, "duty_admin", 1)
 							--triggerServerEvent("updateNametagColor", localPlayer)

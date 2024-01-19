@@ -5,7 +5,7 @@ local coolDown = {}
 local lastExpiryCheck = 0
 
 local function getSectionFromName(section)
-    local sections = {"Services", "Vehicles", "Real Estate", "Community", "Jobs", "Personals"}
+    local sections = {"Servicios", "Vehiculos", "Bienes raíces", "Comunidad", "Trabajos", "Personal"}
 
     for sectionId, sectionName in ipairs(sections) do
         if section == sectionName then

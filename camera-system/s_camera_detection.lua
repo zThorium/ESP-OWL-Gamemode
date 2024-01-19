@@ -157,14 +157,14 @@ function sendWarningToCops(theVehicle, thePlayer, speed, x, y, z)
 					--local vehicleFaction = tonumber(getElementData(vehicleOfficerIsIn, "faction"))
 					--if vehicleFaction and vehicleFaction == 1 or vehicleFaction == 2 then
 							triggerClientEvent(value, "beep", value)
-							outputChatBox("[RADIO] All units, we've got a traffic violation at the " .. areaName .. " speedcam.", value, 0, 210, 255)
-							outputChatBox("[RADIO] The vehicle was a " .. vehicleColor(color1, color2) .. " " .. vehicleName .. " travelling at " .. tostring(math.ceil(speed)) .. " KM/H.", value, 0, 210, 255)
+							outputChatBox("[RADIO] A todas las unidades, tenemos una infracción de tránsito en el " .. areaName .. " cámara de velocidad.", value, 0, 210, 255)
+							outputChatBox("[RADIO] El vehículo era un " .. vehicleColor(color1, color2) .. " " .. vehicleName .. " viajando en " .. tostring(math.ceil(speed)) .. " KM/H.", value, 0, 210, 255)
 						if getElementData(theVehicle, "registered") == 1 and getElementData(theVehicle, "show_plate") == 1 and exports.vehicle:hasVehiclePlates( theVehicle ) then
-							outputChatBox("[RADIO] The plates are '"..  getVehiclePlateText ( theVehicle ) .."' and the vehicle was heading " .. direction .. ".", value, 0, 210, 255)
+							outputChatBox("[RADIO] Las placas son '"..  getVehiclePlateText ( theVehicle ) .."' y el vehículo se dirigía " .. direction .. ".", value, 0, 210, 255)
 						elseif getElementData(theVehicle, "registered") == 0 and getElementData(theVehicle, "show_plate") == 1 and exports.vehicle:hasVehiclePlates( theVehicle ) then
-							outputChatBox("[RADIO] The vehicle is not registered and was heading " .. direction .. ".", value, 0, 210, 255)
+							outputChatBox("[RADIO] El vehículo no está matriculado y se dirigía " .. direction .. ".", value, 0, 210, 255)
 						else
-							outputChatBox("[RADIO] The vehicle has no plates and was heading " .. direction .. ".", value, 0, 210, 255)
+							outputChatBox("[RADIO] El vehículo no tiene placas y se dirigía " .. direction .. ".", value, 0, 210, 255)
 						end
 					--end
 				end

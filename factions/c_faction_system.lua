@@ -40,7 +40,7 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 		local teamName = getTeamName(theTeam)
 		local playerName = getPlayerName(thePlayer)
 		triggerEvent( 'hud:blur', resourceRoot, 6, false, 0.5, nil )
-		gFactionWindow = guiCreateWindow(0.1, 0.25, 0.85, 0.525, "Faction Menu", true)
+		gFactionWindow = guiCreateWindow(0.1, 0.25, 0.85, 0.525, "Menu Facción", true)
 		local width, height = guiGetSize(gFactionWindow, false)
 		if height < 500 then
 			guiSetSize(gFactionWindow, width, 500, false)
@@ -80,27 +80,27 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 		-- Make members list
 		gMemberGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabOverview)
 
-		colName = guiGridListAddColumn(gMemberGrid, "Name", 0.20)
-		colRank = guiGridListAddColumn(gMemberGrid, "Rank", 0.20)
-		colOnline = guiGridListAddColumn(gMemberGrid, "Status", 0.115)
-		colLastLogin = guiGridListAddColumn(gMemberGrid, "Last Login", 0.13)
+		colName = guiGridListAddColumn(gMemberGrid, "Nombre", 0.20)
+		colRank = guiGridListAddColumn(gMemberGrid, "Rango", 0.20)
+		colOnline = guiGridListAddColumn(gMemberGrid, "Estado", 0.115)
+		colLastLogin = guiGridListAddColumn(gMemberGrid, "Ultima Conexión", 0.13)
 
 		local factionType = tonumber(getElementData(theTeam, "type"))
 
 		if (factionType==2) or (factionType==3) or (factionType==4) or (factionType==5) or (factionType==6) or (factionType==7) then -- Added Mechanic type \ Adams
 			--colLocation = guiGridListAddColumn(gMemberGrid, "Location", 0.12)
-			colWage = guiGridListAddColumn(gMemberGrid, "Wage ($)", 0.06)
+			colWage = guiGridListAddColumn(gMemberGrid, "Salario ($)", 0.06)
 		--else
 			--colLocation = guiGridListAddColumn(gMemberGrid, "Location", 0.1)
 		end
 
 		if phone then
-			colPhone = guiGridListAddColumn(gMemberGrid, "Phone No.", 0.08)
+			colPhone = guiGridListAddColumn(gMemberGrid, "N° Telefono.", 0.08)
 		end
 
 		local factionPackages = exports.duty:getFactionPackages(factionID)
 		if factionPackages and factionType >= 2 then
-			colDuty = guiGridListAddColumn(gMemberGrid, "Duty", 0.06)
+			colDuty = guiGridListAddColumn(gMemberGrid, "Servicio", 0.06)
 		end
 
 		local localPlayerIsLeader = nil
@@ -119,16 +119,16 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 					guiGridListSetItemText(gMemberGrid, row, colRank, tostring(rankName), false, false)
 					guiGridListSetItemData(gMemberGrid, row, colRank, tostring(theRank))
 			
-					local login = "Never"
+					local login = "Nunca"
 					if (not memberLastLogin[x]) then
-						login = "Never"
+						login = "Nunca"
 					else
 						if (memberLastLogin[x]==0) then
-							login = "Today"
+							login = "Hoy"
 						elseif (memberLastLogin[x]==1) then
-							login = tostring(memberLastLogin[x]) .. " day ago"
+							login = tostring(memberLastLogin[x]) .. " día"
 						else
-							login = tostring(memberLastLogin[x]) .. " days ago"
+							login = tostring(memberLastLogin[x]) .. " días"
 						end
 					end
 					guiGridListSetItemText(gMemberGrid, row, colLastLogin, login, false, false)
@@ -140,11 +140,11 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 					end
 
 					if (memberOnline[x]) then
-						guiGridListSetItemText(gMemberGrid, row, colOnline, "Online", false, false)
+						guiGridListSetItemText(gMemberGrid, row, colOnline, "Conectado", false, false)
 						guiGridListSetItemColor(gMemberGrid, row, colOnline, 0, 255, 0)
 						counterOnline = counterOnline + 1
 					else
-						guiGridListSetItemText(gMemberGrid, row, colOnline, "Offline", false, false)
+						guiGridListSetItemText(gMemberGrid, row, colOnline, "Desconectado", false, false)
 						guiGridListSetItemColor(gMemberGrid, row, colOnline, 255, 0, 0)
 						counterOffline = counterOffline + 1
 					end
@@ -153,10 +153,10 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 
 					if colDuty then
 						if memberOnDuty[x] then
-							guiGridListSetItemText(gMemberGrid, row, colDuty, "On duty", false, false)
+							guiGridListSetItemText(gMemberGrid, row, colDuty, "En servicio", false, false)
 							guiGridListSetItemColor(gMemberGrid, row, colDuty, 0, 255, 0)
 						else
-							guiGridListSetItemText(gMemberGrid, row, colDuty, "Off duty", false, false)
+							guiGridListSetItemText(gMemberGrid, row, colDuty, "Fuera de servicio", false, false)
 							guiGridListSetItemColor(gMemberGrid, row, colDuty, 255, 0, 0)
 						end
 					end
@@ -176,52 +176,52 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 		membersOffline = counterOffline
 
 		-- Update the window title
-		guiSetText(ftab[factionID], tostring(teamName) .. " (" .. counterOnline .. " of " .. (counterOnline+counterOffline) .. " Members Online)")
+		guiSetText(ftab[factionID], tostring(teamName) .. " (" .. counterOnline .. " de " .. (counterOnline+counterOffline) .. " Miembros en Linea)")
 
 		-- Make the buttons
 		if (hasMemberPermissionTo(localPlayer, factionID, "del_member")) then
-			gButtonKick = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Boot Member", true, tabOverview)
+			gButtonKick = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Expulsar Miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonKick, btKickPlayer, false)
 		end	
 		if (hasMemberPermissionTo(localPlayer, factionID, "change_member_rank")) then
-			gButtonPromote = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Promote/Demote Member", true, tabOverview)
+			gButtonPromote = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Promover/Demover Miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonPromote, btPromotePlayer, false)	
 		end
 		
 		if (factionType==2) or (factionType==3) or (factionType==4) or (factionType==5) or (factionType==6) or (factionType==7) then -- Added Mechanic type \ Adams
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_ranks")) then
-				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Edit Ranks and Wages", true, tabOverview)
+				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Editar Rangos/Salarios", true, tabOverview)
 				addEventHandler("onClientGUIClick", gButtonEditRanks, btEditRanks, false)
 			end	
 		else
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_ranks")) then
-				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Edit Ranks", true, tabOverview)
+				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Editar Rangos", true, tabOverview)
 				addEventHandler("onClientGUIClick", gButtonEditRanks, btEditRanks, false)
 			end	
 		end
 		if (hasMemberPermissionTo(localPlayer, factionID, "edit_motd")) then
-			gButtonEditMOTD = guiCreateButton(0.825, 0.3058, 0.16, 0.06, "Edit MOTD", true, tabOverview)
+			gButtonEditMOTD = guiCreateButton(0.825, 0.3058, 0.16, 0.06, "Editar MOTD", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonEditMOTD, btEditMOTD, false)
 		end	
 		if (hasMemberPermissionTo(localPlayer, factionID, "add_member")) then
-			gButtonInvite = guiCreateButton(0.825, 0.3824, 0.16, 0.06, "Invite Member", true, tabOverview)
+			gButtonInvite = guiCreateButton(0.825, 0.3824, 0.16, 0.06, "Invitar Miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonInvite, btInvitePlayer, false)
 		end	
 		if (hasMemberPermissionTo(localPlayer, factionID, "respawn_vehs")) then
-			gButtonRespawnui = guiCreateButton(0.825, 0.459, 0.16, 0.06, "Respawn Vehicles", true, tabOverview)
+			gButtonRespawnui = guiCreateButton(0.825, 0.459, 0.16, 0.06, "Respawnear Vehiculos", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonRespawnui, showrespawn, false)
 		end
 
 			local _y = 0.5356
 			if phone then
-				gAssignPhone = guiCreateButton(0.825, _y, 0.16, 0.06, "Phone No.", true, tabOverview)
+				gAssignPhone = guiCreateButton(0.825, _y, 0.16, 0.06, "N° Telefono.", true, tabOverview)
 				addEventHandler("onClientGUIClick", gAssignPhone, btPhoneNumber, false)
 				_y = _y + 0.0766
 			end
 
 			if factionType >= 2 then 
 				if (hasMemberPermissionTo(localPlayer, factionID, "set_member_duty")) then
-					gButtonPerk = guiCreateButton(0.825, _y, 0.16, 0.06, "Manage Duty Perks", true, tabOverview)
+					gButtonPerk = guiCreateButton(0.825, _y, 0.16, 0.06, "Ajustar Ubicaciones Duty", true, tabOverview)
 					addEventHandler("onClientGUIClick", gButtonPerk, btButtonPerk, false)
 				end	
 			end
@@ -229,16 +229,16 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 			
 
 			if (hasMemberPermissionTo(localPlayer, factionID, "respawn_vehs")) then
-				tabVehicles = guiCreateTab("(Leader) Vehicles", tabs)
+				tabVehicles = guiCreateTab("(Lider) Vehiculos", tabs)
 
 				gVehicleGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabVehicles)
 
 				colVehID = guiGridListAddColumn(gVehicleGrid, "ID (VIN)", 0.1)
-				colVehModel = guiGridListAddColumn(gVehicleGrid, "Model", 0.30)
-				colVehPlates = guiGridListAddColumn(gVehicleGrid, "Plate", 0.1)
-				colVehLocation = guiGridListAddColumn(gVehicleGrid, "Location", 0.4)
-				gButtonVehRespawn = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Respawn Vehicle", true, tabVehicles)
-				gButtonAllVehRespawn = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Respawn All Vehicles", true, tabVehicles)
+				colVehModel = guiGridListAddColumn(gVehicleGrid, "Modelo", 0.30)
+				colVehPlates = guiGridListAddColumn(gVehicleGrid, "Placa", 0.1)
+				colVehLocation = guiGridListAddColumn(gVehicleGrid, "Ubicación", 0.4)
+				gButtonVehRespawn = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Respawnear Vehiculo", true, tabVehicles)
+				gButtonAllVehRespawn = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Respawn todos los Vehiculos", true, tabVehicles)
 
 				for index, vehID in ipairs(vehicleIDs) do
 					local row = guiGridListAddRow(gVehicleGrid)
@@ -252,13 +252,13 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 			end	
 
 			if (hasMemberPermissionTo(localPlayer, factionID, "manage_interiors")) then
-				tabProperties = guiCreateTab("(Leader) Properties", tabs)
+				tabProperties = guiCreateTab("(Lider) Propiedades", tabs)
 
 				gPropertyGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabProperties)
 
 				colProID = guiGridListAddColumn(gPropertyGrid, "ID", 0.1)
-				colName = guiGridListAddColumn(gPropertyGrid, "Name", 0.30)
-				colProLocation = guiGridListAddColumn(gPropertyGrid, "Location", 0.4)
+				colName = guiGridListAddColumn(gPropertyGrid, "Nombre", 0.30)
+				colProLocation = guiGridListAddColumn(gPropertyGrid, "Ubicación", 0.4)
 
 				for index, int in ipairs(properties) do
 					local row = guiGridListAddRow(gPropertyGrid)
@@ -268,26 +268,26 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 				end
 			end
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_factionl_note")) then
-				tabNote = guiCreateTab("(Leader) Note", tabs)
+				tabNote = guiCreateTab("(Lider) Nota", tabs)
 				eNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, note or "", true, tabNote)
-				gButtonSaveNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Save", true, tabNote)
+				gButtonSaveNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Guardar", true, tabNote)
 				addEventHandler("onClientGUIClick", gButtonSaveNote, btUpdateNote, false)
 			end	
 	
 			-- towstats
 			if towstats then
 				if (hasMemberPermissionTo(localPlayer, factionID, "see_towstats")) then
-					tabTowstats = guiCreateTab("(Leader) Towstats", tabs)
+					tabTowstats = guiCreateTab("(Lider) Remolque Estadisticas", tabs)
 					gTowGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabTowstats)
 					local totals = {[0] = 0, [-1] = 0, [-2] = 0, [-3] = 0, [-4] = 0}
-					local colName = guiGridListAddColumn(gTowGrid, 'Name', 0.2)
-					local colRank = guiGridListAddColumn(gTowGrid, 'Rank', 0.2)
+					local colName = guiGridListAddColumn(gTowGrid, 'Nombre', 0.2)
+					local colRank = guiGridListAddColumn(gTowGrid, 'Rango', 0.2)
 					local cols = {
-						[0] = guiGridListAddColumn(gTowGrid, 'this week', 0.1),
-						[-1] = guiGridListAddColumn(gTowGrid, 'last week', 0.1),
-						[-2] = guiGridListAddColumn(gTowGrid, '2 weeks ago', 0.1),
-						[-3] = guiGridListAddColumn(gTowGrid, '3 weeks ago', 0.1),
-						[-4] = guiGridListAddColumn(gTowGrid, '4 weeks ago', 0.1)
+						[0] = guiGridListAddColumn(gTowGrid, 'esta semana', 0.1),
+						[-1] = guiGridListAddColumn(gTowGrid, 'anterior semana', 0.1),
+						[-2] = guiGridListAddColumn(gTowGrid, '2 semanas', 0.1),
+						[-3] = guiGridListAddColumn(gTowGrid, '3 semanas', 0.1),
+						[-4] = guiGridListAddColumn(gTowGrid, '4 semanas', 0.1)
 					}
 					for k, v in ipairs(memberUsernames) do
 						local row = guiGridListAddRow(gTowGrid)
@@ -302,7 +302,7 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 						end
 					end
 					local row = guiGridListAddRow(gTowGrid)
-					guiGridListSetItemText(gTowGrid, row, colName, "Totals", true, false)
+					guiGridListSetItemText(gTowGrid, row, colName, "Totales", true, false)
 					for week, col in pairs(cols) do
 						guiGridListSetItemText(gTowGrid, row, col, tostring(totals[week] or 0), true, true)
 					end
@@ -312,34 +312,34 @@ function showFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 	
 			-- for faction-wide note
 			if hasMemberPermissionTo(localPlayer, factionID, "modify_faction_note") then
-				tabFNote = guiCreateTab("Note", tabs)
+				tabFNote = guiCreateTab("Nota", tabs)
 				fNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, fnote or "", true, tabFNote)
 				guiMemoSetReadOnly(fNote, false)
 	
-				gButtonSaveFNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Save", true, tabFNote)
+				gButtonSaveFNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Guardar", true, tabFNote)
 				addEventHandler("onClientGUIClick", gButtonSaveFNote, btUpdateFNote, false)
 			else -- for faction-wide note
-				tabFNote = guiCreateTab("Note", tabs)
+				tabFNote = guiCreateTab("Nota", tabs)
 				fNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, fnote or "", true, tabFNote)
 				guiMemoSetReadOnly(fNote, true)
 			end	
 	
 			if hasMemberPermissionTo(localPlayer, factionID, "manage_finance") then
-				tabFinance = guiCreateTab("(Leader) Finance", tabs)
+				tabFinance = guiCreateTab("(Lider) Finanza", tabs)
 				addEventHandler("onClientGUITabSwitched", tabFinance, loadFinance)
 			end	
 	
 			if factionType >= 2 then
 				if (hasMemberPermissionTo(localPlayer, factionID, "modify_duty_settings")) then	
-					tabDuty = guiCreateTab("(Leader) Duty Settings", tabs)
+					tabDuty = guiCreateTab("(Lider) Ajustes Duty", tabs)
 					addEventHandler("onClientGUITabSwitched", tabDuty, createDutyMain)
 				end
 			end
 
 		
 
-			gButtonQuit = guiCreateButton(0.825, 0.7834, 0.16, 0.06, "Leave Faction", true, tabOverview)
-			gButtonExit = guiCreateButton(0.825, 0.86, 0.16, 0.06, "Exit Menu", true, tabOverview)
+			gButtonQuit = guiCreateButton(0.825, 0.7834, 0.16, 0.06, "Dejar Facción", true, tabOverview)
+			gButtonExit = guiCreateButton(0.825, 0.86, 0.16, 0.06, "Salir del Menu", true, tabOverview)
 			gMOTDLabel = guiCreateLabel(0.015, 0.935, 0.95, 0.15, tostring(motd), true, tabOverview)
 			guiSetFont(gMOTDLabel, "default-bold-small")
 
@@ -364,9 +364,9 @@ function showrespawn()
 	local sx, sy = guiGetScreenSize()
 
 	showrespawnUI = guiCreateWindow(sx/2 - 150,sy/2 - 50,300,100,"Vehicle respawn", false)
-	local lQuestion = guiCreateLabel(0.05,0.25,0.9,0.3,"Are you sure you want to respawn the faction vehicles?",true,showrespawnUI)
+	local lQuestion = guiCreateLabel(0.05,0.25,0.9,0.3,"¿Estás seguro de que quieres reaparecer los vehículos de facción?",true,showrespawnUI)
 	guiLabelSetHorizontalAlign (lQuestion,"center",true)
-	gButtonRespawn = guiCreateButton(0.1,0.65,0.37,0.23,"Yes",true,showrespawnUI)
+	gButtonRespawn = guiCreateButton(0.1,0.65,0.37,0.23,"Si",true,showrespawnUI)
 	gButtonNo = guiCreateButton(0.53,0.65,0.37,0.23,"No",true,showrespawnUI)
 
 	addEventHandler("onClientGUIClick", gButtonRespawn, btRespawnVehicles, false)
@@ -444,9 +444,9 @@ function saveRanks(button, state)
 		end
 
 		if (found) then
-			outputChatBox("Your ranks contain invalid characters, please ensure it does not contain characters such as '@.;", 255, 0, 0)
+			outputChatBox("Sus rangos contienen caracteres no válidos, asegúrese de que no contenga caracteres como '@.;", 255, 0, 0)
 		elseif not (isNumber) then
-			outputChatBox("Your wages are not numbers, please ensure you entered a number and no currency symbol.", 255, 0, 0)
+			outputChatBox("Sus salarios no son números, asegúrese de ingresar un número y ningún símbolo de moneda..", 255, 0, 0)
 		else
 			local sendRanks = { }
 			local sendWages = { }
@@ -491,15 +491,15 @@ function btEditMOTD(button, state)
 			local x = scrWidth/2 - (width/2)
 			local y = scrHeight/2 - (height/2)
 
-			wMOTD = guiCreateWindow(x, y, width, height, "Message of the Day", false)
+			wMOTD = guiCreateWindow(x, y, width, height, "Mensaje del día", false)
 			tMOTD = guiCreateEdit(0.1, 0.2, 0.85, 0.1, tostring(theMotd), true, wMOTD)
 
 			guiSetInputEnabled(true)
 
-			bUpdate = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Update!", true, wMOTD)
+			bUpdate = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Actualizado!", true, wMOTD)
 			addEventHandler("onClientGUIClick", bUpdate, sendMOTD, false)
 
-			bMOTDClose= guiCreateButton(0.1, 0.775, 0.85, 0.15, "Close Window", true, wMOTD)
+			bMOTDClose= guiCreateButton(0.1, 0.775, 0.85, 0.15, "Cerrar Ventana", true, wMOTD)
 			addEventHandler("onClientGUIClick", bMOTDClose, closeMOTD, false)
 
 			triggerEvent("hud:convertUI", localPlayer, wMOTD)
@@ -526,7 +526,7 @@ function sendMOTD(button, state)
 		local found2 = string.find(motd, "'")
 
 		if (found1) or (found2) then
-			outputChatBox("Your message contains invalid characters.", 255, 0, 0)
+			outputChatBox("Su mensaje contiene caracteres no válidos.", 255, 0, 0)
 		else
 			guiSetText(gMOTDLabel, tostring(motd))
 			theMOTD = motd -- Store it clientside
@@ -559,22 +559,22 @@ function btInvitePlayer(button, state)
 			local x = scrWidth/2 - (width/2)
 			local y = scrHeight/2 - (height/2)
 
-			wInvite = guiCreateWindow(x, y, width, height, "Invite a Player", false)
-			tInvite = guiCreateEdit(0.1, 0.2, 0.85, 0.1, "Partial Player Name", true, wInvite)
+			wInvite = guiCreateWindow(x, y, width, height, "Invitar Jugador", false)
+			tInvite = guiCreateEdit(0.1, 0.2, 0.85, 0.1, "Nombre Parcial Jugador", true, wInvite)
 			addEventHandler("onClientGUIChanged", tInvite, checkNameExists)
 
-			lNameCheck = guiCreateLabel(0.1, 0.325, 0.8, 0.3, "Player not found or multiple were found.", true, wInvite)
+			lNameCheck = guiCreateLabel(0.1, 0.325, 0.8, 0.3, "Reproductor no encontrado o se encontraron varios.", true, wInvite)
 			guiSetFont(lNameCheck, "default-bold-small")
 			guiLabelSetColor(lNameCheck, 255, 0, 0)
 			guiLabelSetHorizontalAlign(lNameCheck, "center")
 
 			guiSetInputEnabled(true)
 
-			bInvite = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Invite!", true, wInvite)
+			bInvite = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Invitar!", true, wInvite)
 			guiSetEnabled(bInvite, false)
 			addEventHandler("onClientGUIClick", bInvite, sendInvite, false)
 
-			bCloseInvite = guiCreateButton(0.1, 0.775, 0.85, 0.15, "Close Window", true, wInvite)
+			bCloseInvite = guiCreateButton(0.1, 0.775, 0.85, 0.15, "Cerrar Ventana", true, wInvite)
 			addEventHandler("onClientGUIClick", bCloseInvite, closeInvite, false)
 
 			triggerEvent("hud:convertUI", localPlayer, wInvite)
@@ -615,16 +615,16 @@ function checkNameExists(theEditBox)
 	end
 
 	if (count>1) then
-		guiSetText(lNameCheck, "Multiple Found.")
+		guiSetText(lNameCheck, "Multiples resultados.")
 		guiLabelSetColor(lNameCheck, 255, 255, 0)
 		guiSetEnabled(bInvite, false)
 	elseif (count==1) then
-		guiSetText(lNameCheck, "Player Found. ("..foundstr..")")
+		guiSetText(lNameCheck, "Jugador Encontrado. ("..foundstr..")")
 		guiLabelSetColor(lNameCheck, 0, 255, 0)
 		invitedPlayer = found
 		guiSetEnabled(bInvite, true)
 	elseif (count==0) then
-		guiSetText(lNameCheck, "Player not found or multiple were found.")
+		guiSetText(lNameCheck, "Jugador no encontrado o se encontraron varios.")
 		guiLabelSetColor(lNameCheck, 255, 0, 0)
 		guiSetEnabled(bInvite, false)
 	end
@@ -651,10 +651,10 @@ function btQuitFaction(button, state)
 			--outputChatBox("You must promote someone to lead this faction before quitting. You are the only leader.", 255, 0, 0)
 		--else
 			local sx, sy = guiGetScreenSize()
-			wConfirmQuit = guiCreateWindow(sx/2 - 125,sy/2 - 50,250,100,"Leaving Confirmation", false)
-			local lQuestion = guiCreateLabel(0.05,0.25,0.9,0.3,"Do you really want to leave " .. getTeamName(theTeam) .. "?",true,wConfirmQuit)
+			wConfirmQuit = guiCreateWindow(sx/2 - 125,sy/2 - 50,250,100,"Confirmación de salida", false)
+			local lQuestion = guiCreateLabel(0.05,0.25,0.9,0.3,"¿Realmente quieres irte " .. getTeamName(theTeam) .. "?",true,wConfirmQuit)
 			guiLabelSetHorizontalAlign (lQuestion,"center",true)
-			local bYes = guiCreateButton(0.1,0.65,0.37,0.23,"Yes",true,wConfirmQuit)
+			local bYes = guiCreateButton(0.1,0.65,0.37,0.23,"Si",true,wConfirmQuit)
 			local bNo = guiCreateButton(0.53,0.65,0.37,0.23,"No",true,wConfirmQuit)
 			addEventHandler("onClientGUIClick", getRootElement(),
 				function(button)
@@ -688,10 +688,10 @@ function btKickPlayer(button, state)
 
 			local theTeamName = getTeamName(theTeam)
 
-			outputChatBox("You removed " .. playerName:gsub("_", " ") .. " from the faction '" .. tostring(theTeamName) .. "'.", 0, 255, 0)
+			outputChatBox("Tu eliminaste " .. playerName:gsub("_", " ") .. " de la facción '" .. tostring(theTeamName) .. "'.", 0, 255, 0)
 			triggerServerEvent("cguiKickPlayer", getLocalPlayer(), playerName, faction_tab)
 		else
-			outputChatBox("Please select a member to kick.")
+			outputChatBox("Por favor selecciona un miembro para expulsar.")
 		end
 	end
 end
@@ -701,7 +701,7 @@ function btButtonPerk(button, state)
 		local bPerkActivePlayer = guiGridListGetItemText(gMemberGrid, guiGridListGetSelectedItem(gMemberGrid), 1)
 		local playerName = string.gsub(bPerkActivePlayer, " ", "_")
 		if (playerName == "") then
-			outputChatBox("Please select a member to manage.")
+			outputChatBox("Por favor seleccione un miembro para administrar.")
 			return
 		end
 		triggerServerEvent("Duty:GetPackages", resourceRoot, faction_tab)
@@ -721,7 +721,7 @@ function gotPackages(factionPackages)
 	local x = scrWidth/2 - (width/2)
 	local y = scrHeight/2 - (height/2)
 
-	wPerkWindow = guiCreateWindow(x, y, width, height, "Faction perks for "..playerName, false)
+	wPerkWindow = guiCreateWindow(x, y, width, height, "Beneficios de facción para "..playerName, false)
 
 	local factionPerks = false
 	for k, v in ipairs(arrUsernames) do -- Find the player
@@ -733,7 +733,7 @@ function gotPackages(factionPackages)
 	end
 
 	if not factionPerks then
-		outputChatBox("Failed to load "..playerName.. " his faction perks")
+		outputChatBox("Falló al cargar "..playerName.. " sus ventajas de facción")
 		factionPerks = { }
 	end
 
@@ -756,8 +756,8 @@ function gotPackages(factionPackages)
 		table.insert(bPerkChkTable, tmpChk)
 	end
 
-	bPerkSave = guiCreateButton(0.05, 0.900, 0.9, 0.045, "Save", true, wPerkWindow)
-	bPerkClose = guiCreateButton(0.05, 0.950, 0.9, 0.045, "Close", true, wPerkWindow)
+	bPerkSave = guiCreateButton(0.05, 0.900, 0.9, 0.045, "Guardar", true, wPerkWindow)
+	bPerkClose = guiCreateButton(0.05, 0.950, 0.9, 0.045, "Cerrar", true, wPerkWindow)
 	addEventHandler("onClientGUIClick", bPerkSave,
 		function (button, state)
 			if (source == bPerkSave) and (button=="left") and (state=="up") then
@@ -800,7 +800,7 @@ function btRespawnOneVehicle(button, state)
 		if vehID then
 			triggerServerEvent("cguiRespawnOneVehicle", getLocalPlayer(), vehID, faction_tab)
 		else
-			outputChatBox("Please select a vehicle to respawn.", 255, 0, 0)
+			outputChatBox("Selecciona un vehículo para reaparecer..", 255, 0, 0)
 		end
 	end
 end
@@ -821,7 +821,7 @@ function btPhoneNumber(button, state)
 				local x = scrWidth/2 - (width/2)
 				local y = scrHeight/2 - (height/2)
 
-				wPhone = guiCreateWindow(x, y, width, height, "Phone Number", false)
+				wPhone = guiCreateWindow(x, y, width, height, "Numero Telefono", false)
 				tPhone = guiCreateEdit(0.3, 0.325, 0.85, 0.1, currentPhone, true, wPhone)
 				guiSetProperty(tPhone, "ValidationString","[0-9]{0,2}")
 
@@ -830,14 +830,14 @@ function btPhoneNumber(button, state)
 				guiSetFont(tPre, "default-bold-small")
 				guiLabelSetVerticalAlign(tPre, "center")
 
-				guiCreateLabel(0.1, 0.2, 0.8, 0.08, "Phone number for " .. playerName .. ":", true, wPhone)
+				guiCreateLabel(0.1, 0.2, 0.8, 0.08, "Número de teléfono para " .. playerName .. ":", true, wPhone)
 
 				guiSetInputEnabled(true)
 
-				bSet = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Assign Phone No.", true, wPhone)
+				bSet = guiCreateButton(0.1, 0.6, 0.85, 0.15, "Asignar Nro Telefono.", true, wPhone)
 				addEventHandler("onClientGUIClick", bSet, setPhoneNumber, false)
 
-				bClosePhone = guiCreateButton(0.1, 0.775, 0.85, 0.15, "Close Window", true, wPhone)
+				bClosePhone = guiCreateButton(0.1, 0.775, 0.85, 0.15, "Cerrar Ventana", true, wPhone)
 				addEventHandler("onClientGUIClick", bClosePhone, closePhone, false)
 
 
@@ -850,7 +850,7 @@ function btPhoneNumber(button, state)
 				guiBringToFront(wPhone)
 			end
 		else
-			outputChatBox("Please select a member to toggle leader on.")
+			outputChatBox("Seleccione un miembro para activar el liderazgo.")
 		end
 	end
 end
@@ -871,7 +871,7 @@ function setPhoneNumber(button, state)
 	elseif #text and num then
 		guiGridListSetItemText(gMemberGrid, guiGridListGetSelectedItem(gMemberGrid), colPhone, tostring(tmpPhone) .. "-" .. ("%02d"):format(num), false, true)
 	else
-		return "Invalid Format"
+		return "Formato Invalido"
 	end
 	local playerName = guiGridListGetItemText(gMemberGrid, guiGridListGetSelectedItem(gMemberGrid), 1):gsub(" ", "_")
 
@@ -898,7 +898,7 @@ function btPromotePlayer(button, state)
 		local playerName = string.gsub(guiGridListGetItemText(gMemberGrid, guiGridListGetSelectedItem(gMemberGrid), 1), " ", "_")
 		local currentRank = guiGridListGetItemText(gMemberGrid, row, 2)
 		if (playerName == "") then
-			outputChatBox("Select the player you wish to change the rank of first.", 255, 125, 0)
+			outputChatBox("Selecciona el jugador cuyo rango deseas cambiar primero.", 255, 125, 0)
 			return
 		end
 		triggerServerEvent("faction-system.showChangeRankGUI", resourceRoot, playerName, faction_tab)
@@ -917,21 +917,21 @@ function setPromotionRanks(rankTbl, rankName, playerName)
 		local wX, wY = 210, 316
 		local sX, sY, wX, wY = (sX/2)-(wX/2),(sY/2)-(wY/2),wX,wY
 		-- sX, sY, wX, wY = 699, 287, 210, 316
-		wPromotions = guiCreateWindow(sX, sY, wX, wY, "Change Faction Rank", false)
+		wPromotions = guiCreateWindow(sX, sY, wX, wY, "Cambiar rango de facción", false)
 		guiWindowSetSizable(wPromotions, false)
 		-- Labels
-		lPromotions1 = guiCreateLabel(14, 26, 150, 15, "Selected Member:", false, wPromotions)
+		lPromotions1 = guiCreateLabel(14, 26, 150, 15, "Selecciona Miembro:", false, wPromotions)
 		lPromotions2 = guiCreateLabel(13, 45, 182, 15, playerName, false, wPromotions)
 		guiLabelSetHorizontalAlign(lPromotions2, "center", false)
-		lPromotions3 = guiCreateLabel(14, 65, 89, 15, "Current Rank:", false, wPromotions)
+		lPromotions3 = guiCreateLabel(14, 65, 89, 15, "Rango Actual:", false, wPromotions)
 		lPromotions4 = guiCreateLabel(13, 85, 182, 15, currentRank, false, wPromotions)
 		guiLabelSetHorizontalAlign(lPromotions4, "center", false)
 		-- Gridlist
 		promotionsGridlist = guiCreateGridList(9, 105, 192, 168, false, wPromotions)
-		guiGridListAddColumn(promotionsGridlist, "Rank List", 0.9)
+		guiGridListAddColumn(promotionsGridlist, "Lista Rango", 0.9)
 		-- Button
-		bPromotionsUpdate = guiCreateButton(9, 280, 93, 27, "Update Rank", false, wPromotions)
-		bPromotionsCancel = guiCreateButton(112, 280, 89, 27, "Cancel", false, wPromotions)
+		bPromotionsUpdate = guiCreateButton(9, 280, 93, 27, "Actualizar Rango", false, wPromotions)
+		bPromotionsCancel = guiCreateButton(112, 280, 89, 27, "Cancelar", false, wPromotions)
 		for i,rank in ipairs(rankTbl) do
 			local row = guiGridListAddRow(promotionsGridlist)
 			guiGridListSetItemText(promotionsGridlist, row, 1, rank[2], false, false)
@@ -941,7 +941,7 @@ function setPromotionRanks(rankTbl, rankName, playerName)
 		addEventHandler("onClientGUIClick", bPromotionsCancel, function() destroyElement(wPromotions) end, false)
 		triggerEvent("hud:convertUI", localPlayer, wPromotions)
 	else
-		outputChatBox("Please select a member to promote / demote.", 255, 0, 0)
+		outputChatBox("Por favor seleccione un miembro para ascender/desgradar.", 255, 0, 0)
 	end
 end
 addEvent("faction-system.showChangeRankGUI", true)
@@ -954,7 +954,7 @@ function saveNewRank()
 	
 	local row = guiGridListGetSelectedItem(promotionsGridlist)
 	if (not row or row == -1) then
-		outputChatBox("Select a rank that you want to set this person's rank to.", 255, 125, 0)
+		outputChatBox("Seleccione el rango en el que desea establecer el rango de esta persona.", 255, 125, 0)
 		return
 	end
 		
@@ -1021,23 +1021,23 @@ function loadFaction(tab)
 	end
 
 	tabs = guiCreateTabPanel(0.008, 0.01, 0.985, 0.97, true, tab)
-	tabOverview = guiCreateTab("Overview", tabs)
+	tabOverview = guiCreateTab("Descripción general", tabs)
 	-- Make members list
 	gMemberGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabOverview)
-	colName = guiGridListAddColumn(gMemberGrid, "Name", 0.20)
-	colRank = guiGridListAddColumn(gMemberGrid, "Rank", 0.20)
-	colOnline = guiGridListAddColumn(gMemberGrid, "Status", 0.115)
-	colLastLogin = guiGridListAddColumn(gMemberGrid, "Last Login", 0.13)
+	colName = guiGridListAddColumn(gMemberGrid, "Nombre", 0.20)
+	colRank = guiGridListAddColumn(gMemberGrid, "Rango", 0.20)
+	colOnline = guiGridListAddColumn(gMemberGrid, "Estado", 0.115)
+	colLastLogin = guiGridListAddColumn(gMemberGrid, "Ultima Conexión", 0.13)
 
 	-- Some buttons
-	gButtonQuit = guiCreateButton(0.825, 0.7834, 0.16, 0.06, "Leave Faction", true, tabOverview)
-	gButtonExit = guiCreateButton(0.825, 0.86, 0.16, 0.06, "Exit Menu", true, tabOverview)
+	gButtonQuit = guiCreateButton(0.825, 0.7834, 0.16, 0.06, "Dejar Facción", true, tabOverview)
+	gButtonExit = guiCreateButton(0.825, 0.86, 0.16, 0.06, "Salir al Menu", true, tabOverview)
 	addEventHandler("onClientGUIClick", gButtonQuit, btQuitFaction, false)
 	addEventHandler("onClientGUIClick", gButtonExit, hideFactionMenu, false)
 
 	triggerServerEvent("faction:loadFaction", resourceRoot, getElementData(tab, "factionID"))
 	faction_tab = getElementData(tab, "factionID")
-	guiSetText(tab, "Loading...")
+	guiSetText(tab, "Cargando...")
 end
 
 function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, memberLeaders, memberOnline, memberLastLogin, factionRanks, factionWages, factionTheTeam, note, fnote, vehicleIDs, vehicleModels, vehiclePlates, vehicleLocations, memberOnDuty, towstats, phone, membersPhone, fromShowF, factionID, properties, factionRankID, rankOrder)
@@ -1065,16 +1065,16 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 
 	local factionType = tonumber(getElementData(theTeam, "type"))
 	if (factionType==2) or (factionType==3) or (factionType==4) or (factionType==5) or (factionType==6) or (factionType==7) then -- Added Mechanic type \ Adams
-		colWage = guiGridListAddColumn(gMemberGrid, "Wage ($)", 0.06)
+		colWage = guiGridListAddColumn(gMemberGrid, "Salario ($)", 0.06)
 	end
 
 	if phone then
-		colPhone = guiGridListAddColumn(gMemberGrid, "Phone No.", 0.08)
+		colPhone = guiGridListAddColumn(gMemberGrid, "N° Telefono.", 0.08)
 	end
 
 	local factionPackages = exports.duty:getFactionPackages(factionID)
 	if factionPackages and factionType >= 2 then
-		colDuty = guiGridListAddColumn(gMemberGrid, "Duty", 0.06)
+		colDuty = guiGridListAddColumn(gMemberGrid, "Servicio", 0.06)
 	end
 
 	local localPlayerIsLeader = nil
@@ -1092,16 +1092,16 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 				guiGridListSetItemText(gMemberGrid, row, colRank, tostring(rankName), false, false)
 				guiGridListSetItemData(gMemberGrid, row, colRank, tostring(theRank))
 		
-				local login = "Never"
+				local login = "Nunca"
 				if (not memberLastLogin[x]) then
-					login = "Never"
+					login = "Nunca"
 				else
 					if (memberLastLogin[x]==0) then
-						login = "Today"
+						login = "Hoy"
 					elseif (memberLastLogin[x]==1) then
-						login = tostring(memberLastLogin[x]) .. " day ago"
+						login = tostring(memberLastLogin[x]) .. " día"
 					else
-						login = tostring(memberLastLogin[x]) .. " days ago"
+						login = tostring(memberLastLogin[x]) .. " días"
 					end
 				end
 				guiGridListSetItemText(gMemberGrid, row, colLastLogin, login, false, false)
@@ -1113,11 +1113,11 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 				end
 				
 				if (memberOnline[x]) then
-					guiGridListSetItemText(gMemberGrid, row, colOnline, "Online", false, false)
+					guiGridListSetItemText(gMemberGrid, row, colOnline, "Conectado", false, false)
 					guiGridListSetItemColor(gMemberGrid, row, colOnline, 0, 255, 0)
 					counterOnline = counterOnline + 1
 				else
-					guiGridListSetItemText(gMemberGrid, row, colOnline, "Offline", false, false)
+					guiGridListSetItemText(gMemberGrid, row, colOnline, "Desconectado", false, false)
 					guiGridListSetItemColor(gMemberGrid, row, colOnline, 255, 0, 0)
 					counterOffline = counterOffline + 1
 				end
@@ -1131,10 +1131,10 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 				
 				if colDuty then
 					if memberOnDuty[x] then
-						guiGridListSetItemText(gMemberGrid, row, colDuty, "On duty", false, false)
+						guiGridListSetItemText(gMemberGrid, row, colDuty, "En Servicio", false, false)
 						guiGridListSetItemColor(gMemberGrid, row, colDuty, 0, 255, 0)
 					else
-						guiGridListSetItemText(gMemberGrid, row, colDuty, "Off duty", false, false)
+						guiGridListSetItemText(gMemberGrid, row, colDuty, "Fuera de Servicio", false, false)
 						guiGridListSetItemColor(gMemberGrid, row, colDuty, 255, 0, 0)
 					end
 				end
@@ -1153,70 +1153,70 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 	membersOffline = counterOffline
 
 	-- Update the window title
-	guiSetText(ftab[factionID], tostring(teamName) .. " (" .. counterOnline .. " of " .. (counterOnline+counterOffline) .. " Members Online)")
+	guiSetText(ftab[factionID], tostring(teamName) .. " (" .. counterOnline .. " de " .. (counterOnline+counterOffline) .. " Miembros en Linea)")
 
 	-- Make the buttons
 
 		-- Make the buttons
 		if (hasMemberPermissionTo(localPlayer, factionID, "del_member")) then
-			gButtonKick = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Boot Member", true, tabOverview)
+			gButtonKick = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Expulsar Miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonKick, btKickPlayer, false)
 		end	
 
 		if (hasMemberPermissionTo(localPlayer, factionID, "change_member_rank")) then
-			gButtonPromote = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Promote/Demote Member", true, tabOverview)
+			gButtonPromote = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Promocionar/Degradar miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonPromote, btPromotePlayer, false)	
 		end
 		
 		if (factionType==2) or (factionType==3) or (factionType==4) or (factionType==5) or (factionType==6) or (factionType==7) then -- Added Mechanic type \ Adams
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_ranks")) then
-				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Edit Ranks and Wages", true, tabOverview)
+				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Editar rangos y salarios", true, tabOverview)
 				addEventHandler("onClientGUIClick", gButtonEditRanks, btEditRanks, false)
 			end	
 		else
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_ranks")) then
-				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Edit Ranks", true, tabOverview)
+				gButtonEditRanks = guiCreateButton(0.825, 0.2292, 0.16, 0.06, "Editar Rangos", true, tabOverview)
 				addEventHandler("onClientGUIClick", gButtonEditRanks, btEditRanks, false)
 			end	
 		end
 
 		if (hasMemberPermissionTo(localPlayer, factionID, "edit_motd")) then
-			gButtonEditMOTD = guiCreateButton(0.825, 0.3058, 0.16, 0.06, "Edit MOTD", true, tabOverview)
+			gButtonEditMOTD = guiCreateButton(0.825, 0.3058, 0.16, 0.06, "Editar MOTD", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonEditMOTD, btEditMOTD, false)
 		end	
 		
 		if (hasMemberPermissionTo(localPlayer, factionID, "add_member")) then
-			gButtonInvite = guiCreateButton(0.825, 0.3824, 0.16, 0.06, "Invite Member", true, tabOverview)
+			gButtonInvite = guiCreateButton(0.825, 0.3824, 0.16, 0.06, "Invitar Miembro", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonInvite, btInvitePlayer, false)
 		end	
 
 		local _y = 0.5356
 		if phone then
-			gAssignPhone = guiCreateButton(0.825, _y, 0.16, 0.06, "Phone No.", true, tabOverview)
+			gAssignPhone = guiCreateButton(0.825, _y, 0.16, 0.06, "N° Telefono.", true, tabOverview)
 			addEventHandler("onClientGUIClick", gAssignPhone, btPhoneNumber, false)
 			_y = _y + 0.0766
 		end
 
 		if factionType >= 2 then 
 			if (hasMemberPermissionTo(localPlayer, factionID, "set_member_duty")) then
-				gButtonPerk = guiCreateButton(0.825, _y, 0.16, 0.06, "Manage Duty Perks", true, tabOverview)
+				gButtonPerk = guiCreateButton(0.825, _y, 0.16, 0.06, "Ajustar Ubicaciones Duty", true, tabOverview)
 				addEventHandler("onClientGUIClick", gButtonPerk, btButtonPerk, false)
 			end	
 		end
 		if (hasMemberPermissionTo(localPlayer, factionID, "respawn_vehs")) then
-			gButtonRespawnui = guiCreateButton(0.825, 0.459, 0.16, 0.06, "Respawn Vehicles", true, tabOverview)
+			gButtonRespawnui = guiCreateButton(0.825, 0.459, 0.16, 0.06, "Respawnear Vehiculos", true, tabOverview)
 			addEventHandler("onClientGUIClick", gButtonRespawnui, showrespawn, false)
 
-			tabVehicles = guiCreateTab("(Leader) Vehicles", tabs)
+			tabVehicles = guiCreateTab("(Lider) Vehiculos", tabs)
 
 			gVehicleGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabVehicles)
 
 			colVehID = guiGridListAddColumn(gVehicleGrid, "ID (VIN)", 0.1)
-			colVehModel = guiGridListAddColumn(gVehicleGrid, "Model", 0.30)
-			colVehPlates = guiGridListAddColumn(gVehicleGrid, "Plate", 0.1)
-			colVehLocation = guiGridListAddColumn(gVehicleGrid, "Location", 0.4)
-			gButtonVehRespawn = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Respawn Vehicle", true, tabVehicles)
-			gButtonAllVehRespawn = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Respawn All Vehicles", true, tabVehicles)
+			colVehModel = guiGridListAddColumn(gVehicleGrid, "Modelo", 0.30)
+			colVehPlates = guiGridListAddColumn(gVehicleGrid, "Placa", 0.1)
+			colVehLocation = guiGridListAddColumn(gVehicleGrid, "Ubicación", 0.4)
+			gButtonVehRespawn = guiCreateButton(0.825, 0.076, 0.16, 0.06, "Respawnear Vehiculo", true, tabVehicles)
+			gButtonAllVehRespawn = guiCreateButton(0.825, 0.1526, 0.16, 0.06, "Respawnear todos los Vehiculos", true, tabVehicles)
 
 			for index, vehID in ipairs(vehicleIDs) do
 				local row = guiGridListAddRow(gVehicleGrid)
@@ -1230,13 +1230,13 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 		end	
 
 		if (hasMemberPermissionTo(localPlayer, factionID, "manage_interiors")) then
-			tabProperties = guiCreateTab("(Leader) Properties", tabs)
+			tabProperties = guiCreateTab("(Lider) Propiedades", tabs)
 
 			gPropertyGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabProperties)
 
 			colProID = guiGridListAddColumn(gPropertyGrid, "ID", 0.1)
-			colName = guiGridListAddColumn(gPropertyGrid, "Name", 0.30)
-			colProLocation = guiGridListAddColumn(gPropertyGrid, "Location", 0.4)
+			colName = guiGridListAddColumn(gPropertyGrid, "Nombre", 0.30)
+			colProLocation = guiGridListAddColumn(gPropertyGrid, "Ubicación", 0.4)
 
 			for index, int in ipairs(properties) do
 				local row = guiGridListAddRow(gPropertyGrid)
@@ -1247,26 +1247,26 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 		end	
 
 		if (hasMemberPermissionTo(localPlayer, factionID, "modify_factionl_note")) then
-			tabNote = guiCreateTab("(Leader) Note", tabs)
+			tabNote = guiCreateTab("(Leader) Nota", tabs)
 			eNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, note or "", true, tabNote)
-			gButtonSaveNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Save", true, tabNote)
+			gButtonSaveNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Guardar", true, tabNote)
 			addEventHandler("onClientGUIClick", gButtonSaveNote, btUpdateNote, false)
 		end	
 
 		-- towstats
 		if towstats then
 			if (hasMemberPermissionTo(localPlayer, factionID, "see_towstats")) then
-				tabTowstats = guiCreateTab("(Leader) Towstats", tabs)
+				tabTowstats = guiCreateTab("(Leader) Remolque Estadisticas", tabs)
 				gTowGrid = guiCreateGridList(0.01, 0.015, 0.8, 0.905, true, tabTowstats)
 				local totals = {[0] = 0, [-1] = 0, [-2] = 0, [-3] = 0, [-4] = 0}
-				local colName = guiGridListAddColumn(gTowGrid, 'Name', 0.2)
-				local colRank = guiGridListAddColumn(gTowGrid, 'Rank', 0.2)
+				local colName = guiGridListAddColumn(gTowGrid, 'Nombre', 0.2)
+				local colRank = guiGridListAddColumn(gTowGrid, 'Rango', 0.2)
 				local cols = {
-					[0] = guiGridListAddColumn(gTowGrid, 'this week', 0.1),
-					[-1] = guiGridListAddColumn(gTowGrid, 'last week', 0.1),
-					[-2] = guiGridListAddColumn(gTowGrid, '2 weeks ago', 0.1),
-					[-3] = guiGridListAddColumn(gTowGrid, '3 weeks ago', 0.1),
-					[-4] = guiGridListAddColumn(gTowGrid, '4 weeks ago', 0.1)
+					[0] = guiGridListAddColumn(gTowGrid, 'esta semana', 0.1),
+					[-1] = guiGridListAddColumn(gTowGrid, 'anterior semana', 0.1),
+					[-2] = guiGridListAddColumn(gTowGrid, '2 semanas', 0.1),
+					[-3] = guiGridListAddColumn(gTowGrid, '3 semanas', 0.1),
+					[-4] = guiGridListAddColumn(gTowGrid, '4 semanas', 0.1)
 				}
 				for k, v in ipairs(memberUsernames) do
 					local row = guiGridListAddRow(gTowGrid)
@@ -1281,7 +1281,7 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 					end
 				end
 				local row = guiGridListAddRow(gTowGrid)
-				guiGridListSetItemText(gTowGrid, row, colName, "Totals", true, false)
+				guiGridListSetItemText(gTowGrid, row, colName, "Totales", true, false)
 				for week, col in pairs(cols) do
 					guiGridListSetItemText(gTowGrid, row, col, tostring(totals[week] or 0), true, true)
 				end
@@ -1291,26 +1291,26 @@ function fillFactionMenu(motd, memberUsernames, memberRanks, memberPerks, member
 
 		-- for faction-wide note
 		if hasMemberPermissionTo(localPlayer, factionID, "modify_faction_note") then
-			tabFNote = guiCreateTab("Note", tabs)
+			tabFNote = guiCreateTab("Nota", tabs)
 			fNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, fnote or "", true, tabFNote)
 			guiMemoSetReadOnly(fNote, false)
 
-			gButtonSaveFNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Save", true, tabFNote)
+			gButtonSaveFNote = guiCreateButton(0.79, 0.90, 0.2, 0.08, "Guardar", true, tabFNote)
 			addEventHandler("onClientGUIClick", gButtonSaveFNote, btUpdateFNote, false)
 		else -- for faction-wide note
-			tabFNote = guiCreateTab("Note", tabs)
+			tabFNote = guiCreateTab("Nota", tabs)
 			fNote = guiCreateMemo(0.01, 0.02, 0.98, 0.87, fnote or "", true, tabFNote)
 			guiMemoSetReadOnly(fNote, true)
 		end	
 
 		if hasMemberPermissionTo(localPlayer, factionID, "manage_finance") then
-			tabFinance = guiCreateTab("(Leader) Finance", tabs)
+			tabFinance = guiCreateTab("(Leader) Finanza", tabs)
 			addEventHandler("onClientGUITabSwitched", tabFinance, loadFinance)
 		end	
 
 		if factionType >= 2 then
 			if (hasMemberPermissionTo(localPlayer, factionID, "modify_duty_settings")) then	
-				tabDuty = guiCreateTab("(Leader) Duty Settings", tabs)
+				tabDuty = guiCreateTab("(Leader) Ajustes Servicio", tabs)
 				addEventHandler("onClientGUITabSwitched", tabDuty, createDutyMain)
 			end
 		end
@@ -1419,7 +1419,7 @@ end
 function loadFinance()
 	if source == tabFinance then
 		if not financeLoaded then
-			local label = guiCreateLabel(0,0,1,1,"Loading...",true,tabFinance)
+			local label = guiCreateLabel(0,0,1,1,"Cargando...",true,tabFinance)
 			guiLabelSetHorizontalAlign(label, "center", false)
 			guiLabelSetVerticalAlign(label, "center")
 			triggerServerEvent("factionmenu:getFinance", getResourceRootElement(), faction_tab)

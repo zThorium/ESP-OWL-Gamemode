@@ -55,28 +55,28 @@ function openMotdManager(motdList1)
         end
     else
         showCursor(true)
-        GUIEditor.window[1] = guiCreateWindow(412, 210, 800, 354, "MOTD - Message of the Day", false)
+        GUIEditor.window[1] = guiCreateWindow(412, 210, 800, 354, "MOTD - Mensaje del Dia", false)
         guiWindowSetSizable(GUIEditor.window[1], false)
         exports.global:centerWindow(GUIEditor.window[1])
 
         GUIEditor.gridlist[1] = guiCreateGridList(9, 28, 781, 276, false, GUIEditor.window[1])
         
-        GUIEditor.gridcol.title = guiGridListAddColumn(GUIEditor.gridlist[1], "MOTD Title", 0.3)
-        GUIEditor.gridcol.audiences = guiGridListAddColumn(GUIEditor.gridlist[1], "Audiences", 0.3)
-        GUIEditor.gridcol.expiration_date = guiGridListAddColumn(GUIEditor.gridlist[1], "Expiration Date", 0.25)
-        GUIEditor.gridcol.dismissable = guiGridListAddColumn(GUIEditor.gridlist[1], "Dismissable", 0.05)
-        GUIEditor.gridcol.author =  guiGridListAddColumn(GUIEditor.gridlist[1], "Author", 0.1)
-        GUIEditor.gridcol.creation_date = guiGridListAddColumn(GUIEditor.gridlist[1], "Creation Date", 0.2)
+        GUIEditor.gridcol.title = guiGridListAddColumn(GUIEditor.gridlist[1], "MOTD Titulo", 0.3)
+        GUIEditor.gridcol.audiences = guiGridListAddColumn(GUIEditor.gridlist[1], "Audiencia", 0.3)
+        GUIEditor.gridcol.expiration_date = guiGridListAddColumn(GUIEditor.gridlist[1], "Fecha Expiración", 0.25)
+        GUIEditor.gridcol.dismissable = guiGridListAddColumn(GUIEditor.gridlist[1], "Desestimable", 0.05)
+        GUIEditor.gridcol.author =  guiGridListAddColumn(GUIEditor.gridlist[1], "Autor", 0.1)
+        GUIEditor.gridcol.creation_date = guiGridListAddColumn(GUIEditor.gridlist[1], "Fecha de Creacion", 0.2)
         GUIEditor.gridcol.id = guiGridListAddColumn(GUIEditor.gridlist[1], "ID", 0.05)
 
-        GUIEditor.button[1] = guiCreateButton(10, 314, 388, 30, "Create new MOTD", false, GUIEditor.window[1])
+        GUIEditor.button[1] = guiCreateButton(10, 314, 388, 30, "Crear nuevo MOTD", false, GUIEditor.window[1])
         guiSetFont(GUIEditor.button[1], "default-bold-small")
         addEventHandler("onClientGUIClick", GUIEditor.button[1], function()
             if source == GUIEditor.button[1] then
                 createNewMotd()
             end
         end)
-        GUIEditor.button[2] = guiCreateButton(402, 314, 388, 30, "Close", false, GUIEditor.window[1])
+        GUIEditor.button[2] = guiCreateButton(402, 314, 388, 30, "Cerrar", false, GUIEditor.window[1])
         guiSetFont(GUIEditor.button[2], "default-bold-small")    
         addEventHandler("onClientGUIClick", GUIEditor.button[2], function()
         	if source == GUIEditor.button[2] then
@@ -85,7 +85,7 @@ function openMotdManager(motdList1)
         end)
         if not motdList then
             guiSetVisible(GUIEditor.gridlist[1], false)
-            GUIEditor.label["loading"] = guiCreateLabel(9, 28, 781, 276, "Loading..\n\nTIPS: Double click to edit, double right click to delete.", false, GUIEditor.window[1])
+            GUIEditor.label["loading"] = guiCreateLabel(9, 28, 781, 276, "Cargando..\n\nCONSEJO: Doble clic para editar, doble clic derecho para eliminar.", false, GUIEditor.window[1])
             guiLabelSetHorizontalAlign(GUIEditor.label["loading"], "center", false)
             guiLabelSetVerticalAlign(GUIEditor.label["loading"], "center")
             guiSetEnabled(GUIEditor.button[1], false)
@@ -121,13 +121,13 @@ function deleteMOTD(motdId)
     if GUIEditor.window[1] and isElement(GUIEditor.window[1]) then
         guiSetEnabled(GUIEditor.window[1], false)
     end 
-    GUIEditor.window[3] = guiCreateWindow(684, 373, 339, 137, "Confirmation", false)
+    GUIEditor.window[3] = guiCreateWindow(684, 373, 339, 137, "Confirmación", false)
     guiWindowSetSizable(GUIEditor.window[3], false)
     exports.global:centerWindow(GUIEditor.window[3])
     local motd = getMotdFromId(motdId)
-    GUIEditor.label[100] = guiCreateLabel(14, 25, 315, 63, "You're about to delete MOTD ID #"..motdId.." made by "..motd.author.." on "..motd.creation_date..".\nThis action can not be undone, are you sure you want to proceed?", false, GUIEditor.window[3])
+    GUIEditor.label[100] = guiCreateLabel(14, 25, 315, 63, "Estás a punto de eliminar el ID de MOTD #"..motdId.." hecho por "..motd.author.." en "..motd.creation_date..".\nEsta acción no se puede deshacer. ¿Estás seguro de que deseas continuar?", false, GUIEditor.window[3])
     guiLabelSetHorizontalAlign(GUIEditor.label[100], "left", true)
-    GUIEditor.button[101] = guiCreateButton(15, 97, 153, 25, "Yes", false, GUIEditor.window[3])
+    GUIEditor.button[101] = guiCreateButton(15, 97, 153, 25, "Si", false, GUIEditor.window[3])
     GUIEditor.button[102] = guiCreateButton(168, 97, 153, 25, "No", false, GUIEditor.window[3])
     addEventHandler("onClientGUIClick", GUIEditor.button[101], function()
         if source == GUIEditor.button[101] then
@@ -176,16 +176,16 @@ function createNewMotd(motdId)
     local yExtend = count*aHeight - aHeight*12
     if yExtend < 0 then yExtend = 0 end
 
-    GUIEditor.window[2] = guiCreateWindow(611, 279, 800, 354+yExtend, motdId and ("Edit MOTD ID #"..motdId) or "Create new MOTD", false)
+    GUIEditor.window[2] = guiCreateWindow(611, 279, 800, 354+yExtend, motdId and ("Editar MOTD ID #"..motdId) or "Crear Nuevo MOTD", false)
     guiWindowSetSizable(GUIEditor.window[2], false)
     exports.global:centerWindow(GUIEditor.window[2])
     
-    GUIEditor.label[1] = guiCreateLabel(17, 34, 81, 29, "Title:", false, GUIEditor.window[2])
+    GUIEditor.label[1] = guiCreateLabel(17, 34, 81, 29, "Titulo:", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.label[1], "default-bold-small")
     guiLabelSetVerticalAlign(GUIEditor.label[1], "center")
     GUIEditor.edit[1] = guiCreateEdit(98, 34, 438, 29, motd and motd.title or "", false, GUIEditor.window[2])
     guiEditSetMaxLength(GUIEditor.edit[1], 70)
-    GUIEditor.label[2] = guiCreateLabel(17, 63, 81, 29, "Content:", false, GUIEditor.window[2])
+    GUIEditor.label[2] = guiCreateLabel(17, 63, 81, 29, "Contenido:", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.label[2], "default-bold-small")
     guiLabelSetVerticalAlign(GUIEditor.label[2], "center")
     GUIEditor.memo[1] = guiCreateMemo(16, 97, 520, 240, motd and motd.content or "", false, GUIEditor.window[2])
@@ -193,23 +193,23 @@ function createNewMotd(motdId)
     guiLabelSetColor ( GUIEditor.label[3], 255,0,0 )
     guiLabelSetHorizontalAlign(GUIEditor.label[3], "center", false)
     guiLabelSetVerticalAlign(GUIEditor.label[3], "center")
-    GUIEditor.label[4] = guiCreateLabel(554, 34, 65, 29, "Expire in:", false, GUIEditor.window[2])
+    GUIEditor.label[4] = guiCreateLabel(554, 34, 65, 29, "Expira en:", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.label[4], "default-bold-small")
     guiLabelSetVerticalAlign(GUIEditor.label[4], "center")
-    GUIEditor.combobox[1] = guiCreateComboBox(615, 37, 165, 22, "Never", false, GUIEditor.window[2])
+    GUIEditor.combobox[1] = guiCreateComboBox(615, 37, 165, 22, "Nunca", false, GUIEditor.window[2])
     guiComboBoxAddItem(GUIEditor.combobox[1], "Never")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "1 day")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "2 days")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "3 days")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "1 week")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "2 weeks")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "1 month")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "2 months")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "6 months")
-    guiComboBoxAddItem(GUIEditor.combobox[1], "1 year")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "1 dia")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "2 dias")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "3 dias")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "1 semana")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "2 semanas")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "1 mes")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "2 meses")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "6 meses")
+    guiComboBoxAddItem(GUIEditor.combobox[1], "1 año")
     exports.global:guiComboBoxAdjustHeight(GUIEditor.combobox[1], 9)
 
-    GUIEditor.checkbox[1] = guiCreateCheckBox(689, 73, 91, 13, "Dismissable", false, false, GUIEditor.window[2])
+    GUIEditor.checkbox[1] = guiCreateCheckBox(689, 73, 91, 13, "Desestimable", false, false, GUIEditor.window[2])
     guiSetFont(GUIEditor.checkbox[1], "default-bold-small")
     if motd and motd.dismissable == "0" then
         guiCheckBoxSetSelected(GUIEditor.checkbox[1], false)
@@ -217,7 +217,7 @@ function createNewMotd(motdId)
         guiCheckBoxSetSelected(GUIEditor.checkbox[1], true)
     end
 
-    GUIEditor.label[5] = guiCreateLabel(554, 63, 65, 29, "Audience:", false, GUIEditor.window[2])
+    GUIEditor.label[5] = guiCreateLabel(554, 63, 65, 29, "Audiencia:", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.label[5], "default-bold-small")
     guiLabelSetVerticalAlign(GUIEditor.label[5], "center")
 
@@ -254,11 +254,11 @@ function createNewMotd(motdId)
     local curWinW, curWinH = guiGetSize(GUIEditor.memo[1], false)
     guiSetSize(GUIEditor.memo[1], curWinW, curWinH+yExtend, false)
 
-	GUIEditor.button[5] = guiCreateButton(669, 288+yExtend, 111, 22, "Delete", false, GUIEditor.window[2])
+	GUIEditor.button[5] = guiCreateButton(669, 288+yExtend, 111, 22, "Borrar", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.button[5], "default-bold-small")
-    GUIEditor.button[4] = guiCreateButton(554, 315+yExtend, 111, 22, "Close", false, GUIEditor.window[2])
+    GUIEditor.button[4] = guiCreateButton(554, 315+yExtend, 111, 22, "Cerrar", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.button[4], "default-bold-small")
-    GUIEditor.button[3] = guiCreateButton(669, 315+yExtend, 111, 22, "Save", false, GUIEditor.window[2])
+    GUIEditor.button[3] = guiCreateButton(669, 315+yExtend, 111, 22, "Guardar", false, GUIEditor.window[2])
     guiSetFont(GUIEditor.button[3], "default-bold-small")
 
     addEventHandler("onClientGUIClick", GUIEditor.window[2], function()
@@ -287,17 +287,17 @@ function createNewMotd(motdId)
                     closeNewMotd()
                     exports.global:playSoundSuccess()
                 else
-                    guiSetText(GUIEditor.label[3], "Please select at least one target audience group.")
+                    guiSetText(GUIEditor.label[3], "Seleccione al menos un grupo de audiencia objetivo.")
                 end
             else
-                guiSetText(GUIEditor.label[3], "Please enter Title and Content.")
+                guiSetText(GUIEditor.label[3], "Por favor ingrese Título y Contenido.")
             end
 		elseif source == GUIEditor.button[5] then
 			if confirm then
 				triggerServerEvent("deleteMOTD", localPlayer, motdId)
 				closeNewMotd()
 			else	
-				guiSetText(GUIEditor.button[5], "Are you sure?")
+				guiSetText(GUIEditor.button[5], "Estas seguro")
 				confirm = true
 			end
         end

@@ -18,7 +18,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 		local hit, _, _, _, _, _, _, _, mat, _, _, buildingId, bx, by, bz = unpack(x)
 		if hit and isElement(buildingId) then
 			element = buildingId
-			outputDebugString("Used hack to get hidden element")
+			outputDebugString("Hack usado para obtener elementos ocultos.")
 		end
 	end
 	if (element) and (getElementType(element)=="ped") and (button=="right") and (state=="down") and (sent==false) and (element~=getLocalPlayer()) then
@@ -387,17 +387,17 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 				elseif string.find(interact, "paintball") then
 					rcMenu = exports.rightclick:create(name)
 					if (interact == "paintball.feedback") then
-						row.talk = exports.rightclick:addrow("Feedback")
+						row.talk = exports.rightclick:addrow("Comentario")
 						addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 							triggerServerEvent("event:getFeedbackGUI", getLocalPlayer())
 						end, true)
 					elseif (interact == "paintball.leaderboard") then
-						row.talk = exports.rightclick:addrow("Leaderboard")
+						row.talk = exports.rightclick:addrow("ListaMejores")
 						addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 							triggerServerEvent("event:getLeaderboardGUI", getLocalPlayer())
 						end, true)
 					else
-						row.talk = exports.rightclick:addrow("Participate ($50)")
+						row.talk = exports.rightclick:addrow("Participar ($50)")
 						addEventHandler("onClientGUIClick", row.talk,  function (button, state)
 							executeCommandHandler("togglecursor")
 							triggerServerEvent("event:getPaintballGUI", getLocalPlayer(), interact)
@@ -442,7 +442,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 							rcMenu = exports.rightclick:create(name)
 						end
 						--bStabilize = guiCreateButton(0.05, y, 0.87, 0.1, "Take from stretcher", true, wRightClick)
-						row.stretcher = exports.rightclick:addrow("Take from stretcher")
+						row.stretcher = exports.rightclick:addrow("Tomar de la camilla")
 						addEventHandler("onClientGUIClick", row.stretcher, function (button, state)
 							triggerServerEvent("stretcher:takePedFromStretcher", getLocalPlayer(), element)
 						end, false)
@@ -452,7 +452,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 							rcMenu = exports.rightclick:create(name)
 						end
 						--bStabilize = guiCreateButton(0.05, y, 0.87, 0.1, "Lay on stretcher", true, wRightClick)
-						row.stretcher = exports.rightclick:addrow("Lay on stretcher")
+						row.stretcher = exports.rightclick:addrow("Acostarse en camilla")
 						addEventHandler("onClientGUIClick", row.stretcher, function (button, state)
 							triggerServerEvent("stretcher:movePedOntoStretcher", getLocalPlayer(), element)
 						end, false)
@@ -466,7 +466,7 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 						if not rcMenu then
 							rcMenu = exports.rightclick:create(name)
 						end
-						row.heal = exports.rightclick:addrow("Heal")
+						row.heal = exports.rightclick:addrow("Sanar")
 						addEventHandler("onClientGUIClick", row.heal, function (button, state)
 							triggerServerEvent("peds:healPed", getLocalPlayer(), getLocalPlayer(), element)
 						end, false)
@@ -486,13 +486,13 @@ function clickPed(button, state, absX, absY, wx, wy, wz, element)
 						rcMenu = exports.rightclick:create(name)
 					end
 					--if getElementData(element, "dbid") then
-						row.admEdit = exports.rightclick:addrow("ADM: Edit")
+						row.admEdit = exports.rightclick:addrow("ADM: Editar")
 						addEventHandler("onClientGUIClick", row.admEdit, function (button, state)
 							adminEditPedGui(element)
 						end, false)
 					--end
 
-					row.respawn = exports.rightclick:addrow("ADM: Respawn")
+					row.respawn = exports.rightclick:addrow("ADM: Respawnear")
 					addEventHandler("onClientGUIClick", row.respawn, function (button, state)
 						triggerServerEvent("peds:respawnPed", localPlayer, localPlayer, element)
 					end, false)

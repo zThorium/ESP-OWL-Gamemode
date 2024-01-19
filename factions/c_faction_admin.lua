@@ -34,7 +34,7 @@ function createAdminDuty(factionT, dutyT)
 	factionTable = factionT
 	dutyChanges = dutyT
 
-    DutyAllow.window[1] = guiCreateWindow(562, 250, 564, 351, "Admin Duty Settings", false)
+    DutyAllow.window[1] = guiCreateWindow(562, 250, 564, 351, "Administrador Duty Ajustes", false)
     centerWindow(DutyAllow.window[1])
     guiWindowSetSizable(DutyAllow.window[1], false)
     guiWindowSetMovable(DutyAllow.window[1], true)
@@ -42,34 +42,34 @@ function createAdminDuty(factionT, dutyT)
 
 	DutyAllow.gridlist[1] = guiCreateGridList(9, 75, 545, 224, false, DutyAllow.window[1])
     guiGridListAddColumn(DutyAllow.gridlist[1], "ID", 0.1)
-    guiGridListAddColumn(DutyAllow.gridlist[1], "Name", 0.3)
-    guiGridListAddColumn(DutyAllow.gridlist[1], "Description", 0.6)
+    guiGridListAddColumn(DutyAllow.gridlist[1], "Nombre", 0.3)
+    guiGridListAddColumn(DutyAllow.gridlist[1], "Descripción", 0.6)
     DutyAllow.label[1] = guiCreateLabel(10, 308, 73, 21, "Item ID:", false, DutyAllow.window[1])
     guiLabelSetVerticalAlign(DutyAllow.label[1], "center")
     DutyAllow.edit[1] = guiCreateEdit(83, 308, 78, 21, "", false, DutyAllow.window[1])
-    DutyAllow.button[1] = guiCreateButton(318, 303, 108, 30, "Allow", false, DutyAllow.window[1])
+    DutyAllow.button[1] = guiCreateButton(318, 303, 108, 30, "Permitir", false, DutyAllow.window[1])
     guiSetProperty(DutyAllow.button[1], "NormalTextColour", "FFAAAAAA")
-    DutyAllow.button[2] = guiCreateButton(436, 303, 108, 30, "Remove", false, DutyAllow.window[1])
+    DutyAllow.button[2] = guiCreateButton(436, 303, 108, 30, "Remover", false, DutyAllow.window[1])
     guiSetProperty(DutyAllow.button[2], "NormalTextColour", "FFAAAAAA")
-    DutyAllow.label[2] = guiCreateLabel(11, 59, 543, 16, "Allowed Items", false, DutyAllow.window[1])
+    DutyAllow.label[2] = guiCreateLabel(11, 59, 543, 16, "Items Permitidos", false, DutyAllow.window[1])
     guiLabelSetHorizontalAlign(DutyAllow.label[2], "center", false)
-    DutyAllow.label[3] = guiCreateLabel(9, 348, 74, 24, "View:", false, DutyAllow.window[1])
+    DutyAllow.label[3] = guiCreateLabel(9, 348, 74, 24, "Vista:", false, DutyAllow.window[1])
     guiLabelSetVerticalAlign(DutyAllow.label[3], "center")
     DutyAllow.label[4] = guiCreateLabel(163, 308, 68, 20, "Item Value:", false, DutyAllow.window[1])
     guiLabelSetVerticalAlign(DutyAllow.label[4], "center")
     DutyAllow.edit[2] = guiCreateEdit(230, 308, 78, 21, "1", false, DutyAllow.window[1])
-    DutyAllow.combobox[1] = guiCreateComboBox(1, 25, 242, 998, "Make a faction selection.", false, DutyAllow.window[1])
+    DutyAllow.combobox[1] = guiCreateComboBox(1, 25, 242, 998, "Haz una selección de facción.", false, DutyAllow.window[1])
     exports.global:guiComboBoxAdjustHeight(DutyAllow.combobox[1], #factionT)
-    DutyAllow.button[3] = guiCreateButton(442, 25, 102, 35, "Done", false, DutyAllow.window[1])
+    DutyAllow.button[3] = guiCreateButton(442, 25, 102, 35, "Hecho", false, DutyAllow.window[1])
     guiSetProperty(DutyAllow.button[3], "NormalTextColour", "FFAAAAAA")
     DutyAllow.combobox[2] = guiCreateComboBox(255, 25, 124, 19, "", false, DutyAllow.window[1])
     exports.global:guiComboBoxAdjustHeight(DutyAllow.combobox[2], 2)
     guiComboBoxAddItem(DutyAllow.combobox[2], "Items")
-    guiComboBoxAddItem(DutyAllow.combobox[2], "Weapons")
+    guiComboBoxAddItem(DutyAllow.combobox[2], "Armas")
     guiComboBoxSetSelected( DutyAllow.combobox[2], 0 )
 
     local row = guiGridListAddRow( DutyAllow.gridlist[1] )
-    guiGridListSetItemText ( DutyAllow.gridlist[1], row, 2, "Make a faction selection...", false, false )
+    guiGridListSetItemText ( DutyAllow.gridlist[1], row, 2, "Haz una selección de facción...", false, false )
 
     for k,v in pairs(factionT) do
     	guiComboBoxAddItem( DutyAllow.combobox[1], v[2] )
@@ -124,18 +124,18 @@ function toggleView()
     guiGridListClear( DutyAllow.gridlist[1] )
 
 	if item == 1 then -- Weapons
-		guiSetText(DutyAllow.label[2], "Allowed Weapons")
+		guiSetText(DutyAllow.label[2], "Armas Permitidas")
 
-        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 2, "Name")
-        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 3, "Max Ammo")
+        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 2, "Nombre")
+        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 3, "Max Municion")
 
-        guiSetText(DutyAllow.label[1], "Weapon ID:")
-        guiSetText(DutyAllow.label[4], "Max Ammo:")
+        guiSetText(DutyAllow.label[1], "Arma ID:")
+        guiSetText(DutyAllow.label[4], "Max Municion:")
 	elseif item == 0 then -- Items
-		guiSetText(DutyAllow.label[2], "Allowed Items")
+		guiSetText(DutyAllow.label[2], "Items Permitidos")
 
-        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 2, "Name")
-        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 3, "Description")
+        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 2, "Nombre")
+        guiGridListSetColumnTitle(DutyAllow.gridlist[1], 3, "Descripcion")
 
         guiSetText(DutyAllow.label[1], "Item ID:")
         guiSetText(DutyAllow.label[4], "Item Value:")
@@ -175,13 +175,13 @@ function allowItem()
 	if not tonumber(itemID) then return end
 
 	if not exports['item-system']:isItem(itemID) and selection == 0 then
-		outputChatBox("That's not even a item...", 255, 0, 0)
+		outputChatBox("Eso no es un item...", 255, 0, 0)
 		return
 	elseif tonumber(itemID) == 16 then
-		outputChatBox("Skins are supposed to be uploaded by faction leaders while being on faction duty at Dupont HQ.", 255, 0, 0)
+		outputChatBox("Se supone que los líderes de facción deben cargar las máscaras mientras están de servicio en la sede de Dupont..", 255, 0, 0)
 		return
 	elseif not getWeaponNameFromID(itemID) and selection == 1 and tonumber(itemID) ~= 100 then
-		outputChatBox("That's not even a weapon...", 255, 0, 0)
+		outputChatBox("Eso no es un arma...", 255, 0, 0)
 		return
 	end
 
@@ -200,18 +200,18 @@ function allowItem()
 						table.insert(dutyChanges, { faction, 1, maxIndex, -tonumber(itemID), itemValue })
 						setElementData(resourceRoot, "maxIndex", maxIndex)
 					else
-						outputChatBox("This weapon is banned from being added.", 255, 0, 0)
+						outputChatBox("Está prohibido agregar esta arma..", 255, 0, 0)
 					end
 				else
-					outputChatBox("The Max Ammo must be a number!", 255, 0, 0)
+					outputChatBox("¡La munición máxima debe ser un número!", 255, 0, 0)
 				end
 			end
 			populateList(faction)
 		else
-			outputChatBox("The Item ID must be a number!", 255, 0, 0)
+			outputChatBox("El ID del artículo debe ser un número.!", 255, 0, 0)
 		end
 	else
-		outputChatBox("Please make a selection first.", 255, 0, 0)
+		outputChatBox("Por favor haga una selección primero.", 255, 0, 0)
 	end
 end
 
@@ -229,6 +229,6 @@ function removeItem()
     		end
     	end
     else
-    	outputChatBox("Please make a selection first.", 255, 0, 0)
+    	outputChatBox("Por favor haga una selección primero.", 255, 0, 0)
     end
 end

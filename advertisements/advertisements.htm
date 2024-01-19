@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="col-sm-9">
-                                    <h5>{{ page == 'SECTION' ? currentSection : 'Latest Advertisements' }}</h5>
+                                    <h5>{{ page == 'SECTION' ? currentSection : 'Ultimos anuncios' }}</h5>
 
                                     <div v-show="deletePending" class="alert alert-info">
                                         Successfully deleted advertisement {{ deletePending }}
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="col-sm-3 animated fadeIn">
-                                    <h5>Browse Categories</h5>
+                                    <h5>Buscar Categorias</h5>
                                     <div class="list-group">
                                         <a class="list-group-item list-group-item-action d-flex" v-for="section in sections" @click="viewSection(section)">
                                             <span class="mr-auto">{{ section }}</span>
@@ -128,7 +128,7 @@
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <h5>Browse Categories</h5>
+                                    <h5>Buscar Categorias</h5>
                                     <div class="list-group">
                                         <a class="list-group-item list-group-item-action d-flex" v-for="section in sections" @click="viewSection(section)">
                                             <span class="mr-auto">{{ section }}</span>
@@ -177,7 +177,7 @@
                                                     <option v-for="section in sections" :value="section">{{ section }}</option>
                                                 </select>
                                                 <div class="invalid-feedback">
-                                                    Please choose a section for the advertisement.
+                                                    Por favor elija una sección para el anuncio.
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-6">
@@ -186,17 +186,17 @@
                                                     <option v-for="(expiry, expiryHours) in expiries" :value="expiryHours">{{ expiry }}</option>
                                                 </select>
                                                 <div class="invalid-feedback">
-                                                    Please choose when the advertisement should expire.
+                                                    Por favor elige cuando va a expirar.
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group col-sm-6">
-                                                <label for="name">Your Name</label>
+                                                <label for="name">Tu nombre</label>
                                                 <input type="text" v-model="form.name" class="form-control" required minlength="3" maxlength="50">
                                                 <div class="invalid-feedback">
-                                                    Name is required to be at least five characters.
+                                                    Nombre es requerido de minimo 5 caracteres.
                                                 </div>
                                             </div>
                                             
@@ -235,7 +235,7 @@
                                         <div class="row">
                                             <div class="col-sm-12 text-right">
                                                 <button class="btn btn-link" @click="viewSection(null)">Cancel</button>
-                                                <button class="btn btn-primary" @click="postAdvertisement()">Post Advertisement</button>
+                                                <button class="btn btn-primary" @click="postAdvertisement()">Publicar Anuncio</button>
                                             </div>
                                         </div>
 
@@ -253,13 +253,13 @@
             var vm = new Vue({
                 el: '#app',
                 data: {
-                    title: 'Advertisements',
+                    title: 'Anuncios',
                     page: 'HOME',
                     pages: ['HOME', 'SECTION', 'NEW_ADVERTISEMENT'],
                     currentSection: null,
                     loading: true,
-                    sections: ['Services', 'Vehicles', 'Real Estate', 'Community', 'Jobs', 'Classifieds'],
-                    expiries: {1: 'One Hour', 2:'Two Hours', 6: 'Six Hours', 24: 'One Day'},
+                    sections: ['Servicios', 'Vehiculos', 'Bienes raices', 'Comunidad', 'Trabajos', 'Clasificados'],
+                    expiries: {1: 'Una Hora', 2:'Dos Horas', 6: 'Seis Horas', 24: 'Un Dia'},
                     advertisements: [],
                     currentAdvertisement: {},
                     pagination: {

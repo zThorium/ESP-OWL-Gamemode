@@ -32,15 +32,15 @@ local function updateGUI()
 		
 		local onduty = getElementData( localPlayer, "admin_level" ) <= 7 and "Off Duty " or ""
 		if getElementData( localPlayer, "duty_admin" ) == 1 or getElementData( localPlayer, "duty_supporter" ) == 1 then
-			onduty = "On Duty" .. " :: "
+			onduty = "En Servicio" .. " :: "
 		else
 			onduty = ""
 		end
 
 		if exports.integration:isPlayerSupporter(localPlayer) or exports.integration:isPlayerTrialAdmin(localPlayer) then
-			textString = getAdminTitle( localPlayer ) .. " :: " .. onduty .. admstr .. ( (getElementData( localPlayer, "admin_level" ) <= 10 )and ( " :: " .. ( openReports - handledReports ) .. " unanswered reports" .. reporttext .. " :: " .. handledReports .. " handled reports" .. ownreporttext .. " :: " .. ckAmount .. " unanswered CK requests ::") or "" )
+			textString = getAdminTitle( localPlayer ) .. " :: " .. onduty .. admstr .. ( (getElementData( localPlayer, "admin_level" ) <= 10 )and ( " :: " .. ( openReports - handledReports ) .. " informes sin respuesta" .. reporttext .. " :: " .. handledReports .. " informes manejados" .. ownreporttext .. " :: " .. ckAmount .. " solicitudes de CK sin respuesta ::") or "" )
 		else
-			textString = getAdminTitle( localPlayer ) .. " :: " .. ( openReports - handledReports ) .. " unanswered reports" .. reporttext .. " :: " .. handledReports .. " handled reports" .. ownreporttext .. " :: "
+			textString = getAdminTitle( localPlayer ) .. " :: " .. ( openReports - handledReports ) .. " informes sin respuesta" .. reporttext .. " :: " .. handledReports .. " informes manejados" .. ownreporttext .. " :: "
 		end
 	end
 end

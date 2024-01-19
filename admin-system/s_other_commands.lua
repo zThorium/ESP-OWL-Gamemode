@@ -35,7 +35,7 @@ function getKey(thePlayer, commandName)
 					
 					return true
 				else
-					outputChatBox(" You're not in any vehicle or possible interior.", thePlayer, 255,0 ,0 )
+					outputChatBox(" No estás en ningún vehículo o posible interior.", thePlayer, 255,0 ,0 )
 					return false
 				end
 			end
@@ -48,14 +48,14 @@ function generateFakeIdentity(player, cmd)
 	if exports.integration:isPlayerLeadAdmin(player) then
 		if getElementData(player, "fakename") then
 			exports.anticheat:changeProtectedElementDataEx(player, "fakename", false, true)
-			outputChatBox("Fake identity removed.",player)
+			outputChatBox("Se eliminó la identidad falsa.",player)
 			return false
 		end
 		
 		local name = exports.global:createRandomMaleName()
 		
 		exports.anticheat:changeProtectedElementDataEx(player, "fakename", name, true)
-		outputChatBox("Fake identity activated.",player)
+		outputChatBox("Identidad falsa activada.",player)
 		triggerEvent("fakemyid", player)
 	end
 end
@@ -63,14 +63,14 @@ addCommandHandler("fakeme", generateFakeIdentity, false, false)
 
 function setSvPassword(thePlayer, commandName, password)
 	if exports.integration:isPlayerLeadAdmin(thePlayer) or exports.integration:isPlayerLeadScripter(thePlayer) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Password without spaces, empty to remove pw] - Set/remove server's password", thePlayer, 255, 194, 14)
+		outputChatBox("SINTAXIS: /" .. commandName .. " [Contraseña sin espacios, vacía para eliminar pw] - Establecer/eliminar la contraseña del servidor", thePlayer, 255, 194, 14)
 		if password and string.len(password) > 0 then
 			if setServerPassword(password) then
-				exports.global:sendMessageToStaff("[SYSTEM] "..exports.global:getPlayerFullIdentity(thePlayer).." has set server's password to '"..password.."'.", true)
+				exports.global:sendMessageToStaff("[SISTEMA] "..exports.global:getPlayerFullIdentity(thePlayer).." ha establecido la contraseña del servidor en '"..password.."'.", true)
 			end
 		else
 			if setServerPassword('') then
-				exports.global:sendMessageToStaff("[SYSTEM] "..exports.global:getPlayerFullIdentity(thePlayer).." has removed server's password.", true)
+				exports.global:sendMessageToStaff("[SISTEMA] "..exports.global:getPlayerFullIdentity(thePlayer).." ha eliminado la contraseña del servidor.", true)
 			end
 		end
 	end

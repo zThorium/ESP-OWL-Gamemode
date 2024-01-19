@@ -65,9 +65,9 @@ function createTrafficCam(thePlayer, commandName, maxSpeed)
 				exports.anticheat:changeProtectedElementDataEx(thePlayer, "speedcam:new:dimension", dimension, false)
 				exports.anticheat:changeProtectedElementDataEx(thePlayer, "speedcam:new:interior", interior, false)
 				exports.anticheat:changeProtectedElementDataEx(thePlayer, "speedcam:new:maxspeed", tonumber(maxSpeed), false)
-				outputChatBox("Okay, stored. Now set the outside of the speedcam with /setradius.", thePlayer, 255, 0, 0)
+				outputChatBox("Bien, almacenado. Ahora configure el exterior del radar con /setradius.", thePlayer, 255, 0, 0)
 			else
-				outputChatBox("The trigger speed needs to be above 35 KPH.", thePlayer, 255, 0, 0)
+				outputChatBox("La velocidad del gatillo debe ser superior a 35 KPH.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
@@ -95,16 +95,16 @@ function setTrafficCamRadius(thePlayer, commandName)
 			-- Calulate radius
 			local radius = math.floor(getDistanceBetweenPoints2D(x, y, newx, newy))
 			if (radius > 99) then
-				outputChatBox("Radius is too big.", thePlayer, 255, 0, 0)
+				outputChatBox("El radio es demasiado grande.", thePlayer, 255, 0, 0)
 			else
 				exports.anticheat:changeProtectedElementDataEx(thePlayer, "speedcam:new", false, false)
 				local query = dbQuery(exports.mysql:getConn("mta"), "INSERT INTO `speedcams` SET `enabled` = 1, `radius` = ?, `maxspeed` = ?, `x` = ?, `y` = ?, `z` = ?, `interior` = ?, `dimension` = ?", radius, maxspeed, x, y, z, interior, dimension)
 				local _, _, id = dbPoll(query, 1000)
 				if (id) then
-					outputChatBox("Speed camera created.", thePlayer, 0, 255, 0)
+					outputChatBox("Cámara de velocidad creada.", thePlayer, 0, 255, 0)
 					loadOneTrafficCam(id)
 				else
-					outputChatBox("Failed to create speedcam.", thePlayer, 255, 0, 0)
+					outputChatBox("No se pudo crear el radar.", thePlayer, 255, 0, 0)
 				end
 			end
 		end
@@ -128,10 +128,10 @@ function delTrafficCam(thePlayer, commandName)
 		if (colShape) then
 			local id = getElementData(colShape, "speedcam:dbid")
 			dbExec(exports.mysql:getConn("mta"), "DELETE FROM `speedcams` WHERE id = ?", id)
-			outputChatBox("Speedcam #" .. id .. " deleted.", thePlayer)
+			outputChatBox("Speedcam #" .. id .. " borrada.", thePlayer)
 			destroyElement(colShape)
 		else
-			outputChatBox("You are not in a speed camera.", thePlayer, 255, 0, 0)
+			outputChatBox("No estás en un radar.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -152,9 +152,9 @@ function getNearbyTrafficCams(thePlayer, commandName)
 					local dbid = getElementData(theColshape, "speedcam:dbid")
 					local enabled = getElementData(theColshape, "speedcam:enabled")
 					if (enabled) then
-						outputChatBox("   ID " .. dbid .. " - Enabled.", thePlayer, 255, 126, 0)
+						outputChatBox("   ID " .. dbid .. " - Activado.", thePlayer, 255, 126, 0)
 					else
-						outputChatBox("   ID " .. dbid .. " - Disabled.", thePlayer, 255, 126, 0)
+						outputChatBox("   ID " .. dbid .. " - Desactivado.", thePlayer, 255, 126, 0)
 					end
 					found = true
 				end

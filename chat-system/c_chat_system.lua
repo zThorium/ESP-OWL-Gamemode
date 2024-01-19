@@ -44,7 +44,7 @@ function showdata()
 		end
 	end
 
-	outputChatBox("Largest was: ".. largestname .. ": " .. largest)
+	outputChatBox("El más grande fue: ".. largestname .. ": " .. largest)
 end
 addCommandHandler("showdata", showdata)
 
@@ -71,5 +71,5 @@ addEventHandler("pmClient",getRootElement(),playPmSound)
 
 
 addCommandHandler("d", function()
-	outputChatBox("The department radio chat was moved to /dep. Thank you.")
+	outputChatBox("El chat de radio del departamento se trasladó a /dep. Gracias.")
 end, false, false)

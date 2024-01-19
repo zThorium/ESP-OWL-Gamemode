@@ -22,17 +22,17 @@ function jobAdverts()
 	for _, ourPlayer in pairs(exports.pool:getPoolElementsByType( 'player' )) do
 		if (getElementData(ourPlayer, 'loggedin') == 1) then
 			if taxicount > 0 then
-				text = "ADVERT: Yellow Cab Co is now taking fares! Call us today! - #8294"
+				text = "PROPAGANDA: ¡Yellow Cab Co ahora está aceptando tarifas! ¡Llámenos hoy! - #8294"
 				if exports.integration:isPlayerTrialAdmin(ourPlayer) then 
-					text = text .. " (( Job Advert. ))"
+					text = text .. " (( PROPAGANDA de Trabajo. ))"
 				end
 
 				outputChatBox(text, ourPlayer, 0, 255, 0)
 			end
 			if buscount > 0 then
-				text = "ADVERT: Los Santos Bus is now running routes! If you need a ride wait by one of our stops!"
+				text = "PROPAGANDA: ¡Los Santos Bus ya está realizando rutas! Si necesita transporte, ¡espere en una de nuestras paradas!"
 				if exports.integration:isPlayerTrialAdmin(ourPlayer) then 
-					text = text .. " (( Job Advert. ))"
+					text = text .. " (( PROPAGANDA de Trabajo. ))"
 				end
 
 				outputChatBox(text, ourPlayer, 0, 255, 0)

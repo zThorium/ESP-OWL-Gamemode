@@ -72,7 +72,7 @@ function updateGrid(dopont_npc)
 		local row = guiGridListAddRow(grid)
 		local v = {id=0, description="Original", creator_charname=getGtaDesigners(), creator_char=0, price=50, skin=selected_skin, date="Unknown"}
 		guiGridListSetItemText(grid, row, 1, v.id, false, true)
-		guiGridListSetItemText(grid, row, 2, v.description.." designed by "..v.creator_charname, false, false)
+		guiGridListSetItemText(grid, row, 2, v.description.." Diseñado por "..v.creator_charname, false, false)
 		guiGridListSetItemText(grid, row, 3, tostring(v.skin), false, true)
 		guiGridListSetItemText(grid, row, 4, v.price == 0 and 'N/A' or ('$' .. exports.global:formatMoney(v.price)), false, false)
 		guiGridListSetItemText(grid, row, 5, v.date , false, false)
@@ -82,7 +82,7 @@ function updateGrid(dopont_npc)
 		if dopont_npc or isForSale(v) then
 			local row = guiGridListAddRow(grid)
 			guiGridListSetItemText(grid, row, 1, v.id, false, true)
-			guiGridListSetItemText(grid, row, 2, v.description.." designed by "..v.creator_charname, false, false)
+			guiGridListSetItemText(grid, row, 2, v.description.." Diseñado por "..v.creator_charname, false, false)
 			guiGridListSetItemText(grid, row, 3, tostring(v.skin), false, true)
 			guiGridListSetItemText(grid, row, 4, v.price == 0 and 'N/A' or ('$' .. exports.global:formatMoney(v.price)), false, false)
 			if dopont_npc then
@@ -114,16 +114,16 @@ function listClothes(item, list)
 		default_ped.cloth = getElementData(source, 'clothing:id')
 		selected_skin = item.itemValue
 		local margin = 30
-		window = guiCreateWindow(screen_width - width - 45, screen_height - height-110, width, height, "Colection #"..(item.itemValue or ""), false)
+		window = guiCreateWindow(screen_width - width - 45, screen_height - height-110, width, height, "Colección #"..(item.itemValue or ""), false)
 		guiSetEnabled(window, false)
 		guiSetAlpha(window, 0.95)
 		guiWindowSetSizable(window, false)
 
-		loading_label = guiCreateLabel(10, 25, width - 20, height - 60, "Loading.." ,false, window)
+		loading_label = guiCreateLabel(10, 25, width - 20, height - 60, "Cargando.." ,false, window)
 		guiLabelSetHorizontalAlign(loading_label, 'center')
 		guiLabelSetVerticalAlign(loading_label, 'center')
 
-		local close = guiCreateButton(width - 110, height - 30, 100, 25, 'Close', false, window)
+		local close = guiCreateButton(width - 110, height - 30, 100, 25, 'Cerrar', false, window)
 		addEventHandler('onClientGUIClick', close, closeWindow, false)
 		addEventHandler('account:changingchar', root, closeWindow)
 		--Now request custom clothes from server
@@ -139,23 +139,23 @@ function listCreateGuiElements(dopont_npc)
 	if not window or not isElement(window) then return end
 	grid = guiCreateGridList(10, 25, width - 20, height - 60, false, window)
 	guiGridListAddColumn(grid, 'ID', 0.07)
-	guiGridListAddColumn(grid, 'Description', 0.5)
-	guiGridListAddColumn(grid, 'Collection', 0.07)
-	guiGridListAddColumn(grid, 'Price', 0.1)
+	guiGridListAddColumn(grid, 'Descripción', 0.5)
+	guiGridListAddColumn(grid, 'Colección ', 0.07)
+	guiGridListAddColumn(grid, 'Precio', 0.1)
 	if dopont_npc then
-		guiGridListAddColumn(grid, 'Status', 0.3)
-		guiGridListAddColumn(grid, 'Manufactured Date', 0.2)
+		guiGridListAddColumn(grid, 'Estado', 0.3)
+		guiGridListAddColumn(grid, 'Fecha de manufacturación', 0.2)
 	end
-	guiGridListAddColumn(grid, 'Designed Date', 0.2)
+	guiGridListAddColumn(grid, 'Fecha del diseño', 0.2)
 	--guiGridListSetSortingEnabled ( grid, false ) -- disable sorting cuz it will cause indexing issue.
 
 	local buy, add, make = nil
 	if dopont_npc then
-		add = guiCreateButton(width - 220, height - 30, 100, 25, 'Add', false, window)
-		make = guiCreateButton(width - 330, height - 30, 100, 25, 'Manufacture', false, window)
+		add = guiCreateButton(width - 220, height - 30, 100, 25, 'Añadir', false, window)
+		make = guiCreateButton(width - 330, height - 30, 100, 25, 'Manufacturar', false, window)
 		guiSetVisible(make, false)
 	else
-		buy = guiCreateButton(width - 220, height - 30, 100, 25, 'Buy', false, window)
+		buy = guiCreateButton(width - 220, height - 30, 100, 25, 'Comprar', false, window)
 		guiSetEnabled(buy, false)
 	end
 
@@ -194,19 +194,19 @@ function listCreateGuiElements(dopont_npc)
 					if cl then
 						if row == -1 then
 							resetPed()
-							guiSetText(add, 'Add')
+							guiSetText(add, 'Añadir')
 							guiSetVisible(make, false)
 						else
 							guiSetVisible(make, true)
 							if cl.distribution == 1 then -- draft
-								guiSetText(make, 'Manufacture')
+								guiSetText(make, 'Manufacturar')
 								guiSetEnabled(make, true)
 							else
-								guiSetText(make, 'Distribute')
+								guiSetText(make, 'Distribuir')
 								guiSetEnabled(make, canDistribute(cl))
 							end
 
-							guiSetText(add, 'Edit')
+							guiSetText(add, 'Editar')
 							guiSetEnabled(add, cl and true or false)
 							
 							if cl then
@@ -215,7 +215,7 @@ function listCreateGuiElements(dopont_npc)
 								selected_skin = cl.skin
 								setPedAnimation ( default_ped.ped )
 							else
-								outputDebugString('Clothing preview broke, aw.')
+								outputDebugString('La vista previa de la ropa se rompió, aw.')
 							end
 						end
 						-- we selected another row, so tweak that a bit
@@ -244,7 +244,7 @@ function listCreateGuiElements(dopont_npc)
 							selected_skin = cl.skin
 							setPedAnimation ( default_ped.ped )
 						else
-							outputDebugString('Clothing preview broke, aw.')
+							outputDebugString('La vista previa de la ropa se rompió, aw.')
 							guiSetEnabled(buy, false)
 						end
 					end
@@ -259,9 +259,9 @@ function listCreateGuiElements(dopont_npc)
 		addEventHandler('onClientGUIClick', add,
 			function(button)
 				if button == 'left' then
-					if guiGetText(add) == 'Add' then
+					if guiGetText(add) == 'Añadir' then
 						startWizard_1()
-					elseif guiGetText(add) == 'Edit' then
+					elseif guiGetText(add) == 'Editar' then
 						editMyClothes(selected_index)
 					end
 				end
@@ -270,15 +270,15 @@ function listCreateGuiElements(dopont_npc)
 		addEventHandler('onClientGUIClick', make,
 			function(button)
 				if button == 'left' then
-					if guiGetText(source) == 'Manufacture' then
+					if guiGetText(source) == 'Manufacturar' then
 						openManu(selected_index)
 						playSoundFrontEnd(12)
-					elseif guiGetText(source) == 'Distribute' then
+					elseif guiGetText(source) == 'Distribuir' then
 						openDist(selected_index)
 						playSoundFrontEnd(12)
 					else
 						playSoundFrontEnd(4)
-						outputChatBox('This feature is currently under construction.', 255,0 ,0)
+						outputChatBox('Esta característica está actualmente en construcción..', 255,0 ,0)
 					end
 				end
 		end, false)

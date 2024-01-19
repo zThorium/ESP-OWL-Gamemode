@@ -37,10 +37,10 @@ addCommandHandler("myartifacts", function(player, cmd)
 		for k,v in pairs(artifactsList[player]) do
 			outputChatBox(tostring(v[1]),player)
 		end
-		outputChatBox(tostring(#artifactsList[player]).." items worn.",player)
+		outputChatBox(tostring(#artifactsList[player]).." artículos usados.",player)
 		outputChatBox("--",player)
 	else
-		outputChatBox("You are not wearing any artifacts.",player)
+		outputChatBox("No llevas ningún artefacto..",player)
 	end
 end)
 
@@ -170,7 +170,7 @@ addEventHandler("accounts:characters:change", root, removeAllOnPlayer)
 addCommandHandler("removeartifacts", function(player, cmd)
 	local num = #artifactsList[player]
 	removeAllOnPlayer(player)
-	outputChatBox(tostring(num).." artifacts removed.",player)
+	outputChatBox(tostring(num).." artefactos removidos.",player)
 end)
 
 function countPlayerArtifacts(player) --returns a number of how many artifacts the player is currently wearing
