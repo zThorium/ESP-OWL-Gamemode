@@ -12,12 +12,12 @@ handlingValues = {
 	{"Mass Weight (Kg)", 50, 10000, ref = 'mass'},
 	{"Center of Mass X", -1, 1, ref = 'centerOfMassX'},
 	{"Center of Mass Y", -1, 1, ref = 'centerOfMassY'},
-	{"Center of Mass Z", -1, 1, ref = 'centerOfMassZ'},
+	{"Center of Mass Z", -20, 1, ref = 'centerOfMassZ'},
 
 	{"Drag Coefficiency", 0.1, 6, ref = 'dragCoeff'},
 	{"Braking Power", 0.1, 50, ref = 'brakeDeceleration'},
 	{"Braking Bias", 0.1, 1, ref = 'brakeBias'},
-	{"Traction Multiplier", 0.1, 10, ref = 'tractionMultiplier'},
+	{"Traction Multiplier", 0.1, 50, ref = 'tractionMultiplier'},
 	{"Traction Bias", 0.1, 1, ref = 'tractionBias'},
 }
 

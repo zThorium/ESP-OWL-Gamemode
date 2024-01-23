@@ -4,9 +4,9 @@ function requestInventory(button)
 	if button=="left" and not getElementData(localPlayer, "exclusiveGUI") then
 		if isVehicleLocked(vehicle) and vehicle ~= getPedOccupiedVehicle(localPlayer) then
 			triggerServerEvent("onVehicleRemoteAlarm", vehicle)
-			outputChatBox("This vehicle is locked.", 255, 0, 0)
+			outputChatBox("Este vehículo está bloqueado.", 255, 0, 0)
 		elseif type(getElementData(vehicle, "Impounded")) == "number" and isVehicleImpounded(vehicle) and not exports.global:hasItem(localPlayer, 3, getElementData(vehicle, "dbid")) then
-			outputChatBox("You need the keys to search this vehicle.", 255, 0, 0)
+			outputChatBox("Necesitas las llaves para buscar este vehículo.", 255, 0, 0)
 		else
 			triggerServerEvent( "openFreakinInventory", localPlayer, vehicle, ax, ay )
 		end
@@ -74,8 +74,8 @@ function showVehicleMenu(hasRamp)
 	end
 
 	if (hasVehicleWindows(vehicle)) then
-		local windowState = isVehicleWindowUp(vehicle, true) and "Up" or "Down"
-		row.window = rightclick:addRow("Window: "..windowState, false, true)
+		local windowState = isVehicleWindowUp(vehicle, true) and "Arriba" or "Abajo"
+		row.window = rightclick:addRow("Ventanas: "..windowState, false, true)
 	end
 
 	--y = y + lineH
@@ -84,20 +84,20 @@ function showVehicleMenu(hasRamp)
 
 		local lockText
 		if isLocked then
-			lockText = "Unlock"
+			lockText = "Desbloquear"
 		else
-			lockText = "Lock"
+			lockText = "Bloquear"
 		end
 		row.lock = rightclick:addRow(lockText)
 		addEventHandler("onClientGUIClick", row.lock, lockUnlock, false)
 
 		if not isLocked or inCar then --if vehicle is not locked or if player is inside vehicle
-			row.inventory = rightclick:addRow("Inventory")
+			row.inventory = rightclick:addRow("Maletero")
 			addEventHandler("onClientGUIClick", row.inventory, requestInventory, false)
 
 			-- Cabriolet (Exciter)
 			if isCabriolet(vehicle) then
-				row.cabriolet = rightclick:addRow("Toggle Roof")
+				row.cabriolet = rightclick:addRow("Cambiar Techo")
 				addEventHandler("onClientGUIClick", row.cabriolet, cabrioletToggleRoof, false)
 			end
 
@@ -109,7 +109,7 @@ function showVehicleMenu(hasRamp)
 	end
 
 	if getElementData(localPlayer, "job") == 5 or exports.integration:isPlayerTrialAdmin(localPlayer, true) then -- Mechanic
-		row.fix = rightclick:addRow("Fix/Upgrade")
+		row.fix = rightclick:addRow("Arreglar/Mejorar")
 		addEventHandler("onClientGUIClick", row.fix, openMechanicWindow, false)
 	end
 
@@ -119,12 +119,12 @@ function showVehicleMenu(hasRamp)
 			local trailers = { [606] = true, [607] = true, [610] = true, [590] = true, [569] = true, [611] = true, [584] = true, [608] = true, [435] = true, [450] = true, [591] = true }
 			if trailers[ getElementModel( vehicle ) ] then
 				if exports.global:hasItem(localPlayer, 3, getElementData(vehicle, "dbid")) then
-					row.park = rightclick:addRow("Park")
+					row.park = rightclick:addRow("Estacionar")
 					addEventHandler("onClientGUIClick", row.park, parkTrailer, false)
 				else
 					local vehicleFactionID = getElementData(vehicle, "faction")
 					if exports.factions:hasMemberPermissionTo(localPlayer, vehicleFactionID, "respawn_vehs") then
-						row.park = rightclick:addRow("Park")
+						row.park = rightclick:addRow("Estacionar")
 						addEventHandler("onClientGUIClick", row.park, factionParkTrailer, false)
 					else
 						trailerAdminPark = true
@@ -132,7 +132,7 @@ function showVehicleMenu(hasRamp)
 				end
 			else
 				if exports.global:hasItem(localPlayer, 57) then -- FUEL CAN
-					row.fill = rightclick:addRow("Fill Tank")
+					row.fill = rightclick:addRow("Llenar Tanque")
 					addEventHandler("onClientGUIClick", row.fill, fillFuelTank, false)
 				end
 			end
@@ -152,10 +152,10 @@ function showVehicleMenu(hasRamp)
 		end
 
 		if not (found) then
-			row.sit = rightclick:addRow("Sit")
+			row.sit = rightclick:addRow("Sentarse")
 			addEventHandler("onClientGUIClick", row.sit, sitInHelicopter, false)
 		else
-			row.sit = rightclick:addRow("Stand Up")
+			row.sit = rightclick:addRow("Levantarse")
 			addEventHandler("onClientGUIClick", row.sit, unsitInHelicopter, false)
 		end
 	end
@@ -163,13 +163,13 @@ function showVehicleMenu(hasRamp)
 	local entrance = getElementData( vehicle, "entrance" )
 	if entrance then
 		if not isPedInVehicle(localPlayer) then
-			row.enter = rightclick:addRow("Enter Interior")
+			row.enter = rightclick:addRow("Entrar al Interior")
 			addEventHandler("onClientGUIClick", row.enter, enterInterior, false)
 
-			row.knock = rightclick:addRow("Knock on Door")
+			row.knock = rightclick:addRow("Tocar la Puerta")
 			addEventHandler("onClientGUIClick", row.knock, knockVehicle, false)
 		elseif getElementModel(vehicle) == 435 then
-			row.enter = rightclick:addRow("Enter Interior with Vehicle")
+			row.enter = rightclick:addRow("Entrar al Interior con vehículo")
 			addEventHandler("onClientGUIClick", row.enter, enterInterior, false)
 		end
 	end
@@ -184,27 +184,27 @@ function showVehicleMenu(hasRamp)
 		end
 	end
 	if #getDoorsFor(getElementModel(vehicle), seat) > 0 then -- Now showing this outside of the check because people were abusing it to get away from the alarm.
-		row.doorControl = rightclick:addRow("Door Control")
+		row.doorControl = rightclick:addRow("Control de Puertas")
 		addEventHandler("onClientGUIClick", row.doorControl, function(button, state) fDoorControl(button, state, isLocked) end, false)
 	end
 
 	if not isLocked then
 		if (getVehicleType(vehicle) == "Trailer" or getVehicleNameFromModel( 608 ) == getVehicleName( vehicle )) then -- this is a trailer, zomg. But getVehicleType returns "" CLIENT-SIDE. Fine on the server.
-			row.handbrake = rightclick:addRow("Handbrake")
+			row.handbrake = rightclick:addRow("Freno de Mano")
 			addEventHandler("onClientGUIClick", row.handbrake, handbrakeVehicle, false)
 		end
 
 		if (getElementModel(vehicle) == 416) or (getElementModel(vehicle) == 482 and getElementData(vehicle, "faction") == 147) then --Stretcher for ambulance and Dinoco (red rose funeral home).
-			row.stretcher = rightclick:addRow("Stretcher")
+			row.stretcher = rightclick:addRow("Camilla")
 			addEventHandler("onClientGUIClick", row.stretcher, fStretcher, false)
 		elseif(getElementModel(vehicle) == 487 and getElementData(vehicle, "faction") == 2 or getElementModel(vehicle) == 417 and getElementData(vehicle, "faction") == 2) then --air ambulance and SAR heli
-			row.stretcher = rightclick:addRow("Stretcher")
+			row.stretcher = rightclick:addRow("Camilla")
 			addEventHandler("onClientGUIClick", row.stretcher, fStretcher, false)
 		end
 
 		if ( getPedSimplestTask(localPlayer) == "TASK_SIMPLE_CAR_DRIVE" and getPedOccupiedVehicle(localPlayer) == vehicle ) then
 			if (getElementData(vehicle, "dbid") > 0 ) then
-				row.look = rightclick:addRow("Edit Description")
+				row.look = rightclick:addRow("Editar Descripción")
 				addEventHandler("onClientGUIClick", row.look, fLook, false)
 			end
 		end
@@ -214,25 +214,25 @@ function showVehicleMenu(hasRamp)
 	if (exports.integration:isPlayerTrialAdmin(localPlayer) or exports.integration:isPlayerSupporter(localPlayer) or exports.integration:isPlayerScripter(localPlayer)) then
 		if exports.global:isStaffOnDuty(localPlayer) then
 			if trailerAdminPark then
-				row.park = rightclick:addRow("ADM: Park")
+				row.park = rightclick:addRow("ADM: Estacionar")
 				addEventHandler("onClientGUIClick", row.park, parkTrailer, false)
 			end
 
-			row.respawn = rightclick:addRow("ADM: Respawn")
+			row.respawn = rightclick:addRow("ADM: Reaparecer")
 			addEventHandler("onClientGUIClick", row.respawn, fRespawn, false)
 
 			if (exports.integration:isPlayerTrialAdmin(localPlayer) or exports.integration:isPlayerScripter(localPlayer)) then
-				row.textures = rightclick:addRow("ADM: Textures")
+				row.textures = rightclick:addRow("ADM: Texturas")
 				addEventHandler("onClientGUIClick", row.textures, fTextures, false)
 			end
 		end
 	end
 
-	row.textures = rightclick:addRow("Preview Texture")
+	row.textures = rightclick:addRow("Previsualizar Textura")
 	addEventHandler("onClientGUIClick", row.textures, pTextures, false)
 	
 	if (getElementModel(vehicle) == 544) and not getPedOccupiedVehicle(localPlayer) then
-		row.ladderTruck = rightclick:addRow("Climb ladder truck")
+		row.ladderTruck = rightclick:addRow("Subir escalera del camión")
 		addEventHandler("onClientGUIClick", row.ladderTruck, fLadder, false)
 	end
 end
@@ -265,7 +265,7 @@ function fDoorControl(button, state, locked)
 	if (button=="left") and (not locked) then
 		openVehicleDoorGUI( vehicle )
 	elseif locked then
-		outputChatBox("This vehicle is locked.", 255, 0, 0)
+		outputChatBox("Este vehículo está bloqueado.", 255, 0, 0)
 	end
 end
 
@@ -286,7 +286,7 @@ function fillFuelTank(button, state)
 		if value > 0 then
 			triggerServerEvent("fillFuelTankVehicle", localPlayer, vehicle)
 		else
-			outputChatBox("This fuel can is empty...", 255, 0, 0)
+			outputChatBox("Este tanque está vacío..", 255, 0, 0)
 		end
 	end
 end

@@ -56,7 +56,7 @@ function openVehicleDoorGUI( vehicleElement )
 	end
 
 	guiSetSize(vControlGUI["main"],272,guiPos+40, false)
-	vControlGUI["close"] = guiCreateButton(23,guiPos,230,14,"Close",false, vControlGUI["main"])
+	vControlGUI["close"] = guiCreateButton(23,guiPos,230,14,"Cerrar",false, vControlGUI["main"])
 	addEventHandler ( "onClientGUIClick", vControlGUI["close"], closeVehicleGUI, false )
 end
 addCommandHandler("doors", openVehicleDoorGUI)

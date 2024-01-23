@@ -22,35 +22,35 @@ function build_SaleGUI(itemValue)
 	local windowWidth, windowHeight = 400, 252
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Department of Motor Vehicles", false)
+	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Departamento de vehículos", false)
 	guiWindowSetSizable(gui["_root"], false)
 
-	gui["label"] = guiCreateLabel(170, 25, 70, 45, "Vehicle Sale", false, gui["_root"])
+	gui["label"] = guiCreateLabel(170, 25, 70, 45, "Venta de vehículo", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label"], "left", false)
 	guiLabelSetVerticalAlign(gui["label"], "center")
 
-	gui["label_2"] = guiCreateLabel(30, 75, 331, 21, "By signing this document, I agree to grant all ownership", false, gui["_root"])
+	gui["label_2"] = guiCreateLabel(30, 75, 331, 21, "Firmando este documento, yo le doy todos los", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label_2"], "left", false)
 	guiLabelSetVerticalAlign(gui["label_2"], "center")
 
-	gui["label_3"] = guiCreateLabel(30, 95, 331, 21, "rights of this motor vehicle to this mentioned person.", false, gui["_root"])
+	gui["label_3"] = guiCreateLabel(30, 95, 331, 21, "derechos sobre este vehículo a la siguiente persona.", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label_3"], "left", false)
 	guiLabelSetVerticalAlign(gui["label_3"], "center")
 
 	gui["lineEdit"] = guiCreateEdit(30, 155, 231, 21, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["lineEdit"], 32767)
 
-	gui["label_4"] = guiCreateLabel(30, 135, 150, 16, "New owner's name", false, gui["_root"])
+	gui["label_4"] = guiCreateLabel(30, 135, 150, 16, "Nombre del nuevo dueño", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label_4"], "left", false)
 	guiLabelSetVerticalAlign(gui["label_4"], "center")
 
-	gui["pushButton"] = guiCreateButton(180, 195, 91, 31, "Sell", false, gui["_root"])
+	gui["pushButton"] = guiCreateButton(180, 195, 91, 31, "Vender", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["pushButton"], function ()
 			triggerServerEvent("sellVehiclePapers", getResourceRootElement(), localPlayer, "sell", guiGetText(gui["lineEdit"]), itemValue)
 		end, false)
 
 
-	gui["pushButton_2"] = guiCreateButton(290, 195, 91, 31, "Close", false, gui["_root"])
+	gui["pushButton_2"] = guiCreateButton(290, 195, 91, 31, "Cerrar", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["pushButton_2"], function ()
 			destroyElement(gui["_root"])
 			showCursor(false)
@@ -88,23 +88,23 @@ function openVehSales(cmd, ...)
 		local leader = exports.factions:hasMemberPermissionTo(localPlayer, getElementData(veh, "faction"), "respawn_vehs")
 		if (exports.integration:isPlayerAdmin(localPlayer) and getElementData(localPlayer, "duty_admin") == 1 ) or (getElementData(veh, "owner") == getElementData(localPlayer, "dbid")) or (leader and faction) then
 			if not (...) then
-				return outputChatBox("SYNTAX: /" .. cmd .. " [partial player name / id]", 255, 194, 14)
+				return outputChatBox("SYNTAX: /" .. cmd .. " [Nombre parcial / id]", 255, 194, 14)
 			end
 
 			exports['item-system']:playSoundInvOpen()
 
-			GUIEditor.window[1] = guiCreateWindow(1107, 377, 391, 181, "Vehicle Ownership Transfer", false)
+			GUIEditor.window[1] = guiCreateWindow(1107, 377, 391, 181, "Transferencia de vehículo", false)
 			guiWindowSetSizable(GUIEditor.window[1], false)
 			exports.global:centerWindow(GUIEditor.window[1])
 
-			GUIEditor.label[1] = guiCreateLabel(35, 36, 323, 79, "You're about to sell vehicle ID# () to player.\n\nTo prevent OOC Vehicle Scam, please input an amount of money that you have agreed with them to start selling:", false, GUIEditor.window[1])
+			GUIEditor.label[1] = guiCreateLabel(35, 36, 323, 79, "Estás apunto de vender el vehículo ID# () al jugador.\n\npara prevenir estafas OOC, por favor coloca el monto que acordaron para empezar la venta:", false, GUIEditor.window[1])
 			guiLabelSetHorizontalAlign(GUIEditor.label[1], "left", true)
 			GUIEditor.label[2] = guiCreateLabel(20, 131, 21, 25, "$", false, GUIEditor.window[1])
 			guiLabelSetHorizontalAlign(GUIEditor.label[2], "center", false)
 			guiLabelSetVerticalAlign(GUIEditor.label[2], "center")
 			GUIEditor.edit[1] = guiCreateEdit(41, 131, 176, 25, "sdwd23dsdsdad", false, GUIEditor.window[1])
-			GUIEditor.button[1] = guiCreateButton(221, 131, 70, 25, "Sell", false, GUIEditor.window[1])
-			GUIEditor.button[2] = guiCreateButton(291, 131, 70, 25, "Close", false, GUIEditor.window[1])
+			GUIEditor.button[1] = guiCreateButton(221, 131, 70, 25, "Vender", false, GUIEditor.window[1])
+			GUIEditor.button[2] = guiCreateButton(291, 131, 70, 25, "Cerrar", false, GUIEditor.window[1])
 			addEventHandler("onClientGUIClick", GUIEditor.window[1], function ()
 				if source == GUIEditor.button[1] then
 
@@ -114,7 +114,7 @@ function openVehSales(cmd, ...)
 			end)
 			addEventHandler("onClientPlayerVehicleExit", localPlayer, sellCheck)
 		else
-			return outputChatBox("You do not own this vehicle or you're not a leader of the faction that owns this vehicle.", 255, 0, 0)
+			return outputChatBox("Tu no eres dueño de este vehículo o no eres líder de la facción que posee este vehículo.", 255, 0, 0)
 		end
 	end
 end
@@ -162,7 +162,7 @@ addEventHandler("onClientVehicleExit", getRootElement(), function(thePlayer)
 		-- The player fell off the bike because onClientVehicleStartExit was not triggered.
 		if isVehicleLocked(source) then
 			triggerServerEvent("lockUnlockOutsideVehicle", thePlayer, source)
-			outputChatBox("Your bike has been automatically unlocked because you fell off.", 255, 0, 0)
+			outputChatBox("Tu bicicleta fue bloqueada automaticamente dado que te caiste.", 255, 0, 0)
 		end
 		clientStartExit = false
 		triggerServerEvent("vehicle:realinvehicle", resourceRoot, thePlayer, 0)

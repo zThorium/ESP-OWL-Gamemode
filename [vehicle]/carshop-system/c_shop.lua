@@ -94,7 +94,7 @@ function carshop_buyCar_click()
 		end
 		triggerServerEvent("carshop:buyCar", theVehicle, sourcestr)
 	else
-		outputChatBox("No tienes espacio en tu inventario para una llave", 0, 255, 0)
+		outputChatBox("No tienes espacio en tu inventario para una llave.", 0, 255, 0)
 	end
 	carshop_buyCar_close()
 end

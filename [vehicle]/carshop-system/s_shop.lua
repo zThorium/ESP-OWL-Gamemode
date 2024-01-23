@@ -116,7 +116,7 @@ function carshop_updateVehicles( forceUpdate )
 
 					local vehicle_shop_id = tonumber(vehicleData["id"])
 					if not (vehicle and vehBrand and vehModel and vehPrice and vehTax and vehYear and vehicle_shop_id) then
-						outputDebugString("failed to spawn a "..data[1])
+						outputDebugString("Se produjo un fallo al generar un "..data[1])
 						--next
 					else
 
@@ -180,14 +180,14 @@ function refreshCarShops(thePlayer, _, fromvehmang)
 		killTimer(refreshTimer)
 		carshop_updateVehicles(true)
 		refreshTimer = setTimer( carshop_updateVehicles, 1000*60*minute, 0, false )
-		outputChatBox("Carshops refreshed, Timer restarted.", thePlayer, 0, 255, 0)
+		outputChatBox("Concesionarios actualizados, Contador reiniciado.", thePlayer, 0, 255, 0)
 
 		local staffUsername = getElementData(thePlayer, "account:username")
 		local staffTitle = exports.global:getPlayerAdminTitle(thePlayer)
-		exports.global:sendMessageToAdmins("[CARSHOPS] "..staffTitle.." "..staffUsername.." Manually Refreshed the Carshops.")
+		exports.global:sendMessageToAdmins("[CONCES] "..staffTitle.." "..staffUsername.." a actualizado los concesionarios manualmente.")
 		exports.logs:dbLog(thePlayer, 4, thePlayer, "RESETCARSHOP")
 	else
-		outputChatBox("You must now be a lead admin to use this function.", thePlayer, 255, 0, 0)
+		outputChatBox("Tu debes ser al menos un administrador principal para usar esta función.", thePlayer, 255, 0, 0)
 	end
 end
 addCommandHandler("restartcarshops", refreshCarShops)
@@ -445,8 +445,8 @@ function notifyEveryoneWhoOrderedThisModel(shopname, shopnicename, vehicle_shop_
 					local playerName = exports.global:getPlayerName(player)
 					local itemName = vehYear.." "..vehBrand.." "..vehModel
 
-					exports.global:sendLocalText(player, "*"..playerName.." receives a text message.", 255, 51, 102, 30, {}, true)
-					outputChatBox("["..languagename.."] SMS from "..shopnicename..": Hello! As you have ordered, we now have a "..itemName.." in stock for $"..exports.global:formatMoney(vehPrice)..". Come check it out!" , player, 120, 255, 80)
+					exports.global:sendLocalText(player, "*"..playerName.." recibe un mensaje de texto.", 255, 51, 102, 30, {}, true)
+					outputChatBox("["..languagename.."] SMS de "..shopnicename..": Hola! como tu ordenaste, nosotros disponemos de "..itemName.." es stock por $"..exports.global:formatMoney(vehPrice)..". ven a ver!" , player, 120, 255, 80)
 				end
 			end
 		end
@@ -458,7 +458,7 @@ function isAlreadySpawned(shopID, randomID)
 		if isElement(v["vehicle"]) then
 			local id = getElementData(v["vehicle"], "vehicle_shop_id")
 			if id == randomID then
-				outputDebugString("Carshop / Spawn duplicado, reintentando..")
+				outputDebugString("Concesionarios / Spawn duplicado, reintentando..")
 				return true
 			end
 		end
