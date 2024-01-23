@@ -22,7 +22,7 @@ function drawTombPlates()
 					local textToDraw = string.gsub(tombInfo.charactername or "Unknown", "_", " ")
 					local textToDraw2 = "○ "..(tombInfo.born or "Unknown").." ○"
 					local textToDraw3 = "○ "..(tombInfo.dead or "Unknown").." ○"
-					local textToDraw4 = string.upper(tombInfo.tomb_text and ("'"..tombInfo.tomb_text.."'") or "'Rest In Peace'")
+					local textToDraw4 = string.upper(tombInfo.tomb_text and ("'"..tombInfo.tomb_text.."'") or "'Descansa en Paz'")
 
 					local fontWidth1 = dxGetTextWidth(textToDraw, 1, font)
 					local fontWidth2 = dxGetTextWidth(textToDraw2)

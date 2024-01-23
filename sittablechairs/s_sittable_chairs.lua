@@ -2,7 +2,7 @@ function sitOnChair(x, y, z, rz, chair, offset)
 	setPedRotation(source, rz-180)
 	setElementFrozen(client, true)
 	exports.global:applyAnimation( source, "FOOD", "FF_Sit_Look", -1, true, false, true)
-	exports.global:sendLocalMeAction(source, "sits down on the chair.")
+	exports.global:sendLocalMeAction(source, "se sienta en la silla.")
 	for k,v in ipairs(getElementsByType("player")) do
 		if (v~=source) then
 			triggerClientEvent(v,"csit",source,x,y,z)
@@ -21,7 +21,7 @@ function standUp(chair)
 	removeAnim( client )
 	setTimer(removeAnim, 200, 1, client)
 	setElementFrozen(client, false)
-	exports.global:sendLocalMeAction(client, "stands up from the chair.")
+	exports.global:sendLocalMeAction(client, "se levanta de la silla.")
 	
 	for k,v in ipairs(getElementsByType("player")) do
 		if (v~=client) then
@@ -54,7 +54,7 @@ addEventHandler("chair:allocate", root,
 		for k, v in pairs(haxChairs) do
 			if v.d == getElementDimension(client) and v.i == getElementInterior(client) then
 				if same(v.x, x) and same(v.y, y) and same(v.z, z) then
-					outputChatBox("That seat is already occupied!", client, 255, 0, 0)
+					outputChatBox("¡Ese asiento ya está ocupado!", client, 255, 0, 0)
 					return
 				end
 			end

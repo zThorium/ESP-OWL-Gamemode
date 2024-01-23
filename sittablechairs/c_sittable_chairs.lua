@@ -106,7 +106,7 @@ function useChair(chair)
 	local data = chairData[getElementModel(chair)]
 	
 	if getElementData(localPlayer, "recovery") then
-		outputChatBox("You cannot sit on a chair whilst in recovery.", 255, 0, 0)
+		outputChatBox("No puedes sentarte en una silla mientras estás en recuperación.", 255, 0, 0)
 		return false
 	end
 
@@ -119,7 +119,7 @@ function useChair(chair)
 		sitGUI(data.rotateable, rz + data.rotation)
 	end
 	
-	outputChatBox("You are now sitting down on a chair. Press M then click on yourself to stand up.", 255, 195, 14)
+	outputChatBox("Ahora estás sentado en una silla. Presiona M y luego haz clic en ti mismo para levantarte.", 255, 195, 14)
 end
 
 function attemptToSitOnChair(chair)
@@ -130,7 +130,7 @@ function attemptToSitOnChair(chair)
 			useChair(chair)
 		end
 	else
-		outputChatBox("You are too far from that chair, get closer!", 255, 0, 0)
+		outputChatBox("Estás muy lejos de esa silla, acércate.!", 255, 0, 0)
 	end
 end
 
