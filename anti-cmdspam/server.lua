@@ -20,11 +20,11 @@ function onCmd( commandName )
 		spam[source] = tonumber(spam[source] or 0) + 1
 		local playerName = getPlayerName( source ):gsub('_', ' ')
 		if spam[source] == 25 then
-			outputChatBox('   Please try not to spam too much or you will have your commands disabled.', source, 255,0,0)
-			exports.global:sendMessageToAdmins("[ANTI-CMDSPAM] Detected Player '" .. playerName .. "' for possibly spamming "..tonumber(spam[source]).." commands / "..(antispamCooldown/1000).." seconds. ('/"..commandName.."').")
+			outputChatBox('   Intente no enviar demasiado spam o sus comandos estarán deshabilitados..', source, 255,0,0)
+			exports.global:sendMessageToAdmins("[ANTI-CMDSPAM] Jugador detectado '" .. playerName .. "' por posible spam "..tonumber(spam[source]).." comandos / "..(antispamCooldown/1000).." segundos. ('/"..commandName.."').")
 		elseif spam[source] > 50 then
-			exports.global:sendMessageToAdmins("[ANTI-CMDSPAM] Player '" .. playerName .. "' has had his commands disabled spamming "..tonumber(spam[source]).." commands / "..(antispamCooldown/1000).." seconds. ('/"..commandName.."').")
-			outputChatBox('   Your command usage has been disabled.', source, 255,0,0)
+			exports.global:sendMessageToAdmins("[ANTI-CMDSPAM] Jugador '" .. playerName .. "' se le han desactivado los comandos spam "..tonumber(spam[source]).." comandos / "..(antispamCooldown/1000).." segundos. ('/"..commandName.."').")
+			outputChatBox('   Su uso de comandos ha sido deshabilitado.', source, 255,0,0)
 			exports.anticheat:changeProtectedElementDataEx(source, "cmdDisabled", true)
 			spam[source] = 0
 		end
@@ -45,8 +45,8 @@ function onCmd( commandName )
 			if resourceCache[commandName] ~= nil then
 				theResource = resourceCache[commandName]
 			end
-			outputServerLog('[CMD] '.. playerName ..' executed command /'.. commandName ..' from ' .. theResource)
-			outputDebugString('[CMD] '.. playerName ..' executed command /'.. commandName ..' from ' .. theResource)
+			outputServerLog('[CMD] '.. playerName ..' comando ejecutado /'.. commandName ..' por ' .. theResource)
+			outputDebugString('[CMD] '.. playerName ..' comando ejecutado /'.. commandName ..' por ' .. theResource)
 		end
 	else
 		cancelEvent()

@@ -111,7 +111,7 @@ function renderInteriorName()
     if hitPickup and isElement(hitPickup) then
         local theInterior = hitPickup
         makeFonts()
-        local intInst = "Press F to enter"
+        local intInst = "Presiona F para entrar"
         local intStatus = getElementData(theInterior, "status")
         --Draw int name
         local intName = "Elevator"
@@ -132,7 +132,7 @@ function renderInteriorName()
             local protected, details = isProtected(theInterior)
             if protected then
                 textColor = tocolor(0, 255, 0,255)
-                protectedText = "[Inactivity protection remaining: "..details.."]"
+                protectedText = "[Protección por inactividad restante: "..details.."]"
             else
                 local active, details2 = isActive(theInterior)
                 if not active then
@@ -174,7 +174,7 @@ function renderInteriorName()
 			--MS: Draw Address - Only accounts for if it has an actual address set, doesn't account for the main interior's address if it's a sub-int, as that's not really needed here.
 			local intAddress = getElementData(theInterior, "address")
 			if intAddress and intAddress ~= "" then
-				local intAddress = "Address: "..intAddress
+				local intAddress = "Direccion: "..intAddress
 				local intAddress_width = dxGetTextWidth ( intAddress, 1, "default" )
                 local intAddress_left = (scrWidth-intAddress_width)/2
                 local intAddress_height = dxGetFontHeight ( 1, "default" )
@@ -192,30 +192,30 @@ function renderInteriorName()
                 if intStatus.owner > 0 then
                     local ownerName = exports.cache:getCharacterNameFromID(intStatus.owner)
                     if intType == 3 then
-                        intOwner = "Rented by "..(ownerName or "..Loading..")
-                        intInst = "Press F to enter"
+                        intOwner = "Alquilado por "..(ownerName or "..Cargando..")
+                        intInst = "Presiona F para entrar"
                     elseif intType ~= 2 then
-                        intOwner = "Owned by "..(ownerName or "..Loading..")
-                        intInst = "Press F to enter"
+                        intOwner = "Comprado por "..(ownerName or "..Cargando..")
+                        intInst = "Presiona F para entrar"
                     end
                 elseif intStatus.faction > 0 then
                     local ownerName = exports.cache:getFactionNameFromId(intStatus.faction)
                     if intType ~= 2 then
                         intOwner = "Owned by "..(ownerName or "..Loading..")
-                        intInst = "Press F to enter"
+                        intInst = "Presiona F para entrar"
                     end
                 else
                     if intType == 2 then
-                        intOwner = "Owned by no-one"
-                        intInst = "Press F to enter"
+                        intOwner = "Comprado por nadie"
+                        intInst = "Presiona F para entrar"
                     elseif intType == 3 then
                         local intPrice = exports.global:formatMoney(intStatus.cost)
-                        intOwner = "For rent: $"..intPrice
-                        intInst = "Press F to rent"
+                        intOwner = "Por renta: $"..intPrice
+                        intInst = "Presiona F para alquilar"
                     else
                         local intPrice = exports.global:formatMoney(intStatus.cost)
-                        intOwner = "For sale: $"..intPrice
-                        intInst = "Press F to purchase"
+                        intOwner = "A la Venta: $"..intPrice
+                        intInst = "Presiona F para comprar"
                         local url = getElementData(theInterior, 'interior_id') and exports.cache:getImage(-tonumber(getElementData(theInterior, 'interior_id')))
                         dxDrawImage ( img_l, img_t, img_w, img_h, url and url.tex or ':resources/loading.jpg' )
                     end
@@ -256,9 +256,9 @@ function renderInteriorName()
             end
         end
 
-        dxDrawText ( intName or "Unknown Interior", n_l+textShadowDistance , n_t+textShadowDistance , n_r+textShadowDistance, n_b+textShadowDistance, tocolor(0,0,0,255),
+        dxDrawText ( intName or "Interior desconocido", n_l+textShadowDistance , n_t+textShadowDistance , n_r+textShadowDistance, n_b+textShadowDistance, tocolor(0,0,0,255),
                     1, intNameFont, "center", "center", false, true )
-        dxDrawText ( intName or "Unknown Interior", n_l , n_t , n_r, n_b, textColor,
+        dxDrawText ( intName or "Interior desconocido", n_l , n_t , n_r, n_b, textColor,
                     1, intNameFont, "center", "center", false, true )
 
         --Draw instructions

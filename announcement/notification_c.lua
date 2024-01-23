@@ -235,11 +235,11 @@ local GUIEditor = {
 function openNoti(noti)
 	closeNoti()
 	exports.global:playSoundSuccess()
-	GUIEditor.window[1] = guiCreateWindow(631, 387, 474, 215, "Notification", false)
+	GUIEditor.window[1] = guiCreateWindow(631, 387, 474, 215, "Notificación", false)
 	guiWindowSetSizable(GUIEditor.window[1], false)
 	exports.global:centerWindow(GUIEditor.window[1])
 	GUIEditor.memo[1] = guiCreateMemo(9, 23, 455, 152, noti.title.."\n\n"..(noti.details and noti.details or ""), false, GUIEditor.window[1])
-	GUIEditor.button[1] = guiCreateButton(12, 181, 452, 24, "Close", false, GUIEditor.window[1])
+	GUIEditor.button[1] = guiCreateButton(12, 181, 452, 24, "Cerrar", false, GUIEditor.window[1])
 	addEventHandler("onClientGUIClick", GUIEditor.button[1], function()
 		if source == GUIEditor.button[1] then
 			closeNoti()

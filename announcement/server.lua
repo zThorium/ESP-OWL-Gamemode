@@ -14,7 +14,7 @@ addCommandHandler("ann",
 
 		if isLoggedIn and (integration:isPlayerTrialAdmin(player) or integration:isPlayerSupporter(player)) then
 			if not (...) then
-				outputChatBox("SYNTAX: /" .. commandName .. " [Message]", player, 255, 194, 14)
+				outputChatBox("SYNTAX: /" .. commandName .. " [Mensaje]", player, 255, 194, 14)
 				return
 			end
 
@@ -24,13 +24,13 @@ addCommandHandler("ann",
 
 			for _, arrayPlayer in ipairs(players) do
 				if integration:isPlayerTrialAdmin(player) then
-					triggerClientEvent(arrayPlayer, "announcement:post", arrayPlayer, "Admin Announcement: " .. message, 255, 194, 14, 1)
+					triggerClientEvent(arrayPlayer, "announcement:post", arrayPlayer, "Admin anuncio: " .. message, 255, 194, 14, 1)
 				elseif integration:isPlayerSupporter(player) then
-					triggerClientEvent(arrayPlayer, "announcement:post", arrayPlayer, "SUP Announcement: " .. message, 255, 100, 150, 1)
+					triggerClientEvent(arrayPlayer, "announcement:post", arrayPlayer, "SUP anuncio: " .. message, 255, 100, 150, 1)
 				end
 			end
 			outputConsole("Adm/SUPCmd: " .. message)
-			exports.global:sendMessageToAdmins("Adm/SUPCmd: " .. username .. " made an announcement")
+			exports.global:sendMessageToAdmins("Adm/SUPCmd: " .. username .. " hizo un anuncio")
 			exports.logs:dbLog(player, 4, player, "ANN " .. message)
 		end
 	end,

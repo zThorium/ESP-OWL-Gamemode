@@ -7,21 +7,21 @@ function ATMCardInteractions(theATM, item, absX, absY, atmLocationName )
 	local rightclick = exports.rightclick
 
 	local row = {}
-	local rcMenu = rightclick:create("An ATM card is stuck in the slot")
+	local rcMenu = rightclick:create("Una tarjeta de cajero automático está atascada en la ranura.")
 
-	row.use = rightclick:addRow("Use ATM card")
+	row.use = rightclick:addRow("Usar tarjeta de cajero automático")
 	addEventHandler( "onClientGUIClick", row.use, function ()
 		closeATMCardInteractions()
 		requestATMInterfacePIN(theATM, atmLocationName)
 	end, false )
 
-	row.take = rightclick:addRow("Take ATM card")
+	row.take = rightclick:addRow("Tomar tarjeta de cajero automático")
 	addEventHandler( "onClientGUIClick", row.take, function ()
 		closeATMCardInteractions()
 		triggerServerEvent("bank:takeOutATMCard", localPlayer, theATM, item)
 	end, false )
 
-	row.leave = rightclick:addRow("Leave It")
+	row.leave = rightclick:addRow("Dejalo")
 	addEventHandler( "onClientGUIClick", row.leave, closeATMCardInteractions , false )
 end
 addEvent("bank:ATMCardInteractions", true)
@@ -48,7 +48,7 @@ function requestATMInterfacePIN(theATM, atmLocationName)
 		local x = scrWidth/2 - (width/2)
 		local y = scrHeight/2 - (height/2)
 
-		wPIN = guiCreateWindow(x, y, width, height, "ATM Machine #"..getElementData(theATM, "dbid").." at "..(atmLocationName or "Unknown Area"), false)
+		wPIN = guiCreateWindow(x, y, width, height, "Cajero automático #"..getElementData(theATM, "dbid").." en "..(atmLocationName or "Area Desconocida"), false)
 			guiWindowSetSizable(wPIN, false)
 
 		local tabPanel = guiCreateTabPanel(0.05, 0.05, 0.9, 0.85, true, wPIN)
@@ -63,7 +63,7 @@ function requestATMInterfacePIN(theATM, atmLocationName)
             guiSetFont(Label_Keypad_Number,"sa-gothic")
             guiLabelSetVerticalAlign(Label_Keypad_Number,"center")
             guiLabelSetHorizontalAlign(Label_Keypad_Number,"center",false)
-		Label_Error = guiCreateLabel(20,90,220,30,"Please enter 4 digitals of PIN Code",false,tabPersonal)
+		Label_Error = guiCreateLabel(20,90,220,30,"Por favor ingrese 4 dígitos del código PIN",false,tabPersonal)
 			guiLabelSetVerticalAlign(Label_Error,"center")
             guiLabelSetHorizontalAlign(Label_Error,"center",false)
         local Button_1 = guiCreateButton(0+posXOffset,116+posYOffset,78,66,"1",false,tabPersonal)
@@ -148,13 +148,13 @@ function requestATMInterfacePIN(theATM, atmLocationName)
 			playSoundFrontEnd ( soundID )
 		end, false )
 
-		bEnter = guiCreateButton(20,268+posYOffset,225,66,"Enter",false,tabPersonal)
+		bEnter = guiCreateButton(20,268+posYOffset,225,66,"Entrar",false,tabPersonal)
 		addEventHandler( "onClientGUIClick", bEnter, function ()
 			guiSetEnabled(bEnter, false)
 			triggerServerEvent("bank:checkPINCode", localPlayer, theATM, enteredCode)
 		end, false )
 
-        local bClose = guiCreateButton(20,344+posYOffset,225,66,"Exit",false,tabPersonal)
+        local bClose = guiCreateButton(20,344+posYOffset,225,66,"Salir",false,tabPersonal)
 		addEventHandler( "onClientGUIClick", bClose, function ()
 			closeATMInterfacePIN()
 			triggerServerEvent("bank:ejectATMCard", localPlayer, theATM)
@@ -184,19 +184,19 @@ function respondToATMInterfacePIN(Label_Error_Msg, r,g,b, action, otherInfo)
 	end
 
 	if action == "cardRemoved" then
-		exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "ATM Machine is not working properly due to ATM card was removed.")
+		exports.hud:sendBottomNotification(localPlayer, "ATM Maquina", "El cajero automático no funciona correctamente debido a que se extrajo la tarjeta del cajero automático.")
 		setTimer(closeATMInterfacePIN, 2000, 1)
 	elseif action == "failedLessThan3" then
-		exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Access Denied. Entering incorrect PIN more than 3 times, ATM machine will swallow the card. ("..otherInfo.."/3)")
+		exports.hud:sendBottomNotification(localPlayer, "ATM Maquina", "Acceso denegado. Al ingresar el PIN incorrecto más de 3 veces, el cajero automático se tragará la tarjeta. ("..otherInfo.."/3)")
 		guiSetEnabled(bEnter, true)
 	elseif action == "failedMoreThan3" then
-		exports.hud:sendBottomNotification(source, "ATM Machine", "Access Denied ("..otherInfo.."/3). ATM machine has swallowed your ATM card. Please contact the Bank.")
+		exports.hud:sendBottomNotification(source, "ATM Maquina", "Access Denied ("..otherInfo.."/3). El cajero automático se ha tragado su tarjeta de cajero automático. Por favor contacta al banco.")
 		setTimer(closeATMInterfacePIN, 2000, 1)
 	elseif action == "locked" then
-		exports.hud:sendBottomNotification(source, "ATM Machine", "ATM Card Number '"..otherInfo.."' is locked and not usable, please contact the Bank.")
+		exports.hud:sendBottomNotification(source, "ATM Maquina", "ATM Numero Tarjeta '"..otherInfo.."' está bloqueado y no se puede utilizar, comuníquese con el banco.")
 		guiSetEnabled(bEnter, true)
 	elseif action == "success" then
-		exports.hud:sendBottomNotification(source, "ATM Machine", "Access Granted!")
+		exports.hud:sendBottomNotification(source, "ATM Maquina", "Acceso permitido!")
 	elseif action == "changedPIN"  then
 		guiSetEnabled(bEnter, true)
 		if otherInfo == "ok" then
@@ -242,27 +242,27 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 		local x = scrWidth/2 - (width/2)
 		local y = scrHeight/2 - (height/2)
 
-		guiATMGranted = guiCreateWindow(x, y, width, height, "ATM Machine #"..getElementData(theATM, "dbid").." at "..(atmLocationName or "Unknown Area"), false)
+		guiATMGranted = guiCreateWindow(x, y, width, height, "ATM Maquina #"..getElementData(theATM, "dbid").." en "..(atmLocationName or "Area Desconocida"), false)
 		guiWindowSetSizable(guiATMGranted, false)
 
 		tabPanel = guiCreateTabPanel(0.05, 0.05, 0.9, 0.85, true, guiATMGranted)
 
-		tabPersonal = guiCreateTab("Personal Banking", tabPanel)
-		tabPersonalTransactions = guiCreateTab("Transactions History", tabPanel)
-		tabChangePin = guiCreateTab("Change PIN", tabPanel)
+		tabPersonal = guiCreateTab("Banca personal", tabPanel)
+		tabPersonalTransactions = guiCreateTab("Historial de transacciones", tabPanel)
+		tabChangePin = guiCreateTab("Cambiar PIN", tabPanel)
 		setElementData(tabChangePin,"theATM", theATM)
 		createTheRestOf(tabChangePin, isPinCodeDefault)
 
 		local hoursplayed = getElementData(localPlayer, "hoursplayed")
 
-		local lBankName = guiCreateLabel(0.1, 0.05, 0.9, 0.05, "Card Owner:                           "..(cardInfo[1] or "Unknown"):gsub("_", " "), true, tabPersonal)
+		local lBankName = guiCreateLabel(0.1, 0.05, 0.9, 0.05, "Dueño Tarjeta:                           "..(cardInfo[1] or "Desconocido"):gsub("_", " "), true, tabPersonal)
 		guiSetFont(lBankName, "default-bold-small")
 
-		local lBankNumber = guiCreateLabel(0.1, 0.1, 0.9, 0.05, "Bank Account Number:       "..(cardInfo[2] or "Unknown"), true, tabPersonal)
+		local lBankNumber = guiCreateLabel(0.1, 0.1, 0.9, 0.05, "Número de cuenta bancaria:       "..(cardInfo[2] or "Desconocido"), true, tabPersonal)
 		guiSetFont(lBankNumber, "default-bold-small")
 
 		local posYOffset = 0.2
-		bClose = guiCreateButton(0.75, 0.91, 0.2, 0.1, "Close", true, guiATMGranted)
+		bClose = guiCreateButton(0.75, 0.91, 0.2, 0.1, "Cerrar", true, guiATMGranted)
 		addEventHandler("onClientGUIClick", bClose, function()
 			hideATMGrantedGUI()
 			triggerServerEvent("bank:ejectATMCard", localPlayer, theATM)
@@ -275,7 +275,7 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 
 		if withdrawable then
 			-- WITHDRAWAL PERSONAL
-			lWithdrawP = guiCreateLabel(0.1, 0.15+posYOffset, 0.2, 0.05, "Withdraw:", true, tabPersonal)
+			lWithdrawP = guiCreateLabel(0.1, 0.15+posYOffset, 0.2, 0.05, "Retirar:", true, tabPersonal)
 			guiSetFont(lWithdrawP, "default-bold-small")
 
 			tWithdrawP = guiCreateEdit(0.22, 0.13+posYOffset, 0.2, 0.075, "0", true, tabPersonal)
@@ -286,18 +286,18 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				end
 			end, false)
 
-			bWithdrawP = guiCreateButton(0.44, 0.13+posYOffset, 0.2, 0.075, "Withdraw", true, tabPersonal)
+			bWithdrawP = guiCreateButton(0.44, 0.13+posYOffset, 0.2, 0.075, "Retirar", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bWithdrawP, function()
 				local amount = tonumber2(guiGetText(tWithdrawP))
 				local money = balance
 
 				local oldamount = getElementData( lastUsedATM, "withdrawn" ) or 0
 				if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Please enter a positive amount!")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "Por favor ingrese una cantidad positiva!")
 				elseif (amount>money) then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "You do not have enough funds.")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "No tienes suficientes fondos.")
 				elseif not _depositable and limitedwithdraw ~= 0 and oldamount + amount > limitedwithdraw then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "This ATM only allows you to withdraw $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "Este cajero automático sólo te permite retirar $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
 				else
 					setElementData( lastUsedATM, "withdrawn", oldamount + amount, false )
 					setTimer(
@@ -311,13 +311,13 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				end
 			end, false)
 		else
-			lWithdrawP = guiCreateLabel(0.1, 0.15+posYOffset, 0.5, 0.05, "This ATM does not support the withdraw function.", true, tabPersonal)
+			lWithdrawP = guiCreateLabel(0.1, 0.15+posYOffset, 0.5, 0.05, "Este cajero automático no admite la función de retiro.", true, tabPersonal)
 			guiSetFont(lWithdrawP, "default-bold-small")
 		end
 
 		if (depositable) then
 			-- DEPOSIT PERSONAL
-			lDepositP = guiCreateLabel(0.1, 0.25+posYOffset, 0.2, 0.05, "Deposit:", true, tabPersonal)
+			lDepositP = guiCreateLabel(0.1, 0.25+posYOffset, 0.2, 0.05, "Depósito:", true, tabPersonal)
 			guiSetFont(lDepositP, "default-bold-small")
 
 			tDepositP = guiCreateEdit(0.22, 0.23+posYOffset, 0.2, 0.075, "0", true, tabPersonal)
@@ -328,13 +328,13 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				end
 			end, false)
 
-			bDepositP = guiCreateButton(0.44, 0.23+posYOffset, 0.2, 0.075, "Deposit", true, tabPersonal)
+			bDepositP = guiCreateButton(0.44, 0.23+posYOffset, 0.2, 0.075, "Depósito", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bDepositP, function()
 				local amount = tonumber2(guiGetText(tDepositP))
 				if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Please enter a positive amount!")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "Por favor ingrese una cantidad positiva!")
 				elseif not exports.global:hasMoney(localPlayer, amount) then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "You do not have enough funds.")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "No tienes suficientes fondos.")
 				else
 					hideATMGrantedGUI()
 					--outputDebugString("asd")
@@ -342,8 +342,8 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				end
 			end, false)
 		else
-			lDepositP = guiCreateLabel(0.1, 0.25+posYOffset, 0.5, 0.05, "This ATM does not support the deposit function.", true, tabPersonal)
-			lCharge = guiCreateLabel(0.1, 0.29+posYOffset, 0.5, 0.05, "This ATM has a $2 fee for use.", true, tabPersonal)
+			lDepositP = guiCreateLabel(0.1, 0.25+posYOffset, 0.5, 0.05, "Este cajero automático no admite la función de depósito.", true, tabPersonal)
+			lCharge = guiCreateLabel(0.1, 0.29+posYOffset, 0.5, 0.05, "Este cajero automático tiene una tarifa de $2 por su uso..", true, tabPersonal)
 			guiSetFont(lDepositP, "default-bold-small")
 			guiSetFont(lCharge, "default-bold-small")
 
@@ -355,7 +355,7 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 
 		if hoursplayed >= 12 then
 			-- TRANSFER PERSONAL
-			lTransferP = guiCreateLabel(0.1, 0.45+posYOffset, 0.2, 0.05, "Transfer:", true, tabPersonal)
+			lTransferP = guiCreateLabel(0.1, 0.45+posYOffset, 0.2, 0.05, "Transferir:", true, tabPersonal)
 			guiSetFont(lTransferP, "default-bold-small")
 
 			tTransferP = guiCreateEdit(0.22, 0.43+posYOffset, 0.2, 0.075, "0", true, tabPersonal)
@@ -366,7 +366,7 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				end
 			end, false)
 
-			bTransferP = guiCreateButton(0.44, 0.43+posYOffset, 0.2, 0.075, "Transfer to", true, tabPersonal)
+			bTransferP = guiCreateButton(0.44, 0.43+posYOffset, 0.2, 0.075, "Transferir a", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bTransferP, function()
 				local amount = tonumber2(guiGetText(tTransferP))
 				local money = balance
@@ -374,13 +374,13 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 				local bankAccNo = guiGetText(eTransferP)
 
 				if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Please enter a positive amount!")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "Por favor ingrese una cantidad positiva!")
 				elseif (amount>money) then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "You do not have enough funds.")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "No tienes suficientes fondos.")
 				elseif reason == "" then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Please enter a reason for the transfer!")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "Por favor ingresa un motivo para la transferencia!")
 				elseif bankAccNo == "" then
-					exports.hud:sendBottomNotification(localPlayer, "ATM Machine", "Please enter the target Bank Account Number for the transfer!")
+					exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", "¡Ingrese el número de cuenta bancaria objetivo para la transferencia!")
 				else
 					triggerServerEvent("bank:transferATMMoneyToPersonal", localPlayer, theATM, amount, bankAccNo, reason)
 					guiSetEnabled(guiATMGranted,false)
@@ -395,12 +395,12 @@ function openATMGrantedGUI(cardInfo, depositable, limit, withdrawable, theATM, a
 			end, false)
 
 
-			lTransferPReason = guiCreateLabel(0.1, 0.55+posYOffset, 0.2, 0.05, "Reason:", true, tabPersonal)
+			lTransferPReason = guiCreateLabel(0.1, 0.55+posYOffset, 0.2, 0.05, "Razón:", true, tabPersonal)
 			guiSetFont(lTransferPReason, "default-bold-small")
 
-			tTransferPReason = guiCreateEdit(0.22, 0.54+posYOffset, 0.74, 0.075, "<What is this transaction for?>", true, tabPersonal)
+			tTransferPReason = guiCreateEdit(0.22, 0.54+posYOffset, 0.74, 0.075, "<¿Para qué es esta transacción?>", true, tabPersonal)
 			addEventHandler("onClientGUIClick", tTransferPReason, function()
-				if guiGetText(tTransferPReason) == "<What is this transaction for?>" then
+				if guiGetText(tTransferPReason) == "<¿Para qué es esta transacción?>" then
 					guiSetText(tTransferPReason, "")
 				end
 			end, false)
@@ -440,7 +440,7 @@ function respondToPendingTransfer(msg, closeATMGUI)
 			guiSetEnabled(guiATMGranted,true)
 		end
 	end
-	exports.hud:sendBottomNotification(localPlayer, "ATM Machine", msg)
+	exports.hud:sendBottomNotification(localPlayer, "ATM Cajero", msg)
 end
 addEvent("bank:respondToPendingTransfer", true)
 addEventHandler("bank:respondToPendingTransfer", getRootElement(), respondToPendingTransfer)
@@ -458,7 +458,7 @@ function createTheRestOf(parent, isPinCodeDefault)
 		guiSetFont(Label_Keypad_Number,"sa-gothic")
 		guiLabelSetVerticalAlign(Label_Keypad_Number,"center")
 		guiLabelSetHorizontalAlign(Label_Keypad_Number,"center",false)
-	Label_Error = guiCreateLabel(20,100,220,115,"Please enter 4 digitals of new PIN Code",false,parent)
+	Label_Error = guiCreateLabel(20,100,220,115,"Ingrese 4 dígitos del nuevo código PIN",false,parent)
 		guiLabelSetVerticalAlign(Label_Error,"top", true)
 		guiLabelSetHorizontalAlign(Label_Error,"center",true)
 	local Button_1 = guiCreateButton(0+posXOffset,116+posYOffset,78,66,"1",false,parent)
@@ -543,7 +543,7 @@ function createTheRestOf(parent, isPinCodeDefault)
 		playSoundFrontEnd ( soundID )
 	end, false )
 
-	bEnter = guiCreateButton(20,344+posYOffset,225,66,"Enter",false,parent)
+	bEnter = guiCreateButton(20,344+posYOffset,225,66,"Entrar",false,parent)
 	addEventHandler( "onClientGUIClick", bEnter, function ()
 		guiSetEnabled(bEnter, false)
 		triggerServerEvent("bank:changePIN", localPlayer, theATM, enteredCode)
@@ -607,7 +607,7 @@ function clickATM(button, state, absX, absY, wx, wy, wz, element)
 					return false
 				end
 				if isAnyOneElseAround(element) then
-					exports.hud:sendBottomNotification(localPlayer,"ATM Machine is already in use", "Please get in line, an ATM machine can serve only one people at once.")
+					exports.hud:sendBottomNotification(localPlayer,"El cajero automático ya está en uso", "Por favor haga fila, un cajero automático solo puede atender a una persona a la vez.")
 				else
 					triggerServerEvent( "bank:checkInsideATMMachine", localPlayer, element, absX, absY )
 				end
@@ -637,15 +637,15 @@ function atmCardExisted()
 	if not (wGui) then
 		showCursor(true)
 		--NEW CARD
-		wGui = guiCreateWindow(X, Y, Width, Height, "'You've already had one in our system. What should I do?'", false )
-		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Terminate my previous card, make a new one please.", true, wGui )
+		wGui = guiCreateWindow(X, Y, Width, Height, "'Ya tienes uno en nuestro sistema. ¿Qué tengo que hacer?'", false )
+		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Cancelar mi tarjeta anterior, crear una nueva por favor.", true, wGui )
 		addEventHandler( "onClientGUIClick", option[1], function()
 			closeAtmCardExisted()
 			chooseAtm()
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 		--CANCEL CARD
-		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah, nevermind.", true, wGui )
+		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah, olvidalo.", true, wGui )
 		addEventHandler( "onClientGUIClick", option[6], function()
 			closeAtmCardExisted()
 		end, false )
@@ -682,8 +682,8 @@ function chooseAtm()
 	if not (wGui) then
 		showCursor(true)
 		--NEW CARD
-		wGui = guiCreateWindow(X, Y, Width, Height, "'What kind of ATM card do you want?'", false )
-		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "ATM Card - Basic ($50)\nCan be used to make transactions with a very limited amount per day. (($10,000 per 5 hours))", true, wGui )
+		wGui = guiCreateWindow(X, Y, Width, Height, "'¿Qué tipo de tarjeta de cajero automático quieres?'", false )
+		option[1] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Tarjeta de cajero automático - Básica ($45.000)\nSe puede utilizar para realizar transacciones con un monto muy limitado por día. ($10,000 por 5 horas))", true, wGui )
 		if exports.donators:isVisible() then
 			guiSetEnable(option[1], false)
 		else
@@ -694,14 +694,14 @@ function chooseAtm()
 		end
 		verticalPos = verticalPos + 1/numberOfButtons
 
-		option[2] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "ATM Card - Premium ($200)\nCan be used to make transactions with a fair amount per day. (($50,000 per 5 hours))", true, wGui )
+		option[2] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Tarjeta de cajero automático - Premium ($140.000)\nSe puede utilizar para realizar transacciones con una cantidad justa por día. ($50,000 por 5 horas))", true, wGui )
 		addEventHandler( "onClientGUIClick", option[2], function()
 			closeChooseAtm()
 			triggerServerEvent("bank:applyForNewATMCard", localPlayer, true, 2)
 		end, false )
 		verticalPos = verticalPos + 1/numberOfButtons
 
-		option[3] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "ATM Card - Ultimate ($500)\nCan be used to make transactions with unlimited amount per day.", true, wGui )
+		option[3] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "ATM Card - Ultimate ($450.000)\nSe puede utilizar para realizar transacciones con monto ilimitado por día..", true, wGui )
 		addEventHandler( "onClientGUIClick", option[3], function()
 			closeChooseAtm()
 			triggerServerEvent("bank:applyForNewATMCard", localPlayer, true, 3)
@@ -709,7 +709,7 @@ function chooseAtm()
 		verticalPos = verticalPos + 1/numberOfButtons
 
 		--CANCEL CARD
-		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah, nevermind.", true, wGui )
+		option[6] = guiCreateButton( 0.05, verticalPos, 0.9, 1/numberOfButtons, "Ah, olvidalo.", true, wGui )
 		addEventHandler( "onClientGUIClick", option[6], function()
 			closeChooseAtm()
 		end, false )
@@ -742,7 +742,7 @@ function hardenATM()
 			count = count + 1
 		end
 	end
-	outputDebugString(count.." ATM(s) have been hardened.")
+	outputDebugString(count.." ATM(s) Han sido endurecidos.")
 end
 
 function onHandlePINChange(button, pressOrRelease)
@@ -761,7 +761,7 @@ function onHandlePINChange(button, pressOrRelease)
 					cancelEvent() -- prevent default keybinds from triggering
 				end
 			else
-				outputDebugString("ATM: button for " .. tostring(name) .. " went away")
+				outputDebugString("ATM: boton para " .. tostring(name) .. " irte")
 			end
 		end
 	end

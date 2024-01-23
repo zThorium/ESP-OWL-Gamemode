@@ -7,7 +7,7 @@ local lastBanTimer = nil
 function banAPlayer(thePlayer, commandName, targetPlayer, hours, ...)
 	if exports["integration"]:isPlayerTrialAdmin(thePlayer) then
 		if not (targetPlayer) or not (hours) or not tonumber(hours) or tonumber(hours)<0 or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID] [Time in Hours, 0 = Infinite] [Reason]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Nick / ID] [Tiempo en Horas, 0 = Infinito] [Razon]", thePlayer, 255, 194, 14)
 		else
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
 			local targetPlayerSerial = getPlayerSerial(targetPlayer)
@@ -33,14 +33,14 @@ function banAPlayer(thePlayer, commandName, targetPlayer, hours, ...)
 					local rhours = hours
 					-- text value
 					if (hours==0) then
-						hours = "Permanent"
+						hours = "Permanente"
 					elseif (hours==1) then
-						hours = "1 Hour"
+						hours = "1 Hora"
 					else
-						hours = hours .. " Hours"
+						hours = hours .. " Horas"
 					end
 
-					if hours == "Permanent" then
+					if hours == "Permanente" then
 						reason = reason .. " (" .. hours .. ")"
 					else
 						reason = reason .. " (" .. hours .. ")"
@@ -79,33 +79,33 @@ function banAPlayer(thePlayer, commandName, targetPlayer, hours, ...)
 
 					adminTitle = exports.global:getAdminTitle1(thePlayer)
 					if (hiddenAdmin==1) then
-						adminTitle = "A hidden admin"
+						adminTitle = "Un admin oculto"
 					end
 
 					if string.lower(commandName) == "sban" then
-						exports.global:sendMessageToAdmins("[SILENT-BAN] " .. adminTitle .. " silently banned " .. targetPlayerName .. ". (" .. hours .. ")")
-						exports.global:sendMessageToAdmins("[SILENT-BAN] Reason: " .. reason .. ".")
+						exports.global:sendMessageToAdmins("[SILENT-BAN] " .. adminTitle .. " baneado silenciosamente " .. targetPlayerName .. ". (" .. hours .. ")")
+						exports.global:sendMessageToAdmins("[SILENT-BAN] Razón: " .. reason .. ".")
 					elseif string.lower(commandName) == "forceapp" then
 						for index, player in pairs( getElementsByType("player")) do
 							if tonumber( getElementData( player, "punishment_notification_selector") ) ~= 1 or player == thePlayer or player == targetPlayer then
 								outputChatBox("[FA] "..adminTitle .. " " .. playerName .. " forced app " .. targetPlayerName .. ".", player, 255,0,0)
-								hours = "Permanent"
-								reason = "Failure to meet server standard. Please improve yourself then appeal on forums.owlgaming.net"
-								outputChatBox("[FA]: Reason: " .. reason .. "." ,player, 255,0,0)
+								hours = "Permanente"
+								reason = "Incumplimiento del estándar del servidor. Por favor, mejore y luego apele en discord"
+								outputChatBox("[FA]: Razon: " .. reason .. "." ,player, 255,0,0)
 							end
 						end
 					else
 						for index, player in pairs( getElementsByType("player")) do
 							if tonumber( getElementData( player, "punishment_notification_selector") ) ~= 1 or player == thePlayer or player == targetPlayer then
-								outputChatBox("[BAN] " .. adminTitle .. " banned " .. targetPlayerName .. ". (" .. hours .. ")", player, 255,0,0)
-								outputChatBox("[BAN] Reason: " .. reason .. ".", player, 255,0,0)
+								outputChatBox("[BAN] " .. adminTitle .. " baneo " .. targetPlayerName .. ". (" .. hours .. ")", player, 255,0,0)
+								outputChatBox("[BAN] Razón: " .. reason .. ".", player, 255,0,0)
 							end
 						end
 					end
-					exports.global:sendMessageToAdmins("/showban for details.")
+					exports.global:sendMessageToAdmins("/showban para detalles.")
 				else
-					outputChatBox(" This player is a higher level admin than you.", thePlayer, 255, 0, 0)
-					outputChatBox(playerName .. " attempted to execute the ban command on you.", targetPlayer, 255, 0 ,0)
+					outputChatBox(" Este jugador es un administrador de nivel superior al tuyo.", thePlayer, 255, 0, 0)
+					outputChatBox(playerName .. " intentó ejecutar el comando de prohibición en usted.", targetPlayer, 255, 0 ,0)
 				end
 			end
 		end
@@ -119,11 +119,11 @@ function makeForumThread(targetPlayerName, bannedUserName, hours, reason, adminU
 	local adminUsername = string.gsub(adminUsername, "_", " ")
 	local forumTitle = "("..bannedUserName..") "..targetPlayerName.." - "..hours
 	local content = {
-		{"Banned username:", bannedUserName},
-		{"Character name:", targetPlayerName},
-		{"Banned by:", adminUsername},
-		{"Period:", hours},
-		{"Reason:", reason}
+		{"Nombre Usuario Baneado:", bannedUserName},
+		{"Nombre Personaje:", targetPlayerName},
+		{"Baneado por:", adminUsername},
+		{"Tiempo:", hours},
+		{"Razón:", reason}
 	}
 
 	triggerEvent("integration:createForumThread", resourceRoot, 61, forumTitle, content, banrecordId)
@@ -137,7 +137,7 @@ function offlineBanAPlayer(thePlayer, commandName, targetUsername, hours, ...)
 		else
 			hours = tonumber(hours) or 0
 			if (hours>168) then
-				outputChatBox("You cannot ban for more than 7 days (168 Hours).", thePlayer, 255, 194, 14)
+				outputChatBox("No puedes banear por más de 7 días (168 Horas).", thePlayer, 255, 194, 14)
 				return false
 			end
 			local qh = dbQuery(mysql:getConn("core"), "SELECT * FROM `accounts` WHERE `username`=? LIMIT 1", targetUsername)
@@ -158,8 +158,8 @@ function offlineBanAPlayer(thePlayer, commandName, targetUsername, hours, ...)
 					local adminTitle = exports.global:getAdminTitle1(thePlayer)
 					local adminUsername = getElementData(thePlayer, "account:username" )
 					if (tonumber(result[1].admin) > thePlayerPower) then
-						outputChatBox(" '"..targetUsername.."' is a higher level admin than you.", thePlayer, 255, 0, 0)
-						exports.global:sendMessageToAdmins("AdmWrn: "..adminTitle.." attempted to execute the ban command on higher admin '"..targetUsername.."'.")
+						outputChatBox(" '"..targetUsername.."' es un administrador de nivel superior al tuyo.", thePlayer, 255, 0, 0)
+						exports.global:sendMessageToAdmins("AdmWrn: "..adminTitle.." intentó ejecutar el comando de prohibición en un administrador superior '"..targetUsername.."'.")
 						return false
 					end
 
@@ -185,11 +185,11 @@ function offlineBanAPlayer(thePlayer, commandName, targetUsername, hours, ...)
 					local rhours = hours
 					-- text value
 					if (hours==0) then
-						hours = "Permanent"
+						hours = "Permanente"
 					elseif (hours==1) then
-						hours = "1 Hour"
+						hours = "1 Hora"
 					else
-						hours = hours .. " Hours"
+						hours = hours .. " Horas"
 					end
 					reason = reason .. " (" .. hours .. ")"
 					exports['admin-system']:addAdminHistory(user['id'], thePlayer, reason, 2, rhours)
@@ -234,21 +234,21 @@ function offlineBanAPlayer(thePlayer, commandName, targetUsername, hours, ...)
 						adminTitle = "A hidden admin"
 					end
 					if string.lower(commandName) == "soban" then
-						exports.global:sendMessageToAdmins("[OFFLINE-BAN]: " .. adminTitle .. " " .. adminUsername .. " silently banned " .. targetUsername .. ". (" .. hours .. ")")
-						exports.global:sendMessageToAdmins("[OFFLINE-BAN]: Reason: " .. reason .. ".")
+						exports.global:sendMessageToAdmins("[OFFLINE-BAN]: " .. adminTitle .. " " .. adminUsername .. " baneado silenciosamente " .. targetUsername .. ". (" .. hours .. ")")
+						exports.global:sendMessageToAdmins("[OFFLINE-BAN]: Razón: " .. reason .. ".")
 					else
 						for index, player in pairs(getElementsByType("player")) do
 							if tonumber(getElementData(player, "punishment_notification_selector")) ~= 1 or player == thePlayer then
 								outputChatBox("[OFFLINE-BAN]: " .. adminTitle .. " " .. adminUsername .. " banned " .. targetUsername .. ". (" .. hours .. ")", player, 255, 0, 51)
-								outputChatBox("[OFFLINE-BAN]: Reason: " .. reason .. ".", player, 255, 0, 51)
+								outputChatBox("[OFFLINE-BAN]: Razón: " .. reason .. ".", player, 255, 0, 51)
 							end
 						end
 					end
 
-					exports.global:sendMessageToAdmins("/showban for details.")
+					exports.global:sendMessageToAdmins("/showban para detalles.")
 				end
 			else
-				outputChatBox("Player Username not found!", thePlayer, 255, 194, 14)
+				outputChatBox("Nombre de usuario del jugador no encontrado!", thePlayer, 255, 194, 14)
 				return false
 			end
 		end
@@ -283,7 +283,7 @@ function banPlayerSerial(thePlayer, commandName, serial, ...)
 							kickPlayer(value, thePlayer, reason)
 						end
 					end
-					exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." has banned serial number '"..serial.."' permanently for '"..reason.."'. /showban for details.")
+					exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." ha prohibido el número de serie '"..serial.."' permanentemente para '"..reason.."'. /showban para detalles.")
 				else
 					dbFree(banQ)
 				end
@@ -299,8 +299,8 @@ addCommandHandler("serialban", banPlayerSerial, false, false)
 function banPlayerIP(thePlayer, commandName, ip, ...)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not ip or not string.len(ip) or string.len(ip) > 15 or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [IP Address] [Reason]", thePlayer, 255, 194, 14)
-			outputChatBox("You can use * for IP range ban. For example: 192.168.*.*", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [IP Direccion] [Razón]", thePlayer, 255, 194, 14)
+			outputChatBox("Puede utilizar * para prohibir el rango de IP. Por ejemplo: 192.168.*.*", thePlayer, 255, 194, 14)
 		else
 			local reason = table.concat({...}, " ")
 			local id = addToBan(nil, nil, ip, getElementData(thePlayer,"account:id"), reason)
@@ -321,7 +321,7 @@ function banPlayerIP(thePlayer, commandName, ip, ...)
 							kickPlayer(value, thePlayer, reason)
 						end
 					end
-					exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." has banned IP Address '"..ip.."' permanently for '"..reason.."'. /showban for details.")
+					exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." ha prohibido la dirección IP '"..ip.."' permanentemente para '"..reason.."'. /showban para detalles.")
 				else
 					dbFree(banQ)
 				end
@@ -338,12 +338,12 @@ function banPlayerAccount(thePlayer, commandName, account, ...)
 	end
 
 	if not account or not (...) then
-		return outputChatBox("SYNTAX: /" .. commandName .. " [Username] [Reason]", thePlayer, 255, 194, 14)
+		return outputChatBox("SYNTAX: /" .. commandName .. " [Usuario] [Razón]", thePlayer, 255, 194, 14)
 	end
 
 	local accountid = exports.cache:getIdFromUsername(account)
 	if not accountid then
-		outputChatBox("Account '"..account.."' does not existed.", thePlayer, 255, 0, 0)
+		outputChatBox("Cuenta '"..account.."' no existe.", thePlayer, 255, 0, 0)
 		return false
 	end
 
@@ -366,7 +366,7 @@ function banPlayerAccount(thePlayer, commandName, account, ...)
 			end
 		end
 
-		exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." has banned account '"..(account).."' permanently for '"..reason.."'. /showban for details.")
+		exports.global:sendMessageToAdmins("[BAN] "..exports.global:getPlayerFullIdentity(thePlayer).." ha prohibido la cuenta '"..(account).."' permanentemente para '"..reason.."'. /showban para detalles.")
 	else
 		dbFree(banQ)
 	end
@@ -379,14 +379,14 @@ function unbanPlayer(thePlayer, commandName, id)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not id or not tonumber(id) then
 			outputChatBox("SYNTAX: /" .. commandName .. " [Ban ID]", thePlayer, 255, 194, 14)
-			outputChatBox("/showban [Username or serial or IP] to retrieve ban ID.", thePlayer, 255, 194, 14)
+			outputChatBox("/showban [Username or serial or IP] para recuperar la identificación de prohibición.", thePlayer, 255, 194, 14)
 		else
 			if tonumber(getElementData(thePlayer, "cmd:unban")) ~= tonumber(id) then
 				banQ = dbQuery(mysql:getConn("core"), "SELECT * FROM bans WHERE id=? LIMIT 1", id)
 				ban = dbPoll(banQ, 10000)
 				if ban and #ban == 1 and ban[1]['id'] and tonumber(ban[1]['id']) then
 					printBanInfo(thePlayer,ban[1])
-					outputChatBox("You're about to remove this ban record. Please type /unban "..ban[1]['id'].." once again to proceed.", thePlayer, 255, 194, 14)
+					outputChatBox("Estás a punto de eliminar este registro de prohibición. Por favor escribe /unban "..ban[1]['id'].." una vez más para proceder.", thePlayer, 255, 194, 14)
 					setElementData(thePlayer, "cmd:unban", ban[1]['id'])
 				else
 					dbFree(banQ)
@@ -414,11 +414,11 @@ function unbanPlayer(thePlayer, commandName, id)
 							exports['admin-system']:addAdminHistory(ban[1]['account'], thePlayer, "UNBAN", 2 , 0)
 						end
 						local hiddenAdmin = getElementData(thePlayer, "hiddenadmin")
-						exports.global:sendMessageToAdmins("[UNBAN] "..exports.global:getPlayerFullIdentity(thePlayer).." has removed ban record #"..ban[1]['id']..". /showban for details.")
+						exports.global:sendMessageToAdmins("[UNBAN] "..exports.global:getPlayerFullIdentity(thePlayer).." ha eliminado el registro de prohibición #"..ban[1]['id']..". /showban para detalles.")
 					end
 				else
 					dbFree(banQ)
-					outputChatBox("Opps, sorry that ban must have been lifted.", thePlayer, 255, 194, 14)
+					outputChatBox("Opps, Lo siento, esa prohibición debe haber sido levantada..", thePlayer, 255, 194, 14)
 				end
 			end
 		end
@@ -439,19 +439,19 @@ function checkForSerialOrIpBan(playerNick, playerIP, playerUsername, playerSeria
 		lastBanTimer = setTimer(function()
 			lastBan = nil
 		end, 1000*60*5,1) --5 minutes
-		local banText = "You are banned. Please appeal on www.owlgaming.net"
+		local banText = "Estás prohibido. Por favor apele en discord"
 		local bannedSerial = false
 		local bannedIp = false
 		if result[1]['mta_serial'] == playerSerial then
-		 	banText = "Your serial is banned. Please appeal on www.owlgaming.net"
+		 	banText = "Tu serie está prohibida. Por favor apele en discord"
 		 	bannedSerial = playerSerial
 		end
 		if result[1]['ip'] == playerIP then
 			bannedIp = playerIP
-			banText = "Your IP address is banned. Please appeal on www.owlgaming.net"
+			banText = "Su dirección IP está prohibida. Por favor apele en discord"
 		end
 		cancelEvent(true, banText)
-		exports.global:sendMessageToAdmins("[BAN] Rejected connection from"..(bannedSerial and (" serial: '"..tostring(bannedSerial).."'") or "" ).." "..(bannedIp and (" IP: '"..tostring(bannedIp).."'") or "")..". /showban for details.")
+		exports.global:sendMessageToAdmins("[BAN] Conexión rechazada de"..(bannedSerial and (" serial: '"..tostring(bannedSerial).."'") or "" ).." "..(bannedIp and (" IP: '"..tostring(bannedIp).."'") or "")..". /showban para detalles.")
 		return true
 	else
 		dbFree(resultQ)
@@ -470,8 +470,8 @@ function checkForSerialOrIpBan(playerNick, playerIP, playerUsername, playerSeria
 				lastBanTimer = setTimer(function()
 					lastBan = nil
 				end, 1000*60*5,1) --5 minutes
-				cancelEvent(true, "Your IP address is rangebanned. Please appeal on www.owlgaming.net")
-				exports.global:sendMessageToAdmins("[RANGE-BAN] Rejected connection from IP: '"..playerIP.."' as range IP '"..ban.ip.."' is banned. /showban for details.")
+				cancelEvent(true, "Su dirección IP está prohibida en el rango. Por favor apele en discord")
+				exports.global:sendMessageToAdmins("[RANGE-BAN] Conexión rechazada desde IP: '"..playerIP.."' como rango IP '"..ban.ip.."' está prohibido. /showban para detalles.")
 				return true
 			end
 		end
@@ -492,7 +492,7 @@ function proxyCheck()
 	local ip = getPlayerIP(thePlayer)
 
 	if not ip then
-		outputDebugString("[BANS] Couldn't get player IP, letting him in..")
+		outputDebugString("[BANS] No se pudo obtener la IP del jugador, dejándolo entrar..")
 		return false
 	end
 
@@ -511,20 +511,20 @@ function proxyCheck()
 		-- Conditions
 
 		if (count == 0) then -- Failed to retrieve information. Let them in.
-			outputDebugString("[BANS] Couldn't get any info..")
+			outputDebugString("[BANS] No se pudo obtener ninguna información..")
 			return false
 		elseif isLocalIP( ip ) then
-			outputDebugString( "[BANS] Local IP detected: "..ip )
+			outputDebugString( "[BANS] IP local detectada: "..ip )
 			return false
 		elseif count == 1 then -- Only returned the IP address meaning either their IP is spoofed or internal.
 			outputDebugString("[BANS] Spoofed: ".. ip)
-			outputChatBox("There is a issue with your IP address. Please contact us at www.olwgaming.net", thePlayer, 255, 0, 0)
-			kickPlayer(thePlayer, "There is a issue with your IP address.")
+			outputChatBox("Hay un problema con su dirección IP. Por favor contáctenos en www.olwgaming.net", thePlayer, 255, 0, 0)
+			kickPlayer(thePlayer, "Hay un problema con su dirección IPs.")
 			return true
 		elseif (not country_code) or (country_code == "A1") or (not longitude) or (not latitude) or (longitude == 0 and latitude == 0) then
-			outputChatBox("Your IP address is not genuine. Please connct without using a proxy service.", thePlayer, 255, 0, 0)
-			exports.global:sendMessageToAdmins("[BANS] Rejected connection from IP: '"..ip.."' as it has automatically been detected as non-genuine.")
-			kickPlayer(thePlayer, "Your IP address is not genuine.")
+			outputChatBox("Su dirección IP no es genuina. Conéctese sin utilizar un servicio proxy.", thePlayer, 255, 0, 0)
+			exports.global:sendMessageToAdmins("[BANS] Conexión rechazada desde IP: '"..ip.."' ya que se ha detectado automáticamente como no original.")
+			kickPlayer(thePlayer, "Su dirección IP no es genuina.")
 			return true
 		end
 	end )
@@ -544,7 +544,7 @@ function checkAccountBan(userid)
 		lastBanTimer = setTimer(function()
 			lastBan = nil
 		end, 1000*60*5,1) --5 minutes
-		exports.global:sendMessageToAdmins("[BAN] Rejected connection from account "..exports.cache:getUsernameFromId(userid).." as account is banned. /showban for details.")
+		exports.global:sendMessageToAdmins("[BAN] Conexión rechazada de la cuenta "..exports.cache:getUsernameFromId(userid).." ya que la cuenta está prohibida. /showban para más detalles.")
 		return true
 	else
 		dbFree(resultQ)
@@ -565,17 +565,17 @@ function showBanDetails(thePlayer, commandName, clue)
 						if ban and ban.id then
 							printBanInfo(thePlayer, ban)
 						else
-							outputChatBox("Sorry, the ban you're looking for must have been lifted.", thePlayer, 255, 194, 14)
+							outputChatBox("Lo sentimos, la prohibición que buscas debe haberse levantado.", thePlayer, 255, 194, 14)
 						end
 					end
 				elseif #result == 0 then
-					outputChatBox("There is no ban records with serial or IP or account name matched the keyword '"..clue.."'.", thePlayer, 255, 194, 14)
+					outputChatBox("No hay registros de prohibición con serie o IP o nombre de cuenta que coincida con la palabra clave '"..clue.."'.", thePlayer, 255, 194, 14)
 				end
 			end, {thePlayer, clue, username}, mysql:getConn("core"), "SELECT * FROM bans WHERE id=? OR mta_serial=? OR ip=? OR account=? ORDER BY date DESC", clue, clue, clue, username)
 		elseif lastBan then
 			printBanInfo(thePlayer, lastBan)
 		else
-			outputChatBox("SYNTAX: /" .. commandName .. " [Serial or IP or Username]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Serie o IP o nombre de usuario]", thePlayer, 255, 194, 14)
 		end
 	end
 end
@@ -586,7 +586,7 @@ function printBanInfo(thePlayer, result)
 	outputChatBox("===========BAN RECORD #"..result['id'].."============", thePlayer, 255, 194, 14)
 
 	local bannedAccount = exports.cache:getUsernameFromId(result['account'])
-	outputChatBox("Account: "..(bannedAccount and bannedAccount or "N/A"), thePlayer, 255, 194, 14)
+	outputChatBox("Cuenta: "..(bannedAccount and bannedAccount or "N/A"), thePlayer, 255, 194, 14)
 
 	local bannedSerial = nil
 	if result['mta_serial'] then
@@ -601,18 +601,18 @@ function printBanInfo(thePlayer, result)
 	outputChatBox("IP: "..(bannedIp and bannedIp or "N/A"), thePlayer, 255, 194, 14)
 
 	local banningAdmin = exports.cache:getUsernameFromId(result['admin'])
-	outputChatBox("Banned by admin: "..(banningAdmin and banningAdmin or "N/A"), thePlayer, 255, 194, 14)
+	outputChatBox("Baneado por: "..(banningAdmin and banningAdmin or "N/A"), thePlayer, 255, 194, 14)
 
 	local bannedDate = nil
 	if result['date'] then
 		bannedDate = result['date']
 	end
-	outputChatBox("Banned Date: "..(bannedDate and bannedDate or "N/A"), thePlayer, 255, 194, 14)
+	outputChatBox("Fecha Baneo: "..(bannedDate and bannedDate or "N/A"), thePlayer, 255, 194, 14)
 	local bannedUntil = 'Permanent'
 	if result['until'] then
 		bannedUntil = result['until']
 	end
-	outputChatBox("Banned Until: "..bannedUntil, thePlayer, 255, 194, 14)
+	outputChatBox("Baneado hasta: "..bannedUntil, thePlayer, 255, 194, 14)
 	local bannedReason = nil
 	if result['reason'] then
 		bannedReason = result['reason']

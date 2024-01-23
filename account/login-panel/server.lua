@@ -229,7 +229,7 @@ function playerLogin(username,password,checksave)
 						setElementDataEx(client, "admin:monitor", accountData_mta["monitored"], true)
 					end
 				
-					exports.logs:dbLog("ac"..tostring(accountData["id"]), 27, "ac"..tostring(accountData["id"]), "Connected from "..getPlayerIP(client) .. " - "..getPlayerSerial(client) )
+					exports.logs:dbLog("ac"..tostring(accountData["id"]), 27, "ac"..tostring(accountData["id"]), "Conectado desde "..getPlayerIP(client) .. " - "..getPlayerSerial(client) )
 					mysql:query_free("UPDATE `account_details` SET `mtaserial`='" .. mysql:escape_string(getPlayerSerial(client)) .. "' WHERE `account_id`='".. mysql:escape_string(tostring(accountData["id"])) .."'")
 					dbExec(exports.mysql:getConn("core"), "UPDATE `accounts` SET `ip`=? WHERE id=?", getPlayerIP(client), accountData.id)
 					--[[
@@ -271,10 +271,10 @@ function playerLogin(username,password,checksave)
 
 					goFromLoginToSelectionScreen(client)
 				else
-					triggerClientEvent(client,"set_warning_text",client,"Login","Account name '".. username .."' doesn't exist!")
+					triggerClientEvent(client,"set_warning_text",client,"Login","Nombre de Cuenta '".. username .."' no existe!")
 				end
 			else
-				triggerClientEvent(client,"set_warning_text",client,"Login","Failed to connect to game server. Database error!")
+				triggerClientEvent(client,"set_warning_text",client,"Login","No se pudo conectar al servidor del juego. Error de la base de datos!")
 				dbFree(qh)
 			end
 		end, {username, password, checksave, client}, exports.mysql:getConn("core"), preparedQuery, username)
@@ -363,7 +363,7 @@ function playerRegister(username,password,confirmPassword, email)
 
 				local usernameExisted = mysql:fetch_assoc(Q2)
 				if (mysql:num_rows(Q2) > 0) and usernameExisted["id"] ~= "1" then
-					triggerClientEvent(client,"set_warning_text",client,"Register","Multiple Accounts is not allowed (Existed: "..tostring(usernameExisted["username"])..")")
+					triggerClientEvent(client,"set_warning_text",client,"Register","No se permiten varias cuentas (Existen: "..tostring(usernameExisted["username"])..")")
 					return false
 				end
 				mysql:free_result(Q2)

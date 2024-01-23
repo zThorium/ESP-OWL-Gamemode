@@ -45,16 +45,16 @@ local factionSelectGUI = {
 function startFactionSelect(fTable, selectiontype)
 	closeFactionSelect()
 
-    factionSelectGUI.window[1] = guiCreateWindow(766, 385, 399, 121, "Select the faction to view", false)
+    factionSelectGUI.window[1] = guiCreateWindow(766, 385, 399, 121, "Seleccione la facción para ver", false)
     guiWindowSetSizable(factionSelectGUI.window[1], false)
 	guiSetAlpha(factionSelectGUI.window[1], 0.89)
 	exports.global:centerWindow(factionSelectGUI.window[1])
 	guiSetEnabled(wBank, false)
 
-    factionSelectGUI.button[1] = guiCreateButton(13, 64, 111, 42, "Cancel", false, factionSelectGUI.window[1])
+    factionSelectGUI.button[1] = guiCreateButton(13, 64, 111, 42, "Cancelar", false, factionSelectGUI.window[1])
     guiSetProperty(factionSelectGUI.button[1], "NormalTextColour", "FFAAAAAA")
-    factionSelectGUI.combobox[1] = guiCreateComboBox(13, 35, 366, 113, "Select the faction to view", false, factionSelectGUI.window[1])
-    factionSelectGUI.button[2] = guiCreateButton(268, 64, 111, 42, "Accept", false, factionSelectGUI.window[1])
+    factionSelectGUI.combobox[1] = guiCreateComboBox(13, 35, 366, 113, "Seleccione la facción para ver", false, factionSelectGUI.window[1])
+    factionSelectGUI.button[2] = guiCreateButton(268, 64, 111, 42, "Acceptar", false, factionSelectGUI.window[1])
     guiSetProperty(factionSelectGUI.button[2], "NormalTextColour", "FFAAAAAA")  
 
     for k,v in pairs(fTable) do
@@ -64,7 +64,7 @@ function startFactionSelect(fTable, selectiontype)
     addEventHandler("onClientGUIClick", factionSelectGUI.button[2], function()
     	local name = guiComboBoxGetItemText(factionSelectGUI.combobox[1], guiComboBoxGetSelected(factionSelectGUI.combobox[1]))
 
-    	if name ~= "Select the faction to view" then
+    	if name ~= "Seleccione la facción para ver" then
     		if selectiontype == 2 then
 				triggerServerEvent("tellTransfersBusiness", localPlayer, name)
 			else
@@ -72,7 +72,7 @@ function startFactionSelect(fTable, selectiontype)
 			end
     		closeFactionSelect()
     	else
-    		outputChatBox("Please select a faction.", 255, 0, 0)
+    		outputChatBox("Por favor selecciona una facción.", 255, 0, 0)
     	end
     end, false)
 
@@ -132,25 +132,25 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 			[1] = true,
 		}
 
-		wBank = guiCreateWindow(x, y, width, height, "Bank of Los Santos | "..version.."", false)
+		wBank = guiCreateWindow(x, y, width, height, "Banco de los santos | "..version.."", false)
 		guiWindowSetSizable(wBank, false)
 
 		tabPanel = guiCreateTabPanel(0.05, 0.05, 0.9, 0.85, true, wBank)
 		addEventHandler( "onClientGUITabSwitched", tabPanel, function() updateTabStuff(fTable) end )
 
-		tabPersonal = guiCreateTab("Personal Banking", tabPanel)
-		tabPersonalTransactions = guiCreateTab("Personal Transactions", tabPanel)
+		tabPersonal = guiCreateTab("Banquero Personal", tabPanel)
+		tabPersonalTransactions = guiCreateTab("Transacciones Personales", tabPanel)
 
 		local hoursplayed = getElementData(localPlayer, "hoursplayed") or 0
 		if (exports.global:countTable(fTable) > 0) then
-			tabBusiness = guiCreateTab("Business Banking", tabPanel)
+			tabBusiness = guiCreateTab("Banca de negocios", tabPanel)
 
 			lBalanceB = guiCreateLabel(0.1, 0.05, 0.9, 0.05, "Balance: $", true, tabBusiness)
 			guiSetFont(lBalanceB, "default-bold-small")
 
 			if (withdrawable) then
 			-- WITHDRAWAL BUSINESS
-				lWithdrawB = guiCreateLabel(0.1, 0.15, 0.2, 0.05, "Withdraw:", true, tabBusiness)
+				lWithdrawB = guiCreateLabel(0.1, 0.15, 0.2, 0.05, "Retirar:", true, tabBusiness)
 				guiSetFont(lWithdrawB, "default-bold-small")
 
 				tWithdrawB = guiCreateEdit(0.22, 0.13, 0.2, 0.075, "0", true, tabBusiness)
@@ -161,16 +161,16 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 					end
 				end, false)
 
-				bWithdrawB = guiCreateButton(0.44, 0.13, 0.2, 0.075, "Withdraw", true, tabBusiness)
+				bWithdrawB = guiCreateButton(0.44, 0.13, 0.2, 0.075, "Retirar", true, tabBusiness)
 				addEventHandler("onClientGUIClick", bWithdrawB, withdrawMoneyBusiness, false)
 			else
-				lWithdrawB = guiCreateLabel(0.1, 0.15, 0.5, 0.05, "This ATM does not support the withdraw function.", true, tabBusiness)
+				lWithdrawB = guiCreateLabel(0.1, 0.15, 0.5, 0.05, "Este cajero automático no admite la función de retiro.", true, tabBusiness)
 				guiSetFont(lWithdrawB, "default-bold-small")
 			end
 
 			if (depositable) then
 				-- DEPOSIT BUSINESS
-				lDepositB = guiCreateLabel(0.1, 0.25, 0.2, 0.05, "Deposit:", true, tabBusiness)
+				lDepositB = guiCreateLabel(0.1, 0.25, 0.2, 0.05, "Depósito:", true, tabBusiness)
 				guiSetFont(lDepositB, "default-bold-small")
 
 				tDepositB = guiCreateEdit(0.22, 0.23, 0.2, 0.075, "0", true, tabBusiness)
@@ -181,10 +181,10 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 					end
 				end, false)
 
-				bDepositB = guiCreateButton(0.44, 0.23, 0.2, 0.075, "Deposit", true, tabBusiness)
+				bDepositB = guiCreateButton(0.44, 0.23, 0.2, 0.075, "Depositar", true, tabBusiness)
 				addEventHandler("onClientGUIClick", bDepositB, depositMoneyBusiness, false)
 			else
-				lDepositB = guiCreateLabel(0.1, 0.25, 0.5, 0.05, "This ATM does not support the deposit function.", true, tabBusiness)
+				lDepositB = guiCreateLabel(0.1, 0.25, 0.5, 0.05, "Este cajero automático no admite la función de depósito.", true, tabBusiness)
 				guiSetFont(lDepositB, "default-bold-small")
 
 				if limitedwithdraw > 0 and withdrawable then
@@ -195,7 +195,7 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 
 			if hoursplayed >= 12 then
 				-- TRANSFER BUSINESS
-				lTransferB = guiCreateLabel(0.1, 0.45, 0.2, 0.05, "Transfer:", true, tabBusiness)
+				lTransferB = guiCreateLabel(0.1, 0.45, 0.2, 0.05, "Transferir:", true, tabBusiness)
 				guiSetFont(lTransferB, "default-bold-small")
 
 				tTransferB = guiCreateEdit(0.22, 0.43, 0.2, 0.075, "0", true, tabBusiness)
@@ -206,29 +206,29 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 					end
 				end, false)
 
-				bTransferB = guiCreateButton(0.44, 0.43, 0.2, 0.075, "Transfer to", true, tabBusiness)
+				bTransferB = guiCreateButton(0.44, 0.43, 0.2, 0.075, "Transferir a", true, tabBusiness)
 				addEventHandler("onClientGUIClick", bTransferB, transferMoneyBusiness, false)
 
-				eTransferB = guiCreateEdit(0.66, 0.43, 0.3, 0.075, "<Bank Account Number>", true, tabBusiness)
+				eTransferB = guiCreateEdit(0.66, 0.43, 0.3, 0.075, "<Número de cuenta bancaria>", true, tabBusiness)
 				addEventHandler("onClientGUIClick", eTransferB, function()
 					if guiGetText(eTransferB) == "<Bank Account Number>" then
 						guiSetText(eTransferB, "")
 					end
 				end, false)
 
-				lTransferBReason = guiCreateLabel(0.1, 0.55, 0.2, 0.05, "Reason:", true, tabBusiness)
+				lTransferBReason = guiCreateLabel(0.1, 0.55, 0.2, 0.05, "Razon:", true, tabBusiness)
 				guiSetFont(lTransferBReason, "default-bold-small")
 
-				tTransferBReason = guiCreateEdit(0.22, 0.54, 0.74, 0.075, "<What is this transaction for?>", true, tabBusiness)
+				tTransferBReason = guiCreateEdit(0.22, 0.54, 0.74, 0.075, "<¿Para qué es esta transacción?>", true, tabBusiness)
 				addEventHandler("onClientGUIClick", tTransferBReason, function()
-					if guiGetText(tTransferBReason) == "<What is this transaction for?>" then
+					if guiGetText(tTransferBReason) == "<¿Para qué es esta transacción?>" then
 						guiSetText(tTransferBReason, "")
 					end
 				end, false)
 			end
 
 			-- TRANSACTION HISTORY
-			tabBusinessTransactions = guiCreateTab("Business Transactions", tabPanel)
+			tabBusinessTransactions = guiCreateTab("Transacciones de negocios", tabPanel)
 
 			gBusinessTransactions = guiCreateGridList(0.02, 0.02, 0.96, 0.96, true, tabBusinessTransactions)
 			for key, value in ipairs( transactionColumns ) do
@@ -236,7 +236,7 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 			end
 		end
 
-		bClose = guiCreateButton(0.75, 0.91, 0.2, 0.1, "Close", true, wBank)
+		bClose = guiCreateButton(0.75, 0.91, 0.2, 0.1, "Cerrar", true, wBank)
 		addEventHandler("onClientGUIClick", bClose, hideBankUI, false)
 
 		local balance = getElementData(localPlayer, "bankmoney")
@@ -250,7 +250,7 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 
 		if withdrawable then
 			-- WITHDRAWAL PERSONAL
-			lWithdrawP = guiCreateLabel(0.1, 0.15, 0.2, 0.05, "Withdraw:", true, tabPersonal)
+			lWithdrawP = guiCreateLabel(0.1, 0.15, 0.2, 0.05, "Retirar:", true, tabPersonal)
 			guiSetFont(lWithdrawP, "default-bold-small")
 
 			tWithdrawP = guiCreateEdit(0.22, 0.13, 0.2, 0.075, "0", true, tabPersonal)
@@ -261,16 +261,16 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 				end
 			end, false)
 
-			bWithdrawP = guiCreateButton(0.44, 0.13, 0.2, 0.075, "Withdraw", true, tabPersonal)
+			bWithdrawP = guiCreateButton(0.44, 0.13, 0.2, 0.075, "Retirar", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bWithdrawP, withdrawMoneyPersonal, false)
 		else
-			lWithdrawP = guiCreateLabel(0.1, 0.15, 0.5, 0.05, "This ATM does not support the withdraw function.", true, tabPersonal)
+			lWithdrawP = guiCreateLabel(0.1, 0.15, 0.5, 0.05, "Este cajero automático no admite la función de retiro.", true, tabPersonal)
 			guiSetFont(lWithdrawP, "default-bold-small")
 		end
 
 		if (depositable) then
 			-- DEPOSIT PERSONAL
-			lDepositP = guiCreateLabel(0.1, 0.25, 0.2, 0.05, "Deposit:", true, tabPersonal)
+			lDepositP = guiCreateLabel(0.1, 0.25, 0.2, 0.05, "Deposito:", true, tabPersonal)
 			guiSetFont(lDepositP, "default-bold-small")
 
 			tDepositP = guiCreateEdit(0.22, 0.23, 0.2, 0.075, "0", true, tabPersonal)
@@ -281,10 +281,10 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 				end
 			end, false)
 
-			bDepositP = guiCreateButton(0.44, 0.23, 0.2, 0.075, "Deposit", true, tabPersonal)
+			bDepositP = guiCreateButton(0.44, 0.23, 0.2, 0.075, "Deposito", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bDepositP, depositMoneyPersonal, false)
 		else
-			lDepositP = guiCreateLabel(0.1, 0.25, 0.5, 0.05, "This ATM does not support the deposit function.", true, tabPersonal)
+			lDepositP = guiCreateLabel(0.1, 0.25, 0.5, 0.05, "Este cajero automático no admite la función de depósito.", true, tabPersonal)
 			guiSetFont(lDepositP, "default-bold-small")
 
 			if limitedwithdraw > 0 and withdrawable then
@@ -295,7 +295,7 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 
 		if hoursplayed >= 12 then
 			-- TRANSFER PERSONAL
-			lTransferP = guiCreateLabel(0.1, 0.45, 0.2, 0.05, "Transfer:", true, tabPersonal)
+			lTransferP = guiCreateLabel(0.1, 0.45, 0.2, 0.05, "Transferir:", true, tabPersonal)
 			guiSetFont(lTransferP, "default-bold-small")
 
 			tTransferP = guiCreateEdit(0.22, 0.43, 0.2, 0.075, "0", true, tabPersonal)
@@ -306,22 +306,22 @@ function showBankUI(fTable, depositable, limit, withdrawable, ped)
 				end
 			end, false)
 
-			bTransferP = guiCreateButton(0.44, 0.43, 0.2, 0.075, "Transfer to", true, tabPersonal)
+			bTransferP = guiCreateButton(0.44, 0.43, 0.2, 0.075, "Transferir a", true, tabPersonal)
 			addEventHandler("onClientGUIClick", bTransferP, transferMoneyPersonal, false)
 
-			eTransferP = guiCreateEdit(0.66, 0.43, 0.3, 0.075, "<Player/Faction Name>", true, tabPersonal)
+			eTransferP = guiCreateEdit(0.66, 0.43, 0.3, 0.075, "<Jugador/Nombre Faccion>", true, tabPersonal)
 			addEventHandler("onClientGUIClick", eTransferP, function()
-				if guiGetText(eTransferP) == "<Player/Faction Name>" then
+				if guiGetText(eTransferP) == "<Jugador/Nombre Faccion>" then
 					guiSetText(eTransferP, "")
 				end
 			end, false)
 
-			lTransferPReason = guiCreateLabel(0.1, 0.55, 0.2, 0.05, "Reason:", true, tabPersonal)
+			lTransferPReason = guiCreateLabel(0.1, 0.55, 0.2, 0.05, "Razon:", true, tabPersonal)
 			guiSetFont(lTransferPReason, "default-bold-small")
 
-			tTransferPReason = guiCreateEdit(0.22, 0.54, 0.74, 0.075, "<What is this transaction for?>", true, tabPersonal)
+			tTransferPReason = guiCreateEdit(0.22, 0.54, 0.74, 0.075, "<¿Para qué es esta transacción?>", true, tabPersonal)
 			addEventHandler("onClientGUIClick", tTransferPReason, function()
-				if guiGetText(tTransferPReason) == "<What is this transaction for?>" then
+				if guiGetText(tTransferPReason) == "<¿Para qué es esta transacción?>" then
 					guiSetText(tTransferPReason, "")
 				end
 			end, false)
@@ -370,11 +370,11 @@ function withdrawMoneyPersonal(button)
 
 		local oldamount = getElementData( lastUsedATM, "withdrawn" ) or 0
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif (amount>money) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		elseif not _depositable and limitedwithdraw ~= 0 and oldamount + amount > limitedwithdraw then
-			outputChatBox("This ATM only allows you to withdraw $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
+			outputChatBox("Este cajero automático sólo te permite retirar $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
 		else
 			setElementData( lastUsedATM, "withdrawn", oldamount + amount, false )
 			setTimer(
@@ -394,9 +394,9 @@ function depositMoneyPersonal(button)
 		local amount = tonumber2(guiGetText(tDepositP))
 
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif not exports.global:hasMoney(localPlayer, amount) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		else
 			hideBankUI()
 			triggerServerEvent("depositMoneyPersonal", localPlayer, amount)
@@ -412,13 +412,13 @@ function transferMoneyPersonal(button)
 		local playername = guiGetText(eTransferP)
 
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif (amount>money) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		elseif reason == "" then
-			outputChatBox("Please enter a reason for the Transfer!", 255, 0, 0)
+			outputChatBox("Por favor ingrese un motivo para la transferencia!", 255, 0, 0)
 		elseif playername == "" then
-			outputChatBox("Please enter the full character name of the reciever!", 255, 0, 0)
+			outputChatBox("¡Ingrese el nombre completo del personaje del receptor!", 255, 0, 0)
 		else
 			triggerServerEvent("transferMoneyToPersonal", localPlayer, nil, playername, amount, reason )
 			guiSetText(tTransferP, "0")
@@ -434,11 +434,11 @@ function withdrawMoneyBusiness(button)
 
 		local oldamount = getElementData( lastUsedATM, "withdrawn" ) or 0
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif (amount>gfactionBalance) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		elseif not _depositable and limitedwithdraw ~= 0 and oldamount + amount > limitedwithdraw then
-			outputChatBox("This ATM only allows you to withdraw $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
+			outputChatBox("Este cajero automático sólo te permite retirar $" .. exports.global:formatMoney( limitedwithdraw - oldamount ) .. ".")
 		else
 			setElementData( lastUsedATM, "withdrawn", oldamount + amount, false )
 			setTimer(
@@ -458,9 +458,9 @@ function depositMoneyBusiness(button)
 		local amount = tonumber2(guiGetText(tDepositB))
 
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif not exports.global:hasMoney(localPlayer, amount) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		else
 			hideBankUI()
 			triggerServerEvent("depositMoneyBusiness", localPlayer, amount, gFactionID)
@@ -475,13 +475,13 @@ function transferMoneyBusiness(button)
 		local reason = guiGetText(tTransferBReason)
 
 		if not amount or amount <= 0 or math.ceil( amount ) ~= amount then
-			outputChatBox("Please enter a positive amount!", 255, 0, 0)
+			outputChatBox("¡Por favor ingrese una cantidad positiva!", 255, 0, 0)
 		elseif (amount>gfactionBalance) then
-			outputChatBox("You do not have enough funds.", 255, 0, 0)
+			outputChatBox("No tienes suficientes fondos.", 255, 0, 0)
 		elseif reason == "" then
-			outputChatBox("Please enter a reason for the Transfer!", 255, 0, 0)
+			outputChatBox("Por favor ingrese un motivo para la transferencia!", 255, 0, 0)
 		elseif playername == "" then
-			outputChatBox("Please enter the full character name of the reciever!", 255, 0, 0)
+			outputChatBox("¡Ingrese el nombre completo del personaje del receptor!", 255, 0, 0)
 		else
 			triggerServerEvent("transferMoneyToPersonal", localPlayer, gFactionID, playername, amount, reason )
 			guiSetText(tTransferB, "0")

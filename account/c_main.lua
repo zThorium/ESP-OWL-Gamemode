@@ -241,7 +241,7 @@ whiteFemales = {12, 31, 38, 39, 40, 41, 53, 54, 55, 56, 64, 75, 77, 85, 86, 87, 
 asianFemales = {38, 53, 54, 55, 56, 88, 141, 169, 178, 224, 225, 226, 263}
 
 local screenX, screenY = guiGetScreenSize( )
-local label = guiCreateLabel( 0, 0, screenX, 15, "oG Script Version "..exports.global:getScriptVersion().."", false )
+local label = guiCreateLabel( 0, 0, screenX, 15, "Version Thorium @Danny_Occean "..exports.global:getScriptVersion().."", false )
 guiSetSize( label, guiLabelGetTextExtent( label ) + 5, 14, false )
 guiSetPosition( label, screenX - guiLabelGetTextExtent( label ) - 5, screenY - 27, false )
 guiSetAlpha( label, 0.5 )
@@ -258,14 +258,14 @@ addEventHandler('onClientGUIClick', label, function()
 	local url = "http://dev.owlgaming.net"
 	--triggerEvent('debug:releases', localPlayer)
 	setClipboard(url)
-	outputChatBox("Copied '".. url .. "' to clipboard!")
+	outputChatBox("Copiado '".. url .. "' al portapapeles!")
 end, false)
 
 function updateSoundLabel(setting)
 	if setting == 0 then 
-		guiSetText(toggleSoundLabel, "Disable Login Music")
+		guiSetText(toggleSoundLabel, "Deshabilitar Musica Login")
 	else 
-		guiSetText(toggleSoundLabel, "Enable Login Music")
+		guiSetText(toggleSoundLabel, "Habilitar Musica Login")
 	end
 end
 
@@ -275,7 +275,7 @@ function stopNameChange(oldNick, newNick)
 
 		if (oldNick~=newNick) and (legitNameChange==0) then
 			triggerServerEvent("resetName", getLocalPlayer(), oldNick, newNick)
-			outputChatBox("Click 'Change Character' if you wish to change your roleplay identity.", 255, 0, 0)
+			outputChatBox("Clickea 'Cambiar Personaje' si deseas cambiar tu identidad de juego de rol..", 255, 0, 0)
 		end
 	end
 end
@@ -283,7 +283,7 @@ addEventHandler("onClientPlayerChangeNick", getRootElement(), stopNameChange)
 
 addEvent("account:showMusicLabel")
 addEventHandler("account:showMusicLabel", root, function()
-	toggleSoundLabel = guiCreateLabel( 0, 0, screenX, 15, "Enable Login Music", false )
+	toggleSoundLabel = guiCreateLabel( 0, 0, screenX, 15, "Habilitar Musica Login", false )
 	guiSetSize( toggleSoundLabel, guiLabelGetTextExtent( toggleSoundLabel ) + 5, 15, false )
 	guiSetPosition( toggleSoundLabel, screenX - guiLabelGetTextExtent( label ) + 30, screenY - 40, false )
 	guiSetAlpha( toggleSoundLabel, 0.5 )

@@ -87,7 +87,7 @@ function open_log_reg_pannel()
 		guiLabelSetVerticalAlign(lbl_about_legth,"center")
 		guiLabelSetHorizontalAlign(lbl_about_legth,"center",false)
 		]]
-		panel.login.remember = guiCreateCheckBox(X + 230,Y + 275-120,100,20,"(Remember me!)",false,false)
+		panel.login.remember = guiCreateCheckBox(X + 230,Y + 275-120,100,20,"(Recuerdame!)",false,false)
 		guiSetFont(panel.login.remember,"default-small")
 
 		panel.login.error = guiCreateLabel(X,Y + 325-120,364,31,"Error_login_tab",false)
@@ -494,39 +494,39 @@ end
 
 function registerValidation(username, password, passwordConfirm, email)
 	if not username or username == "" or not password or password == "" or not passwordConfirm or passwordConfirm == "" or not email or email == ""  then
-		guiSetText(panel.login.toplabel, "Please fill out all fields.")
+		guiSetText(panel.login.toplabel, "Por favor rellene todos los campos.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.len(username) < 3 then
-		guiSetText(panel.login.toplabel, "Username must be 3 characters or longer.")
+		guiSetText(panel.login.toplabel, "El nombre de usuario debe tener 3 caracteres o más.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.len(username) >= 19 then
-		guiSetText(panel.login.toplabel, "Username must be less then 20 characters long.")
+		guiSetText(panel.login.toplabel, "El nombre de usuario debe tener menos de 20 caracteres.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.find(username, ' ') then
-		guiSetText(panel.login.toplabel, "Invalid Username.")
+		guiSetText(panel.login.toplabel, "Nombre de usuario no válido.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.find(password, "'") or string.find(password, '"') then
-		guiSetText(panel.login.toplabel, "Password must not contain ' or "..'"')
+		guiSetText(panel.login.toplabel, "La contraseña no debe contener ' o "..'"')
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.len(password) < 8 then
-		guiSetText(panel.login.toplabel, "Password must be 8 characters or longer.")
+		guiSetText(panel.login.toplabel, "La contraseña debe tener 8 caracteres o más.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.len(password) > 25 then
-		guiSetText(panel.login.toplabel, "Password must be less than 25 characters long.")
+		guiSetText(panel.login.toplabel, "La contraseña debe tener menos de 25 caracteres.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif password ~= passwordConfirm then
-		guiSetText(panel.login.toplabel, "Passwords mismatched!")
+		guiSetText(panel.login.toplabel, "Las contraseñas no coinciden!")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	elseif string.match(username,"%W") then
-		guiSetText(panel.login.toplabel, "\"!@#$\"%'^&*()\" are not allowed in username.")
+		guiSetText(panel.login.toplabel, "\"!@#$\"%'^&*()\" no están permitidos en el nombre de usuario.")
 		guiLabelSetColor ( panel.login.toplabel, 255, 0, 0 )
 		playSoundFrontEnd ( 4 )
 	else
@@ -537,7 +537,7 @@ function registerValidation(username, password, passwordConfirm, email)
 			playSoundFrontEnd ( 4 )
 		else
 			triggerServerEvent("accounts:register:attempt",getLocalPlayer(),username,password,passwordConfirm, email)
-			authen_msg("Register", "Sending request to server.")
+			authen_msg("Registro", "Enviando solicitud al servidor.")
 		end
 	end
 end
@@ -561,7 +561,7 @@ function displayRegisterConpleteText(username)
 	local extend = 100
 	local yoffset = 150
 
-	GUIEditor.window[1] = guiCreateWindow(667, 381, 357, 189+extend, "Congratulations! Account has been successfully created!", false)
+	GUIEditor.window[1] = guiCreateWindow(667, 381, 357, 189+extend, "¡Felicidades! La cuenta ha sido creada exitosamente!", false)
 	exports.global:centerWindow(GUIEditor.window[1])
 	--local x, y = guiGetPosition(GUIEditor.window[1], false)
 	--guiSetPosition(GUIEditor.window[1], x, y+yoffset, false)
@@ -569,18 +569,18 @@ function displayRegisterConpleteText(username)
     guiWindowSetMovable(GUIEditor.window[1], false)
     guiWindowSetSizable(GUIEditor.window[1], false)
     guiSetProperty(GUIEditor.window[1], "AlwaysOnTop", "True")
-    local temp = "An email contains instructions to activate your account has been dispatched, please check your email's inbox.\n\nIf for some reasons you don't receive the email, please check your junk box or try to dispatch another activation email at https://owlgaming.net/account/"
-    GUIEditor.label[1] = guiCreateLabel(8, 50, 339, 121+extend, "Your OwlGaming MTA account for '"..username.."' is almost ready for action!\n\n"..temp.."\n\nSincerely, \nOwlGaming Community OwlGaming Development Team\"", false, GUIEditor.window[1])
+    local temp = "Se ha enviado un correo electrónico que contiene instrucciones para activar su cuenta. Revise la bandeja de entrada de su correo electrónico.\n\nSi por alguna razón no recibe el correo electrónico, verifique su casilla de correo no deseado o intente enviar otro correo electrónico de activación a el discord"
+    GUIEditor.label[1] = guiCreateLabel(8, 50, 339, 121+extend, "Tu cuenta '"..username.."' esta casi lista para la acción!\n\n"..temp.."\n\nAtentamente, \nChileStreet Team\"", false, GUIEditor.window[1])
     guiLabelSetHorizontalAlign(GUIEditor.label[1], "left", true)
 
-    GUIEditor.button[1] = guiCreateButton(10, 153+extend, 337, 26, "Copy Activation Link", false, GUIEditor.window[1])
+    GUIEditor.button[1] = guiCreateButton(10, 153+extend, 337, 26, "Copiar enlace de activación", false, GUIEditor.window[1])
     addEventHandler("onClientGUIClick", GUIEditor.button[1], function()
     	if source == GUIEditor.button[1] then
     		if isElement(GUIEditor.window[1]) then
     			destroyElement(GUIEditor.window[1])
     			GUIEditor = nil
     			switchToLoginPanel()
-    			setClipboard("https://owlgaming.net/account/")
+    			setClipboard("https://discord.gg/MuKMexxJhR")
     		end
     	else
     		cancelEvent()
@@ -667,7 +667,7 @@ function screenStandBy(action, value) -- Maxime / 2015.3.25
 	if action == "add" then
 		screenStandByCurrent = screenStandByCurrent + 1
 		if screenStandByShowing then
-			authen_msg("Login", "Loading prerequisite resources.."..screenStandBy("getPercentage").."%")
+			authen_msg("Login", "Cargando recursos de requisitos previos.."..screenStandBy("getPercentage").."%")
 		end
 		return screenStandByCurrent
 	elseif action == "getCurrent" then
@@ -677,14 +677,14 @@ function screenStandBy(action, value) -- Maxime / 2015.3.25
 	elseif action == "setState" then
 		screenStandByShowing = value
 		if screenStandByShowing then
-			authen_msg("Login", "Loading prerequisite resources.."..screenStandBy("getPercentage").."%")
+			authen_msg("Login", "Cargando recursos de requisitos previos.."..screenStandBy("getPercentage").."%")
 		end
 		screenStandByCurrent = 0
 		return true
 	elseif action == "getPercentage" then
 		local percentage = math.floor(screenStandByCurrent/screenStandByComplete*100)
 		if screenStandByShowing then
-			authen_msg("Login", "Loading prerequisite resources.."..percentage.."%")
+			authen_msg("Login", "Cargando recursos de requisitos previos.."..percentage.."%")
 		end
 		return percentage
 	end

@@ -8,7 +8,7 @@ addEvent("alertAdminsOfSpeedHacks", true)
 addEventHandler("alertAdminsOfSpeedHacks", getRootElement(), showSpeedToAdmins)
 
 function showDMToAdmins(kills)
-	exports.global:sendMessageToAdmins("[Possible DeathMatching] " .. getPlayerName(client) .. ": " .. kills .. " kills in <=2 Minutes.")
+	exports.global:sendMessageToAdmins("[Possible DeathMatching] " .. getPlayerName(client) .. ": " .. kills .. " asesinatos en <=2 Minutos.")
 end
 addEvent("alertAdminsOfDM", true)
 addEventHandler("alertAdminsOfDM", getRootElement(), showDMToAdmins)
@@ -45,7 +45,7 @@ function scanMoneyHacks()
 		local money = hackersMoney[key]
 		local accountID = getElementData(value, "account:id")
 		local adminTitle = exports.global:getPlayerAdminTitle(thePlayer)
-		outputChatBox("AntiCheat: " .. targetPlayerName .. " was auto-banned for Money Hacks. (" .. tostring(money) .. "$)", getRootElement(), 255, 0, 51)
+		outputChatBox("AntiCheat: " .. targetPlayerName .. " Fue baneado automáticamente por Money Hacks. (" .. tostring(money) .. "$)", getRootElement(), 255, 0, 51)
 	end
 end
 setTimer(scanMoneyHacks, 3600000, 0) -- Every 60 minutes

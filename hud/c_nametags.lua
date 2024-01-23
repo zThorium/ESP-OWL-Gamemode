@@ -21,11 +21,11 @@ function moneyUpdateFX(state, amount, toEachother)
 			moneyFloat["moneyYOffset"] = 60
 			moneyFloat["text"] = "+$"..exports.global:formatMoney(amount)
 
-			table.insert(info, {"   - Money: $"..exports.global:formatMoney(money).." ("..moneyFloat["text"]..")"})
+			table.insert(info, {"   - Dinero: $"..exports.global:formatMoney(money).." ("..moneyFloat["text"]..")"})
 			if toEachother then
-				table.insert(info, {"   - Bank money: $"..exports.global:formatMoney(bankmoney-amount)})
+				table.insert(info, {"   - Banco: $"..exports.global:formatMoney(bankmoney-amount)})
 			else
-				table.insert(info, {"   - Bank money: $"..exports.global:formatMoney(bankmoney)})
+				table.insert(info, {"   - Banco: $"..exports.global:formatMoney(bankmoney)})
 			end
 		else
 			triggerEvent("shop:playPayWageSound", localPlayer)
@@ -37,11 +37,11 @@ function moneyUpdateFX(state, amount, toEachother)
 			moneyFloat["moneyYOffset"] = 180
 			moneyFloat["text"] = "-$"..exports.global:formatMoney(amount)
 
-			table.insert(info, {"   - Money: $"..exports.global:formatMoney(money).." ("..moneyFloat["text"]..")"})
+			table.insert(info, {"   - Dinero: $"..exports.global:formatMoney(money).." ("..moneyFloat["text"]..")"})
 			if toEachother then
-				table.insert(info, {"   - Bank money: $"..exports.global:formatMoney(bankmoney+amount)})
+				table.insert(info, {"   - Banco: $"..exports.global:formatMoney(bankmoney+amount)})
 			else
-				table.insert(info, {"   - Bank money: $"..exports.global:formatMoney(bankmoney)})
+				table.insert(info, {"   - Banco: $"..exports.global:formatMoney(bankmoney)})
 			end
 		end
 		triggerEvent("hudOverlay:drawOverlayTopRight", localPlayer, info )

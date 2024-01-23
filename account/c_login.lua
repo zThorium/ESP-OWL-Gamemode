@@ -160,7 +160,7 @@ function checkCredentials()
 	guiSetText(tPassword, "")
 	--appendSavedData("hashcode", "")
 	if (string.len(username)<3) then
-		outputChatBox("Your username is too short. You must enter 3 or more characters.", 255, 0, 0)
+		outputChatBox("Su nombre de usuario es demasiado corto. Debes ingresar 3 o más caracteres.", 255, 0, 0)
 	else
 		local saveInfo = guiCheckBoxGetSelected(chkRememberLogin)
 		triggerServerEvent("accounts:login:attempt", localPlayer, username, password, saveInfo)
@@ -181,7 +181,7 @@ function LoginScreen_showWarningMessage( message )
 	end
 
 	local x, y = guiGetScreenSize()
-	warningBox = guiCreateWindow( x*.5-150, y*.5-65, 300, 120, "Attention!", false )
+	warningBox = guiCreateWindow( x*.5-150, y*.5-65, 300, 120, "Atención!", false )
 	guiWindowSetSizable( warningBox, false )
 	warningMessage = guiCreateLabel( 40, 30, 220, 60, message, false, warningBox )
 	guiLabelSetHorizontalAlign( warningMessage, "center", true )
@@ -193,7 +193,7 @@ end
 addEventHandler("accounts:error:window", getRootElement(), LoginScreen_showWarningMessage)
 
 function defaultLoginText()
-	loginTitleText = "OwlGaming MTA Roleplay"
+	loginTitleText = "ChileStreet MTA Roleplay"
 end
 
 addEventHandler("accounts:login:attempt", getRootElement(),
@@ -240,18 +240,18 @@ local Edit = {}
 
 function showPasswordUpdate()
 	showCursor(true)
-	Window[1] = guiCreateWindow(0.3562,0.3997,0.2891,0.2383,"SECURITY NOTICE:",true)
+	Window[1] = guiCreateWindow(0.3562,0.3997,0.2891,0.2383,"ALERTA DE SEGURIDAD:",true)
 		guiSetInputEnabled ( true)
-		Label[1] = guiCreateLabel(0.0378,0.153,0.9324,0.2404,"We have noticed a potential security flaw with your account.\nTo help prevent any loss of data, we highly reccomend that\nyou enter a new password in the box below!",true,Window[1])
+		Label[1] = guiCreateLabel(0.0378,0.153,0.9324,0.2404,"Hemos notado una posible falla de seguridad en su cuenta.\nPara ayudar a prevenir cualquier pérdida de datos, recomendamos encarecidamente que\n ingrese una nueva contraseña en el cuadro a continuación!",true,Window[1])
 			guiLabelSetColor(Label[1],0,200,0)
 			guiLabelSetHorizontalAlign(Label[1],"center",false)
 		Edit[1] = guiCreateEdit(0.4243,0.4481,0.5351,0.1475,"",true,Window[1])
 			guiEditSetMasked(Edit[1], true)
 		Edit[2] = guiCreateEdit(0.4243,0.6175,0.5351,0.1475,"",true,Window[1])
 			guiEditSetMasked(Edit[2], true)
-		Label[2] = guiCreateLabel(0.1649,0.4754,0.2432,0.1038,"New Password:",true,Window[1])
-		Label[3] = guiCreateLabel(0.1216,0.6284,0.2784,0.1038,"Confirm Password:",true,Window[1])
-		Button[1] = guiCreateButton(0.427,0.8087,0.527,0.1257,"Change Password",true,Window[1])
+		Label[2] = guiCreateLabel(0.1649,0.4754,0.2432,0.1038,"Nueva Contraseña:",true,Window[1])
+		Label[3] = guiCreateLabel(0.1216,0.6284,0.2784,0.1038,"Confirma Contraseña:",true,Window[1])
+		Button[1] = guiCreateButton(0.427,0.8087,0.527,0.1257,"Cambiar Contraseña",true,Window[1])
 			addEventHandler("onClientGUIClick", Button[1], function()
 				triggerServerEvent("account:forceChange:validate", localPlayer, guiGetText(Edit[1]), guiGetText(Edit[2]))
 			end)

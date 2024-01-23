@@ -26,16 +26,16 @@ function clothesManager(item, list)
  		default_ped.cloth = getElementData(source, 'clothing:id')
  		selected_skin = 0--item.itemValue
  		local margin = 30
- 		mGui.window = guiCreateWindow(screen_width - width - 45, screen_height - height-110, width, height, "Colection ", false)
+ 		mGui.window = guiCreateWindow(screen_width - width - 45, screen_height - height-110, width, height, "Coleccion ", false)
  		guiSetEnabled(mGui.window, false)
  		guiSetAlpha(mGui.window, 0.95)
  		guiSetSizable(mGui.window, false)
 
- 		loading_label = guiCreateLabel(10, 25, width - 20, height - 60, "Loading.." ,false, mGui.window)
+ 		loading_label = guiCreateLabel(10, 25, width - 20, height - 60, "Cargando.." ,false, mGui.window)
  		guiLabelSetHorizontalAlign(loading_label, 'center')
  		guiLabelSetVerticalAlign(loading_label, 'center')
 
- 		local close = guiCreateButton(width - 110, height - 30, 100, 25, 'Close', false, mGui.window)
+ 		local close = guiCreateButton(width - 110, height - 30, 100, 25, 'Cerrar', false, mGui.window)
  		addEventHandler('onClientGUIClick', mGui.window, function ()
  			if source == close then
  				closeManager()

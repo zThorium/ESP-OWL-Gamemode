@@ -9,7 +9,7 @@ function sendOpm(username, msg, cost)
 	if userid then
 		local read = mysql:query_fetch_assoc("SELECT DATE_FORMAT(date,'%b %d, %Y %h:%i %p') AS fdate FROM notifications WHERE userid="..userid.." AND type="..getElementData(client, "account:id").." AND `read`=0 LIMIT 1")
 		if read and read.fdate then
-			outputChatBox("Oops, "..username.." has already received another unread PM from you at "..read.fdate..". They must read it before you can send them another one.", client, 255,0,0)
+			outputChatBox("Oops, "..username.." ya ha recibido otro MP no leído tuyo en "..read.fdate..". Deben leerlo antes de que puedas enviarles otro..", client, 255,0,0)
 			return false
 		else
 			--outputChatBox(tostring(cost))
@@ -23,8 +23,8 @@ function sendOpm(username, msg, cost)
 					return false
 				end
 			end
-			if makePlayerNotification(userid, "New private message from "..getElementData(client, "account:username"), msg, getElementData(client, "account:id")) then
-				outputChatBox("Private message delivered to "..username, client, 0,255,0)
+			if makePlayerNotification(userid, "Nuevo mensaje privado de "..getElementData(client, "account:username"), msg, getElementData(client, "account:id")) then
+				outputChatBox("Mensaje privado entregado a "..username, client, 0,255,0)
 				return true
 			else
 				return false

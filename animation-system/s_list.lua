@@ -4,7 +4,7 @@ addEvent("AnimationSet",true)
 addEventHandler("AnimationSet",getRootElement(),
 	function (block, ani, loop)
 		if bannedAnimations[ani] then
-			outputChatBox("This animation is currently banned.", source, 255, 0, 0)
+			outputChatBox("Esta animacion actualmente esta baneada", source, 255, 0, 0)
 			return
 		end
 

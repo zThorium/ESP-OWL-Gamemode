@@ -13,7 +13,7 @@ addEvent("setServerCurrentTimeSec", true)
 addEventHandler("setServerCurrentTimeSec", root, setServerCurrentTimeSec)
 
 function getNow()
-	outputChatBox("[Client] "..now())
+	outputChatBox("[Cliente] "..now())
 end
 addCommandHandler("now", getNow)
 

@@ -21,7 +21,7 @@ end
 addCommandHandler('getclothingtexture',
 	function(command, model)
 		local model = tonumber(model) or getElementModel(localPlayer)
-		outputChatBox('Model ' .. model .. ' has ' .. (getPrimaryTextureName(model) or 'N/A') .. ' as primary texture.', 255, 127, 0)
+		outputChatBox('Model ' .. model .. ' tiene ' .. (getPrimaryTextureName(model) or 'N/A') .. ' una textura primaria.', 255, 127, 0)
 	end)
 
 function getSkin(command)
@@ -64,11 +64,11 @@ function addClothing(player, clothing, event)
 					loaded[clothing] = { texture = texture, shader = shader }
 					players[player] = { id = clothing, texName = texName }
 				else
-					outputDebugString('creating shader for player ' .. getPlayerName(player) .. ' failed.', 2)
+					outputDebugString('creando sombras para jugador ' .. getPlayerName(player) .. ' falló.', 2)
 					destroyElement(texture)
 				end
 			else
-				outputDebugString('creating texture for player ' .. getPlayerName(player) .. ' failed (Path: ' .. path .. ') Deleting file...', 2)
+				outputDebugString('Creando textura para el jugador ' .. getPlayerName(player) .. ' falló (Path: ' .. path .. ') Borrando archivo...', 2)
 				fileDelete(path)
 			end
 		end
@@ -222,6 +222,6 @@ local function flushSkin(type)
 end
 
 function flushSkins()
-	outputChatBox(flushSkin('player')+flushSkin('ped').." skins have been flushed.")
+	outputChatBox(flushSkin('player')+flushSkin('ped').." las pieles se han sonrojado.")
 end
 addCommandHandler('flushskins', flushSkins, false)

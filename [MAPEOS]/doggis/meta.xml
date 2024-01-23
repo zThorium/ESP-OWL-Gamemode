@@ -1,0 +1,10 @@
+<meta>
+    <info author="Modelado Thorium" name="Turbus Terminal" version="1.5.6" type="script" />
+	<script src="s.lua" type="server" cache="false" />
+    <script src="replace.lua" type="client" cache="false" />
+	<file src="doggis.dff" />
+	<file src="protected/doggis.dff" />
+	<file src="doggis.col" />
+	<file src="doggis.txd" />
+</meta>
+

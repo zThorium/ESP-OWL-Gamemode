@@ -1,14 +1,14 @@
 function doCheck(sourcePlayer, command, ...)
 	if (exports.integration:isPlayerTrialAdmin(sourcePlayer) or exports.integration:isPlayerSupporter(sourcePlayer)) then
 		if not (...) then
-			outputChatBox("SYNTAX: /" .. command .. " [Partial Player Name / ID] or [Username]", sourcePlayer, 255, 194, 14)
+			outputChatBox("SINTAXIS: /" .. command .. " [Nombre parcial del jugador / ID] o [Usuario]", sourcePlayer, 255, 194, 14)
 		else
 			local checkTarget = exports.global:findPlayerByPartialNick(sourcePlayer, table.concat({...},"_"), true)
 			if (checkTarget) then
 				local logged = getElementData(checkTarget, "loggedin")
 
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", sourcePlayer, 255, 0, 0)
+					outputChatBox("El jugador no está conectado.", sourcePlayer, 255, 0, 0)
 				else
 					if checkTarget and isElement(checkTarget) then
 						local ip = getPlayerIP(checkTarget)
@@ -161,7 +161,7 @@ function doCheck(sourcePlayer, command, ...)
 						exports.logs:dbLog(sourcePlayer, 4, sourcePlayer, "OFFLINE CHECK ON:" .. offlineTarget)
 						triggerClientEvent(sourcePlayer, "onCheck", sourcePlayer, ip, adminreports, credits, adminnote, history, warns, points, transfers, bankmoney, money, adminlevel, hoursPlayed, username, hoursAcc, accountid, offline)
 					else 
-						outputChatBox("Account/Player '"..offlineTarget.."' not found", sourcePlayer, 255, 0, 0)
+						outputChatBox("Cuenta/Jugador '"..offlineTarget.."' no encontrado", sourcePlayer, 255, 0, 0)
 					end
 					dbFree(qh)
 				end, {qh, offlineTarget}, exports.mysql:getConn("core"), preparedQuery, offlineTarget)
@@ -177,12 +177,12 @@ function savePlayerNote(dbid, username, text)
 		if dbid then 
 			local result = mysql:query_free("UPDATE account_details SET adminnote = '" .. mysql:escape_string(text) .. "' WHERE account_id = '" .. mysql:escape_string(dbid) .. "';" )
 			if result then
-				outputChatBox( "Note for the " .. username .. " has been updated.", client, 0, 255, 0 )
+				outputChatBox( "Nota para " .. username .. " ha sido actualizado.", client, 0, 255, 0 )
 			else
-				outputChatBox( "Note Update failed.", client, 255, 0, 0 )
+				outputChatBox( "Nota La actualización falló.", client, 255, 0, 0 )
 			end
 		else
-			outputChatBox( "Unable to get Account ID.", client, 255, 0, 0 )
+			outputChatBox( "No se puede obtener el ID de la cuenta.", client, 255, 0, 0 )
 		end
 	end
 end
@@ -226,10 +226,10 @@ function showAdminHistory( target )
 			triggerClientEvent( client, "cshowAdminHistory", target, info, tostring( getElementData( target, "account:username" ) ) )
 			mysql:free_result( result )
 		else
-			outputChatBox( "Failed to retrieve history.", client, 255, 0, 0)
+			outputChatBox( "No se pudo recuperar el historial.", client, 255, 0, 0)
 		end
 	else
-		outputChatBox("Unable to find the account id.", client, 255, 0, 0)
+		outputChatBox("No se puede encontrar la identificación de la cuenta.", client, 255, 0, 0)
 	end
 end
 addEvent( "showAdminHistory", true )
@@ -313,7 +313,7 @@ addCommandHandler( "history",
 	function( thePlayer, commandName, ... )
 		if not (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer)) then
 			if (...) then
-				outputChatBox("Only Admins or Supporters can check other's player admin history.", thePlayer, 255, 0, 0)
+				outputChatBox("Solo los administradores o seguidores pueden consultar el historial de administración de otros jugadores.", thePlayer, 255, 0, 0)
 				return false
 			end
 		end
@@ -326,7 +326,7 @@ addCommandHandler( "history",
 		if targetPlayer then
 			local logged = getElementData(targetPlayer, "loggedin")
 			if (logged==0) then
-				outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+				outputChatBox("El jugador no está conectado.", thePlayer, 255, 0, 0)
 			else
 				triggerEvent("showAdminHistory", thePlayer, targetPlayer)
 			end
@@ -353,7 +353,7 @@ addCommandHandler( "history",
 				mysql:free_result( result )
 			end
 			mysql:free_result( result )
-			outputChatBox("Player not found or multiple were found.", thePlayer, 255, 0, 0)
+			outputChatBox("Reproductor no encontrado o se encontraron varios.", thePlayer, 255, 0, 0)
 		end
 	end
 )

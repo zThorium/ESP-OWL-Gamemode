@@ -26,7 +26,7 @@ addEventHandler("onElementDataChange", getRootElement(),
 						local newData = getElementData(source, index)
 						local playername = getPlayerName(source) or "Somethings"
 						-- Get rid of the player
-						local msg = "[AdmWarn] " .. getPlayerName(sourceClient) .. " sent illegal data. "
+						local msg = "[AdmWarn] " .. getPlayerName(sourceClient) .. " envió datos ilegales. "
 						local msg2 = " (victim: "..playername.." index: "..index .." newvalue:".. tostring(newData) .. " oldvalue:".. tostring(oldValue)  ..")"
 						--outputConsole(msg)
 						--outputConsole(msg2)

@@ -10,9 +10,9 @@ function clientReady()
 		if resourceName == "global" or resourceName == "mysql" or resourceNmae == "pool" then
 			if getResourceState(value) == "loaded" or getResourceState(value) == "stopping" or getResourceState(value) == "failed to load" then
 				missingResources = true
-				outputChatBox("The server is missing dependent resource '"..getResourceName(value).."'.", thePlayer, 255, 0, 0)
-				outputChatBox("Please try again shortly.", thePlayer, 255, 0, 0)
-				outputChatBox("       - The Owl Gaming Administration Team", thePlayer, 255, 0, 0)
+				outputChatBox("Al servidor le falta un recurso dependiente '"..getResourceName(value).."'.", thePlayer, 255, 0, 0)
+				outputChatBox("Por favor intenta nuevamente en breve.", thePlayer, 255, 0, 0)
+				outputChatBox("       - Administración de Chile Street", thePlayer, 255, 0, 0)
 				break
 			end
 		end
@@ -23,9 +23,9 @@ function clientReady()
 	local playerIP = getPlayerIP(thePlayer)
 	for key, value in ipairs(bannedIPs) do
 		if playerIP == value then
-			outputChatBox("Your IP is blacklisted from the server.", thePlayer, 255, 0, 0)
-			setTimer(outputChatBox, 1000, 1, "You will be kicked from the server in 10 secconds.", thePlayer, 255, 0, 0)
-			setTimer(kickPlayer, 10000, 1, thePlayer, "You are blacklisted from this server.")
+			outputChatBox("Tu IP está en la lista negra del servidor.", thePlayer, 255, 0, 0)
+			setTimer(outputChatBox, 1000, 1, "Serás expulsado del servidor en 10 segundos..", thePlayer, 255, 0, 0)
+			setTimer(kickPlayer, 10000, 1, thePlayer, "Estás en la lista negra de este servidor..")
 			willPlayerBeBanned = true
 			break
 		end
@@ -35,9 +35,9 @@ function clientReady()
 		local playerSerial = getPlayerSerial(thePlayer)
 		for key, value in ipairs(bannedSerials) do
 			if playerSerial == value then
-				outputChatBox("Your serial is blacklisted from the server.", thePlayer, 255, 0, 0)
-				setTimer(outputChatBox, 1000, 1, "You will be kicked from the server in 10 secconds.", thePlayer, 255, 0, 0)
-				setTimer(kickPlayer, 10000, 1, thePlayer, "You are blacklisted from this server.")
+				outputChatBox("Su serial está en la lista negra del servidor.", thePlayer, 255, 0, 0)
+				setTimer(outputChatBox, 1000, 1, "Serás expulsado del servidor en 10 segundos..", thePlayer, 255, 0, 0)
+				setTimer(kickPlayer, 10000, 1, thePlayer, "Estás en la lista negra de este servidor.")
 				willPlayerBeBanned = true
 				break
 			end
@@ -75,7 +75,7 @@ function quitPlayer(quitReason, reason)
 		if dbID then
 			table.insert(affected, "ch"..tostring(dbID))
 		end
-		exports.logs:dbLog("ac"..tostring(accountID), 27, affected, "Disconnected (".. (quitReason or "Unknown reason") ..") (Name: "..getPlayerName(source)..")" )
+		exports.logs:dbLog("ac"..tostring(accountID), 27, affected, "Desconectado (".. (quitReason or "Razón Desconocida") ..") (Nombre: "..getPlayerName(source)..")" )
 	end
 end
 addEventHandler("onPlayerQuit",getRootElement(), quitPlayer)
