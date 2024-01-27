@@ -31,7 +31,7 @@ function changeSpeedradar(player, commandName)
 			outputChatBox("Speedcam changed to chatbox", player, 255, 180, 20)
 		end
 	else
-		outputChatBox("You need to have a speedcamera in order to use this command", player, 255, 0, 0)
+		outputChatBox("Necesitas tener una cámara de velocidad para poder usar este comando", player, 255, 0, 0)
 	end	
 end
 addCommandHandler("speedmode", changeSpeedradar)
@@ -99,7 +99,7 @@ addCommandHandler({"togspeedcamera", "togglespeedcamera", "togspeedcam", "toggle
 							break
 						end
 					end
-					outputChatBox("Dual Stalker SL speed camera has been deactivated on this cruiser.", player, 255, 180, 20, false)
+					outputChatBox("El radar de velocidad Dual Stalker SL se ha desactivado en esta crucero.", player, 255, 180, 20, false)
 					removeElementData(vehicle, "speedcamera:owner")
 					removeElementData(vehicle, "speedcamera:state")
 					if not getElementData(player, "speedradar_chat") then
@@ -137,11 +137,11 @@ addCommandHandler({"togspeedcamera", "togglespeedcamera", "togspeedcam", "toggle
 							outputChatBox("SYNTAX: /" .. cmd .. " [30 or more]", player, 255, 180, 20, false)
 						end
 					else
-						outputChatBox("You need to deactivate the existing speed camera.", player, 255, 0, 0, false)
+						outputChatBox("Debes desactivar el radar existente.", player, 255, 0, 0, false)
 					end
 				end
 			else
-				outputChatBox("You must be in a law enforcement vehicle in order to activate your speed camera.", player, 255, 0, 0, false)
+				outputChatBox("Debes estar en un vehículo policial para poder activar tu cámara de velocidad.", player, 255, 0, 0, false)
 			end
 		end
 	end, false, false
@@ -172,9 +172,9 @@ addCommandHandler({"resetspeed", "resetspeedcam", "resetspeedcamera"},
 			setElementData(player, "speedcamera:vehicleColor", "No info", true )
 			setElementData(player, "speedcamera:vehicleName", "No info", true )
 			setElementData(player, "speedcamera:vehicleDirection", "No info", true )
-			outputChatBox("All of your speed cameras are now deactivated.", player, 255, 180, 20, false)
+			outputChatBox("Todos tus radares de tráfico ahora están desactivados.", player, 255, 180, 20, false)
 		else
-			outputChatBox("You do not have any existing speed cameras.", player, 255, 0, 0, false)
+			outputChatBox("No tienes ningún radar existente.", player, 255, 0, 0, false)
 		end
 	end, false, false
 )
@@ -225,9 +225,9 @@ addEventHandler("onColShapeHit", root,
 										 
 										-- If we are using the chat, normal chatbox. Otherwise go in console
 										if getElementData(player, "speedradar_chat") then
-											outputChatBox("[RADAR] A " .. getColorName(c1, c2) .. " " .. exports.global:getVehicleName(hitElement) .. " was clocked travelling at " .. math.floor(tonumber(kmh) * 0.621371) .. " mph (" .. tonumber(kmh) .. " km/h) and is heading " .. direction .. ".", player, 255, 180, 20, false)										
+											outputChatBox("[RADAR] A " .. getColorName(c1, c2) .. " " .. exports.global:getVehicleName(hitElement) .. " fue registrado viajando a las " .. math.floor(tonumber(kmh) * 0.621371) .. " mph (" .. tonumber(kmh) .. " km/h) y se dirige " .. direction .. ".", player, 255, 180, 20, false)										
 										else
-											outputConsole( "[RADAR] A " .. getColorName(c1, c2) .. " " .. exports.global:getVehicleName(hitElement) .. " was clocked travelling at " .. math.floor(tonumber(kmh) * 0.621371) .. " mph (" .. tonumber(kmh) .. " km/h) and is heading " .. direction .. ".", player )
+											outputConsole( "[RADAR] A " .. getColorName(c1, c2) .. " " .. exports.global:getVehicleName(hitElement) .. " fue registrado viajando a las " .. math.floor(tonumber(kmh) * 0.621371) .. " mph (" .. tonumber(kmh) .. " km/h) y se dirige " .. direction .. ".", player )
 										end
 									end
 								end
@@ -275,7 +275,7 @@ addEventHandler("onPlayerVehicleExit", root,
 					break
 				end
 			end
-			outputChatBox("Speed camera has been deactivated.", source, 255, 180, 20, false)
+			outputChatBox("Los radares han sido desactivados.", source, 255, 180, 20, false)
 			if not getElementData(source, "speedradar_chat") then
 				triggerClientEvent("destroyGUI", source)
 			end
@@ -294,7 +294,7 @@ addEventHandler("onResourceStop", resourceRoot,
 				setElementData(source, "speedcamera:vehicleColor", "No info", true )
 				setElementData(source, "speedcamera:vehicleName", "No info", true )
 				setElementData(source, "speedcamera:vehicleDirection", "No info", true )
-				outputChatBox("Speed camera has been deactivated.", getVehicleController(v), 255, 180, 20, false)
+				outputChatBox("Los radares han sido desactivados.", getVehicleController(v), 255, 180, 20, false)
 			end
 		end
 		
@@ -330,7 +330,7 @@ addEventHandler("onPlayerWasted", root,
 			if not getElementData(source, "speedradar_chat") then
 				triggerClientEvent("destroyGUI", source)
 			end
-			outputChatBox("Speed camera has been deactivated.", source, 255, 180, 20, false)
+			outputChatBox("Los radares han sido desactivados.", source, 255, 180, 20, false)
 		end
 	end
 )

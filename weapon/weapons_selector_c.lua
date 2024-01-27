@@ -178,7 +178,7 @@ function weaponSwitch(button, press)
 		for key, weap in pairs(hotkeys) do
 			if tostring(key) == button then
 				cancelEvent()
-				switching = 'Switching..'
+				switching = 'Cambiando..'
 				triggerServerEvent( 'weapon:switch_weapon_in_same_slot', localPlayer, weap.dbid, weap.slot )
 				outputDebugString( switching.." to "..weap.dbid)
 				pressed = getTickCount()

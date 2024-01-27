@@ -12,12 +12,12 @@ function switchModex()
 		local mode = getElementData(localPlayer, "shotgunmode")
 		if mode == 0 then -- bean bag
 			triggerServerEvent("shotgunmode", localPlayer, 1)
-			outputChatBox( "You switched your shotgun mode to Lethal mode", 0, 255, 0 )
+			outputChatBox( "Cambiaste tu modo escopeta al modo Letal.", 0, 255, 0 )
 		elseif mode == 1 then -- lethal gun mode
-			outputChatBox( "You switched your shotgun mode to Beanbag mode", 0, 255, 0 )
+			outputChatBox( "Cambiaste tu modo escopeta al modo Beanbag.", 0, 255, 0 )
 			triggerServerEvent("shotgunmode", localPlayer, 0)
 		end
-		triggerServerEvent("sendLocalMeAction", localPlayer, localPlayer, "switches the mode on their shotgun.")
+		triggerServerEvent("sendLocalMeAction", localPlayer, localPlayer, "cambia el modo de su escopeta.")
 	end
 end
 

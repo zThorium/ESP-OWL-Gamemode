@@ -299,7 +299,7 @@ function showTextProD()
 						local protected, details = exports.interior_system:isProtected(theProperty) 
 			            if protected and (powner == getElementData(localPlayer, "dbid") or exports.integration:isPlayerTrialAdmin(localPlayer)) then
 			                textColor = tocolor(0, 255, 0,255)
-			                protectedText = "[Inactivity protection remaining: "..details.."]"
+			                protectedText = "[Protección por inactividad restante: "..details.."]"
 			                toBeAdded = protectedText.."\n"
 							toBeShowed = toBeShowed..toBeAdded
 							local len = dxGetTextWidth(toBeAdded)
@@ -315,16 +315,16 @@ function showTextProD()
 			                    local owner_last_login = getElementData(theProperty, "owner_last_login")
 								if owner_last_login and tonumber(owner_last_login) then
 									local owner_last_login_text, owner_last_login_sec = exports.datetime:formatTimeInterval(owner_last_login)
-									inactiveText = inactiveText.." Owner last seen "..owner_last_login_text.." "
+									inactiveText = inactiveText.." Propietario visto por última vez "..owner_last_login_text.." "
 								else
-									inactiveText = inactiveText.." Owner last seen is irrelevant | "
+									inactiveText = inactiveText.." El propietario visto por última vez es irrelevante | "
 								end
 			                    local lastused = getElementData(theProperty, "lastused")
 								if lastused and tonumber(lastused) then
 									local lastusedText, lastusedSeconds = exports.datetime:formatTimeInterval(lastused)
-									inactiveText = inactiveText.."Last used "..lastusedText.."]"
+									inactiveText = inactiveText.."Usado por última vez "..lastusedText.."]"
 								else
-									inactiveText = inactiveText.."Last used is irrelevant]"
+									inactiveText = inactiveText.."El último uso es irrelevante]"
 								end
 				                toBeAdded = inactiveText.."\n"
 								toBeShowed = toBeShowed..toBeAdded

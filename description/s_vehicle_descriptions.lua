@@ -21,7 +21,7 @@ function saveToDescription(descriptions, theVehicle)
 	for i = 1, 5 do
 		dbExec(connection, "UPDATE `vehicles` SET `??` = ? WHERE id = ?", "description"..i, tostring(descriptions[i]), tostring(dbid))
 	
-		exports.anticheat:changeProtectedElementDataEx(theVehicle, "description:"..i, descriptions[i], true)
+		exports.anticheat:changeProtectedElementDataEx(theVehicle, "descripcion:"..i, descriptions[i], true)
 		acceptedQuerys[i] = true
 
 	end
@@ -30,7 +30,7 @@ function saveToDescription(descriptions, theVehicle)
 		exports.anticheat:changeProtectedElementDataEx(theVehicle, "description:admin", descriptions[6], true)
 	end
 
-	outputChatBox("Description saved succesfully.", source, 0, 255, 0)
+	outputChatBox("Descripción guardada con éxito.", source, 0, 255, 0)
 	
 	
 end

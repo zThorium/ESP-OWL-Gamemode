@@ -40,15 +40,15 @@ end)
 
 function canPlayerShoot()
 	if getElementData(localPlayer, 'restrain') == 1 then
-		return false, 'Restrained.'
+		return false, 'Restringido.'
 	end
 
 	if switching then
-		return false, 'Switching..'
+		return false, 'Cambiando..'
 	end
 
 	if reloading then
-		return false, 'Reloading..'
+		return false, 'Recargando..'
 	end
 
 	if weapon_fire_disabled[getPedWeapon(localPlayer)] then
@@ -61,9 +61,9 @@ function canPlayerShoot()
 
 	local ammo = getPedTotalAmmo(localPlayer) - 1
 	if ammo <= 0 then
-		return false, 'Out of ammo!'
+		return false, 'Sin municiones!'
 	else
-		return true, ammo..' ammo loaded.'
+		return true, ammo..' munición cargada.'
 	end
 end
 
@@ -76,7 +76,7 @@ function traceBullet(weapon, ammo, ammoInClip, hitX, hitY, hitZ, hitElement )
 			synced_ammo = getTickCount()
 			local can, why = canPlayerShoot()
 			if not can then
-				if why == 'Out of ammo!' then
+				if why == 'Sin municiones!' then
 					playSound("sounds/no_ammo.mp3")
 					triggerServerEvent('global:playSound3D', localPlayer, ':weapon/sounds/no_ammo.mp3', false, 20, 100, false, true)
 					outputChatBox(why.." Hit 'R' to reload.", 200,200,200)
@@ -117,15 +117,15 @@ function weaponInteract(item)
 	local gun_source = tonumber(serial_info[2])
 
 	if gun_source == 2 then
-		outputChatBox("You can not modify duty weapon.", 255, 0, 0)
+		outputChatBox("No puedes modificar el arma de servicio..", 255, 0, 0)
 		playSoundFrontEnd(4)
 	else
 		closeWeaponInteract()
-        GUIEditor.window[1] = guiCreateWindow(677, 403, 177, 105, item_values[3] or "Unknown Weapon" , false)
+        GUIEditor.window[1] = guiCreateWindow(677, 403, 177, 105, item_values[3] or "Arma desconocida" , false)
         guiWindowSetSizable(GUIEditor.window[1], false)
         exports.global:centerWindow(GUIEditor.window[1])
 
-		GUIEditor.button[1] = guiCreateButton(9, 26, 158, 20, "Unload", false, GUIEditor.window[1])
+		GUIEditor.button[1] = guiCreateButton(9, 26, 158, 20, "Descargar", false, GUIEditor.window[1])
 		guiSetEnabled(GUIEditor.button[1], false)
 		local loaded_ammo = tonumber(item_values[4]) or 0
 
@@ -133,10 +133,10 @@ function weaponInteract(item)
 			guiSetEnabled(GUIEditor.button[1], true)
 		end
 
-        GUIEditor.button[2] = guiCreateButton(9, 51, 158, 20, "Edit", false, GUIEditor.window[1])
+        GUIEditor.button[2] = guiCreateButton(9, 51, 158, 20, "Editar", false, GUIEditor.window[1])
         guiSetEnabled(GUIEditor.button[2], gun_source ~= 2 and (weapon_ammoless[tonumber(item_values[1])]~=nil or exports.integration:isPlayerTrialAdmin(localPlayer, true) or exports.integration:isPlayerSupporter(localPlayer, true) or not item_values[5] or (item_values[5] and item_values[5]~="1") ) )
 
-        GUIEditor.button[3] = guiCreateButton(9, 76, 158, 20, "Close", false, GUIEditor.window[1])
+        GUIEditor.button[3] = guiCreateButton(9, 76, 158, 20, "Cerrar", false, GUIEditor.window[1])
 
         addEventHandler('onClientGUIClick', GUIEditor.window[1], function()
         	if source == GUIEditor.button[3] then
@@ -150,7 +150,7 @@ function weaponInteract(item)
 					if loaded_ammo and loaded_ammo > 0 then
 						if reloading then
 							playSoundFrontEnd(4)
-							outputChatBox("Please wait...", 255,0,0)
+							outputChatBox("Por favor espera...", 255,0,0)
 						else
 							reloading = true
 							syncAmmo()
@@ -159,11 +159,11 @@ function weaponInteract(item)
         				end
         			else
         				playSoundFrontEnd(4)
-						outputChatBox("Your "..item_values[3].." is empty.", 255,0,0)
+						outputChatBox("Tu "..item_values[3].." esta vacío.", 255,0,0)
         			end
         		else
         			playSoundFrontEnd(4)
-					outputChatBox("This weapon doesn't use ammo.", 255,0,0)
+					outputChatBox("Esta arma no usa munición..", 255,0,0)
         		end
         	end
         end)

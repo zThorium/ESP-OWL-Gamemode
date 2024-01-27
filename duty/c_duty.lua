@@ -9,7 +9,7 @@ function openDutyWindow()
 			triggerServerEvent("duty:offduty", localPlayer)
 		end
 	else
-		outputChatBox("There is no duty available for you at this spot!")
+		outputChatBox("No hay duty disponible para usted en este lugar!")
 	end
 end
 addCommandHandler("duty", openDutyWindow)
@@ -39,7 +39,7 @@ function selectPackageGUI_open(availablePackages, allowList)
 	local windowWidth, windowHeight = 680, 516
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Duty Selection", false)
+	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Selección de Duty", false)
 	guiWindowSetSizable(gui["_root"], false)
 	
 	gui["tabSelection"] = guiCreateTabPanel(10, 25, 651, 471, false, gui["_root"])

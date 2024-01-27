@@ -19,25 +19,25 @@ function displayPdCodes(contentFromServer)
 		content = contentFromServer
 	end
 	
-	myWindow = guiCreateWindow( 0.25, 0.25, 0.5, 0.5, "Los Santos Government - Radio Codes & Procedures - V2.0",true)
+	myWindow = guiCreateWindow( 0.25, 0.25, 0.5, 0.5, "Gobierno de Los Santos - Códigos y procedimientos de radio - V2.0",true)
 	local tabPanel = guiCreateTabPanel ( 0, 0.12, 1, 1, true, myWindow ) 
 	
 	--Response & Ten Codes
-	local tabCodes = guiCreateTab( "Response & Ten Codes", tabPanel )
+	local tabCodes = guiCreateTab( "Respuesta y diez códigos", tabPanel )
 	
-	memoCodes = guiCreateMemo ( 0.02, 0.02, 0.96, 0.96, content.codes or "It's lonely here or content is out of date. \n\nPlease refresh..", true, tabCodes )
+	memoCodes = guiCreateMemo ( 0.02, 0.02, 0.96, 0.96, content.codes or "Es un lugar solitario o el contenido no está actualizado. \n\nPorfavor refresca..", true, tabCodes )
 	guiMemoSetReadOnly(memoCodes, true)
 	
 	--Radio Procedures
-	local tabProcedure = guiCreateTab( "Radio procedures", tabPanel )
-	memoProcedure = guiCreateMemo ( 0.02, 0.02, 0.96, 0.96, content.procedures or "It's lonely here or content is out of date. \n\nPlease refresh..", true, tabProcedure )
+	local tabProcedure = guiCreateTab( "Procedimientos de radio", tabPanel )
+	memoProcedure = guiCreateMemo ( 0.02, 0.02, 0.96, 0.96, content.procedures or "Es un lugar solitario o el contenido está desactualizado. \n\nPorfavor refresca..", true, tabProcedure )
 	guiMemoSetReadOnly(memoProcedure, true)
 	
-	local tlBackButton = guiCreateButton(0.89, 0.05, 0.1, 0.07, "Close", true, myWindow) -- close button      
+	local tlBackButton = guiCreateButton(0.89, 0.05, 0.1, 0.07, "Cerrar", true, myWindow) -- close button      
 	addEventHandler("onClientGUIClick", tlBackButton, closePdCodes, false)
 	
 	--Update the window(s)
-	local tlSaveButton = guiCreateButton(0.77, 0.05, 0.1, 0.07, "Save", true, myWindow) -- save button, hidden from players
+	local tlSaveButton = guiCreateButton(0.77, 0.05, 0.1, 0.07, "Guardar", true, myWindow) -- save button, hidden from players
 	addEventHandler("onClientGUIClick", tlSaveButton, function()
 		local contentToBeUpdated = {}
 		contentToBeUpdated.codes = guiGetText(memoCodes)
@@ -46,7 +46,7 @@ function displayPdCodes(contentFromServer)
 	end)
 
 	--Refresh the content / You will need to edit the positon for this button, as I just copied and pasted.
-	local tlRefreshButton = guiCreateButton(0.65, 0.05, 0.1, 0.07, "Refresh", true, myWindow) 
+	local tlRefreshButton = guiCreateButton(0.65, 0.05, 0.1, 0.07, "Refrescar", true, myWindow) 
 
 	
 	guiSetVisible(tlSaveButton, false)

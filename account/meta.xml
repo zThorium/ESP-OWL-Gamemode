@@ -364,6 +364,10 @@
     <file src="img/310.png" />
     <file src="img/311.png" />
     <file src="img/312.png" />
+	
+	<file src="ando.mp3" />
+	<file src="bellakita.mp3" />
+	<file src="glocko.mp3" />
 
     <min_mta_version client="1.3.0-9.04464"></min_mta_version>
 </meta>

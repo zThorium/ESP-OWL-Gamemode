@@ -31,14 +31,14 @@ addEventHandler("fetchTickets", getRootElement(), function()
 		end
 		if #tickets > 0 then
 			local quotes = {
-				"I'm not very computer savvy, please be patient.",
-				"My name is Emma, how may I help you " .. (getElementData(source, "gender") == 1 and "ma'am" or "sir") .. "?",
-				"You have " .. #tickets .. " unpaid ticket" .. (#tickets > 1 and "s" or "") .. ", would you like to pay " .. (#tickets == 1 and "it" or "them") .. "?"
+				"No soy muy experto en informática, tenga paciencia..",
+				"Mi nombre es Emma en que puedo ayudarte " .. (getElementData(source, "gender") == 1 and "señora" or "señor") .. "?",
+				"Tienes " .. #tickets .. " tickets sin pagar" .. (#tickets > 1 and "s" or "") .. ", deseas pagarlos " .. (#tickets == 1 and "tickets" or "tickets") .. "?"
 			}
-			outputChatBox(" [English] " .. pedname .. " says: " .. quotes[math.random(1, 3)], source, 255, 255, 255)
+			outputChatBox(" [Español] " .. pedname .. " dice: " .. quotes[math.random(1, 3)], source, 255, 255, 255)
 			triggerClientEvent(source, "showPayGUI", source, tickets)
 		else
-			outputChatBox(" [English] " .. pedname .. " says: Sorry. You have no unpaid tickets on record.", source, 255, 255, 255)
+			outputChatBox(" [Español] " .. pedname .. " dice: Lo siento. No tienes entradas pendientes de pago en tu registro.", source, 255, 255, 255)
 		end
 	end
 end)

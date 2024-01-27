@@ -27,15 +27,15 @@ function popupSFESPedMenu()
 		local x = scrWidth/2 - (width/2)
 		local y = scrHeight/2 - (height/2)
 
-		lsesOptionMenu = guiCreateWindow(x, y, width, height, "How can we help you?", false)
+		lsesOptionMenu = guiCreateWindow(x, y, width, height, "Como podemos ayudarte?", false)
 
-		bPhotos = guiCreateButton(0.05, 0.2, 0.87, 0.2, "I need help", true, lsesOptionMenu)
+		bPhotos = guiCreateButton(0.05, 0.2, 0.87, 0.2, "Necesito ayuda", true, lsesOptionMenu)
 		addEventHandler("onClientGUIClick", bPhotos, helpButtonFunction, false)
 
-		bAdvert = guiCreateButton(0.05, 0.5, 0.87, 0.2, "Appointment", true, lsesOptionMenu)
+		bAdvert = guiCreateButton(0.05, 0.5, 0.87, 0.2, "Cita", true, lsesOptionMenu)
 		addEventHandler("onClientGUIClick", bAdvert, appointmentButtonFunction, false)
 		
-		bSomethingElse = guiCreateButton(0.05, 0.8, 0.87, 0.2, "I'm fine, thanks.", true, lsesOptionMenu)
+		bSomethingElse = guiCreateButton(0.05, 0.8, 0.87, 0.2, "Estoy bien gracias.", true, lsesOptionMenu)
 		addEventHandler("onClientGUIClick", bSomethingElse, otherButtonFunction, false)
 		triggerServerEvent("lses:ped:start", getLocalPlayer(), getElementData(rosie, "name"))
 		showCursor(true)
@@ -79,83 +79,83 @@ function pedDialog_hospital(ped)
 	if pedDialogWindow and isElement(pedDialogWindow) then
 		destroyElement(pedDialogWindow)
 	end
-	pedDialogWindow = guiCreateWindow(x, y, width, height, "Hospital Front Desk", false)
+	pedDialogWindow = guiCreateWindow(x, y, width, height, "Recepción del hospital", false)
 
-	b1 = guiCreateButton(10, 30, width-20, 40, "I need a doctor now, someone's dying!", false, pedDialogWindow)
+	b1 = guiCreateButton(10, 30, width-20, 40, "¡Necesito un doctor ahora, alguien se está muriendo!", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b1,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "We're dispatching a team here ASAP, please remain calm.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Estamos enviando un equipo aquí lo antes posible, mantenga la calma..")
 				setTimer(function()
-						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Code Critical at front desk, Code Critical at front desk, response team to front desk ASAP.")
+						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Código crítico en recepción, Código crítico en recepción, equipo de respuesta a recepción lo antes posible.")
 					end, 3000, 1)
 			end
 		end, false)
 
-	b2 = guiCreateButton(10, 75, width-20, 40, "I need someone to help me or a friend to the Emergency Room.", false, pedDialogWindow)
+	b2 = guiCreateButton(10, 75, width-20, 40, "Necesito que alguien me ayude o un amigo a Emergencias.", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b2,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "We're dispatching someone here to help you, please remain calm.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Estamos enviando a alguien aquí para ayudarle, por favor mantenga la calma..")
 				setTimer(function()
-						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Staff member to the front desk please to assist a patient to E.R.")
+						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Miembro del personal de recepción por favor para ayudar a un paciente a E.R.")
 					end, 4000, 1)
 			end
 		end, false)
 
-	b3 = guiCreateButton(10, 120, width-20, 40, "I'm here to schedule an appointment or check-up.", false, pedDialogWindow)
+	b3 = guiCreateButton(10, 120, width-20, 40, "Estoy aquí para programar una cita o un chequeo.", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b3,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Okay, I'm sending someone down.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Bien, enviaré a alguien abajo.")
 				setTimer(function()
-						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Staff member to the front desk please to assist a patient for check-up or appointment.")
+						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Un miembro del personal de la recepción ayuda a un paciente a realizar un chequeo o una cita.")
 					end, 5000, 1)
 			end
 		end, false)
 
-	b4 = guiCreateButton(10, 165, width-20, 40, "I'm here to see a friend who is staying in the hospital for a extended period.", false, pedDialogWindow)
+	b4 = guiCreateButton(10, 165, width-20, 40, "Estoy aquí para ver a un amigo que se queda en el hospital durante un período prolongado..", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b4,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Please head to the Inpatient Services room, down the hall and first elevator on the left. A nurse will be there to assist you.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Diríjase a la sala de Servicios para pacientes hospitalizados, al final del pasillo y al primer ascensor a la izquierda. Una enfermera estará allí para ayudarle..")
 			end
 		end, false)
 
-	b5 = guiCreateButton(10, 210, width-20, 40, "I'm here to see a friend who is in the Emergency Room or Outpatient Services.", false, pedDialogWindow)
+	b5 = guiCreateButton(10, 210, width-20, 40, "Estoy aquí para ver a un amigo que está en la Sala de Emergencias o en Servicios Ambulatorios.", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b5,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "I'm sending a staff member down to assist you, please be mindful we have a 1 visitor policy in the E.R.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Voy a enviar a un miembro del personal para que lo ayude. Tenga en cuenta que tenemos una política de 1 visitante en urgencias.")
 				setTimer(function()
-						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Staff member to the front desk please to assist a visitor to the E.R or Outpatient Services.")
+						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Miembro del personal de recepción por favor para ayudar a un visitante a la sala de emergencias o servicios ambulatorios.")
 					end, 5000, 1)
 			end
 		end, false)
 
-	b6 = guiCreateButton(10, 255, width-20, 40, "I just need to talk to a staff member.", false, pedDialogWindow)
+	b6 = guiCreateButton(10, 255, width-20, 40, "Sólo necesito hablar con un miembro del personal.", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b6,
 		function()
 			endDialog()
 			if thePed then
-				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Okay, I'll send one down.")
+				triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Está bien, enviaré uno.")
 				setTimer(function()
-						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Staff member to the front desk please to assist a visitor requesting a staff member.")
+						triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "hospitalpa", "Miembro del personal de la recepción por favor para ayudar a un visitante que solicite un miembro del personal.")
 					end, 5000, 1)
 			end
 		end, false)
 
-	b7 = guiCreateButton(10, 300, width-20, 40, "Uhm. Never mind.", false, pedDialogWindow)
+	b7 = guiCreateButton(10, 300, width-20, 40, "Mmm. No importa.", false, pedDialogWindow)
 	addEventHandler("onClientGUIClick", b7, pedDialog_hospital_noHelp, false)
 
 	--showCursor(true)
 
-	triggerServerEvent("airport:ped:outputchat", getResourceRootElement(), thePed, "local", "Welcome to the LSIA reception. Can I help you?")
+	triggerServerEvent("airport:ped:outputchat", getResourceRootElement(), thePed, "local", "Bienvenidos a la recepción de LSIA. ¿Puedo ayudarle?")
 end
 addEvent("lses:ped:hospitalfrontdesk", true)
 addEventHandler("lses:ped:hospitalfrontdesk", getRootElement(), pedDialog_hospital)
@@ -170,6 +170,6 @@ end
 function pedDialog_hospital_noHelp()
 	endDialog()
 	if thePed then
-		triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Okay.")
+		triggerServerEvent("lses:ped:outputchat", getResourceRootElement(), thePed, "local", "Okey.")
 	end
 end
