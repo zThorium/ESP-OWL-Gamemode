@@ -12,12 +12,12 @@ addCommandHandler("settrainrailed",
                                         else
                                                 setTrainDerailed(vehicle, true)
                                         end
-                                        outputChatBox("You set a train (#" .. vehicleID .. ") " .. (state == 0 and "railed" or "derailed") .. ".", player, 0, 255, 0, false)
+                                        outputChatBox("Pones un tren (#" .. vehicleID .. ") " .. (state == 0 and "railed" or "derailed") .. ".", player, 0, 255, 0, false)
                                 else
-                                        outputChatBox("Vehicle not found.", player, 255, 0, 0, false)
+                                        outputChatBox("Vehículo no encontrado..", player, 255, 0, 0, false)
                                 end
                         else
-                                outputChatBox("SYNTAX: /" .. cmd .. " [vehicle id] [0- Railed, 1- Derailed]", player, 255, 194, 14, false)
+                                outputChatBox("SYNTAX: /" .. cmd .. " [ID del Vehículo] [0- Encarrilado, 1- Descarrilado]", player, 255, 194, 14, false)
                         end
                 end
         end, false, false
@@ -36,12 +36,12 @@ addCommandHandler("settraindirection",
                                         else
                                                 setTrainDirection(vehicle, false)
                                         end
-                                        outputChatBox("You set a train (#" .. vehicleID .. ") " .. (state == 0 and "CW" or "CCW") .. ".", player, 0, 255, 0, false)
+                                        outputChatBox("Pones un tren (#" .. vehicleID .. ") " .. (state == 0 and "CW" or "CCW") .. ".", player, 0, 255, 0, false)
                                 else
-                                        outputChatBox("Vehicle not found.", player, 255, 0, 0, false)
+                                        outputChatBox("Vehículo no encontrado.", player, 255, 0, 0, false)
                                 end
                         else
-                                outputChatBox("SYNTAX: /" .. cmd .. " [vehicle id] [0- CW, 1- CCW]", player, 255, 194, 14, false)
+                                outputChatBox("SYNTAX: /" .. cmd .. " [ID del Vehículo] [0- Dirección agujas del reloj, 1- Dirección opuesta agujas del reloj]", player, 255, 194, 14, false)
                         end
                 end
         end, false, false

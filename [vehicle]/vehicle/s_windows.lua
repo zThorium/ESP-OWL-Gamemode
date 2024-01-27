@@ -10,12 +10,12 @@ function toggleWindow(thePlayer)
 				if not (isVehicleWindowUp(theVehicle)) then
 					for i = 0, getVehicleMaxPassengers(theVehicle) do
 						if getVehicleOccupant(theVehicle, i) and isPedDoingGangDriveby(getVehicleOccupant(theVehicle, i)) then
-							outputChatBox(" You can't roll your windows up when somebody is leaning out.", thePlayer, 255, 0, 0)
+							outputChatBox(" No puedes subir las ventanillas cuando alguien se asoma.", thePlayer, 255, 0, 0)
 							return
 						end
 					end
 					exports.anticheat:changeProtectedElementDataEx(theVehicle, "vehicle:windowstat", 0, true)
-					triggerEvent("sendAme", thePlayer, "rolls their windows up.")
+					triggerEvent("sendAme", thePlayer, "sube las ventanillas.")
 					for i = 0, getVehicleMaxPassengers(theVehicle) do
 						local player = getVehicleOccupant(theVehicle, i)
 						if (player) then
@@ -25,7 +25,7 @@ function toggleWindow(thePlayer)
 					end
 				else
 					exports.anticheat:changeProtectedElementDataEx(theVehicle, "vehicle:windowstat", 1, true)
-					triggerEvent("sendAme", thePlayer, "rolls their windows down.")
+					triggerEvent("sendAme", thePlayer, "baja las ventanillas.")
 					for i = 0, getVehicleMaxPassengers(theVehicle) do
 						local player = getVehicleOccupant(theVehicle, i)
 						if (player) then

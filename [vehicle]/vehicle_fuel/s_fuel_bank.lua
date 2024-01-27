@@ -49,7 +49,7 @@ function checkPINCode(enteredCode)
 	
 	local foundAnATMCard = getATMCardFromATMMachine(thePlayer)
 	if not foundAnATMCard then
-		exports.hud:sendBottomNotification(source,"ATM Machine is not working properly!", "This is really weird, the card you've just inserted, It's gone magically!")
+		exports.hud:sendBottomNotification(source,"El cajero automático no funciona correctamente!", "Esto es muy raro, la tarjeta que acaba de insertar, Se ha ido por arte de magia!")
 		return false
 	end
 	
@@ -57,16 +57,16 @@ function checkPINCode(enteredCode)
 	--outputDebugString(cardOwner.." - "..cardNumber.." - "..cardOwnerCharID)
 	local check = mysql:query_fetch_assoc("SELECT `card_locked`, `card_pin`, `card_number` FROM `atm_cards` WHERE `card_number`='"..cardNumber.."' AND `card_pin`='"..enteredCode.."' ")
 	if not check or not check["card_number"] then
-			triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "Access Denied", 255,0,0, "failedLessThan3")
+			triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "Acceso denegado", 255,0,0, "failedLessThan3")
 		return false
 	end
 	
 	if check["card_locked"] == "1" then
-		triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "ERROR: This ATM card is not usable.", 255,0,0, "locked", cardNumber )
+		triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "ERROR: Esta tarjeta no se puede utilizar.", 255,0,0, "bloqueado", cardNumber )
 		return false
 	end
 	
-	triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "Access Granted!", 70,255,14, "success" )
+	triggerClientEvent(source, "fuel:respondToATMInterfacePIN", source, "Acceso concedido!", 70,255,14, "éxito" )
 	
 end
 addEvent( "fuel:checkPINCode", true )

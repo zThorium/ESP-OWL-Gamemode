@@ -40,18 +40,18 @@ function createUniqueVehicle(data, existed)
 		dbExec( exports.mysql:getConn('mta'), "REPLACE INTO vehicles_custom SET id=?, brand=?, model=?, year=?, price=?, tax=?, createdby=?, handling=(SELECT s.handling FROM vehicles_shop s WHERE s.id=?), doortype="..data.doortype, data.id, data.brand, data.model, data.year, data.price, data.tax, getElementData(client, "account:id"), getElementData( vehicle, 'vehicle_shop_id' ) )
 		outputChatBox("[VEHICLE MANAGER] Unique vehicle created.", client, 0,255,0)
 		exports.logs:dbLog(client, 6, { client }, " Created unique vehicle #"..data.id..".")
-		exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." has created new unique vehicle #"..data.id..".")
+		exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." ha creado un nuevo vehículo único #"..data.id..".")
 		exports.vehicle:reloadVehicle(tonumber(data.id))
-		local topicLink = createForumThread(getElementData(client, "account:username").." created unique vehicle #"..data.id, forumText)
+		local topicLink = createForumThread(getElementData(client, "account:username").." vehículo único creado #"..data.id, forumText)
 		addVehicleLogs(tonumber(data.id), 'editveh: ' .. (topicLink or "DB error"), client)
 		return true
 	else
 		dbExec( exports.mysql:getConn('mta'), "UPDATE vehicles_custom SET brand=?, model=?, year=?, price=?, tax=?, updatedby=?, updatedate=NOW(), doortype="..data.doortype.." WHERE id=?", data.brand, data.model, data.year, data.price, data.tax, getElementData(client, "account:id"), data.id )
 		outputChatBox("[VEHICLE MANAGER] You have updated unique vehicle #"..data.id..".", client, 0,255,0)
 		exports.logs:dbLog(client, 6, { client }, " Updated unique vehicle #"..data.id..".")
-		exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." has updated unique vehicle #"..data.id..".")
+		exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." ha actualizado vehículo único #"..data.id..".")
 		exports.vehicle:reloadVehicle(tonumber(data.id))
-		local topicLink = createForumThread(getElementData(client, "account:username").." updated unique vehicle #"..data.id, forumText)
+		local topicLink = createForumThread(getElementData(client, "account:username").."actualizado vehículo único #"..data.id, forumText)
 		addVehicleLogs(tonumber(data.id), 'editveh: ' .. (topicLink or "DB Error"), client)
 		return true
 	end
@@ -71,9 +71,9 @@ function resetUniqueVehicle(vehID)
 		outputChatBox("[VEHICLE MANAGER] Remove unique vehicle #"..vehID.." failed.", client, 255,0,0)
 		return false
 	end
-	outputChatBox("[VEHICLE MANAGER] You have removed unique vehicle #"..vehID..".", client, 0,255,0)
-	exports.logs:dbLog(client, 6, { client }, " Removed unique vehicle #"..vehID..".")
-	exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." has removed unique vehicle #"..vehID..".")
+	outputChatBox("[VEHICLE MANAGER] Ha eliminado vehículo único #"..vehID..".", client, 0,255,0)
+	exports.logs:dbLog(client, 6, { client }, " Vehículo único retirado #"..vehID..".")
+	exports.global:sendMessageToAdmins("[VEHICLE-MANAGER]: "..getElementData(client, "account:username").." ha retirado vehículo único #"..vehID..".")
 	exports.vehicle:reloadVehicle(tonumber(vehID))
 
 	local vehicle = exports.pool:getElement("vehicle", tonumber(vehID))
@@ -81,7 +81,7 @@ function resetUniqueVehicle(vehID)
 		[INDENT]Vehicle ID:   [B]]=] ..tostring(vehID) ..[=[[/B][/INDENT]
 		[INDENT]Current Owner:   [B]]=] ..tostring(getVehicleOwner(vehicle)) ..[=[[/B][/INDENT]
 		[INDENT]Edited by:   [B]]=] ..tostring(getElementData(client, "account:username")) ..[=[[/B][/INDENT]]=]
-	local topicLink = createForumThread(getElementData(client, "account:username").." reset unique vehicle #"..vehID, forumText)
+	local topicLink = createForumThread(getElementData(client, "account:username").." restablecer vehículo único #"..vehID, forumText)
 	addVehicleLogs(tonumber(vehID), 'editveh reset: ' .. ( topicLink or "DB Error"), client)
 	return true
 end
@@ -93,20 +93,20 @@ function openUniqueHandling(vehdbid, existed)
 	if exports.integration:isPlayerVehicleConsultant(client) or exports.integration:isPlayerLeadAdmin(client) then
 		local theVehicle = getPedOccupiedVehicle(client) or false
 		if not theVehicle then
-			outputChatBox( "You must be in a vehicle.", client, 255, 194, 14)
+			outputChatBox( "Debe estar en un vehículo.", client, 255, 194, 14)
 			return false
 		end
 		
 		local vehID = getElementData(theVehicle, "dbid") or false
 		if not vehID or vehID < 0 then	
-			outputChatBox("This vehicle can not have custom properties.", client, 255, 194, 14)
+			outputChatBox("Este vehículo no puede tener propiedades personalizadas.", client, 255, 194, 14)
 			return false
 		end
 		
 		if existed then
 			local row = mysql:query_fetch_assoc("SELECT `handling` FROM `vehicles_custom` WHERE `id` = '" .. mysql:escape_string(vehdbid) .. "' LIMIT 1" ) or false
 			if not row then
-				outputChatBox( "[VEHICLE-MANAGER] Failed to retrieve current handlings from SQL.", client, 255, 194, 14)
+				outputChatBox( "[VEHICLE-MANAGER] Fallo al recuperar la gestión actual de SQL.", client, 255, 194, 14)
 				outputDebugString("VEHICLE MANAGER / openUniqueHandling / DATABASE ERROR")
 				return false
 			end

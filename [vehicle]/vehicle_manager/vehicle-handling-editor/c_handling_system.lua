@@ -31,11 +31,11 @@ function createHandlingWindow(mode)
 	local vehName = exports.global:getVehicleName( theVehicle )
 	local title =  ""
 	if mode == 0 then
-		title = "ALL instances of #"..vehicle_shop_id.." ("..vehName..")"
+		title = "ATODAS las instancias de #"..vehicle_shop_id.." ("..vehName..")"
 	elseif mode == 1 then
-		title = "Unique Handling of vehicle ID#"..getElementData(theVehicle, "dbid").." ("..vehName..")"
+		title = "Manejo único del Vehículo ID#"..getElementData(theVehicle, "dbid").." ("..vehName..")"
 	elseif mode == 2 then
-		title = "Vehicle Stats - "..vehName
+		title = "Estadísticas del vehículo - "..vehName
 	else
 		title =  ""
 	end
@@ -58,64 +58,64 @@ function createHandlingWindow(mode)
 	
 	-- Engine Handling Lines
 	maxVelocity = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, maxVelocity, nameColumn, "Max Speed (Km/h)", false, false)
+		guiGridListSetItemText(handlingList, maxVelocity, nameColumn, "Velocidad máxima (Km/h)", false, false)
 		guiGridListSetItemText(handlingList, maxVelocity, valueColumn, ""..tostring(math.round(handlingCurrent["maxVelocity"], 0)).."", false, false)
 	acceleration = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, acceleration, nameColumn, "Acceleration", false, false)
+		guiGridListSetItemText(handlingList, acceleration, nameColumn, "Aceleración", false, false)
 		guiGridListSetItemText(handlingList, acceleration, valueColumn, ""..tostring(math.round(handlingCurrent["engineAcceleration"], 1)).."", false, false)
 	engineInertia = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, engineInertia, nameColumn, "Engine Inertia", false, false)
+		guiGridListSetItemText(handlingList, engineInertia, nameColumn, "Inercia del motor", false, false)
 		guiGridListSetItemText(handlingList, engineInertia, valueColumn, ""..tostring(math.round(handlingCurrent["engineInertia"], 1)).."", false, false)
 	
 	-- Suspension Handling Lines
 	lowerLimit = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, lowerLimit, nameColumn, "Suspension Height", false, false)
+		guiGridListSetItemText(handlingList, lowerLimit, nameColumn, "Altura de suspensión", false, false)
 		guiGridListSetItemText(handlingList, lowerLimit, valueColumn, ""..tostring(handlingCurrent["suspensionLowerLimit"]).."", false, false)
 	suspensionBias = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, suspensionBias, nameColumn, "Suspension Bias", false, false)
+		guiGridListSetItemText(handlingList, suspensionBias, nameColumn, "Sesgo de suspensión", false, false)
 		guiGridListSetItemText(handlingList, suspensionBias, valueColumn, ""..tostring(math.round(handlingCurrent["suspensionFrontRearBias"], 1)).."", false, false)
 	suspensionForce = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, suspensionForce, nameColumn, "Suspension Force", false, false)
+		guiGridListSetItemText(handlingList, suspensionForce, nameColumn, "Fuerza de suspensión", false, false)
 		guiGridListSetItemText(handlingList, suspensionForce, valueColumn, ""..tostring(math.round(handlingCurrent["suspensionForceLevel"], 3)).."", false, false)
 	suspensionDamping = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, suspensionDamping, nameColumn, "Suspension Damping", false, false)
+		guiGridListSetItemText(handlingList, suspensionDamping, nameColumn, "Amortiguación de la suspensión", false, false)
 		guiGridListSetItemText(handlingList, suspensionDamping, valueColumn, ""..tostring(math.round(handlingCurrent["suspensionDamping"], 5)).."", false, false)
 	steeringLock = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, steeringLock, nameColumn, "Steering Lock", false, false)
+		guiGridListSetItemText(handlingList, steeringLock, nameColumn, "Bloqueo de la dirección", false, false)
 		guiGridListSetItemText(handlingList, steeringLock, valueColumn, ""..tostring(math.round(handlingCurrent["steeringLock"], 1)).."", false, false)
 	driveType = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, driveType, nameColumn, "Drive Type", false, false)
+		guiGridListSetItemText(handlingList, driveType, nameColumn, "Tipo de tracción", false, false)
 		guiGridListSetItemText(handlingList, driveType, valueColumn, ""..tostring(handlingCurrent["driveType"]).."", false, false)
 	massWeight = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, massWeight, nameColumn, "Mass Weight (Kg)", false, false)
+		guiGridListSetItemText(handlingList, massWeight, nameColumn, "Peso Masa (Kg)", false, false)
 		guiGridListSetItemText(handlingList, massWeight, valueColumn, ""..tostring(math.round(handlingCurrent["mass"], 0)).."", false, false)
 	massX = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, massX, nameColumn, "Center of Mass X", false, false)
+		guiGridListSetItemText(handlingList, massX, nameColumn, "Centro de masa X", false, false)
 		guiGridListSetItemText(handlingList, massX, valueColumn, ""..math.round(handlingCurrent["centerOfMass"][1], 2).."", false, false)
 	massY = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, massY, nameColumn, "Center of Mass Y", false, false)
+		guiGridListSetItemText(handlingList, massY, nameColumn, "Centro de masa Y", false, false)
 		guiGridListSetItemText(handlingList, massY, valueColumn, ""..math.round(handlingCurrent["centerOfMass"][2], 2).."", false, false)
 	massZ = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, massZ, nameColumn, "Center of Mass Z", false, false)
+		guiGridListSetItemText(handlingList, massZ, nameColumn, "Centro de masa Z", false, false)
 		guiGridListSetItemText(handlingList, massZ, valueColumn, ""..math.round(handlingCurrent["centerOfMass"][3], 2).."", false, false)
 	dragCoeff = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, dragCoeff, nameColumn, "Drag Coefficiency", false, false)
+		guiGridListSetItemText(handlingList, dragCoeff, nameColumn, "Coeficiencia de resistencia", false, false)
 		guiGridListSetItemText(handlingList, dragCoeff, valueColumn, ""..tostring(math.round(handlingCurrent["dragCoeff"], 1)).."", false, false)
 	brakeForce = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, brakeForce, nameColumn, "Braking Power", false, false)
+		guiGridListSetItemText(handlingList, brakeForce, nameColumn, "Potencia de frenado", false, false)
 		guiGridListSetItemText(handlingList, brakeForce, valueColumn, ""..tostring(math.round(handlingCurrent["brakeDeceleration"], 1)).."", false, false)
 	brakeBias = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, brakeBias, nameColumn, "Braking Bias", false, false)
+		guiGridListSetItemText(handlingList, brakeBias, nameColumn, "Sesgo de frenado", false, false)
 		guiGridListSetItemText(handlingList, brakeBias, valueColumn, ""..tostring(math.round(handlingCurrent["brakeBias"], 1)).."", false, false)
 	tracMultiply = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, tracMultiply, nameColumn, "Traction Multiplier", false, false)
+		guiGridListSetItemText(handlingList, tracMultiply, nameColumn, "Multiplicador de tracción", false, false)
 		guiGridListSetItemText(handlingList, tracMultiply, valueColumn, ""..tostring(math.round(handlingCurrent["tractionMultiplier"], 2)).."", false, false)
 	tracBias = guiGridListAddRow(handlingList)
-		guiGridListSetItemText(handlingList, tracBias, nameColumn, "Traction Bias", false, false)
+		guiGridListSetItemText(handlingList, tracBias, nameColumn, "Tendencia a la tracción", false, false)
 		guiGridListSetItemText(handlingList, tracBias, valueColumn, ""..tostring(math.round(handlingCurrent["tractionBias"], 2)).."", false, false)
 		
 	if mode == 0 then -- All Instances
-		bReset = guiCreateButton(0.05, 0.925, 0.45, 0.05, "Load Default", true, wHandling)
+		bReset = guiCreateButton(0.05, 0.925, 0.45, 0.05, "Cargar Predeterminado", true, wHandling)
 		addEventHandler( "onClientGUIClick", bReset,
 			function( button )
 				if button == "left" then
@@ -126,7 +126,7 @@ function createHandlingWindow(mode)
 		false)
 		guiSetEnabled(bReset, false)
 		
-		bSave = guiCreateButton(0.5, 0.925, 0.45, 0.05, "Save To Database", true, wHandling)
+		bSave = guiCreateButton(0.5, 0.925, 0.45, 0.05, "Guardar en base de datos", true, wHandling)
 		addEventHandler( "onClientGUIClick", bSave,
 			function( button )
 				if button == "left" then
@@ -241,11 +241,11 @@ function applyHandling(veh, saveToSQL)
 	table.insert(centerOfMass, 3, massZS)
 	-- Limits
 	if tonumber(engineInertiaS) < 0.1 or tonumber(engineInertiaS) > 30 then -- Engine Intertia 0.1 - 30
-		outputChatBox("Error: Engine Intertia must be between 0.1 and 30.", 255, 0, 0)
+		outputChatBox("Error: La interecia del motor debe estar entre 0,1 y 30.", 255, 0, 0)
 		playError()
 		return
 	elseif tonumber(suspensionDampingS) < 0.01 or tonumber(suspensionDampingS) > 0.2 then -- Suspension Damping 0.01 - 0.2
-		outputChatBox("Error: Suspension Damping must be between 0.01 and 0.2.", 255, 0, 0)
+		outputChatBox("Error: La amortiguación de la suspensión debe estar entre 0,01 y 0,2.", 255, 0, 0)
 		playError()
 		return
 	end
@@ -269,14 +269,14 @@ function editHandlingWindow()
 			if (source == handlingList) and not (name == "") then
 				guiSetInputEnabled(true)
 				
-				wEdit = guiCreateWindow(x, y, width, height, "Edit Handling - ".. name .."", false)
+				wEdit = guiCreateWindow(x, y, width, height, "Editar Manejo - ".. name .."", false)
 				
 				newValue = guiCreateEdit(0.03, 0.20, 2.0, 0.3, ""..value.."", true, wEdit)
 				
-				finishEdit = guiCreateButton(0.6, 0.75, 0.4, 0.2, "Done", true, wEdit)
+				finishEdit = guiCreateButton(0.6, 0.75, 0.4, 0.2, "Hecho", true, wEdit)
 				addEventHandler("onClientGUIClick", finishEdit, newHandling)
 				
-				cancelEdit = guiCreateButton(0.05, 0.75, 0.4, 0.2, "Cancel", true, wEdit)
+				cancelEdit = guiCreateButton(0.05, 0.75, 0.4, 0.2, "Cancelar", true, wEdit)
 				addEventHandler("onClientGUIClick", cancelEdit, cancelHandling)
 				
 				if name == "Drive Type" then
@@ -360,10 +360,10 @@ function showConfirmReloadAllInstances(vehicle_shop_id, vehName)
 	local x = (scrWidth-width)/2
 	local y = (scrHeight-height)/2
 	
-	GUIEditor_Window["reloadconfirmw"] = guiCreateWindow(x, y, width, height, "Reload all vehicles instances of #"..vehicle_shop_id.."("..vehName..")",false)
-	GUIEditor_Label["reloadconfirml"] = guiCreateLabel(0.0383,0.1429,0.931,0.6468,"You have changed handlings for all instances of vehicle shop ID #"..vehicle_shop_id.."("..vehName.."). \n\nHowever, vehicles existed in game before this moment didn't get effected until next vehicle system restart. \n\nDo you want to force reload all vehicles instances of this model?\n\n*Reloading all vehicle instances might causes server's massive lag, try to avoid reloading all instances unnecessarily by using /reloadveh [id] instead*",true,GUIEditor_Window["reloadconfirmw"])
+	GUIEditor_Window["reloadconfirmw"] = guiCreateWindow(x, y, width, height, "Recarga todas las instancias de vehículos de #"..vehicle_shop_id.."("..vehName..")",false)
+	GUIEditor_Label["reloadconfirml"] = guiCreateLabel(0.0383,0.1429,0.931,0.6468,"Ha modificado el manejo de todas las instancias del ID de la tienda de vehículos #"..vehicle_shop_id.."("..vehName.."). \n\nSin embargo, los vehículos que existían en el juego antes de este momento no se vieron afectados hasta el siguiente reinicio del sistema de vehículos. \n\n¿Quieres forzar la recarga de todas las instancias de vehículos de este modelo?\n\n*Recargar todas las instancias de vehículos puede causar un lag masivo en el servidor, intenta evitar recargar todas las instancias innecesariamente usando /reloadveh [id] en su lugar.*",true,GUIEditor_Window["reloadconfirmw"])
 	guiLabelSetHorizontalAlign(GUIEditor_Label["reloadconfirml"],"left",true)
-	GUIEditor_Button["reloadconfirm_ok"] = guiCreateButton(0.0172,0.8294,0.4808,0.127,"Reload ALL, I know what I'm doing",true,GUIEditor_Window["reloadconfirmw"])
+	GUIEditor_Button["reloadconfirm_ok"] = guiCreateButton(0.0172,0.8294,0.4808,0.127,"Recarga TODO, sé lo que hago",true,GUIEditor_Window["reloadconfirmw"])
 	addEventHandler( "onClientGUIClick", GUIEditor_Button["reloadconfirm_ok"],
 		function( button )
 			if button == "left" then
@@ -373,7 +373,7 @@ function showConfirmReloadAllInstances(vehicle_shop_id, vehName)
 			end
 		end,
 	false)
-	GUIEditor_Button["reloadconfirml_cancel"] = guiCreateButton(0.4981,0.8294,0.4789,0.127,"Cancel",true,GUIEditor_Window["reloadconfirmw"])
+	GUIEditor_Button["reloadconfirml_cancel"] = guiCreateButton(0.4981,0.8294,0.4789,0.127,"Cancelar",true,GUIEditor_Window["reloadconfirmw"])
 	addEventHandler( "onClientGUIClick", GUIEditor_Button["reloadconfirml_cancel"],
 		function( button )
 			if button == "left" then
@@ -404,9 +404,9 @@ function showDriveTestTimer(veh, driveTestTimeSec, thePed)
 	guiWindowSetSizable(GUIEditor_Window["drivetest"],false)
 	guiSetProperty(GUIEditor_Window["drivetest"],"AlwaysOnTop","true")
 	--guiSetProperty(GUIEditor_Window["drivetest"],"TitlebarEnabled","false")
-	GUIEditor_Label["second"] = guiCreateLabel(5,22,305,18,"You have "..driveTestTimeSec.." seconds before this test drive ends.",false,GUIEditor_Window["drivetest"])
+	GUIEditor_Label["second"] = guiCreateLabel(5,22,305,18,"Usted tiene "..driveTestTimeSec.." segundos antes de que termine esta prueba de conducción.",false,GUIEditor_Window["drivetest"])
 	guiLabelSetHorizontalAlign(GUIEditor_Label["second"],"center",false)
-	GUIEditor_Button["finish"] = guiCreateButton(15,46,286,26,"FINISH",false,GUIEditor_Window["drivetest"])
+	GUIEditor_Button["finish"] = guiCreateButton(15,46,286,26,"ACABAR",false,GUIEditor_Window["drivetest"])
 	addEventHandler( "onClientGUIClick", GUIEditor_Button["finish"], function()
 		if source == GUIEditor_Button["finish"] then
 			exports.global:fadeToBlack()
@@ -423,7 +423,7 @@ function showDriveTestTimer(veh, driveTestTimeSec, thePed)
 	end)
 	if thePed then
 		guiSetSize(GUIEditor_Window["drivetest"], width, height+28, false)
-		GUIEditor_Button["orderfinish"] = guiCreateButton(15,46+28,286,26,"ORDER & FINISH",false,GUIEditor_Window["drivetest"])
+		GUIEditor_Button["orderfinish"] = guiCreateButton(15,46+28,286,26,"PEDIR Y ACABAR",false,GUIEditor_Window["drivetest"])
 		addEventHandler( "onClientGUIClick", GUIEditor_Button["orderfinish"], function()
 			if source == GUIEditor_Button["orderfinish"] then
 				exports.global:fadeToBlack()
@@ -453,7 +453,7 @@ function countdownDriveTest(driveTestTimeSec)
 	if isElement(GUIEditor_Label["second"]) then
 		driveTestTimer = setTimer(function()
 			driveTestTimeSec = driveTestTimeSec - 1
-			guiSetText(GUIEditor_Label["second"], "You have "..driveTestTimeSec.." seconds before this test drive ends.")
+			guiSetText(GUIEditor_Label["second"], "Usted tiene "..driveTestTimeSec.." segundos antes de que termine esta prueba de conducción.")
 			if driveTestTimeSec <= 0 then
 				closeCountdownDriveTest()
 			end

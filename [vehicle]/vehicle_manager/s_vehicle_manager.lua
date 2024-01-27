@@ -105,11 +105,11 @@ function checkVeh(thePlayer, commandName, vehID)
 			local veh = getPedOccupiedVehicle(thePlayer) or false
 			vehID = isElement(veh) and getElementData(veh, "dbid") or false
 			if not vehID then
-				outputChatBox( "You must be in a vehicle.", thePlayer, 255, 194, 14)
-				outputChatBox("Or use SYNTAX: /"..commandName.." [Vehicle ID]", thePlayer, 255, 194, 14)
+				outputChatBox( "Debe estar en un vehículo.", thePlayer, 255, 194, 14)
+				outputChatBox("O utilice SYNTAX: /"..commandName.." [ID del Vehículo]", thePlayer, 255, 194, 14)
 				return false
 			elseif vehID <= 0 then
-				outputChatBox( "You can't /checkveh on temp vehicle.", thePlayer, 255, 0, 0)
+				outputChatBox( "No se puede usar /checkveh en un vehículo temporal.", thePlayer, 255, 0, 0)
 				return false
 			end
 		end
@@ -120,12 +120,12 @@ function checkVeh(thePlayer, commandName, vehID)
 			local row = mysql:fetch_assoc(mQuery1) or false
 			mysql:free_result(mQuery1)
 			if not row then
-				outputChatBox("Vehicle ID #"..vehID.." doesn't exist!", thePlayer, 255, 0, 0)
+				outputChatBox("ID del Vehículo #"..vehID.." no existe.", thePlayer, 255, 0, 0)
 				return false
 			end
 
 			if row["vjob"] ~= "-1" then
-				outputChatBox("You can't /checkveh on a city hall job's vehicle.", thePlayer, 255, 0, 0)
+				outputChatBox("No se puede /checkveh en un vehículo de trabajo del ayuntamiento.", thePlayer, 255, 0, 0)
 				return false
 			end
 
@@ -177,22 +177,22 @@ function saveAdminNote(vehID, adminNote, noteId)
 	end
 
 	if string.len(adminNote) > 500 then
-		outputChatBox("Admin note has failed to add. Reason: Exceeded 500 characters.", source, 255, 0, 0)
+		outputChatBox("Nota Admin no ha podido añadir. Razón: Excedido 500 caracteres.", source, 255, 0, 0)
 		return false
 	end
 
 	if noteId then
 		if mysql:query_free("UPDATE vehicle_notes SET note='"..mysql:escape_string(adminNote).."', creator="..getElementData(source, "account:id").." WHERE id ="..noteId.." AND vehid="..vehID) then
-			outputChatBox("You have successfully updated admin note entry #"..noteId.." on vehicle #"..vehID..".", source, 0, 255,0)
-			addVehicleLogs(vehID, "Modified admin note entry #"..noteId, source)
+			outputChatBox("Ha actualizado correctamente la entrada de la nota de administración #"..noteId.." en el vehículo #"..vehID..".", source, 0, 255,0)
+			addVehicleLogs(vehID, "Entrada de nota de administración modificada #"..noteId, source)
 			return true
 		end
 	else
 		--outputChatBox("INSERT INTO vehicle_notes SET note='"..mysql:escape_string(adminNote).."', creator="..getElementData(source, "account:id")..", vehid="..vehID )
 		local insertedId = mysql:query_insert_free("INSERT INTO vehicle_notes SET note='"..mysql:escape_string(adminNote).."', creator="..getElementData(source, "account:id")..", vehid="..vehID )
 		if insertedId then
-			outputChatBox("You have successfully added a new admin note entry #"..insertedId.." to vehicle #"..vehID..".", source, 0, 255,0)
-			addVehicleLogs(vehID, "Added new admin note entry #"..insertedId, source)
+			outputChatBox("Ha añadido correctamente una nueva entrada de nota de administrador #"..insertedId.." al vehículo #"..vehID..".", source, 0, 255,0)
+			addVehicleLogs(vehID, "Añadida nueva entrada de nota de administrador #"..insertedId, source)
 			return true
 		end
 	end
@@ -205,33 +205,33 @@ function getVehicleWeight (thePlayer, commandName, specifiedVehicle)
 		if not specifiedVehicle then
 			local vehicle = getPedOccupiedVehicle(thePlayer) or false
 			if not vehicle then
-				outputChatBox("You need to be sitting in a vehicle in order to use this command, or you can use /getvehweight <veh ID>.", thePlayer, 255, 194, 14)
+				outputChatBox("Necesitas estar sentado en un vehículo para usar este comando, o puedes usar /getvehweight <veh ID>..", thePlayer, 255, 194, 14)
 				return false
 			else
 				local mass = getVehicleHandling(vehicle).mass or false
 				if not mass then
-					outputChatBox("ERROR: Please contact a scripter or a VCT member. Code: 824jS", thePlayer, 255, 0, 0)
+					outputChatBox("ERROR: Póngase en contacto con un scripter o un miembro de VCT. Código 824jS", thePlayer, 255, 0, 0)
 					return false
 				else
-					outputChatBox("Vehicle weight: #7CFC00"..mass.."kg. #FFFFFFAutomated calculation (mass x 3) for chopshop: #01C5BB"..(tonumber(mass) * 3).."$", thePlayer, 255, 255, 255, true)
+					outputChatBox("Peso del vehículo: #7CFC00"..mass.."kg. #FFFFFFAutomated calculation (mass x 3) for chopshop: #01C5BB"..(tonumber(mass) * 3).."$", thePlayer, 255, 255, 255, true)
 				end
 			end
 		elseif tonumber(specifiedVehicle) and tonumber(specifiedVehicle) > 0 then
 			local exists = exports.pool:getElement("vehicle", tonumber(specifiedVehicle)) or false
 			if not exists then
-				outputChatBox("This vehicle ID does not exist.", thePlayer, 255, 194, 14)
+				outputChatBox("Este ID de vehículo no existe.", thePlayer, 255, 194, 14)
 				return false
 			else
 				local mass = getVehicleHandling(exists).mass or false
 				if not mass then
-					outputChatBox("ERROR: Please contact a scripter or a VCT member. Code: 823jS", thePlayer, 255, 0, 0)
+					outputChatBox("ERROR: Póngase en contacto con un scripter o un miembro de VCT. Código 823jS", thePlayer, 255, 0, 0)
 					return false
 				else
-					outputChatBox("Vehicle weight: #7CFC00"..mass.."kg. #FFFFFFAutomated calculation (mass x 3) for chopshop: #01C5BB"..(tonumber(mass) * 3).."$", thePlayer, 255, 255, 255, true)
+					outputChatBox("Peso del vehículo: #7CFC00"..mass.."kg. #FFFFFFAutomated calculation (mass x 3) for chopshop: #01C5BB"..(tonumber(mass) * 3).."$", thePlayer, 255, 255, 255, true)
 				end
 			end
 		else
-			outputChatBox("ERROR: Please contact a scripter. Code: 822jS", thePlayer, 255, 0, 0)
+			outputChatBox("ERROR: Póngase en contacto con un scripter. Código: 822jS", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -241,7 +241,7 @@ function systemDeleteVehicle(vehid, reason) --This function is meant to be used 
 	if vehid and tonumber(vehid) then
 		vehid = tonumber(vehid)
 	else
-		return false, "veh id is missing or invalid"
+		return false, "El id del vehículo no existe o no es válido"
 	end
 	--Existed or not, we take all keys anyway.
 	call( getResourceFromName( "item-system" ), "deleteAll", 3 , vehid )
@@ -253,7 +253,7 @@ function systemDeleteVehicle(vehid, reason) --This function is meant to be used 
 	if veh and veh.id ~= mysql_null() then
 		dbExec(exports.mysql:getConn("mta"), "UPDATE vehicles SET deleted=-1, deletedDate=NOW() WHERE id=?", vehid)
 	else
-		return false, "veh does not existed in database."
+		return false, "El vehículo no existe en la base de datos."
 	end
 
 	--Alright, it's time to give admins some clues of what just happened
@@ -266,6 +266,6 @@ function systemDeleteVehicle(vehid, reason) --This function is meant to be used 
 		destroyElement(theVehicle)
 		return true
 	else
-		return true, "vehicle is not loaded in game so only cleaned up in database."
+		return true, "vEl vehículo no se carga en el juego, por lo que sólo se limpia en la base de datos.."
 	end
 end

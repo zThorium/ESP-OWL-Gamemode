@@ -29,22 +29,22 @@ function controlRamp(theVehicle)
 	local playerVehicle = getPedOccupiedVehicle(client)
 	
 	if not (isElement(theVehicle) and theVehicle == playerVehicle) then
-		outputChatBox("You need to be in the vehicle to use this button.", client, 255, 0, 0)
+		outputChatBox("Es necesario estar en el vehículo para utilizar este botón..", client, 255, 0, 0)
 		return
 	end
 	
 	if not (exports['item-system']:hasItem(theVehicle, 117)) then
-		outputChatBox("You need the item in the cars inventory before you can do this!", client, 255, 0, 0)
+		outputChatBox("Necesitas el objeto en el inventario del coche para poder hacerlo.", client, 255, 0, 0)
 		return
 	end
 
 	if not (getElementData(theVehicle, "handbrake") == 1) then
-		outputChatBox("You need to handbrake the vehicle before you can deploy the ramp!", client, 255, 0, 0)
+		outputChatBox("Antes de desplegar la rampa, debe frenar el vehículo con el freno de mano.", client, 255, 0, 0)
 		return
 	end
 	
 	if not (getElementModel(theVehicle) == 578) then
-		outputChatBox("This vehicle is not compatible with this type of ramp!", client, 255, 0, 0)
+		outputChatBox("¡Este vehículo no es compatible con este tipo de rampa!", client, 255, 0, 0)
 		return
 	end
 	

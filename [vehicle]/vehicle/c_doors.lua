@@ -39,7 +39,7 @@ function openVehicleDoorGUI( vehicleElement )
 
 	local options = 0
 	local guiPos = 30
-	vControlGUI["main"] = guiCreateWindow(700,236,272,288,"Vehicle Control",false)
+	vControlGUI["main"] = guiCreateWindow(700,236,272,288,"Control de Vehículo",false)
 	for index, doorEntry in ipairs(doors) do
 		vControlGUI["scroll"..index] = guiCreateScrollBar(24,guiPos + 17,225,17,true,false,vControlGUI["main"])
 		vControlGUI["label"..index] = guiCreateLabel(30,guiPos,135,15,doorEntry[1],false,vControlGUI["main"])

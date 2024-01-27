@@ -62,7 +62,7 @@ function toggleEngine( )
 					if canPlayerStartEngine( veh, localPlayer ) then
 						triggerServerEvent( 'vehicle:engine:start', resourceRoot, exports.global:getNearbyElements( veh, 'player' ), veh )
 					else
-						exports.hud:sendBottomNotification( localPlayer, exports.global:getVehicleName( veh ), "You require a key to start this vehicle." )
+						exports.hud:sendBottomNotification( localPlayer, exports.global:getVehicleName( veh ), "Necesita una llave para arrancar el vehículo." )
 						playSoundFrontEnd(4)
 					end
 				end

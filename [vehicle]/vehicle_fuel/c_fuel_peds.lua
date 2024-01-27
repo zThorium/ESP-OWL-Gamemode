@@ -70,7 +70,7 @@ function requestATMInterfacePIN(theATM, atmLocationName)
 			guiWindowSetSizable(wPIN, false)
 
 		local tabPanel = guiCreateTabPanel(0.05, 0.05, 0.9, 0.85, true, wPIN)
-		local tabPersonal = guiCreateTab("Please Enter PIN code", tabPanel)
+		local tabPersonal = guiCreateTab("Introduzca el código PIN", tabPanel)
 
 		local posXOffset = 265
 		local posYOffset = -105
@@ -81,7 +81,7 @@ function requestATMInterfacePIN(theATM, atmLocationName)
             guiSetFont(Label_Keypad_Number,"sa-gothic")
             guiLabelSetVerticalAlign(Label_Keypad_Number,"center")
             guiLabelSetHorizontalAlign(Label_Keypad_Number,"center",false)
-		Label_Error = guiCreateLabel(20,90,220,30,"Please enter 4 digitals of PIN Code",false,tabPersonal)
+		Label_Error = guiCreateLabel(20,90,220,30,"Introduzca 4 dígitos del código PIN",false,tabPersonal)
 			guiLabelSetVerticalAlign(Label_Error,"center")
             guiLabelSetHorizontalAlign(Label_Error,"center",false)
         local Button_1 = guiCreateButton(0+posXOffset,116+posYOffset,78,66,"1",false,tabPersonal)

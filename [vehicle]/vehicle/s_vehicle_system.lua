@@ -428,9 +428,9 @@ function toggleLock(source, key, keystate)
 	if (not lockSpam[source]) then
 		lockSpam[source] = 1
 	elseif (lockSpam[source] == 5) then
-		outputChatBox("Please refrain from command spamming!", source, 255, 0, 0)
-		exports.global:sendMessageToAdmins("AdmWarn: " .. getPlayerName(source) .. " is spamming lock/unlock.")
-		outputDebugString( "Possible command spam from: " .. getPlayerName(source) .. " LOCK/UNLOCK")
+		outputChatBox("Por favor, absténgase de enviar spam de comandos.", source, 255, 0, 0)
+		exports.global:sendMessageToAdmins("AdmWarn: " .. getPlayerName(source) .. " es spam de bloqueo/desbloqueo.")
+		outputDebugString( "Posible spam de comandos de: " .. getPlayerName(source) .. " BLOQUEAR/DESBLOQUEAR")
 		return
 	else
 		lockSpam[source] = lockSpam[source] + 1
@@ -451,14 +451,14 @@ function toggleLock(source, key, keystate)
 						local locked = isVehicleLocked(vehicle)
 						if (locked) then
 							setVehicleLocked(vehicle, false)
-							triggerEvent('sendAme', source, "unlocks the vehicle doors.")
+							triggerEvent('sendAme', source, "desbloquea las puertas del vehículo.")
 						else
 							setVehicleLocked(vehicle, true)
 							local doors = getDoorsFor(getElementModel(vehicle), -1)
 							for index, doorEntry in ipairs(doors) do
 								setVehicleDoorOpenRatio(vehicle, doorEntry[2], 0, 0.5)
 							end
-							triggerEvent('sendAme', source, "locks the vehicle doors.")
+							triggerEvent('sendAme', source, "bloquea las puertas del vehículo.")
 						end
 					else
 						outputChatBox("(( No se pueden bloquear los vehículos incautados. ))", source, 255, 195, 14)
@@ -516,7 +516,7 @@ function checkLock(thePlayer, seat, jacked)
 
 	if (locked) and not (jacked) then
 		cancelEvent()
-		outputChatBox("The door is locked.", thePlayer)
+		outputChatBox("La puerta está cerrada.", thePlayer)
 	end
 end
 addEventHandler("onVehicleStartExit", getRootElement(), checkLock)
@@ -555,7 +555,7 @@ function toggleLights(source, key, keystate)
 				end
 			end
 		else
-			exports.hud:sendBottomNotification( source, exports.global:getVehicleName(veh), "Battery ran out." )
+			exports.hud:sendBottomNotification( source, exports.global:getVehicleName(veh), "La batería se agotó." )
 		end
 	end
 end
@@ -574,7 +574,7 @@ addEventHandler('togLightsVehicle', root,
 function checkBikeLock(thePlayer)
 	if (isVehicleLocked(source)) and (getVehicleType(source)=="Bike" or getVehicleType(source)=="Boat" or getVehicleType(source)=="BMX" or getVehicleType(source)=="Quad" or getElementModel(source)==568 or getElementModel(source)==571 or getElementModel(source)==572 or getElementModel(source)==424 or getElementModel(source)==431 or getElementModel(source)==437) then
 		if not getElementData(thePlayer, "interiormarker") then
-			outputChatBox("ese vehiculo esta cerrado.", thePlayer, 255, 194, 15)
+			outputChatBox("ese vehículo esta cerrado.", thePlayer, 255, 194, 15)
 		end
 		cancelEvent()
 	end
@@ -595,15 +595,15 @@ function setRealInVehicle(thePlayer)
 		local faction = getElementData(source, "faction") or -1
 
 		if owner < 0 and faction == -1 then
-			exports.hud:sendBottomNotification( thePlayer, vehName, "(( This "..vehName.." is a civilian vehicle. ))" )
+			exports.hud:sendBottomNotification( thePlayer, vehName, "(( Este "..vehName.." es un vehículo civil. ))" )
 		elseif (faction==-1) and (owner>0) then
 			local ownerName = exports['cache']:getCharacterName(owner)
 			if ownerName and exports.integration:isPlayerTrialAdmin( thePlayer, true ) then
-				exports.hud:sendBottomNotification( thePlayer, vehName, "(( This "..vehName.." belongs to " .. ownerName .. " ))" )
+				exports.hud:sendBottomNotification( thePlayer, vehName, "(( Este "..vehName.." pertenece a " .. ownerName .. " ))" )
 			end
 		elseif (faction~=-1) then
 			local factionName = exports.cache:getFactionNameFromId(faction) or "Unknown Faction"
-			exports.hud:sendBottomNotification( thePlayer, vehName, "(( This vehicle belongs to " .. factionName .. ". ))" )
+			exports.hud:sendBottomNotification( thePlayer, vehName, "(( Este vehículo pertenece a " .. factionName .. ". ))" )
 		end
 	end
 end
@@ -864,7 +864,7 @@ function lockUnlockInside(vehicle)
 				end
 			end
 		else
-			outputChatBox("((  No se pueden bloquear los vehículos incautados. ))", source, 255, 195, 14)
+			outputChatBox("((  No se pueden bloquear los vehículos Impoundeds. ))", source, 255, 195, 14)
 		end
 	--else
 		--outputChatBox("(( You can't lock civilian vehicles. ))", source, 255, 195, 14)
@@ -1072,7 +1072,7 @@ local function parkVeh( thePlayer, veh, commandName )
 					end
 				end
 
-				if ( getElementData(veh, "Incautado") or 0 ) > 0 then
+				if ( getElementData(veh, "Impounded") or 0 ) > 0 then
 					local owner = getPlayerFromName( exports['cache']:getCharacterName( getElementData( veh, "owner" ) ) )
 					if isElement( owner ) and exports.global:hasItem( owner, 2 ) then
 						outputChatBox("((SFT&R)) #5555 [SMS]: Tu " .. getVehicleName(veh) .. "ha sido confiscado. Dirígete al depósito para liberarlo.", owner, 120, 255, 80)
@@ -1129,7 +1129,7 @@ function setVehiclePosition2(thePlayer, commandName, vehicleID)
 	if exports.integration:isPlayerTrialAdmin( thePlayer ) then
 		local vehicleID = tonumber(vehicleID)
 		if not vehicleID or vehicleID < 0 then
-			outputChatBox( "SYNTAX: /" .. commandName .. " [vehicle id]", thePlayer, 255, 194, 14 )
+			outputChatBox( "SYNTAX: /" .. commandName .. " [ID del vehículo]", thePlayer, 255, 194, 14 )
 		else
 			local veh = exports.pool:getElement("vehicle", vehicleID)
 			if veh then
@@ -1165,7 +1165,7 @@ function setVehiclePosition2(thePlayer, commandName, vehicleID)
 					end
 				end
 			else
-				outputChatBox("Vehicle not found.", thePlayer, 255, 0, 0 )
+				outputChatBox("Vehículo no encontrado.", thePlayer, 255, 0, 0 )
 			end
 		end
 	end
@@ -1219,7 +1219,7 @@ function setVehiclePosition3(veh)
 					end
 				end
 
-				if ( getElementData(veh, "Incautado") or 0 ) > 0 then
+				if ( getElementData(veh, "Impounded") or 0 ) > 0 then
 					local owner = getPlayerFromName( exports['cache']:getCharacterName( getElementData( veh, "owner" ) ) )
 					if isElement( owner ) and exports.global:hasItem( owner, 2 ) then
 						outputChatBox("((SFT&R)) #5555 [SMS]: Tu " .. getVehicleName(veh) .. " ha sido confiscado. Dirígete al depósito para liberarlo.", owner, 120, 255, 80)
@@ -1288,7 +1288,7 @@ function setVehiclePosition4(thePlayer, commandName, vehicle)
 				end
 			end
 
-			if ( getElementData(veh, "Incautado") or 0 ) > 0 then
+			if ( getElementData(veh, "Impounded") or 0 ) > 0 then
 				local owner = getPlayerFromName( exports['cache']:getCharacterName( getElementData( veh, "owner" ) ) )
 				if isElement( owner ) and exports.global:hasItem( owner, 2 ) then
 					outputChatBox("((SFT&R)) #5555 [SMS]: Tu " .. getVehicleName(veh) .. " ha sido confiscado. Dirígete al depósito para liberarlo..", owner, 120, 255, 80)

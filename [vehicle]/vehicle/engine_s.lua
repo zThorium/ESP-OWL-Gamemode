@@ -31,8 +31,8 @@ function startEngine( players, veh )
 				status = 'ok'
 			end
 		else
-			exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "Battery died." )
-			triggerEvent('sendAme', client, "attempts to start the engine but fails.")
+			exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "Batería agotada." )
+			triggerEvent('sendAme', client, "intenta arrancar el motor pero no lo consigue.")
 			status = 'nobatt'
 			return
 		end
@@ -75,10 +75,10 @@ function startEngine( players, veh )
 				dbExec( exports.mysql:getConn('mta'), "UPDATE vehicles SET lastUsed=NOW() WHERE id=? ", vid )
 			end
 
-			triggerEvent('sendAme', client, "reaches down sparking a few cables.")
+			triggerEvent('sendAme', client, "se agacha y hace saltar algunos cables.")
 
 			-- logs
-			exports.vehicle_manager:addVehicleLogs( vid , "Started engine via hotwire method due to it already being set hotwirable by an admin.", client )
+			exports.vehicle_manager:addVehicleLogs( vid , "Arranque del motor mediante el método de puentear debido a que ya estaba configurado como puenteable por un administrador..", client )
 			exports.logs:dbLog( client, 31, { veh, client } , "STARTED ENGINE THAT WAS ALREADY HOTWIRED" )
 		else
 			-- play starting sound while we're doing it.
@@ -99,11 +99,11 @@ function startEngine( players, veh )
 					end
 					blowVehicle(veh)
 				elseif status == 'enginebroke' then
-					exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "Engine is broken." )
-					triggerEvent('sendAme', client, "attempts to start the engine but fails.")
+					exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "El motor está roto." )
+					triggerEvent('sendAme', client, "intenta arrancar el motor pero no lo consigue.")
 				elseif status == 'nofuel' then
-					exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "Fuel tank is empty." )
-					triggerEvent('sendAme', client, "attempts to start the engine but fails.")
+					exports.hud:sendBottomNotification( client, exports.global:getVehicleName( veh ), "FEl depósito de combustible está vacío.." )
+					triggerEvent('sendAme', client, "intenta arrancar el motor pero no lo consigue.")
 				end
 			end, 1500, 1, client)
 		end
