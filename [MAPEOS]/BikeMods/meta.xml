@@ -1,0 +1,10 @@
+<meta>
+    <info type="script" version="1.0.0" />
+    <script src="scrypt.lua" type="client" />
+    <file src="caballo.txd" />
+    <file src="caballo.dff" />
+    <file src="yzfr6.txd" />
+    <file src="yzfr6.dff" />
+    <file src="s1000rr.txd" />
+    <file src="s1000rr.dff" />
+</meta>
