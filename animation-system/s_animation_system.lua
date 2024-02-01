@@ -40,8 +40,8 @@ function stopAnimation(thePlayer)
 		unbindKey( thePlayer , "space", "down", stopAnimation )
 	end
 end
-addCommandHandler("stopanim", stopAnimation, false, false)
-addCommandHandler("stopani", stopAnimation, false, false)
+addCommandHandler("pararanim", stopAnimation, false, false)
+addCommandHandler("pararani", stopAnimation, false, false)
 
 -- making sure noone is stuck in any animation when resource stops.
 addEventHandler( 'onResourceStop', resourceRoot, function()
@@ -63,12 +63,12 @@ addEventHandler( "stopAnimationFix2", getRootElement(), stopAnimationFix2 )
 ]]
 
 function animationList(thePlayer)
-	outputChatBox("/piss /wank /slapass /fixcar /handsup /hailtaxi /scratch /fu /carchat /tired /cover", thePlayer, 255, 194, 14)
-	outputChatBox("/strip 1-2 /lightup /drink /beg /mourn /cheer 1-3 /dance 1-3 /crack 1-4 /walk(2) 1-37", thePlayer, 255, 194, 14)
-	outputChatBox("/gsign 1-5 /puke /rap 1-3 /sit 1-5 /smoke 1-3 /smokelean /laugh /startrace /bat 1-3", thePlayer, 255, 194, 14)
-	outputChatBox("/daps 1-2 /shove /bitchslap /shocked /dive /what /fall /fallfront /cpr /copaway", thePlayer, 255, 194, 14)
-	outputChatBox("/copcome /copleft /copstop /wait /think /shake /idle /lay 1-2 /cry /aim /drag /win 1-2", thePlayer, 255, 194, 14)
-	outputChatBox("/stopanim o presione la barra espaciadora para cancelar animaciones.", thePlayer, 255, 194, 14)
+	outputChatBox("/mear /masturbarse /nalguear /fixcar /manosarriba /parartaxi /rascarbolas /puto /hablarauto /cansado /cubrirse", thePlayer, 255, 194, 14)
+	outputChatBox("/strip 1-2 /encender /beber /rogar /luto /animar 1-3 /bailar 1-3 /herido 1-4 /caminar(2) 1-37", thePlayer, 255, 194, 14)
+	outputChatBox("/ganga 1-5 /vomitar /rapear 1-3 /sentarse 1-5 /fumar 1-3 /fumarapoyado /reir /empezarcarrera /bate 1-3", thePlayer, 255, 194, 14)
+	outputChatBox("/saludar 1-2 /empezarcarrera /perracachetada /sorprendido /piquero /quepasa /caerse /caeradelante /rcp /vete", thePlayer, 255, 194, 14)
+	outputChatBox("/acercate /indicarizquierda /detengase /esperar /pensar /negar /quieto /acostarse 1-2 /llorar /apuntar /pipazo /celebrar 1-2", thePlayer, 255, 194, 14)
+	outputChatBox("/pararanim o presione la barra espaciadora para cancelar animaciones.", thePlayer, 255, 194, 14)
 end
 addCommandHandler("animlist", animationList, false, false)
 addCommandHandler("animhelp", animationList, false, false)
@@ -87,7 +87,7 @@ function coverAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "ped", "duck_cower", -1, false, false, false)
 	end
 end
-addCommandHandler("cover", coverAnimation, false, false)
+addCommandHandler("cubrirse", coverAnimation, false, false)
 
 -- /cpr animtion -------------------------------------------------
 function cprAnimation(thePlayer)
@@ -97,7 +97,7 @@ function cprAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "medic", "cpr", 8000, false, true, false)
 	end
 end
-addCommandHandler("cpr", cprAnimation, false, false)
+addCommandHandler("rcp", cprAnimation, false, false)
 
 -- cop away Animation -------------------------------------------------------------------------
 function copawayAnimation(thePlayer)
@@ -107,7 +107,7 @@ function copawayAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "police", "coptraf_away", 1300, true, false, false)
 	end
 end
-addCommandHandler("copaway", copawayAnimation, false, false)
+addCommandHandler("vete", copawayAnimation, false, false)
 
 -- Cop come animation
 function copcomeAnimation(thePlayer)
@@ -117,7 +117,7 @@ function copcomeAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "POLICE", "CopTraf_Come", -1, true, false, false)
 	end
 end
-addCommandHandler("copcome", copcomeAnimation, false, false)
+addCommandHandler("acercate", copcomeAnimation, false, false)
 
 -- Cop Left Animation -------------------------------------------------------------------------
 function copleftAnimation(thePlayer)
@@ -127,7 +127,7 @@ function copleftAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "POLICE", "CopTraf_Left", -1, true, false, false)
 	end
 end
-addCommandHandler("copleft", copleftAnimation, false, false)
+addCommandHandler("indicarizquierda", copleftAnimation, false, false)
 
 -- Cop Stop Animation -------------------------------------------------------------------------
 function copstopAnimation(thePlayer)
@@ -137,7 +137,7 @@ function copstopAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "POLICE", "CopTraf_Stop", -1, true, false, false)
 	end
 end
-addCommandHandler("copstop", copstopAnimation, false, false)
+addCommandHandler("detengase", copstopAnimation, false, false)
 
 -- Wait Animation -------------------------------------------------------------------------
 function pedWait(thePlayer)
@@ -147,7 +147,7 @@ function pedWait(thePlayer)
 		exports.global:applyAnimation( thePlayer, "COP_AMBIENT", "Coplook_loop", -1, true, false, false)
 	end
 end
-addCommandHandler ( "wait", pedWait, false, false )
+addCommandHandler ( "esperar", pedWait, false, false )
 
 -- Think Animation (/wait modifier) ---------------------------------------------------------------
 function pedThink(thePlayer)
@@ -157,7 +157,7 @@ function pedThink(thePlayer)
 		exports.global:applyAnimation( thePlayer, "COP_AMBIENT", "Coplook_think", -1, true, false, false)
 	end
 end
-addCommandHandler ( "think", pedThink, false, false )
+addCommandHandler ( "pensar", pedThink, false, false )
 
 -- Shake Animation(/wait modifier) ---------------------------------------------------------------
 function pedShake(thePlayer)
@@ -167,7 +167,7 @@ function pedShake(thePlayer)
 		exports.global:applyAnimation( thePlayer, "COP_AMBIENT", "Coplook_shake", -1, true, false, false)
 	end
 end
-addCommandHandler ( "shake", pedShake, false, false )
+addCommandHandler ( "negar", pedShake, false, false )
 
 -- Lean Animation -------------------------------------------------------------------------
 function pedLean(thePlayer)
@@ -177,7 +177,7 @@ function pedLean(thePlayer)
 		exports.global:applyAnimation( thePlayer, "GANGS", "leanIDLE", -1, true, false, false)
 	end
 end
-addCommandHandler ( "lean", pedLean, false, false )
+addCommandHandler ( "apoyarse", pedLean, false, false )
 
 -- /idle animtion -------------------------------------------------
 function idleAnimation(thePlayer)
@@ -187,7 +187,7 @@ function idleAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "DEALER", "DEALER_IDLE_01", -1, true, false, false)
 	end
 end
-addCommandHandler("idle", idleAnimation, false, false)
+addCommandHandler("quieto", idleAnimation, false, false)
 
 -- Piss Animation -------------------------------------------------------------------------
 function pedPiss(thePlayer)
@@ -197,7 +197,7 @@ function pedPiss(thePlayer)
 		exports.global:applyAnimation( thePlayer, "PAULNMAC", "Piss_loop", -1, true, false, false)
 	end
 end
-addCommandHandler ( "piss", pedPiss, false, false )
+addCommandHandler ( "mear", pedPiss, false, false )
 
 -- Wank Animation -------------------------------------------------------------------------
 function pedWank(thePlayer)
@@ -207,7 +207,7 @@ function pedWank(thePlayer)
 		exports.global:applyAnimation( thePlayer, "PAULNMAC", "wank_loop", -1, true, false, false)
 	end
 end
-addCommandHandler ( "wank", pedWank, false, false )
+addCommandHandler ( "masturbarse", pedWank, false, false )
 
 -- Slap Ass Animation -------------------------------------------------------------------------
 function pedSlapAss(thePlayer)
@@ -217,7 +217,7 @@ function pedSlapAss(thePlayer)
 		exports.global:applyAnimation( thePlayer, "SWEET", "sweet_ass_slap", 2000, true, false, false)
 	end
 end
-addCommandHandler ( "slapass", pedSlapAss, false, false )
+addCommandHandler ( "nalguear", pedSlapAss, false, false )
 
 -- fix car Animation -------------------------------------------------------------------------
 function pedCarFix(thePlayer)
@@ -237,7 +237,7 @@ function pedHandsup(thePlayer)
 		exports.global:applyAnimation( thePlayer, "ped", "handsup", -1, false, false, false)
 	end
 end
-addCommandHandler ( "handsup", pedHandsup, false, false )
+addCommandHandler ( "manosarriba", pedHandsup, false, false )
 
 -- Hail Taxi -----------------------------------------------------------------------------------
 function pedTaxiHail(thePlayer)
@@ -247,7 +247,7 @@ function pedTaxiHail(thePlayer)
 		exports.global:applyAnimation( thePlayer, "MISC", "Hiker_Pose", -1, false, true, false)
 	end
 end
-addCommandHandler ("hailtaxi", pedTaxiHail, false, false )
+addCommandHandler ("parartaxi", pedTaxiHail, false, false )
 
 -- Scratch Balls Animation -------------------------------------------------------------------------
 function pedScratch(thePlayer)
@@ -257,7 +257,7 @@ function pedScratch(thePlayer)
 		exports.global:applyAnimation( thePlayer, "MISC", "Scratchballs_01", -1, true, true, false)
 	end
 end
-addCommandHandler ( "scratch", pedScratch, false, false )
+addCommandHandler ( "rascarbolas", pedScratch, false, false )
 
 -- F*** You Animation -------------------------------------------------------------------------
 function pedFU(thePlayer)
@@ -267,7 +267,7 @@ function pedFU(thePlayer)
 		exports.global:applyAnimation( thePlayer, "RIOT", "RIOT_FUKU", 800, false, true, false)
 	end
 end
-addCommandHandler ( "fu", pedFU, false, false )
+addCommandHandler ( "puto", pedFU, false, false )
 
 -- Strip Animation -------------------------------------------------------------------------
 function pedStrip( thePlayer, cmd, arg )
@@ -292,7 +292,7 @@ function pedLightup (thePlayer)
 		exports.global:applyAnimation( thePlayer, "SMOKING", "M_smk_in", 4000, true, true, false)
 	end
 end
-addCommandHandler ( "lightup", pedLightup, false, false )
+addCommandHandler ( "encender", pedLightup, false, false )
 
 -- Light up Animation -------------------------------------------------------------------------
 function pedHeil (thePlayer)
@@ -312,7 +312,7 @@ function pedDrink( thePlayer )
 		exports.global:applyAnimation( thePlayer, "BAR", "dnk_stndM_loop", 2300, false, false, false)
 	end
 end
-addCommandHandler ( "drink", pedDrink, false, false )
+addCommandHandler ( "beber", pedDrink, false, false )
 
 -- Lay Animation -------------------------------------------------------------------------
 function pedLay( thePlayer, cmd, arg )
@@ -327,7 +327,7 @@ function pedLay( thePlayer, cmd, arg )
 		end
 	end
 end
-addCommandHandler ( "lay", pedLay, false, false )
+addCommandHandler ( "recostarse", pedLay, false, false )
 
 -- beg Animation -------------------------------------------------------------------------
 function begAnimation( thePlayer )
@@ -337,7 +337,7 @@ function begAnimation( thePlayer )
 		exports.global:applyAnimation( thePlayer, "SHOP", "SHP_Rob_React", 4000, true, false, false)
 	end
 end
-addCommandHandler ( "beg", begAnimation, false, false )
+addCommandHandler ( "rogar", begAnimation, false, false )
 
 -- Mourn Animation -------------------------------------------------------------------------
 function pedMourn( thePlayer )
@@ -347,7 +347,7 @@ function pedMourn( thePlayer )
 		exports.global:applyAnimation( thePlayer, "GRAVEYARD", "mrnM_loop", -1, true, false, false)
 	end
 end
-addCommandHandler ( "mourn", pedMourn, false, false )
+addCommandHandler ( "luto", pedMourn, false, false )
 
 -- Cry Animation -------------------------------------------------------------------------
 function pedCry( thePlayer )
@@ -357,7 +357,7 @@ function pedCry( thePlayer )
 		exports.global:applyAnimation( thePlayer, "GRAVEYARD", "mrnF_loop", -1, true, false, false)
 	end
 end
-addCommandHandler ( "cry", pedCry, false, false )
+addCommandHandler ( "llorar", pedCry, false, false )
 
 -- Cheer Amination -------------------------------------------------------------------------
 function pedCheer(thePlayer, cmd, arg)
@@ -374,7 +374,7 @@ function pedCheer(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler ( "cheer", pedCheer, false, false )
+addCommandHandler ( "animar", pedCheer, false, false )
 
 -- Dance Animation -------------------------------------------------------------------------
 function danceAnimation(thePlayer, cmd, arg)
@@ -391,7 +391,7 @@ function danceAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler ( "dance", danceAnimation, false, false )
+addCommandHandler ( "bailar", danceAnimation, false, false )
 
 -- Crack Animation -------------------------------------------------------------------------
 function crackAnimation(thePlayer, cmd, arg)
@@ -410,7 +410,7 @@ function crackAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler ( "crack", crackAnimation, false, false )
+addCommandHandler ( "herido", crackAnimation, false, false )
 
 -- /gsign animtion -------------------------------------------------
 function gsignAnimation(thePlayer, cmd, arg)
@@ -431,7 +431,7 @@ function gsignAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler("gsign", gsignAnimation, false, false)
+addCommandHandler("ganga", gsignAnimation, false, false)
 
 -- /puke animtion -------------------------------------------------
 function pukeAnimation(thePlayer)
@@ -441,7 +441,7 @@ function pukeAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "FOOD", "EAT_Vomit_P", 8000, true, false, false)
 	end
 end
-addCommandHandler("puke", pukeAnimation, false, false)
+addCommandHandler("vomitar", pukeAnimation, false, false)
 
 -- /rap animtion -------------------------------------------------
 function rapAnimation(thePlayer, cmd, arg)
@@ -458,7 +458,7 @@ function rapAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler("rap", rapAnimation, false, false)
+addCommandHandler("rapear", rapAnimation, false, false)
 
 -- /aim animtion -------------------------------------------------
 function aimAnimation(thePlayer)
@@ -468,7 +468,7 @@ function aimAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "SHOP", "ROB_Loop_Threat", 99999999, true, false, false)
 	end
 end
-addCommandHandler("aim", aimAnimation, false, false)
+addCommandHandler("apuntar", aimAnimation, false, false)
 
 -- /sit animtion -------------------------------------------------
 function sitAnimation(thePlayer, cmd, arg)
@@ -499,7 +499,7 @@ function sitAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler("sit", sitAnimation, false, false)
+addCommandHandler("sentarse", sitAnimation, false, false)
 
 -- /smoke animtion -------------------------------------------------
 function smokeAnimation(thePlayer, cmd, arg)
@@ -516,7 +516,7 @@ function smokeAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler("smoke", smokeAnimation, false, false)
+addCommandHandler("fumar", smokeAnimation, false, false)
 
 -- /smokelean animtion -------------------------------------------------
 function smokeleanAnimation(thePlayer)
@@ -526,7 +526,7 @@ function smokeleanAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "LOWRIDER", "M_smklean_loop", -1, true, false, false)
 	end
 end
-addCommandHandler("smokelean", smokeleanAnimation, false, false)
+addCommandHandler("fumarapoyado", smokeleanAnimation, false, false)
 
 -- /drag animtion -------------------------------------------------
 function smokedragAnimation(thePlayer)
@@ -536,7 +536,7 @@ function smokedragAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "SMOKING", "M_smk_drag", 4000, true, false, false)
 	end
 end
-addCommandHandler("drag", smokedragAnimation, false, false)
+addCommandHandler("pipazo", smokedragAnimation, false, false)
 
 -- /laugh animtion -------------------------------------------------
 function laughAnimation(thePlayer)
@@ -546,7 +546,7 @@ function laughAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "RAPPING", "Laugh_01", -1, true, false, false)
 	end
 end
-addCommandHandler("laugh", laughAnimation, false, false)
+addCommandHandler("reir", laughAnimation, false, false)
 
 -- /startrace animtion -------------------------------------------------
 function startraceAnimation(thePlayer)
@@ -556,7 +556,7 @@ function startraceAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "CAR", "flag_drop", 4200, true, false, false)
 	end
 end
-addCommandHandler("startrace", startraceAnimation, false, false)
+addCommandHandler("empezarcarrera", startraceAnimation, false, false)
 
 -- /carchat animtion -------------------------------------------------
 function carchatAnimation(thePlayer)
@@ -566,7 +566,7 @@ function carchatAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "CAR_CHAT", "car_talkm_loop", -1, true, false, false)
 	end
 end
-addCommandHandler("carchat", carchatAnimation, false, false)
+addCommandHandler("hablarauto", carchatAnimation, false, false)
 
 -- /tired animtion -------------------------------------------------
 function tiredAnimation(thePlayer)
@@ -576,7 +576,7 @@ function tiredAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "FAT", "idle_tired", -1, true, false, false)
 	end
 end
-addCommandHandler("tired", tiredAnimation, false, false)
+addCommandHandler("cansarse", tiredAnimation, false, false)
 
 -- /daps animtion -------------------------------------------------
 function handshakeAnimation(thePlayer, cmd, otherGuy)
@@ -604,7 +604,7 @@ function handshakeAnimation(thePlayer, cmd, otherGuy)
 		end
 	end
 end
-addCommandHandler("daps", handshakeAnimation, false, false)
+addCommandHandler("saludar", handshakeAnimation, false, false)
 
 -- /shove animtion -------------------------------------------------
 function shoveAnimation(thePlayer)
@@ -614,7 +614,7 @@ function shoveAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "GANGS", "shake_carSH", -1, true, false, false)
 	end
 end
-addCommandHandler("shove", shoveAnimation, false, false)
+addCommandHandler("empujar", shoveAnimation, false, false)
 
 -- /bitchslap animtion -------------------------------------------------
 function bitchslapAnimation(thePlayer)
@@ -624,7 +624,7 @@ function bitchslapAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "MISC", "bitchslap", -1, true, false, false)
 	end
 end
-addCommandHandler("bitchslap", bitchslapAnimation, false, false)
+addCommandHandler("perracachetada", bitchslapAnimation, false, false)
 
 -- /shocked animtion -------------------------------------------------
 function shockedAnimation(thePlayer)
@@ -634,7 +634,7 @@ function shockedAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "ON_LOOKERS", "panic_loop", -1, true, false, false)
 	end
 end
-addCommandHandler("shocked", shockedAnimation, false, false)
+addCommandHandler("sorprendido", shockedAnimation, false, false)
 
 -- /dive animtion -------------------------------------------------
 function diveAnimation(thePlayer)
@@ -644,7 +644,7 @@ function diveAnimation(thePlayer)
 		exports.global:applyAnimation(thePlayer, "ped", "EV_dive", -1, false, true, false)
 	end
 end
-addCommandHandler("dive", diveAnimation, false, false)
+addCommandHandler("piquero", diveAnimation, false, false)
 
 -- /what Amination -------------------------------------------------------------------------
 function whatAnimation(thePlayer)
@@ -654,7 +654,7 @@ function whatAnimation(thePlayer)
 		exports.global:applyAnimation( thePlayer, "RIOT", "RIOT_ANGRY", -1, true, false, false)
 	end
 end
-addCommandHandler ( "what", whatAnimation, false, false )
+addCommandHandler ( "quepasa", whatAnimation, false, false )
 
 -- /fallfront Amination -------------------------------------------------------------------------
 function fallfrontAnimation(thePlayer)
@@ -664,7 +664,7 @@ function fallfrontAnimation(thePlayer)
 		exports.global:applyAnimation( thePlayer, "ped", "FLOOR_hit_f", -1, false, false, false)
 	end
 end
-addCommandHandler ( "fallfront", fallfrontAnimation, false, false )
+addCommandHandler ( "caeradelante", fallfrontAnimation, false, false )
 
 -- /fall Amination -------------------------------------------------------------------------
 function fallAnimation(thePlayer)
@@ -674,7 +674,7 @@ function fallAnimation(thePlayer)
 		exports.global:applyAnimation( thePlayer, "ped", "FLOOR_hit", -1, false, false, false)
 	end
 end
-addCommandHandler ( "fall", fallAnimation, false, false )
+addCommandHandler ( "caerse", fallAnimation, false, false )
 
 -- /walk animation -------------------------------------------------------------------------
 local walk = {
@@ -714,8 +714,8 @@ function walkAnimation(thePlayer, cmd, arg)
 		end]]
 	end
 end
-addCommandHandler("walk", walkAnimation, false, false)
-addCommandHandler("walk2", walkAnimation, false, false)
+addCommandHandler("caminar", walkAnimation, false, false)
+addCommandHandler("caminar2", walkAnimation, false, false)
 
 -- /bat animtion -------------------------------------------------
 function batAnimation(thePlayer, cmd, arg)
@@ -732,7 +732,7 @@ function batAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler("bat", batAnimation, false, false)
+addCommandHandler("bate", batAnimation, false, false)
 
 -- /win Amination -------------------------------------------------------------------------
 function winAnimation(thePlayer, cmd, arg)
@@ -747,7 +747,7 @@ function winAnimation(thePlayer, cmd, arg)
 		end
 	end
 end
-addCommandHandler ( "win", winAnimation, false, false )
+addCommandHandler ( "celebrar", winAnimation, false, false )
 
 -- /kickballs Amination -------------------------------------------------------------------------
 function kickballsAnimation(thePlayer, cmd, arg)
@@ -756,7 +756,7 @@ function kickballsAnimation(thePlayer, cmd, arg)
 		exports.global:applyAnimation( thePlayer, "FIGHT_E", "FightKick_B", 1, false, false, false)
 	end
 end
-addCommandHandler ( "kickballs", kickballsAnimation, false, false )
+addCommandHandler ( "patear", kickballsAnimation, false, false )
 
 -- /grabbottle Amination -------------------------------------------------------------------------
 function grabbAnimation(thePlayer, cmd, arg)
@@ -766,7 +766,7 @@ function grabbAnimation(thePlayer, cmd, arg)
 		exports.global:applyAnimation( thePlayer, "BAR", "Barserve_bottle", 2000, false, false, false)
 	end
 end
-addCommandHandler ( "grabbottle", grabbAnimation, false, false )
+addCommandHandler ( "agarrarbotella", grabbAnimation, false, false )
 
 -- /kiss by Equinox
 function kissingAnimation( thePlayer, commandName, target )
@@ -792,7 +792,7 @@ function kissingAnimation( thePlayer, commandName, target )
 		exports.global:applyAnimation( targetPlayer, "KISSING", "Grlfrd_Kiss_01", -1, false, false, false )
 	end
 end
-addCommandHandler( "kiss", kissingAnimation, false, false )
+addCommandHandler( "besar", kissingAnimation, false, false )
 
 -- /handshake animation -------------------------------------------------
 function realHandshakeAnimation(thePlayer, cmd, otherGuy)
@@ -820,4 +820,4 @@ function realHandshakeAnimation(thePlayer, cmd, otherGuy)
 		end
 	end
 end
-addCommandHandler("handshake", realHandshakeAnimation, false, false)
+addCommandHandler("apretondemanos", realHandshakeAnimation, false, false)
