@@ -37,7 +37,7 @@ function dispatchGUI()
 	end
 
 	if count > 1 then
-		outputChatBox("You can only be in one law faction at a time to use /dispatch.", 255, 0, 0)
+		outputChatBox("Solo puedes estar en una facción de la ley a la vez para usar /dispatch.", 255, 0, 0)
 		return 
 	end
 
@@ -55,23 +55,23 @@ function dispatchGUI()
 	local dispatchTable = getElementData(root, "dispatch:table") or { }
 
 	-- building the gui elements
-	DispatchUI.window[1] = guiCreateWindow(x, y, width, height, "Remote Dispatch Device", false)
+	DispatchUI.window[1] = guiCreateWindow(x, y, width, height, "Dispositivo de despacho remoto", false)
 	guiWindowSetSizable(DispatchUI.window[1], false)
 	DispatchUI.gridlist[1] = guiCreateGridList(9, 23, 392, 177, false, DispatchUI.window[1])
-	guiGridListAddColumn(DispatchUI.gridlist[1], "Callsign", 0.3)
-	guiGridListAddColumn(DispatchUI.gridlist[1], "Full name", 0.3)
-	guiGridListAddColumn(DispatchUI.gridlist[1], "Availability", 0.3)
-	DispatchUI.label[1] = guiCreateLabel(11, 206, 40, 19, "Status:", false, DispatchUI.window[1])
-	DispatchUI.label[2] = guiCreateLabel(11, 234, 47, 19, "Call sign:", false, DispatchUI.window[1])
-	DispatchUI.label[3] = guiCreateLabel(11, 261, 61, 19, "Availability:", false, DispatchUI.window[1])
-	DispatchUI.button[1] = guiCreateButton(302, 206, 78, 45, "Close", false, DispatchUI.window[1])
-	DispatchUI.button[2] = guiCreateButton(214, 206, 78, 45, "Update", false, DispatchUI.window[1])
+	guiGridListAddColumn(DispatchUI.gridlist[1], "LLamada", 0.3)
+	guiGridListAddColumn(DispatchUI.gridlist[1], "Nombre Completo", 0.3)
+	guiGridListAddColumn(DispatchUI.gridlist[1], "Disponibilidad", 0.3)
+	DispatchUI.label[1] = guiCreateLabel(11, 206, 40, 19, "Estado:", false, DispatchUI.window[1])
+	DispatchUI.label[2] = guiCreateLabel(11, 234, 47, 19, "Llamada:", false, DispatchUI.window[1])
+	DispatchUI.label[3] = guiCreateLabel(11, 261, 61, 19, "Disponibilidad:", false, DispatchUI.window[1])
+	DispatchUI.button[1] = guiCreateButton(302, 206, 78, 45, "Cerrar", false, DispatchUI.window[1])
+	DispatchUI.button[2] = guiCreateButton(214, 206, 78, 45, "Actualizar", false, DispatchUI.window[1])
 	DispatchUI.combobox[1] = guiCreateComboBox(74, 205, 134, 100, "", false, DispatchUI.window[1])
-	guiComboBoxAddItem(DispatchUI.combobox[1], "On duty")
-	guiComboBoxAddItem(DispatchUI.combobox[1], "Off duty")
+	guiComboBoxAddItem(DispatchUI.combobox[1], "En Servicio")
+	guiComboBoxAddItem(DispatchUI.combobox[1], "Fuera Servicio")
 	DispatchUI.edit[1] = guiCreateEdit(74, 230, 134, 27, "", false, DispatchUI.window[1])
 	DispatchUI.edit[2] = guiCreateEdit(74, 261, 134, 27, "", false, DispatchUI.window[1])
-	DispatchUI.checkbox[1] = guiCreateCheckBox( 239, 253, 150, 16, "Joint Operations", getElementData(root, "dispatch:"..fID), false, DispatchUI.window[1] )
+	DispatchUI.checkbox[1] = guiCreateCheckBox( 239, 253, 150, 16, "Operaciones Conjuntas", getElementData(root, "dispatch:"..fID), false, DispatchUI.window[1] )
 	DispatchUI.label[4] = guiCreateLabel(275, 270, 47, 19, "", false, DispatchUI.window[1])
 
 	-- Setting the operations
@@ -180,7 +180,7 @@ function canUseDispatch()
     if exports.global:hasItem(localPlayer, 177) and (exports.factions:isPlayerInFaction(localPlayer, 1) or exports.factions:isPlayerInFaction(localPlayer, 50)) then
 		dispatchGUI()
 	else
-		outputChatBox("Dispatching through thin air does not seem to work well...", 255, 0, 0)
+		outputChatBox("Enviar por el aire no parece funcionar bien...", 255, 0, 0)
 	end
 end
 addCommandHandler("dispatch", canUseDispatch)

@@ -27,12 +27,12 @@ function startBackup(thePlayer)
 		if veh then
 			local model = getElementModel(veh)
 			if veh and vehiclesDashboardRadio[model] then
-				triggerEvent('sendAme', thePlayer, "flicks a switch on their dashboard radio.")
+				triggerEvent('sendAme', thePlayer, "activa un interruptor en la radio del tablero.")
 			else
-				triggerEvent('sendAme', thePlayer, "flicks a switch on their radio.")
+				triggerEvent('sendAme', thePlayer, "enciende un interruptor en su radio.")
 			end
 		else
-			triggerEvent('sendAme', thePlayer, "flicks a switch on their radio.")
+			triggerEvent('sendAme', thePlayer, "enciende un interruptor en su radio.")
 		end
 		
 		for a, b in ipairs(split(getTeamName(theTeam), ' ')) do 
@@ -61,7 +61,7 @@ function startBackup(thePlayer)
 					if allowedFactionTypes[pFactionType]  then
 						if (faction > 0) then
 							triggerClientEvent(theArrayPlayer, "destroyBackupBlip", thePlayer, availableColourIndex)
-							outputChatBox("The '".. backupColours[availableColourIndex][4]  .."' unit (" .. factionShortName ..") no longer requires assistance. Resume normal patrol.", theArrayPlayer, 255, 194, 14)
+							outputChatBox("La '".. backupColours[availableColourIndex][4]  .."' unidad (" .. factionShortName ..") ya no requiere asistencia. Reanudar patrullaje normal.", theArrayPlayer, 255, 194, 14)
 						end
 					end	
 				end
@@ -76,13 +76,13 @@ function startBackup(thePlayer)
 					if allowedFactionTypes[pFactionType]  then
 						if (faction > 0) then
 							triggerClientEvent(theArrayPlayer, "createBackupBlip", thePlayer, availableColourIndex, backupColours[availableColourIndex])
-							outputChatBox("The '".. backupColours[availableColourIndex][4]  .."' unit (" .. factionShortName ..") has enabled their radio backup beacon!", theArrayPlayer, 255, 194, 14)
+							outputChatBox("La '".. backupColours[availableColourIndex][4]  .."' unidad (" .. factionShortName ..") ha habilitado su radiobaliza de respaldo!", theArrayPlayer, 255, 194, 14)
 						end
 					end	
 				end
 			end		
 		else
-			outputChatBox("All the backup beacons are already in use.", thePlayer, 255, 194, 14)
+			outputChatBox("Todas las balizas de respaldo ya están en uso.", thePlayer, 255, 194, 14)
 		end
 	--end
 	end
@@ -113,7 +113,7 @@ function destroyBlips(thePlayer)
 				if allowedFactionTypes[pFactionType]  then
 					triggerClientEvent(theArrayPlayer, "destroyBackupBlip", theArrayPlayer, availableColourIndex)
 					if (faction > 0) then
-						outputChatBox("The '".. backupColours[availableColourIndex][4]  .."' unit (" .. factionShortName ..")  no longer requires assistance. Resume normal patrol.", theArrayPlayer, 255, 194, 14)
+						outputChatBox("La '".. backupColours[availableColourIndex][4]  .."' unidad (" .. factionShortName ..")  ya no requiere asistencia. Reanudar patrullaje normal.", theArrayPlayer, 255, 194, 14)
 					end
 				end	
 			end

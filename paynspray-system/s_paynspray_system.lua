@@ -22,7 +22,7 @@ function createSpray(thePlayer, commandName)
 				exports.anticheat:changeProtectedElementDataEx(sprayblip, "dbid", insertId, false)
 				exports.pool:allocateElement(sprayblip)
 		
-				outputChatBox("Pay 'N Spray spawned with ID #" .. insertId .. ".", thePlayer, 0, 255, 0)
+				outputChatBox("Pay 'N Spray generado con ID #" .. insertId .. ".", thePlayer, 0, 255, 0)
 			end,
 		exports.mysql:getConn("mta"), "INSERT INTO paynspray SET x=?, y=?, z=?, interior=?, dimension=?", x, y, z, interior, dimension)
 
@@ -68,7 +68,7 @@ addEventHandler("onResourceStart", getResourceRootElement(), loadAllSprays)
 function getNearbySprays(thePlayer, commandName)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		local posX, posY, posZ = getElementPosition(thePlayer)
-		outputChatBox("Nearby Pay 'N Sprays:", thePlayer, 255, 126, 0)
+		outputChatBox("Pay 'N Sprays cercanos:", thePlayer, 255, 126, 0)
 		local count = 0
 
 		for k, theColshape in ipairs(getElementsByType("colshape", getResourceRootElement())) do
@@ -76,13 +76,13 @@ function getNearbySprays(thePlayer, commandName)
 			local distance = getDistanceBetweenPoints2D(posX, posY, x, y)
 			if (distance<=10) then
 				local dbid = getElementData(theColshape, "dbid")
-				outputChatBox("   Pay 'N Spray with ID " .. dbid .. ".", thePlayer, 255, 126, 0)
+				outputChatBox("   Pay 'N Spray con identificación " .. dbid .. ".", thePlayer, 255, 126, 0)
 				count = count + 1
 			end
 		end
 
 		if (count==0) then
-			outputChatBox("   None.", thePlayer, 255, 126, 0)
+			outputChatBox("   Ninguno.", thePlayer, 255, 126, 0)
 		end
 	end
 end
@@ -111,7 +111,7 @@ function delSpray(thePlayer, commandName)
 				end
 			end
 		else
-			outputChatBox("You are not in a Pay 'N Spray.", thePlayer, 255, 0, 0)
+			outputChatBox("No estás en un Pay 'N Spray.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -137,13 +137,13 @@ function shapeHit(element, matchingDimension)
 			local vehicleHealth = getElementHealth(element)
 
 			if (vehicleHealth >= 1000) then
-				outputChatBox("Welcome to the repair garage. Your " .. exports.global:getVehicleName(element) .. " is fine. If you have any problems with it in the future, come back!", thePlayer, 255, 194, 14)
+				outputChatBox("Bienvenido al taller de reparación. Su " .. exports.global:getVehicleName(element) .. " está bien. Si tienes algún problema con él en el futuro, ¡vuelve!", thePlayer, 255, 194, 14)
 			else
 				local playerMoney = exports.global:getMoney(thePlayer, true)
 				if playerMoney == 0 and not factionPlayer[factionVehicle] and not doesPayForRepair(factionPlayer) and not PAYING_FACTIONS[factionVehicle] then
-					outputChatBox("You cannot afford to have your car worked on, sorry.", thePlayer, 255, 0, 0)
+					outputChatBox("No puedes permitirte el lujo de reparar tu auto, lo siento..", thePlayer, 255, 0, 0)
 				else
-					outputChatBox("Welcome to the repair garage. Please wait while we evaluate your " .. exports.global:getVehicleName(element) .. ".", thePlayer, 255, 194, 14)
+					outputChatBox("Bienvenido al taller de reparación. Espere mientras evaluamos su " .. exports.global:getVehicleName(element) .. ".", thePlayer, 255, 194, 14)
 					setTimer(sprayEffect, 2500, 1, element, thePlayer, source)
 					setTimer(spraySoundEffect, 2000, 5, thePlayer, source)
 				end
@@ -183,7 +183,7 @@ function sprayEffect(vehicle, thePlayer, shape)
 				--outputDebugString(vehicleCarshopPrice)
 				estimatedCosts = math.floor ( ( vehicleCarshopPrice / 25 ) * ( damage / 1000 ) )
 			else
-				outputChatBox("OOC: (( This is a temporary vehicle. Repair is free. ))", thePlayer, 255, 194, 14)
+				outputChatBox("OOC: (( Este es un vehículo temporal. La reparación es gratuita.))", thePlayer, 255, 194, 14)
 				estimatedCosts = 0
 			end
 
@@ -192,7 +192,7 @@ function sprayEffect(vehicle, thePlayer, shape)
 			if insured > 0 then
 				local insurerElement = exports.pool:getElement("team", insured)
 				exports.global:takeMoney(insurerElement, estimatedCosts, true)
-				outputChatBox("BILL: Your insurance company has been sent a bill of $".. exports.global:formatMoney(estimatedCosts) ..", please wait while we repair your vehicle.", thePlayer, 0, 255, 0)
+				outputChatBox("FACTURA: A su compañía de seguros se le ha enviado una factura de $".. exports.global:formatMoney(estimatedCosts) ..", espere mientras reparamos su vehículo.", thePlayer, 0, 255, 0)
 				triggerEvent("insurance:claims", root, getElementData(vehicle, "dbid"), estimatedCosts)
 				completefix = true
 				setElementFrozen(vehicle, true)
@@ -214,7 +214,7 @@ function sprayEffect(vehicle, thePlayer, shape)
 			if exports.global:takeMoney(theTeam, estimatedCosts, true) then
 				completefix = true
 				setElementFrozen(vehicle, true)
-				outputChatBox("The bill will be sent to your employer, please wait while we repair.", thePlayer, 0, 255, 0)
+				outputChatBox("La factura se enviará a su empleador, espere mientras reparamos.", thePlayer, 0, 255, 0)
 				dbExec(exports.mysql:getConn("mta"), "INSERT INTO wiretransfers (`from`, `to`, `amount`, `reason`, `type`) VALUES (?,?,?,?,?)", -getElementData(theTeam, "id"), -getElementData(exports.pool:getElement("team", RECEIVING_FACTION), "id"), estimatedCosts, 'Repair', 10)
 			end
 		end
@@ -227,7 +227,7 @@ function sprayEffect(vehicle, thePlayer, shape)
 				for i = 0, 5 do
 					setVehicleDoorState(vehicle, i, 0)
 				end
-				outputChatBox("Your vehicle is now repaired!", thePlayer, 0, 255, 0)
+				outputChatBox("Su vehículo ya está reparado!", thePlayer, 0, 255, 0)
 				setElementFrozen(vehicle, false)
 			end, 5000, 1)
 		end
@@ -243,7 +243,7 @@ function sprayEffect(vehicle, thePlayer, shape)
 
 		exports.logs:dbLog(thePlayer, 6, {  vehicle }, "REPAIR PAYNSPRAY")
 	else
-		outputChatBox("You forgot to wait for your repair!", thePlayer, 255, 0, 0)
+		outputChatBox("¡Olvidaste esperar tu reparación!", thePlayer, 255, 0, 0)
 	end
 end
 
@@ -264,14 +264,14 @@ function acceptedInvoice(paymentType)
 	local faction = exports.factions:getFactionFromID(RECEIVING_FACTION)
 
 	if paymentType == PAY_BY_CARD then 
-		if not exports.bank:takeBankMoney(client, getElementData(client, "paynspray:bill")) then return outputChatBox("You do not have enough bank funds to pay for the repair.", client, 255, 100, 100) end
+		if not exports.bank:takeBankMoney(client, getElementData(client, "paynspray:bill")) then return outputChatBox("No tienes suficientes fondos bancarios para pagar la reparación.", client, 255, 100, 100) end
 		exports.bank:addBankTransactionLog(getElementData(client, 'dbid'), -RECEIVING_FACTION, getElementData(client, "paynspray:bill"), 10, "PAYNSPRAY")
 	elseif paymentType == PAY_BY_CASH then
-		if not exports.global:takeMoney(client, getElementData(client, "paynspray:bill"), true) then return outputChatBox("You do not have enough cash to pay for the repair.", client, 255, 100, 100) end
+		if not exports.global:takeMoney(client, getElementData(client, "paynspray:bill"), true) then return outputChatBox("No tienes suficiente efectivo para pagar la reparación.", client, 255, 100, 100) end
 	end
 
 	exports.global:giveMoney(faction, getElementData(client, "paynspray:bill"), true)
-	outputChatBox("You've paid your invoice, please wait while we repair your car.", client, 0, 255, 0)
+	outputChatBox("Has pagado tu factura, espera mientras reparamos tu coche.", client, 0, 255, 0)
 		
 	removeElementData(client, "paynspray:bill")
 	toggleControl(client, "accelerate", false)

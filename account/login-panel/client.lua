@@ -11,9 +11,9 @@ local panel = {
 		login = {},
 		register = {},
 		sounds = {
-			{ 'http://files.owlgaming.net/menu.mp3', 0.3 },
-			{ 'http://files.owlgaming.net/gtav.mp3', 0.3 },
-			{ 'http://files.owlgaming.net/gtaiv.mp3', 0.3 },
+			{ 'ando.mp3', 0.5 },
+			{ 'bellakita.mp3', 0.5 },
+			{ 'glocko.mp3', 0.5 },   
 		}
 	}
 local sw, sh = guiGetScreenSize()

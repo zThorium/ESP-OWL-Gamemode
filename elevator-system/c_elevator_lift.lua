@@ -54,12 +54,12 @@ function lift_pickupUse(thePlayer, matchingDimension)
 					return
 				end
 
-				gInteriorName = guiCreateLabel(0.0, 0.85, 1.0, 0.3, "Elevator", true)
+				gInteriorName = guiCreateLabel(0.0, 0.85, 1.0, 0.3, "Elevador", true)
 				guiSetFont(gInteriorName, "sa-header")
 				guiLabelSetHorizontalAlign(gInteriorName, "center", true)
 				guiSetAlpha(gInteriorName, 0.0)
 
-				gOwnerName = guiCreateLabel(0.0, 0.90, 1.0, 0.3, "Press F to use.", true)
+				gOwnerName = guiCreateLabel(0.0, 0.90, 1.0, 0.3, "Presiona F para usar.", true)
 				guiSetFont(gOwnerName, "default-bold-small")
 				guiLabelSetHorizontalAlign(gOwnerName, "center", true)
 				guiSetAlpha(gOwnerName, 0.0)
@@ -178,14 +178,14 @@ function triggerLiftGUI(key, keyState, pickup)
 		local x = scrWidth/2 - (width/2)
 		local y = scrHeight/2 - (height/2)
 
-		wElevator = guiCreateWindow(x, y, width, height, "Elevator", false)
+		wElevator = guiCreateWindow(x, y, width, height, "Elevador", false)
 
 		floorList = guiCreateGridList(0.05, 0.1, 0.9, 0.74, true, wElevator)
-		local columnFloor = guiGridListAddColumn(floorList, "Floor", 0.2)
-		local columnName = guiGridListAddColumn(floorList, "Name", 0.7)
+		local columnFloor = guiGridListAddColumn(floorList, "Piso", 0.2)
+		local columnName = guiGridListAddColumn(floorList, "Nombre", 0.7)
 		
-		bGoto = guiCreateButton(0.05, 0.84, 0.45, 0.1, "GO TO", true, wElevator)
-		bCancel = guiCreateButton(0.5, 0.84, 0.45, 0.1, "Cancel", true, wElevator)
+		bGoto = guiCreateButton(0.05, 0.84, 0.45, 0.1, "Ir alla", true, wElevator)
+		bCancel = guiCreateButton(0.5, 0.84, 0.45, 0.1, "Cancelar", true, wElevator)
 		
 		local thisFloorNum = tonumber(getElementData(pickup, "rpp.lift.floor.floor")) or 0
 		lblCurrent = guiCreateLabel(0.05, 0.05, 0.9, 0.05, "This floor: "..tostring(getElementData(pickup, "rpp.lift.floor.floor")).." - "..tostring(getElementData(pickup, "rpp.lift.floor.name")), true, wElevator)
@@ -194,7 +194,7 @@ function triggerLiftGUI(key, keyState, pickup)
 		local liftID = getElementData(liftElement, "dbid")
 		
 		if (exports.integration:isPlayerTrialAdmin(localPlayer)) then
-			lblAdmin = guiCreateLabel(0.05, 0.94, 0.9, 0.05, "Elevator ID: "..tostring(liftID), true, wElevator)
+			lblAdmin = guiCreateLabel(0.05, 0.94, 0.9, 0.05, "Elevador ID: "..tostring(liftID), true, wElevator)
 		end
 		
 		--local numfloors = getElementChildrenCount(liftElement)
@@ -227,7 +227,7 @@ function triggerLiftGUI(key, keyState, pickup)
 				addEventHandler("onClientGUIClick", floorList, editFloor, false)
 			end
 		else
-			outputChatBox("You push the elevator button, but nothing happens.", 255, 0, 0)
+			outputChatBox("Presionas el botón del ascensor, pero no pasa nada.", 255, 0, 0)
 			hideElevatorGUI()
 		end
 	end
@@ -241,7 +241,7 @@ function gotoFloor(button, state)
 		local row, col = guiGridListGetSelectedItem(floorList)
 		if (row==-1) or (col==-1) then
 			--outputChatBox("Please select a floor.", 255, 0, 0)
-			exports.hud:sendBottomNotification(localPlayer, "Elevator", "Please select a floor.")
+			exports.hud:sendBottomNotification(localPlayer, "Elevador", "Por favor seleccione un piso.")
 		else
 			local data = guiGridListGetItemData(floorList, guiGridListGetSelectedItem(floorList), 1)
 			local data = exports.global:split(data, ",")
@@ -266,7 +266,7 @@ function gotoFloor(button, state)
 			end
 			if not pickup then
 				hideElevatorGUI()
-				outputChatBox("ERROR: Floor not found.", 255, 0, 0)
+				outputChatBox("ERROR: Piso no encontrado.", 255, 0, 0)
 				return false
 			end
 			
@@ -318,20 +318,20 @@ function editFloor(button, state)
 				local x = scrWidth/2 - (width/2)
 				local y = scrHeight/2 - (height/2)
 
-				wElevatorEdit = guiCreateWindow(x, y, width, height, "Edit elevator floor", false)
+				wElevatorEdit = guiCreateWindow(x, y, width, height, "Editar piso del ascensor", false)
 
 				local y = 0.05
-				lbl1 = guiCreateLabel(0.05, 0.1, 0.9, 0.112, "Elevator ID: "..tostring(liftID)..", Floor ID: "..tostring(floorID), true, wElevatorEdit)
+				lbl1 = guiCreateLabel(0.05, 0.1, 0.9, 0.112, "Elevador ID: "..tostring(liftID)..", Piso ID: "..tostring(floorID), true, wElevatorEdit)
 				y = y + 0.225
-				lbl2 = guiCreateLabel(0.05, y, 0.3, 0.112, "Floor number:", true, wElevatorEdit)
+				lbl2 = guiCreateLabel(0.05, y, 0.3, 0.112, "Piso numero:", true, wElevatorEdit)
 				editFloorNum = guiCreateEdit(0.35, y, 0.6, 0.112, tostring(floorNum), true, wElevatorEdit)
 				y = y + 0.225
-				lbl3 = guiCreateLabel(0.05, y, 0.3, 0.112, "Floor name:", true, wElevatorEdit)
+				lbl3 = guiCreateLabel(0.05, y, 0.3, 0.112, "Piso nombre:", true, wElevatorEdit)
 				editFloorName = guiCreateEdit(0.35, y, 0.6, 0.112, tostring(floorName), true, wElevatorEdit)
 				y = y + 0.225
-				btnSave = guiCreateButton(0.05, y, 0.27, 0.225, "Save", true, wElevatorEdit)
-				btnDelete = guiCreateButton(0.3625, y, 0.27, 0.225, "Delete", true, wElevatorEdit)
-				btnCancel = guiCreateButton(0.695, y, 0.27, 0.225, "Cancel", true, wElevatorEdit)
+				btnSave = guiCreateButton(0.05, y, 0.27, 0.225, "Guardar", true, wElevatorEdit)
+				btnDelete = guiCreateButton(0.3625, y, 0.27, 0.225, "Borrar", true, wElevatorEdit)
+				btnCancel = guiCreateButton(0.695, y, 0.27, 0.225, "Cancelar", true, wElevatorEdit)
 
 				addEventHandler("onClientGUIClick", btnSave, processEditFloor, false)
 				addEventHandler("onClientGUIClick", btnDelete, confirmFloorDeletion, false)
@@ -354,11 +354,11 @@ function confirmFloorDeletion()
 		destroyElement(btnDelete)
 		destroyElement(btnCancel)
 
-		lbl1 = guiCreateLabel(0.05, 0.1, 0.9, 0.723, "Are you sure you want to delete this floor?", true, wElevatorEdit)
+		lbl1 = guiCreateLabel(0.05, 0.1, 0.9, 0.723, "¿Estás seguro de que quieres eliminar este piso?", true, wElevatorEdit)
 			guiLabelSetHorizontalAlign(lbl1, "center", true)
 			guiLabelSetVerticalAlign(lbl1, "center")
 
-		btnYes = guiCreateButton(0.17, 0.725, 0.27, 0.225, "Yes", true, wElevatorEdit)
+		btnYes = guiCreateButton(0.17, 0.725, 0.27, 0.225, "Si", true, wElevatorEdit)
 		btnNo = guiCreateButton(0.56, 0.725, 0.27, 0.225, "No", true, wElevatorEdit)
 
 		addEventHandler("onClientGUIClick", btnYes, processFloorDeletion, false)

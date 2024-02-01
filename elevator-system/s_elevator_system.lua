@@ -32,7 +32,7 @@ function createElevator(thePlayer, commandName, oneway)
 			local dim = getElementDimension(thePlayer)
 			local int = getElementInterior(thePlayer)
 			setElementData(thePlayer, "adm:addelevator", {x, y , z, rz, int, dim})
-			outputChatBox("[ADDELEVATOR] Source point saved. Please /"..commandName.." once again at destination point.", thePlayer, 0, 255, 0)
+			outputChatBox("[ADDELEVATOR] Punto de origen guardado. Por favor /"..commandName.." una vez más en el punto de destino.", thePlayer, 0, 255, 0)
 			return false
 		else
 			if oneway == "abort" then
@@ -64,12 +64,12 @@ function createElevator(thePlayer, commandName, oneway)
 			if (query) then
 				--reloadOneElevator(id, true)
 				loadOneElevator(id)
-				outputChatBox("[ADDELEVATOR] Elevator and elevator remote created with ID #" .. id .. ". Check your inventory!", thePlayer, 0, 255, 0)
+				outputChatBox("[ADDELEVATOR] Ascensor y mando a distancia de ascensor creados con ID #" .. id .. ". ¡Consulta tu inventario!", thePlayer, 0, 255, 0)
 				exports.global:giveItem(thePlayer, 73, id)
 				removeElementData(thePlayer, "adm:addelevator")
 			end
 		else
-			outputChatBox("[ADDELEVATOR] There was an error while creating an elevator. Try again.", thePlayer, 255, 0, 0)
+			outputChatBox("[ADDELEVATOR] Se produjo un error al crear un ascensor. Intentar otra vez.", thePlayer, 255, 0, 0)
 		end
 	end
 end
@@ -96,10 +96,10 @@ function createElevatorWithFriend(thePlayer, commandName, targetPlayer)
 				if (query) then
 					loadOneElevator(id)
 					outputChatBox("Elevator created with ID #" .. id .. "!", thePlayer, 0, 255, 0)
-					outputChatBox(getPlayerName(thePlayer):gsub("_"," ") .. " created an elevator with an ID of " .. id .. "!", targetPlayer, 0, 255, 0)
+					outputChatBox(getPlayerName(thePlayer):gsub("_"," ") .. " creó un ascensor con una identificación de " .. id .. "!", targetPlayer, 0, 255, 0)
 				end
 			else
-				outputChatBox("There was an error while creating an elevator. Try again.", thePlayer, 255, 0, 0)
+				outputChatBox("Se produjo un error al crear un ascensor. Intentar otra vez.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
@@ -156,14 +156,14 @@ function reloadOneElevator(elevatorID, skipcheck)
 	if (dbid > 0 or skipcheck)then
 		local realElevatorElement = findElevatorElement(dbid)
 		if not realElevatorElement then
-			outputDebugString("[reloadOneElevator] Can't find element")
+			outputDebugString("[reloadOneElevator] No puedo encontrar el elemento")
 		end
 		--triggerClientEvent("deleteInteriorElement", realElevatorElement, tonumber(dbid))
 		destroyElement(realElevatorElement)
 		loadOneElevator(tonumber(dbid), false)
 	else
 		--outputDebugString("You suckx2")
-		outputDebugString("Tried to reload elevator without ID.")
+		outputDebugString("Intentó recargar el ascensor sin identificación.")
 	end
 end
 
@@ -225,7 +225,7 @@ function loadAllElevators(res)
 			setTimer(loadOneElevator, timerDelay, 1, row.id, true)
 		end
 		mysql:free_result(result)
-		outputDebugString("[ELEVATOR] Spawning "..stats_numberOfElevators.." elevators will be finished in approx. "..math.ceil(timerDelay/1000).." seconds.")
+		outputDebugString("[ELEVATOR] Desove "..stats_numberOfElevators.." Los ascensores estarán terminados en aprox.. "..math.ceil(timerDelay/1000).." segundos.")
 	end
 end
 setTimer(loadAllElevators,timerLoadAllElevators, 1)

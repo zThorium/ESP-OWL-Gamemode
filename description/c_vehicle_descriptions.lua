@@ -197,17 +197,17 @@ function showText()
 							local descToBeShown = ""
 							local job = getElementData(theVehicle, "job")
 							if job == 1 then
-								descToBeShown = "RS Haul - We'll dump your load."
+								descToBeShown = "RS Haul: volcaremos su carga."
 								lines = lines + 1
 							elseif job == 2 then
-								descToBeShown = "Yellow Cab Co.\nCall #8294 for a pickup!"
+								descToBeShown = "Taxi Amarillo.\nLlame al #8294 para que lo recojan!"
 								lines = lines + 2
 							elseif job == 3 then
 								descToBeShown = "Los Santos Bus"
 								lines = lines + 1
 							else
 								for j = 1, 5 do
-									local desc = getElementData(theVehicle, "description:"..j)
+									local desc = getElementData(theVehicle, "descripcion:"..j)
 									if desc and desc ~= "" and desc ~= "\n" and desc ~= "\t" then
 										local len = dxGetTextWidth(desc)
 										if len > fontWidth then
@@ -286,7 +286,7 @@ function showText()
 							--GET IMPOUND
 							if (exports.vehicle:isVehicleImpounded(theVehicle)) then
 								local days = getRealTime().yearday-getElementData(theVehicle, "Impounded")
-								toBeShowed = toBeShowed.."\n".."Impounded: " .. days .. " days"
+								toBeShowed = toBeShowed.."\n".."Incautado: " .. days .. " dias"
 								lines = lines + 1
 							end
 
@@ -302,7 +302,7 @@ function showText()
 								elseif vfaction > 0 then
 									ownerName = exports.cache:getFactionNameFromId(vfaction)
 								end
-								local line = "\nOwner: "..(ownerName or "Loading..")
+								local line = "\nDueño: "..(ownerName or "Cargando..")
 								local len = dxGetTextWidth(line)
 								if len > fontWidth then
 									fontWidth = len
@@ -316,7 +316,7 @@ function showText()
 									local protected, details = exports.vehicle:isProtected(theVehicle) 
 									if protected then
 										textColor = tocolor(0, 255, 0,255)
-										protectedText = "[Inactivity protection remaining: "..details.."]"
+										protectedText = "[Protección por inactividad restante: "..details.."]"
 										local toBeAdded = "\n"..protectedText
 										toBeShowed = toBeShowed..toBeAdded
 										local len = dxGetTextWidth(toBeAdded)
@@ -332,16 +332,16 @@ function showText()
 											local owner_last_login = getElementData(theVehicle, "owner_last_login")
 											if owner_last_login and tonumber(owner_last_login) then
 												local owner_last_login_text, owner_last_login_sec = exports.datetime:formatTimeInterval(owner_last_login)
-												inactiveText = inactiveText.." Owner last seen "..owner_last_login_text.." "
+												inactiveText = inactiveText.." Propietario visto por última vez "..owner_last_login_text.." "
 											else
-												inactiveText = inactiveText.." Owner last seen is irrelevant | "
+												inactiveText = inactiveText.." El propietario visto por última vez es irrelevante | "
 											end
 											local lastused = getElementData(theVehicle, "lastused")
 											if lastused and tonumber(lastused) then
 												local lastusedText, lastusedSeconds = exports.datetime:formatTimeInterval(lastused)
-												inactiveText = inactiveText.."Last used "..lastusedText.."]"
+												inactiveText = inactiveText.."Usado por última vez "..lastusedText.."]"
 											else
-												inactiveText = inactiveText.."Last used is irrelevant]"
+												inactiveText = inactiveText.."El último uso es irrelevante]"
 											end
 											local toBeAdded = "\n"..inactiveText
 											toBeShowed = toBeShowed..toBeAdded
@@ -467,13 +467,13 @@ function showEditDescription()
 				addEventHandler("onClientGUIClick", bSave, saveEditDescription, false)
 				addEventHandler("onClientGUIClick", bClose, closeEditDescription, false)
 			else
-				exports.hud:sendBottomNotification(getLocalPlayer(), "Vehicle Description", "You cannot set descriptions on temporary vehicles.")
+				exports.hud:sendBottomNotification(getLocalPlayer(), "Descripcion del vehiculo", "No puede establecer descripciones en vehículos temporales.")
 			end
 		else
-			exports.hud:sendBottomNotification(getLocalPlayer(), "Vehicle Description", "You do not have the keys of this vehicle.")
+			exports.hud:sendBottomNotification(getLocalPlayer(), "Descripcion del vehiculo", "No tienes las llaves de este vehículo.")
 		end
 	else
-		exports.hud:sendBottomNotification(getLocalPlayer(), "Vehicle Description", "You must be in the vehicle you wish to change the description of.")
+		exports.hud:sendBottomNotification(getLocalPlayer(), "Descripcion del vehiculo", "Debes estar en el vehículo cuya descripción deseas cambiar.")
 	end
 end
 addCommandHandler("ed", showEditDescription, false, false)

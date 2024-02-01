@@ -16,8 +16,8 @@ function createLift(thePlayer, commandName, lift, floor, ...)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer)) then
 		local name = table.concat({...}, " ")
 		if(not lift or not floor or not name) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [lift ID] [floor] [name]", thePlayer, 255, 194, 14)
-			outputChatBox("Set lift ID to 0 to create a new lift. Use ID to add a floor to existing lift.", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ascensor ID] [piso] [nombre]", thePlayer, 255, 194, 14)
+			outputChatBox("Establezca el ID del ascensor en 0 para crear un nuevo ascensor. Utilice ID para agregar un piso al ascensor existente.", thePlayer, 255, 194, 14)
 			return false
 		end
 		if(string.len(floor) > 3) then
@@ -41,11 +41,11 @@ function createLift(thePlayer, commandName, lift, floor, ...)
 					local query2 = mysql:query_free("INSERT INTO lift_floors SET id='" .. mysql:escape_string(floorID) .. "', lift='" .. mysql:escape_string(id) .. "', x='" .. mysql:escape_string(x) .. "', y='" .. mysql:escape_string(y) .. "', z='" .. mysql:escape_string(z) .. "', dimension='" .. mysql:escape_string(dimension) .. "', interior='" .. mysql:escape_string(interior) .. "', floor='" .. mysql:escape_string(floor) .. "', name='" .. mysql:escape_string(name) .. "'")
 					if(query2) then
 						loadOneLiftFloor(floorID)
-						outputChatBox("Lift created with ID #" .. id .. ".", thePlayer, 0, 255, 0)
+						outputChatBox("Ascensor creado con ID #" .. id .. ".", thePlayer, 0, 255, 0)
 					end
 				end
 			else
-				outputChatBox("There was an error while creating a lift. Try again.", thePlayer, 255, 0, 0)
+				outputChatBox("Se produjo un error al crear un ascensor. Intentar otra vez.", thePlayer, 255, 0, 0)
 			end
 		elseif(lift > 0) then
 			id = SmallestLiftFloorID()
@@ -53,10 +53,10 @@ function createLift(thePlayer, commandName, lift, floor, ...)
 				local query = mysql:query_free("INSERT INTO lift_floors SET id='" .. mysql:escape_string(id) .. "', lift='" .. mysql:escape_string(lift) .. "', x='" .. mysql:escape_string(x) .. "', y='" .. mysql:escape_string(y) .. "', z='" .. mysql:escape_string(z) .. "', dimension='" .. mysql:escape_string(dimension) .. "', interior='" .. mysql:escape_string(interior) .. "', floor='" .. mysql:escape_string(floor) .. "', name='" .. mysql:escape_string(name) .. "'")
 				if (query) then
 					loadOneLiftFloor(id)
-					outputChatBox("Floor with ID #"..id.." added to lift #".. lift ..".", thePlayer, 0, 255, 0)
+					outputChatBox("Piso con identificación #"..id.." añadido al ascensor #".. lift ..".", thePlayer, 0, 255, 0)
 				end
 			else
-				outputChatBox("There was an error while creating a lift. Try again.", thePlayer, 255, 0, 0)
+				outputChatBox("Se produjo un error al crear un ascensor. Intentar otra vez.", thePlayer, 255, 0, 0)
 			end
 		end
 	end

@@ -2,32 +2,33 @@ local gui = {}
 local curskin = 1
 local dummyPed = nil
 local languageselected = 1
-local selectedMonth1 = "January"
+local selectedMonth1 = "Enero"
 local scrDay = 1
 
 function newCharacter_init()
 	guiSetInputEnabled(true)
-	setCameraInterior(14)
-	setCameraMatrix(254.7190,  -41.1370,  1002, 256.7190,  -41.1370,  1002 )
-	dummyPed = createPed(217, 258,  -42,  1002)
-	setElementInterior(dummyPed, 14)
-	setElementInterior(getLocalPlayer(), 14)
-	setPedRotation(dummyPed, 87)
-	setElementDimension(dummyPed, getElementDimension(getLocalPlayer()))
+	setCameraInterior(18)
+	setCameraMatrix(-25.914,  -64.843,  1009.246, -28.905,  -64.82,  1009.02655 )
+	dummyPed = createPed(217, -30,  -64,  1008)
+	setElementInterior(dummyPed, 18)
+	setElementInterior(getLocalPlayer(), 18)
+	setPedRotation(dummyPed, 270)
+	setElementDimension(dummyPed, 0)
+	setElementDimension(getLocalPlayer(), 0)
 	fadeCamera ( true , 1, 0,0,0 )
 	local screenX, screenY = guiGetScreenSize()
 
 	gui["_root"] = guiCreateStaticImage(10, screenY/2-225, 255, 475, ":resources/window_body.png", false)
 	--guiWindowSetSizable(gui["_root"], false)
 
-	gui["lblCharName"] = guiCreateLabel(10, 25, 91, 16, "Name:", false, gui["_root"])
+	gui["lblCharName"] = guiCreateLabel(10, 25, 91, 16, "Nombre:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblCharName"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblCharName"], "center")
 
 	gui["txtCharName"] = guiCreateEdit(60, 24, 180, 22, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["txtCharName"], 32767)
 
-	gui["lblCharNameExplanation"] = guiCreateLabel(10, 40, 240, 80,"This needs to be in the following format: \n     Firstname Lastname\nFor example: Taylor Jackson.\nYou are not allowed to use famous names.", false, gui["_root"])
+	gui["lblCharNameExplanation"] = guiCreateLabel(10, 40, 240, 80,"Esto debe estar en el siguiente formato: \n     Nombre Apellido\nPor ejemplo: Rene Puente.\nNo está permitido utilizar nombres famosos.", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblCharNameExplanation"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblCharNameExplanation"], "center")
 
@@ -41,11 +42,11 @@ function newCharacter_init()
 	guiLabelSetHorizontalAlign(gui["lblCharDescExplanation"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblCharDescExplanation"], "center")]]
 
-	gui["lblGender"] = guiCreateLabel(10, 160, 46, 13, "Gender:", false, gui["_root"])
+	gui["lblGender"] = guiCreateLabel(10, 160, 46, 13, "Genero:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblGender"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblGender"], "center")
-	gui["rbMale"] = guiCreateRadioButton(90, 160, 51, 13, "Male", false, gui["_root"])
-	gui["rbFemale"] = guiCreateRadioButton(150, 160, 82, 13, "Female", false, gui["_root"])
+	gui["rbMale"] = guiCreateRadioButton(90, 160, 51, 13, "Hombre", false, gui["_root"])
+	gui["rbFemale"] = guiCreateRadioButton(150, 160, 82, 13, "Mujer", false, gui["_root"])
 	guiRadioButtonSetSelected ( gui["rbMale"], true)
 	addEventHandler("onClientGUIClick", gui["rbMale"], newCharacter_updateGender, false)
 	addEventHandler("onClientGUIClick", gui["rbFemale"], newCharacter_updateGender, false)
@@ -54,23 +55,23 @@ function newCharacter_init()
 	guiLabelSetHorizontalAlign(gui["lblSkin"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblSkin"], "center")
 
-	gui["btnPrevSkin"] = guiCreateButton(50, 180, 80, 16, "Previous", false, gui["_root"])
+	gui["btnPrevSkin"] = guiCreateButton(50, 180, 80, 16, "Anterior", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["btnPrevSkin"], newCharacter_updateGender, false)
-	gui["btnNextSkin"] = guiCreateButton(150, 180, 80, 16, "Next", false, gui["_root"])
+	gui["btnNextSkin"] = guiCreateButton(150, 180, 80, 16, "Siguiente", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["btnNextSkin"], newCharacter_updateGender, false)
 
-	gui["lblRace"] = guiCreateLabel(10, 140, 111, 16, "Race:", false, gui["_root"])
+	gui["lblRace"] = guiCreateLabel(10, 140, 111, 16, "Raza:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblRace"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblRace"], "center")
 
-	gui["chkBlack"] =  guiCreateCheckBox ( 60, 140, 55, 16, "Black", true, false, gui["_root"] )
+	gui["chkBlack"] =  guiCreateCheckBox ( 60, 140, 55, 16, "Negro", true, false, gui["_root"] )
 	addEventHandler("onClientGUIClick", gui["chkBlack"] , newCharacter_raceFix, false)
-	gui["chkWhite"] =  guiCreateCheckBox ( 120, 140, 55, 16, "White", false, false, gui["_root"] )
+	gui["chkWhite"] =  guiCreateCheckBox ( 120, 140, 55, 16, "Blanco", false, false, gui["_root"] )
 	addEventHandler("onClientGUIClick", gui["chkWhite"] , newCharacter_raceFix, false)
-	gui["chkAsian"] =  guiCreateCheckBox ( 180, 140, 55, 16, "Asian", false, false, gui["_root"] )
+	gui["chkAsian"] =  guiCreateCheckBox ( 180, 140, 55, 16, "Asiatico", false, false, gui["_root"] )
 	addEventHandler("onClientGUIClick", gui["chkAsian"] , newCharacter_raceFix, false)
 
-	gui["lblHeight"] = guiCreateLabel(10, 200, 111, 16, "Height", false, gui["_root"])
+	gui["lblHeight"] = guiCreateLabel(10, 200, 111, 16, "Altura", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblHeight"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblHeight"], "center")
 
@@ -78,7 +79,7 @@ function newCharacter_init()
 	addEventHandler("onClientGUIScroll", gui["scrHeight"], newCharacter_updateScrollBars, false)
 	guiSetProperty(gui["scrHeight"], "StepSize", "0.02")
 
-	gui["lblWeight"] = guiCreateLabel(10, 220, 111, 16, "Weight", false, gui["_root"])
+	gui["lblWeight"] = guiCreateLabel(10, 220, 111, 16, "Peso", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblWeight"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblWeight"], "center")
 
@@ -86,7 +87,7 @@ function newCharacter_init()
 	addEventHandler("onClientGUIScroll", gui["scrWeight"], newCharacter_updateScrollBars, false)
 	guiSetProperty(gui["scrWeight"], "StepSize", "0.01")
 
-	gui["lblAge"] = guiCreateLabel(10, 240, 111, 16, "Age", false, gui["_root"])
+	gui["lblAge"] = guiCreateLabel(10, 240, 111, 16, "Edad", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblAge"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblAge"], "center")
 
@@ -94,7 +95,7 @@ function newCharacter_init()
 	addEventHandler("onClientGUIScroll", gui["scrAge"], newCharacter_updateScrollBars, false)
 	guiSetProperty(gui["scrAge"], "StepSize", "0.0120")
 
-	gui["lblDay"] = guiCreateLabel(10, 282, 111, 16, "Day of birth:", false, gui["_root"])
+	gui["lblDay"] = guiCreateLabel(10, 282, 111, 16, "Dia Cumple:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblDay"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblDay"], "center")
 
@@ -102,25 +103,25 @@ function newCharacter_init()
 	addEventHandler("onClientGUIScroll", gui["scrDay"], newCharacter_updateScrollBars, false)
 	guiSetProperty(gui["scrDay"], "StepSize", "0.0125")
 
-	gui["lblMonth"] = guiCreateLabel(10, 260, 111, 16, "Month of birth", false, gui["_root"])
+	gui["lblMonth"] = guiCreateLabel(10, 260, 111, 16, "Mes Cumpleaños", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblDay"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblDay"], "center")
 
 
-	gui["drpMonth"] =  guiCreateComboBox ( 110, 260, 130, 16, "January", false, gui["_root"])
+	gui["drpMonth"] =  guiCreateComboBox ( 110, 260, 130, 16, "Enero", false, gui["_root"])
 	guiComboBoxAdjustHeight(gui["drpMonth"], 15)
-	guiComboBoxAddItem(gui["drpMonth"], "January")
-	guiComboBoxAddItem(gui["drpMonth"], "February")
-	guiComboBoxAddItem(gui["drpMonth"], "March")
-	guiComboBoxAddItem(gui["drpMonth"], "April")
-	guiComboBoxAddItem(gui["drpMonth"], "May")
-	guiComboBoxAddItem(gui["drpMonth"], "June")
-	guiComboBoxAddItem(gui["drpMonth"], "July")
-	guiComboBoxAddItem(gui["drpMonth"], "August")
-	guiComboBoxAddItem(gui["drpMonth"], "September")
-	guiComboBoxAddItem(gui["drpMonth"], "October")
-	guiComboBoxAddItem(gui["drpMonth"], "November")
-	guiComboBoxAddItem(gui["drpMonth"], "December")
+	guiComboBoxAddItem(gui["drpMonth"], "Enero")
+	guiComboBoxAddItem(gui["drpMonth"], "Febrero")
+	guiComboBoxAddItem(gui["drpMonth"], "Marzo")
+	guiComboBoxAddItem(gui["drpMonth"], "Abril")
+	guiComboBoxAddItem(gui["drpMonth"], "Mayo")
+	guiComboBoxAddItem(gui["drpMonth"], "Junio")
+	guiComboBoxAddItem(gui["drpMonth"], "Julio")
+	guiComboBoxAddItem(gui["drpMonth"], "Agosto")
+	guiComboBoxAddItem(gui["drpMonth"], "Septiembre")
+	guiComboBoxAddItem(gui["drpMonth"], "Octubre")
+	guiComboBoxAddItem(gui["drpMonth"], "Noviembre")
+	guiComboBoxAddItem(gui["drpMonth"], "Diciembre")
 
 	addEventHandler ( "onClientGUIComboBoxAccepted", root,
 		function ( comboBox )
@@ -132,26 +133,26 @@ function newCharacter_init()
 
 
 
-	gui["lblLanguage"] = guiCreateLabel(10, 305, 111, 16, "Language:", false, gui["_root"])
+	gui["lblLanguage"] = guiCreateLabel(10, 305, 111, 16, "Lenguaje:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblLanguage"], "left", false)
 	guiLabelSetVerticalAlign(gui["lblLanguage"], "center")
 
-	gui["btnLanguagePrev"] = guiCreateButton(110, 305, 16, 16, "<", false, gui["_root"])
-	gui["lblLanguageDisplay"] = guiCreateLabel(126, 305, 98, 16, "English", false, gui["_root"])
+	--gui["btnLanguagePrev"] = guiCreateButton(110, 305, 16, 16, "<", false, gui["_root"])
+	gui["lblLanguageDisplay"] = guiCreateLabel(126, 305, 98, 16, "Español", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["lblLanguageDisplay"], "center", true)
 	guiLabelSetVerticalAlign(gui["lblLanguageDisplay"], "center", true)
 
-	gui["btnLanguageNext"] = guiCreateButton(224, 305, 16, 16, ">", false, gui["_root"])
-	addEventHandler("onClientGUIClick", gui["btnLanguagePrev"] , newCharacter_updateLanguage, false)
-	addEventHandler("onClientGUIClick", gui["btnLanguageNext"] , newCharacter_updateLanguage, false)
+	--gui["btnLanguageNext"] = guiCreateButton(224, 305, 16, 16, ">", false, gui["_root"])
+	--addEventHandler("onClientGUIClick", gui["btnLanguagePrev"] , newCharacter_updateLanguage, false)
+	--addEventHandler("onClientGUIClick", gui["btnLanguageNext"] , newCharacter_updateLanguage, false)
 
-	gui["btnLangs"] = guiCreateButton(10, 330, 231, 41, "All Languages", false, gui["_root"])
-	addEventHandler("onClientGUIClick", gui["btnLangs"] , newCharacter_viewAllLangs, false)
+	--gui["btnLangs"] = guiCreateButton(10, 330, 231, 41, "Todos los Lenguajes", false, gui["_root"])
+	--addEventHandler("onClientGUIClick", gui["btnLangs"] , newCharacter_viewAllLangs, false)
 
-	gui["btnCancel"] = guiCreateButton(10, 370+5, 231, 41, "Cancel", false, gui["_root"])
+	gui["btnCancel"] = guiCreateButton(10, 370+5, 231, 41, "Cancelar", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["btnCancel"], newCharacter_cancel, false)
 
-	gui["btnCreateChar"] = guiCreateButton(10,410+10, 231, 41, "Create", false, gui["_root"])
+	gui["btnCreateChar"] = guiCreateButton(10,410+10, 231, 41, "Crear", false, gui["_root"])
 	addEventHandler("onClientGUIClick", gui["btnCreateChar"], newCharacter_attemptCreateCharacter, false)
 	newCharacter_changeSkin()
 	newCharacter_updateScrollBars()
@@ -161,18 +162,18 @@ function newCharacter_viewAllLangs(button)
 	if (source == gui["btnLangs"] and button == "left") then
 		if isElement(gui['langWindow']) then return false end
 
-		gui['langWindow'] = guiCreateWindow(720, 339, 339, 446, "Languages", false)
+		gui['langWindow'] = guiCreateWindow(720, 339, 339, 446, "Lenguajes", false)
 		guiWindowSetSizable(gui['langWindow'], false)
 		showCursor(true)
 	
 		gui['langWindowGrid'] = guiCreateGridList(9, 28, 320, 379, false, gui['langWindow'])
-		guiGridListAddColumn(gui['langWindowGrid'], "Languages", 0.9)
+		guiGridListAddColumn(gui['langWindowGrid'], "Lenguajes", 0.9)
 	
 		for _, value in ipairs(exports['language-system']:getLanguageList()) do 
 			guiGridListAddRow(gui['langWindowGrid'], value)
 		end
 			
-		gui['langWindowCloseBtn'] = guiCreateButton(9, 411, 320, 25, "Close", false, gui['langWindow'])
+		gui['langWindowCloseBtn'] = guiCreateButton(9, 411, 320, 25, "Cerrar", false, gui['langWindow'])
 			
 		addEventHandler("onClientGUIClick", gui['langWindowCloseBtn'], function(button)
 			if (source == gui['langWindowCloseBtn'] and button == "left") then 
@@ -251,15 +252,15 @@ function newCharacter_updateScrollBars()
 
 	--local scrollHeight = tonumber(guiGetProperty(gui["scrHeight"], "ScrollPosition")) * 100
 	--scrollHeight = math.floor((scrollHeight / 2) + 150)
-	guiSetText(gui["lblHeight"], "Height: "..scrollHeight.." CM")
+	guiSetText(gui["lblHeight"], "Altura: "..scrollHeight.." CM")
 
 	--local scrWeight = tonumber(guiGetProperty(gui["scrWeight"], "ScrollPosition")) * 310
 	--scrWeight = math.floor(scrWeight + 40)
-	guiSetText(gui["lblWeight"], "Weight: "..scrWeight.." KG")
+	guiSetText(gui["lblWeight"], "Peso: "..scrWeight.." KG")
 
 	--local scrAge = tonumber(guiGetProperty(gui["scrAge"], "ScrollPosition")) * 100
 	--scrAge = math.floor( (scrAge * 0.8 ) + 16 )
-	guiSetText(gui["lblAge"], "Age: "..scrAge.." years old")
+	guiSetText(gui["lblAge"], "Edad: "..scrAge.." años")
 
 	local year = getBirthday(tonumber(scrAge))
 	selectedMonth = monthToNumber(selectedMonth1)
@@ -272,7 +273,7 @@ function newCharacter_updateScrollBars()
 		scrDay = 1
 	end
 
-	guiSetText(gui["lblDay"], "Day of birth: "..(scrDay or "1"))
+	guiSetText(gui["lblDay"], "Dia Cumple: "..(scrDay or "1"))
 end
 
 function newCharacter_changeSkin(diff)
@@ -443,9 +444,9 @@ function selectStartPointGUI(characterName, characterDescription, race, gender, 
 	--config
 	local locations = {
 					-- x, 			y,					 z, 			rot    		int, 	dim 	Location Name
-		["default"] = {1168.6484375, -1412.576171875, 13.497941017151, 357.72854614258, 0, 0, "A bus stop near the mall"},
+		["default"] = {2023.678, -2288.047, 14.416, 49, 0, 0, "A bus stop near the mall"},
 		["igs"] = { 1922.9072265625, -1760.6982421875, 13.546875, 0,			0, 		0, 		"A bus stop next in Idlewood"},
-		["bus"] = {1749.509765625, -1860.5087890625, 13.578649520874, 359.0744, 	0, 		0, 		"Unity Bus Station"},
+		["bus"] = {2023.678, -2288.047, 14.416, 49, 	0, 		0, 		"Unity Bus Station"},
 		["metro"] = {808.88671875, -1354.6513671875, -0.5078125, 139.5092, 			0, 		0,		"Metro Station"},
 		["air"] = {1691.6455078125, -2334.001953125, 13.546875, 0.10711, 			0, 		0,		"Los Santos International Airport"},
 		["boat"] = {2809.66015625, -2436.7236328125, 13.628322601318, 90.8995, 		0, 		0,		"Santa Maria Dock"},

@@ -3,39 +3,39 @@ local isFireOn = false
 
 local fireTable = {
 		--  { x, y, z, "Location", "Incident description", "special or regular", carID(or blank) }
-		{ 2116.5451660156, -1790.5614013672, 14.370749473572, "Los Santos, Idlewood Pizza Stack", "There is some smoke coming from this bin, it looks like it's going to set alight!", "regular" },
-		{ 1892.892578125,-1800.7572021484, 15.758026123047, "Los Santos, Old Idlewood Gas Station", "Some fools were playing with a deodorant can and a lighter, they set this skip on fire!", "regular" },
-		{ 1858.4833984375,-1454.541015625, 13.395030975342, "Los Santos, next to the Skate Park", "This box van just swerved away from a bike and crashed into the wall, his car is smoking up. Please help!", "special", 414 },
-		{ -76.41796875, -1593.662109375, 2.6171875, "Flint Intersection, trailer park LS South-West.", "There's smoke coming from a trailer park...you guys might want to check this!" },
-		{ 1706.869140625,-546.01953125,35.386379241943, "Red County, Interstate 25", "This plane just landed on the highway, its engine is smoking up!", "regular", 513 },
-		{ 2499.7451171875,-1670.771484375,13.348224639893, "Los Santos, Grove Street", "This dune buggy just came racing up the street and then the engine blew up, there is a lot of black smoke and can see fire", "regular", 568 },
-		{ 2713.423828125,-2049.33984375,13.4275598526, "Los Santos, South Street - Playa Del Seville, near Sun Street", "One of our trucks just left our chemical plant and burst into flames, there is some chemicals in that truck.. Come quick!", "special", 573 },
-		{ 1873.32421875,-2497.193359375,13.5546875, "Los Santos International, Runway A!", "We've got an emergency landing, the plane's engine is malfunctioning and the engine is due to set alight! We need an engine here quickly!", "regular", 577 },
-		{  2295.1318359375, -1693.37109375, 13.517011642456, "The alleyway behind Ganton Gym!", "Some people just came running out of the alleyway. I can see smoke!, ", "regular", 516 },
-		{  1961.8642578125, -1955.6796875, 13.751493453979, "El Corona train tracks", "One of our trains has reported the smell of smoke coming from under the train. We'd like someone to check it out before it turns into something worse.", "special", 538 },
-		{  1021.109375, -1916.8505859375, 12.66853427887, "The market stalls South of the DMV.", "Somebody knocked the BBQ over and set the stall alight, the fire isn't huge, but we've got nothing to put it out with!", "regular", },
-		{  1303.5419921875, 173.9775390625, 20.4609375, "Montgomery Trailer Park, on the South side.", "Some kids just set some rubbish on fire, it's spread to the trees.", "regular", },
-		{  2161.294921875, -99.8544921875, 2.75, "The small beach, Western side of Palamino Creek.", "Some shed is on fire. Pretty big.", "regular", },
-		{  2352.0224609375, -650.1396484375, 128.0546875, "North Rock.", "Bonfire gone wrong, it's spread into the wooden shack.", "regular", },
-		{  1874.126953125, -1313.33203125, 14.500373840332, "The construction site on the Northern side of the Skate Park.", "Structure fire.", "regular", 524 },
-		{ 2116.5451660156, -1790.5614013672, 14.370749473572, "Los Santos, Idlewood Pizza Stack", "There is some smoke coming from this bin, it looks like it's going to set alight!", "regular", },
-		{ 1892.892578125, -1800.7572021484, 15.758026123047, "Los Santos, Old Idlewood Gas Station", "Some fools were playing with a deodorant can and a lighter, they set this skip on fire!", "regular", },
-		{ 1858.4833984375, -1454.541015625, 13.395030975342, "Los Santos, next to the Skate Park", "This box van just swerved away from a bike and crashed into the wall, his car is smoking up. Please help!", "special", 414 },
-		{ -76.41796875, -1593.662109375, 2.6171875, "Flint Intersection, trailer park LS South-West.", "There's smoke coming from a trailer park...you guys might want to check this!" },
-		{ 1706.869140625, -546.01953125, 35.386379241943, "Red County, Interstate 25", "This plane just landed on the highway, its engine is smoking up!", "regular", 513 },
-		{ 2499.7451171875, -1670.771484375, 13.348224639893, "Los Santos, Grove Street", "This dune buggy just came racing up the street and then the engine blew up, there is a lot of black smoke and can see fire", "regular", 568 },
-		{ 2713.423828125, -2049.33984375, 13.4275598526, "Los Santos, South Street - Playa Del Seville, near Sun Street", "One of our trucks just left our chemical plant and burst into flames, there is some chemicals in that truck.. Come quick!", "special", 573 },
-		{ 1873.32421875, -2497.193359375, 13.5546875, "Los Santos International, Runway A!", "We've got an emergency landing, the plane's engine is malfunctioning and the engine is due to set alight! We need an engine here quickly!", "regular", 577 },
-		{ 595.06, -535.41, 17, "Dillimore, behind the Police Building.", "There's a vehicle smoking, possibly coming on fire!", "regular", 401 },
-		{ 658.0908, -439.372, 16, "Dillimore, the bins behind the bar at north!", "We try to extinguish it and it doesn't work! They're on fire!" },
-		{ -76.41796875, -1593.662109375, 2.6171875, "Flint Intersection, trailer park LS South-West.", "There's smoke coming from a trailer park...you guys might want to check this!" },
-		{ 2351.08984375, -653.4462890625, 128.0546875, "North Rock, the shack on top of the hill!", "I'm not sure, but it's worth checking it out! There's much smoke coming out of there!", "special", 410 },
-		{ 2626.9677734375, -846.2607421875, 84.179885864258, "North Rock, by a shack on the hill!", "A tree just got on fire, god damn California sun!" },
-		{ 2859.03515625, -598.166015625, 10.928389549255, "Interstate 425 East, by the highway.", "A car seems heavily damaged, smoking, and there's a fire next to it! Hurry!", "regular", 420 },
-		{ 392.51171875, -1924.5078125, 10.25, "Santa Monica Pier.", "One of the wood building got on fire!", "special" },
-		{ -104.0712890625, -331.7822265625, 1.4296875, "Red county, blueberry warehouse.", "Not sure what hit the tank, but I feel fire will come out soon!", "regular", 403 },
-		{ 90.162109375, -286.1953125, 1.578125, "Red county, blueberry warehouse.", "Not sure what hit the tank, but I feel fire will come out soon!", "regular", 403 },
-		{ 1368.8466796875, -291.900390625, 1.7080450057983, "Mulholland canal!", "A skimmer just crashed here by the beach!", "regular", 460 },
+		{ 2116.5451660156, -1790.5614013672, 14.370749473572, "Los Santos, Idlewood Pizza Stack", "Hay humo saliendo de este contenedor, parece que se va a incendiar!", "regular" },
+		{ 1892.892578125,-1800.7572021484, 15.758026123047, "Los Santos, Antigua Gasolinera de Idlewood", "¡Algunos tontos estaban jugando con un aerosol y un encendedor, prendieron fuego a este contenedor!", "regular" },
+		{ 1858.4833984375,-1454.541015625, 13.395030975342, "Los Santos, junto al Skate Park", "Esta furgoneta acaba de esquivar una bicicleta y chocó contra la pared, su auto está echando humo. ¡Por favor, ayuda!", "special", 414 },
+		{ -76.41796875, -1593.662109375, 2.6171875, "Intersección de Flint, parque de casas móviles en el suroeste de LS.", "Hay humo saliendo de un parque de casas móviles... ¡deberían revisar esto!", },
+		{ 1706.869140625,-546.01953125,35.386379241943, "Condado Rojo, Autopista 25", "Este avión acaba de aterrizar en la carretera, ¡su motor está echando humo!", "regular", 513 },
+		{ 2499.7451171875,-1670.771484375,13.348224639893, "Los Santos, Grove Street", "Este buggy de dunas acaba de correr por la calle y luego el motor explotó, hay mucho humo negro y se ve fuego", "regular", 568 },
+		{ 2713.423828125,-2049.33984375,13.4275598526, "Los Santos, South Street - Playa Del Seville, cerca de Sun Street", "Uno de nuestros camiones acaba de salir de nuestra planta química y se incendió, hay productos químicos en ese camión. ¡Vengan rápido!", "special", 573 },
+		{ 1873.32421875,-2497.193359375,13.5546875, "Los Santos International, Pista A!", "Tenemos un aterrizaje de emergencia, el motor del avión está fallando y está a punto de prenderse fuego. ¡Necesitamos un motor aquí rápidamente!", "regular", 577 },
+		{ 2295.1318359375, -1693.37109375, 13.517011642456, "El callejón detrás de Ganton Gym!", "Algunas personas acaban de salir corriendo del callejón. Puedo ver humo!", "regular", 516 },
+		{ 1961.8642578125, -1955.6796875, 13.751493453979, "Vías del tren de El Corona", "Uno de nuestros trenes ha reportado olor a humo debajo del tren. Nos gustaría que alguien lo verificara antes de que empeore.", "special", 538 },
+		{ 1021.109375, -1916.8505859375, 12.66853427887, "Puestos del mercado al sur del DMV.", "¡Alguien derribó la barbacoa y prendió fuego al puesto, el fuego no es enorme, pero no tenemos nada para apagarlo!", "regular", },
+		{ 1303.5419921875, 173.9775390625, 20.4609375, "Montgomery Trailer Park, en el lado sur.", "Unos niños acaban de prender fuego a la basura, se ha extendido a los árboles.", "regular", },
+		{ 2161.294921875, -99.8544921875, 2.75, "La pequeña playa, lado oeste de Palamino Creek.", "Algún cobertizo está en llamas. Bastante grande.", "regular", },
+		{ 2352.0224609375, -650.1396484375, 128.0546875, "North Rock.", "Fogata que salió mal, se ha extendido a la choza de madera.", "regular", },
+		{ 1874.126953125, -1313.33203125, 14.500373840332, "El sitio de construcción en el lado norte del Skate Park.", "Incendio de estructura.", "regular", 524 },
+		{ 2116.5451660156, -1790.5614013672, 14.370749473572, "Los Santos, Idlewood Pizza Stack", "Hay humo saliendo de este basurero, parece que se va a incendiar!", "regular", },
+		{ 1892.892578125, -1800.7572021484, 15.758026123047, "Los Santos, Antigua Gasolinera de Idlewood", "¡Algunos tontos estaban jugando con un aerosol y un encendedor, prendieron fuego a este contenedor!", "regular", },
+		{ 1858.4833984375, -1454.541015625, 13.395030975342, "Los Santos, junto al Skate Park", "Esta furgoneta acaba de esquivar una bicicleta y chocó contra la pared, su auto está echando humo. ¡Por favor, ayuda!", "special", 414 },
+		{ -76.41796875, -1593.662109375, 2.6171875, "Intersección de Flint, parque de casas móviles LS suroeste.", "Hay humo saliendo de un parque de casas móviles... ¡deberían revisar esto!" },
+		{ 1706.869140625, -546.01953125, 35.386379241943, "Condado Rojo, Autopista 25", "Este avión acaba de aterrizar en la carretera, ¡su motor está echando humo!", "regular", 513 },
+		{ 2499.7451171875, -1670.771484375, 13.348224639893, "Los Santos, Grove Street", "Este buggy de dunas acaba de correr por la calle y luego el motor explotó, hay mucho humo negro y se ve fuego", "regular", 568 },
+		{ 2713.423828125, -2049.33984375, 13.4275598526, "Los Santos, South Street - Playa Del Seville, cerca de Sun Street", "Uno de nuestros camiones acaba de salir de nuestra planta química y se incendió, hay productos químicos en ese camión.. ¡Vengan rápido!", "special", 573 },
+		{ 1873.32421875, -2497.193359375, 13.5546875, "Los Santos International, Pista A!", "Tenemos un aterrizaje de emergencia, el motor del avión está fallando y está a punto de prenderse fuego. ¡Necesitamos un motor aquí rápidamente!", "regular", 577 },
+		{ 595.06, -535.41, 17, "Dillimore, detrás del Edificio de la Policía.", "Hay un vehículo echando humo, ¡posiblemente esté a punto de incendiarse!", "regular", 401 },
+		{ 658.0908, -439.372, 16, "Dillimore, los contenedores detrás del bar en el norte!", "¡Intentamos apagarlo y no funciona! ¡Están ardiendo!" },
+		{ -76.41796875, -1593.662109375, 2.6171875, "Intersección de Flint, parque de casas móviles LS suroeste.", "Hay humo saliendo de un parque de casas móviles... ¡deberían revisar esto!" },
+		{ 2351.08984375, -653.4462890625, 128.0546875, "North Rock, la choza en la cima de la colina!", "No estoy seguro, pero vale la pena revisarlo. ¡Hay mucho humo saliendo de allí!", "special", 410 },
+		{ 2626.9677734375, -846.2607421875, 84.179885864258, "North Rock, junto a una choza en la colina!", "¡Un árbol acaba de incendiarse, maldito sol de California!" },
+		{ 2859.03515625, -598.166015625, 10.928389549255, "Interstate 425 East, junto a la autopista.", "Un automóvil parece estar muy dañado, echando humo, ¡y hay un incendio junto a él! ¡Rápido!", "regular", 420 },
+		{ 392.51171875, -1924.5078125, 10.25, "Muelle de Santa Monica.", "¡Uno de los edificios de madera se incendió!", "special" },
+		{ -104.0712890625, -331.7822265625, 1.4296875, "Condado Rojo, almacén de arándanos.", "No estoy seguro de qué golpeó al tanque, ¡pero siento que pronto saldrá fuego!", "regular", 403 },
+		{ 90.162109375, -286.1953125, 1.578125, "Condado Rojo, almacén de arándanos.", "No estoy seguro de qué golpeó al tanque, ¡pero siento que pronto saldrá fuego!", "regular", 403 },
+		{ 1368.8466796875, -291.900390625, 1.7080450057983, "Canal de Mulholland!", "¡Un skimmer acaba de estrellarse aquí junto a la playa!", "regular", 460 },
 }
 
 function loadthescript()
@@ -49,9 +49,9 @@ function fdfire()
     local fX, fY, fZ = fireTable[randomfire][1],fireTable[randomfire][2],fireTable[randomfire][3]
             local playersOnFireTeam = exports.factions:getPlayersInFaction(2)
             for k, v in ipairs (playersOnFireTeam) do
-                outputChatBox("[RADIO] This is dispatch. We received an anonymous call regarding a major incident.",v,245, 40, 135)
-				outputChatBox("[RADIO] Incident is as follow: "..fireTable[randomfire][5],v,245, 40, 135)
-                outputChatBox("[RADIO] Location: "..fireTable[randomfire][4].." Please report there immediately. We added a blip on your GPS.",v,245, 40, 135)
+                outputChatBox("[RADIO] Esto es despacho. Recibimos una llamada anónima sobre un incidente importante..",v,245, 40, 135)
+				outputChatBox("[RADIO] El incidente es el siguiente: "..fireTable[randomfire][5],v,245, 40, 135)
+                outputChatBox("[RADIO] Ubicación: "..fireTable[randomfire][4].." Por favor informe allí de inmediato. Agregamos una señal en tu GPS.",v,245, 40, 135)
             end
 
             -- You can get table info like this below, i set the variable above to make it shorter to call from.
@@ -140,11 +140,11 @@ function randomfire (thePlayer)
 	if ( exports.integration:isPlayerTrialAdmin ( thePlayer ) ) then
 		outputDebugString(isFireOn)
 		if (isFireOn) then
-			outputChatBox ("AdmCMD: There is already a fire. Use /cancelfire or wait 30 minutes.", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: Ya hay un incendio. Utilice /cancelfire o espere 30 minutos.", thePlayer,255,0,0)
 		else
 			fdfire()
-			outputChatBox ("AdmCMD: You have random triggered a fire for FD!", thePlayer,255,0,0)
-			outputChatBox ("AdmCMD: Type /cancelfire to cancel it!", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: ¡Has provocado un incendio aleatorio para FD!", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: ¡Escribe /cancelfire para cancelarlo!", thePlayer,255,0,0)
 		end
 	end
 end
@@ -156,12 +156,12 @@ function cancelrandomfire (thePlayer)
 		outputDebugString(isFireOn)
 		if (isFireOn) then
 			local thisResource = getThisResource()
-			outputChatBox ("AdmCMD: You have stopped the random fire for FD!", thePlayer,255,0,0)
-			outputChatBox ("AdmCMD: It may take up to five minutes before it is fully cancelled.", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: ¡Has detenido el fuego aleatorio para FD!", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: Pueden pasar hasta cinco minutos antes de que se cancele por completo.", thePlayer,255,0,0)
 			restartResource(thisResource)
 			isFireOn = false
 		else
-			outputChatBox ("AdmCMD: There is no fire started. Use /randomfire to start it.", thePlayer,255,0,0)
+			outputChatBox ("AdmCMD: No se ha iniciado ningún incendio. Usa /randomfire para iniciarlo.", thePlayer,255,0,0)
 		end
 	end
 end

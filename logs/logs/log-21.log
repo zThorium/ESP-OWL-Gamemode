@@ -358,3 +358,136 @@
 {"action":6,"origin":"ch51716","date":"2024-01-22T22:58:22","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
 {"action":3,"origin":"ch51711","date":"2024-01-22T22:58:27","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"que hiciste?, subiste archivo?","factions":[]}
 {"action":3,"origin":"ch51718","date":"2024-01-22T22:58:38","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"busqué","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T22:58:46","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"pero está en el pd system","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T22:59:10","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"no me sale lo que subiste al git","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T22:59:16","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"seguro hiciste push?","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T22:59:20","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"si","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T22:59:21","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T22:59:36","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"hace una hora dice","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T22:59:58","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T22:59:58","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:00:12","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"no te deja pushear de nuevo?","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:00:16","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"no","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:00:22","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:00:24","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"SETHP 100","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:00:30","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:00:51","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:00:52","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:00:58","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:01:12","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"que raro en la pagina del git tampoco sale tu push","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:01:18","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51716","date":"2024-01-22T23:01:24","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:01:26","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"a","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:01:39","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"967e69fe6230a823a7d36ba395554701640847ea","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:02:03","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"oye pudiste solucionar lo del zmodeler?","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:02:10","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"no lo he tocado","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:02:14","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"asi te enseño","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:03:35","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:04:07","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:04:08","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":34,"origin":"ch51716","date":"2024-01-22T23:04:08","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":" died","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:04:13","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"REVIVIDO desde PK","factions":[]}
+{"action":40,"origin":"ch51716","date":"2024-01-22T23:04:29","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"Trial Joaquin attempts to start the engine but fails.","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:04:30","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:04:35","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51716","date":"2024-01-22T23:04:39","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":40,"origin":"ch51716","date":"2024-01-22T23:04:46","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"Trial Joaquin buckles in their seatbelt.","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:05:04","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51716","date":"2024-01-22T23:05:10","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:05:32","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"AHEAL 100","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:05:46","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:05:48","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:05:51","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:05:55","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:05:59","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"AHEAL 100","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:06:29","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:06:34","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"SETHP 100","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:07:43","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"SETHP 100","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:07:46","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:08:09","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:08:10","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:08:11","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:09:05","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:09:22","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:09:31","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:09:32","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:09:59","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:09:59","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"AHEAL 100","factions":[]}
+{"action":31,"origin":"ch51716","date":"2024-01-22T23:10:00","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:10:28","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"intenta instalarlo","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:10:32","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"si no pesa casi nada","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:11:27","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:11:47","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:12:01","phones":[],"objects":[],"characters":[51711,51718,51716],"vehicles":[],"interiors":[],"accounts":[],"content":"a todo esto el blender me lo cancelacada q quiero instalarlo x","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:12:24","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:12:37","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:13:20","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"SETHP 100","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:13:21","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:13:51","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:13:54","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:14:40","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:16:24","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51716","date":"2024-01-22T23:16:25","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:16:26","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:17:14","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":34,"origin":"ch51716","date":"2024-01-22T23:17:19","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":" died","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:17:24","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"AHEAL 100","factions":[]}
+{"action":4,"origin":"ch51716","date":"2024-01-22T23:17:25","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[],"content":"REVIVIDO desde PK","factions":[]}
+{"action":6,"origin":"ch51716","date":"2024-01-22T23:17:29","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:17:36","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:18:28","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:19:04","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"ANN All vehicles refuelled by Admin Tit_Adict.","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:19:04","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"FUELVEHS","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:19:11","phones":[],"objects":[],"characters":[51718],"vehicles":[-21],"interiors":[],"accounts":[],"content":"FUELVEH","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:19:11","phones":[],"objects":[],"characters":[51716],"vehicles":[-16],"interiors":[],"accounts":[],"content":"FUELVEH","factions":[]}
+{"action":27,"origin":"ac131906","date":"2024-01-22T23:19:24","phones":[],"objects":[],"characters":[51716],"vehicles":[],"interiors":[],"accounts":[131906],"content":"Desconectado (Quit) (Nombre: Trial_Joaquin)","factions":[]}
+{"action":40,"origin":"ch51718","date":"2024-01-22T23:20:38","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Tit Adict unbuckles their seatbelt.","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:39:50","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: TETAS","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:39:55","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Tetas","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:40:00","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Vemos el tema facciones?","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:40:38","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: A todo esto te llego lo q pushie?","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:43:29","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Esta todo traducido lo de facciones","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:43:47","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Pero funca?","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:43:50","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Ahi me llego","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:43:51","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Deja ","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:43:55","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Ver que cambiaste","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:10","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Tipo tenemo lo de samu y wea","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:44:17","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Ah no no","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:44:21","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Pero el resource factions si","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:44:32","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Que recurso traduciste o asi","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:32","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Xd","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:44:35","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Para reiniciarlo","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:39","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: U","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:41","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Varios","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:50","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: C rightclick","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:44:55","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Activity g","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:45:01","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: C shop","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:45:03","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: S shop","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:45:11","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: C doors","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:45:13","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Listo","factions":[]}
+{"action":7,"origin":"ch51711","date":"2024-01-22T23:45:23","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Anda a cachar","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:45:23","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"VEH 880 created with ID -22","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:45:41","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Me buguie xd","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:45:45","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Calmao","factions":[]}
+{"action":27,"origin":"ac131904","date":"2024-01-22T23:45:49","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[131904],"content":"Desconectado (Quit) (Nombre: Tit_Adict)","factions":[]}
+{"action":27,"origin":"ac131904","date":"2024-01-22T23:46:19","phones":[],"objects":[],"characters":[],"vehicles":[],"interiors":[],"accounts":[131904],"content":"Conectado desde 186.173.222.179 - D07C3066987A767946F05743B08A1FA4","factions":[]}
+{"action":27,"origin":"ac131904","date":"2024-01-22T23:46:39","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[131904],"content":"Spawned","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:46:53","phones":[],"objects":[],"characters":[51718,51711],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: La yasuri yamile","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:47:40","phones":[],"objects":[],"characters":[51718],"vehicles":[-22],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":40,"origin":"ch51718","date":"2024-01-22T23:47:42","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Tit Adict buckles in their seatbelt.","factions":[]}
+{"action":40,"origin":"ch51718","date":"2024-01-22T23:48:03","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Tit Adict unbuckles their seatbelt.","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-22T23:48:48","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: 7aheal","factions":[]}
+{"action":4,"origin":"ch51718","date":"2024-01-22T23:48:51","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"AHEAL 100","factions":[]}
+{"action":40,"origin":"ch51718","date":"2024-01-22T23:49:08","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Tit Adict Presiona la llave para bloquear el vehículo.. ((1992 Honda Civic))","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:49:08","phones":[],"objects":[],"characters":[],"vehicles":[29220],"interiors":[],"accounts":[],"content":"BLOQUEO DESDE EL EXTERIOR","factions":[]}
+{"action":40,"origin":"ch51718","date":"2024-01-22T23:49:12","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Tit Adict presiona la llave para desbloquear el vehículo. ((1992 Honda Civic))","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:49:12","phones":[],"objects":[],"characters":[],"vehicles":[29220],"interiors":[],"accounts":[],"content":"DESBLOQUEO DESDE EL EXTERIOR","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:51:18","phones":[],"objects":[],"characters":[51718],"vehicles":[29220],"interiors":[],"accounts":[],"content":"FIXVEH","factions":[]}
+{"action":31,"origin":"ch51718","date":"2024-01-22T23:51:19","phones":[],"objects":[],"characters":[51718],"vehicles":[29220],"interiors":[],"accounts":[],"content":"STARTED ENGINE","factions":[]}
+{"action":6,"origin":"ch51718","date":"2024-01-22T23:53:23","phones":[],"objects":[],"characters":[],"vehicles":[29220],"interiors":[],"accounts":[],"content":"PARK","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:53:55","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"vuelvo en un rato, dejo server abierto, me voy a ver un tutorial de 3dsmax pa hacer modelos","factions":[]}
+{"action":3,"origin":"ch51711","date":"2024-01-22T23:54:00","phones":[],"objects":[],"characters":[51711,51718],"vehicles":[],"interiors":[],"accounts":[],"content":"pero al estilo gtasa","factions":[]}
+{"action":27,"origin":"ac131903","date":"2024-01-22T23:54:02","phones":[],"objects":[],"characters":[51711],"vehicles":[],"interiors":[],"accounts":[131903],"content":"Desconectado (Quit) (Nombre: Danny_Occean)","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:54:15","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"yaya","factions":[]}
+{"action":3,"origin":"ch51718","date":"2024-01-22T23:54:22","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"digamos q te entendi xd","factions":[]}
+{"action":7,"origin":"ch51718","date":"2024-01-23T01:44:37","phones":[],"objects":[],"characters":[51718],"vehicles":[],"interiors":[],"accounts":[],"content":"Español: Weco","factions":[]}

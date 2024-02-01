@@ -18,12 +18,12 @@ function updatePdCodes(contentFromClient)
 	if ((isInPD and pdLeader) or (isInHP and hpLeader)) and contentFromClient then
 		if contentFromClient.codes then
 			if mysql:query_free("UPDATE `settings` SET `value`= '"..exports.global:toSQL(contentFromClient.codes).."' WHERE `name`='pdcodes' ") then
-				outputChatBox("Codes saved successfully!", client)
+				outputChatBox("Codigos Guardados!", client)
 			end
 		end
 		if contentFromClient.procedures then
 			if mysql:query_free("UPDATE `settings` SET `value`= '"..exports.global:toSQL(contentFromClient.procedures).."' WHERE `name`='pdprocedures' ") then
-				outputChatBox("Procedures saved successfully!", client)
+				outputChatBox("¡Procedimientos guardados exitosamente!", client)
 			end
 		end
 	end

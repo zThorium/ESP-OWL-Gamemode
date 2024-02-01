@@ -20,7 +20,7 @@ end
 
 function knockout()
 	if playerInjuries[source] and not isTimer( playerInjuries[source]['knockout'] ) then
-		outputChatBox("You've been knocked out!", source, 255, 0, 0)
+		outputChatBox("¡Has sido noqueado!", source, 255, 0, 0)
 		toggleAllControls(source, false, true, false)
 		--fadeCamera(source, false, 120)
 		playerInjuries[source]['knockout'] = setTimer(killknockedout, 120000, 1, source)
@@ -113,7 +113,7 @@ function injuries(attacker, weapon, bodypart, loss)
 		toggleControl(source, 'aim_weapon', false) -- disable aiming for the player who was hit (can still fire, but without crosshair)
 		toggleControl(source, 'jump', false) -- can't climb over the wall with a broken arm
 
-		executeCommandHandler('ame', source, "'s " .. ( bodypart == 5 and "left" or "right" ) .. " arm was hit.")
+		executeCommandHandler('ame', source, "'s " .. ( bodypart == 5 and "izquierda" or "derecha" ) .. " el brazo fue golpeado.")
 	elseif bodypart == 3 then
 		if not weapon == 17 then
 			executeCommandHandler('ame', source, " torso fue golpeado", source)

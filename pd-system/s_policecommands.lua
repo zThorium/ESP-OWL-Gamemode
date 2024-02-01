@@ -21,9 +21,9 @@ function fingerprintPlayer(thePlayer, commandName, targetPlayerNick)
 
 					if (distance<=10) then
 						local fingerprint = getElementData(targetPlayer, "fingerprint")
-						outputChatBox(targetPlayerName .. "'s Fingerprint: " .. tostring(fingerprint) .. ".", thePlayer, 255, 194, 14)
+						outputChatBox(targetPlayerName .. " Huella Digital: " .. tostring(fingerprint) .. ".", thePlayer, 255, 194, 14)
 					else
-						outputChatBox("You are too far away from " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
+						outputChatBox("Estás demasiado lejos de " .. targetPlayerName .. ".", thePlayer, 255, 0, 0)
 					end
 				end
 			end
@@ -57,9 +57,9 @@ function theftSystem(thePlayer, commandName, targetPlayer)
 				setVehicleEngineState(targetVehicle, false)
 				exports.anticheat:changeProtectedElementDataEx(theVehicle, "engine", 0, true)
 				setVehicleLocked (targetVehicle, true )
-				exports.global:sendLocalDoAction(targetPlayer, "You would hear a sudden silence and a slight clicking noise as some bolts would slide across, locking the door in place.")
+				exports.global:sendLocalDoAction(targetPlayer, "Escucharías un silencio repentino y un ligero chasquido cuando algunos pernos se deslizarían, bloqueando la puerta en su lugar.")
 			else
-				outputChatBox("This vehicle does not have the Anti-Theft System.", thePlayer, 255, 0, 0)
+				outputChatBox("Este vehículo no cuenta con el Sistema Antirrobo.", thePlayer, 255, 0, 0)
 			end
 		end
 	end

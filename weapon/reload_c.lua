@@ -18,7 +18,7 @@ function doReload()
 		if has_ammo or duty then
 			if reloading then
 				playSoundFrontEnd(4)
-				outputChatBox("Please wait..", 255,0,0)
+				outputChatBox("Por favor espera..", 255,0,0)
 			else
 				local total_ammo = getPedTotalAmmo( localPlayer, slot ) - 1
 				local one_pack = getWeaponProperty( id , "std", "maximum_clip_ammo")
@@ -27,7 +27,7 @@ function doReload()
 					local ammo_in_clip = getPedAmmoInClip(localPlayer)
 					if loaded_ammo ~= total_ammo then
 						playSoundFrontEnd(4)
-						outputChatBox("Please wait..", 255,0,0)
+						outputChatBox("Por favor espera..", 255,0,0)
 					elseif total_ammo > one_pack then
 						local ammo_in_clip = getPedAmmoInClip(localPlayer)
 						if one_pack ~= 0 and ammo_in_clip < one_pack then
@@ -42,13 +42,13 @@ function doReload()
 						end
 					else
 						playSoundFrontEnd(4)
-						outputChatBox("Your duty weapon is out of ammo!", 255,0,0)
+						outputChatBox("Tu arma de servicio se ha quedado sin munición.!", 255,0,0)
 					end
 				else
 					-- ammo hasn't synced with server.
 					if loaded_ammo ~= total_ammo then
 						playSoundFrontEnd(4)
-						outputChatBox("Please wait..", 255,0,0)
+						outputChatBox("Por favor espera..", 255,0,0)
 					elseif one_pack ~= 0 and total_ammo < one_pack then
 						reloading = true
 						syncAmmo()
@@ -63,7 +63,7 @@ function doReload()
 			end
 		else
 			playSoundFrontEnd(4)
-			outputChatBox("You don't have any extra ammopack for this weapon.", 255,0,0)
+			outputChatBox("No tienes ningún paquete de munición extra para esta arma.", 255,0,0)
 		end
 	end
 end

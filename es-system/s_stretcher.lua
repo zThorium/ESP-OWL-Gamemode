@@ -35,7 +35,7 @@ function destroyStretcher( playerElement, vehicle )
 				end
 				--outputDebugString("warpResult="..tostring(warpResult))
 				if not warpResult then
-					outputChatBox("The "..tostring(exports.global:getVehicleName(vehicle)).." does not have space for any more patients.", playerElement, 255, 0, 0)
+					outputChatBox("The "..tostring(exports.global:getVehicleName(vehicle)).." no tiene espacio para más pacientes.", playerElement, 255, 0, 0)
 				else
 					setElementData(patient, "realism:stretcher:isInAmbulanceOnStretcher", true, true)
 				end
@@ -92,16 +92,16 @@ function createStretcher( playerElement, vehicle )
 
 	if hasPlayerStretcherSpawned( playerElement ) then
 		if vehicle then
-			exports.global:sendLocalMeAction(playerElement, "puts the stretcher inside the "..tostring(exports.global:getVehicleName(vehicle))..".")
+			exports.global:sendLocalMeAction(playerElement, "Pone la camilla dentro del "..tostring(exports.global:getVehicleName(vehicle))..".")
 		else
-			exports.global:sendLocalMeAction(playerElement, "puts the stretcher inside.")
+			exports.global:sendLocalMeAction(playerElement, "Mete la camilla dentro.")
 		end
 		destroyStretcher( playerElement, vehicle )
 	else
 		if vehicle then
-			exports.global:sendLocalMeAction(playerElement, "takes out a stretcher from the "..tostring(exports.global:getVehicleName(vehicle))..".")
+			exports.global:sendLocalMeAction(playerElement, "Saca una camilla del "..tostring(exports.global:getVehicleName(vehicle))..".")
 		else
-			exports.global:sendLocalMeAction(playerElement, "takes out a stretcher.")
+			exports.global:sendLocalMeAction(playerElement, "Saca una camilla.")
 		end
 		triggerClientEvent( playerElement, "stretcher:getPositionInFrontOfElement", getRootElement( ), playerElement, vehicle )
 	end

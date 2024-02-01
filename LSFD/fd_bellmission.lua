@@ -4,7 +4,7 @@ function startTheFire (fX,fY,fZ)
     setTimer ( function()
 		createFire(fX,fY,fZ,60)
 	end, 420000, 1)
-    outputDebugString("Creating Fire at x:"..fX.." y:"..fY.." z:"..fZ)
+    outputDebugString("Creando Incendio en x:"..fX.." y:"..fY.." z:"..fZ)
 	
     local Soundone = playSound3D( "alarm/firealarm.mp3", 1725, -1130, 24, false )
     setSoundMinDistance(Soundone, 25)
@@ -14,7 +14,7 @@ function startTheFire (fX,fY,fZ)
 	setSoundMinDistance(Soundtwo, 25)
     setSoundMaxDistance(Soundtwo, 70)
 	
-    outputDebugString("Playing LSFD alarm ...")
+    outputDebugString("Sonando Alarma ...")
     -- setSoundVolume( Sound, 1 )
 
 	local fire = engineLoadDFF("fire.dff",1)

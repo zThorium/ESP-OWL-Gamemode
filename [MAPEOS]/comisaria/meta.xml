@@ -1,0 +1,17 @@
+<meta>
+    <info author="Modelado Thorium" name="Turbus Terminal" version="1.5.6" type="script" />
+    <script src="replace.lua" type="client" cache="false" />
+	<file src="turbus.dff" />
+	<file src="turbus.col" />
+	<file src="turbus.txd" />
+</meta>
+
+------CREDITOS------
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709
+@AlvesMTA#5709

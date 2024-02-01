@@ -72,16 +72,16 @@ function arrestPlayer(thePlayer, commandName, targetPlayerNick, fine, jailtime, 
 					local targetCol = isInArrestColshape(targetPlayer)
 
 					if not targetCol then
-						outputChatBox("The player is not within range of the booking desk.", thePlayer, 255, 0, 0)
+						outputChatBox("El jugador no se encuentra dentro del alcance del mostrador de reservas.", thePlayer, 255, 0, 0)
 					elseif targetCol ~= playerCol then
-						outputChatBox("The player is standing infront of another cell.", thePlayer, 255, 0, 0)
+						outputChatBox("El jugador está parado frente a otra celda.", thePlayer, 255, 0, 0)
 					else
 						local jailTimer = getElementData(targetPlayer, "pd.jailtimer")
 						local username  = getPlayerName(thePlayer)
 						local reason = table.concat({...}, " ")
 
 						if (jailTimer) then
-							outputChatBox("This player is already serving a jail sentence.", thePlayer, 255, 0, 0)
+							outputChatBox("Este jugador ya está cumpliendo una sentencia de cárcel.", thePlayer, 255, 0, 0)
 						else
 							local finebank = false
 							local targetPlayerhasmoney = exports.global:getMoney(targetPlayer, true)
@@ -141,15 +141,15 @@ function arrestPlayer(thePlayer, commandName, targetPlayerNick, fine, jailtime, 
 							local factionRanks = getElementData(theTeam, "ranks")
 							local factionRankTitle = factionRanks[factionRank]
 
-							outputChatBox("You were arrested by " .. username .. " for " .. jailtime .. " minute(s).", targetPlayer, 0, 102, 255)
-							outputChatBox("Crimes Committed: " .. reason .. ".", targetPlayer, 0, 102, 255)
+							outputChatBox("Fuiste arrestado por " .. username .. " por " .. jailtime .. " minuto(s).", targetPlayer, 0, 102, 255)
+							outputChatBox("Crímenes cometidos: " .. reason .. ".", targetPlayer, 0, 102, 255)
 							if (finebank == true) then
-								outputChatBox("The rest of the fine has been taken from your banking account.", targetPlayer, 0, 102, 255)
+								outputChatBox("El resto de la multa ha sido descontado de su cuenta bancaria.", targetPlayer, 0, 102, 255)
 							end
 
 							for key, value in ipairs(teamPlayers) do
-								outputChatBox(factionRankTitle .. " " .. username .. " arrested " .. targetPlayerNick .. " for " .. jailtime .. " minute(s).", value, 0, 102, 255)
-								outputChatBox("Crimes Committed: " .. reason .. ".", value, 0, 102, 255)
+								outputChatBox(factionRankTitle .. " " .. username .. " arrestado " .. targetPlayerNick .. " por " .. jailtime .. " minuto(s).", value, 0, 102, 255)
+								outputChatBox("Crímenes cometidos: " .. reason .. ".", value, 0, 102, 255)
 							end
 							timerPDUnjailPlayer(targetPlayer)
 					end
@@ -214,7 +214,7 @@ function timerPDUnjailPlayer(jailedPlayer)
 				toggleControl(jailedPlayer,'aim_weapon',true)
 				--Fade disabled, being unnecessary and buggy
 				--fadeCamera(jailedPlayer, true)
-				outputChatBox("Your time has been served.", jailedPlayer, 0, 255, 0)
+				outputChatBox("Tu tiempo ha sido cumplido.", jailedPlayer, 0, 255, 0)
 
 			elseif (timeLeft>0) then
 				mysql:query_free("UPDATE characters SET pdjail_time='" .. mysql:escape_string(timeLeft) .. "' WHERE id=" .. mysql:escape_string(getElementData(jailedPlayer, "dbid")))
@@ -229,9 +229,9 @@ end
 function showJailtime(thePlayer, commandName)
 	local ajailtime = getElementData(thePlayer, "jailtime")
 	if ajailtime then
-		outputChatBox("You have " .. ajailtime .. " minutes remaining on your admin jail.", thePlayer, 255, 194, 14)
+		outputChatBox("Tienes " .. ajailtime .. " minutos restantes en su cárcel administrativa.", thePlayer, 255, 194, 14)
 	else
-		outputChatBox("You are not in jailed in admin jail.", thePlayer, 255, 0, 0)
+		outputChatBox("No estás encarcelado en la cárcel administrativa.", thePlayer, 255, 0, 0)
 	end
 
 	--[[local isJailed = getElementData(thePlayer, "pd.jailtimer")
@@ -265,7 +265,7 @@ function jailRelease(thePlayer, commandName, targetPlayerNick)
 						exports.anticheat:changeProtectedElementDataEx(targetPlayer, "pd.jailtime", 1, false)
 						timerPDUnjailPlayer(targetPlayer)
 					else
-						outputChatBox("This player is not serving a jail sentence.", thePlayer, 255, 0, 0)
+						outputChatBox("Este jugador no está cumpliendo una sentencia de cárcel.", thePlayer, 255, 0, 0)
 					end
 				end
 			end

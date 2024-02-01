@@ -8,12 +8,12 @@ function switchMode()
 		local team = getPlayerTeam(localPlayer)
 		if mode == 0 then -- tazer mode
 			triggerServerEvent("deaglemode", localPlayer, 1)
-			outputChatBox( "You switched your multipurpose handgun to Lethal Mode.", 0, 255, 0 )
+			outputChatBox( "Cambiaste tu pistola multipropósito al modo letal.", 0, 255, 0 )
 		elseif mode == 1 and ( exports.factions:isInFactionType(localPlayer, 2) or exports.factions:isInFactionType(localPlayer, 3) ) then -- lethal mode
-			outputChatBox( "You switched your multipurpose handgun to Radar Mode.", 0, 255, 0 )
+			outputChatBox( "Cambiaste tu pistola multipropósito al modo radar.", 0, 255, 0 )
 			triggerServerEvent("deaglemode", localPlayer, 2)
 		elseif mode == 2 or mode == 1 and (exports.factions:isInFactionType(localPlayer, 2) or exports.factions:isInFactionType(localPlayer, 3) ) then -- radar gun mode
-			outputChatBox( "You switched your multipurpose handgun to Tazer Mode.", 0, 255, 0 )
+			outputChatBox( "Cambiaste tu pistola multipropósito al modo Tazer.", 0, 255, 0 )
 			triggerServerEvent("deaglemode", localPlayer, 0)
 		end
 		--triggerServerEvent("sendLocalMeAction", localPlayer, localPlayer, "switched their multipurpose handgun mode.")
@@ -74,7 +74,7 @@ function weaponAim(target)
 
 				if (mode==2 and getPedOccupiedVehicle( localPlayer ) ~= target) then
 					actualspeed = exports.global:getVehicleVelocity(target)
-					outputChatBox(exports.global:getVehicleName(target) .. " clocked in at " .. math.floor(actualspeed) .. " km/h.", 255, 194, 14)
+					outputChatBox(exports.global:getVehicleName(target) .. " registrado en " .. math.floor(actualspeed) .. " km/h.", 255, 194, 14)
 				end
 			end
 		end

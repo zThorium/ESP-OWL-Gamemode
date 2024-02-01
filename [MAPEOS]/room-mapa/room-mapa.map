@@ -1,0 +1,7 @@
+<map edf:definitions="editor_main">
+    <object id="object (chip_stack11) (1)" breakable="false" interior="18" alpha="255" dimension="0" model="1911" scale="1" doublesided="false" collisions="true" posX="-26.3444" posY="-65.5184" posZ="1009.9687" rotX="0" rotY="0" rotZ="-90"></object>
+    <object id="object (MED_OFFICE_CHAIR) (1)" breakable="false" interior="18" alpha="255" dimension="0" model="1806" scale="1" doublesided="false" collisions="true" posX="-31.9261" posY="-66.833" posZ="1007.4374" rotX="0" rotY="0" rotZ="60"></object>
+    <object id="object (SWK_COUCH_1) (1)" breakable="false" interior="18" alpha="255" dimension="0" model="2290" scale="1" doublesided="false" collisions="true" posX="-30.2624" posY="-62.4737" posZ="1007.3906" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_MLIGHT16) (1)" breakable="false" interior="18" alpha="255" dimension="0" model="2239" scale="1" doublesided="false" collisions="true" posX="-33.1599" posY="-62.5916" posZ="1007.3906" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (WORK_LAMP1) (1)" breakable="false" interior="18" alpha="255" dimension="0" model="2196" scale="1" doublesided="false" collisions="true" posX="-32.9503" posY="-65.7838" posZ="1008.4609" rotX="0" rotY="0" rotZ="-40"></object>
+</map>
