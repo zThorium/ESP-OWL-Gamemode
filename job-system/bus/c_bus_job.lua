@@ -41,7 +41,7 @@ end
 
 function displayBusJob()
 	blip = createBlip(1787.1259765625, -1903.591796875, 13.394536972046, 0, 4, 255, 255, 0)  --0 0 1787.1259765625 -1903.591796875 13.394536972046
-	exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "Approach the yellow blip on your radar and enter a Bus to start working.")
+	exports.hud:sendBottomNotification(localPlayer, "Conductor", "Acércate al punto amarillo en tu radar y entra en un autobús para empezar a trabajar..")
 end
 
 function startBusJob()
@@ -52,7 +52,7 @@ function startBusJob()
 			blip = nil
 		end
 		if busMarker then
-			exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You have already started a bus route.")
+			exports.hud:sendBottomNotification(localPlayer, "Conductor", "Estas listo, ve ala ruta.")
 		else
 			local vehicle = getPedOccupiedVehicle(getLocalPlayer())
 			if vehicle and getVehicleController(vehicle) == getLocalPlayer() and bus[getElementModel(vehicle)] then
@@ -96,13 +96,13 @@ function startBusJob()
 				
 				setVehicleLocked(vehicle, true)
 				
-				exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "Follow the bus route, stopping at the bus stops (red marker).")
+				exports.hud:sendBottomNotification(localPlayer, "Conductor de autobús", "Sigue la ruta del autobús, deteniéndote en las paradas (marcador rojo).")
 			else
-				exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You must be in a Bus or Coach to begin a bus route.")
+				exports.hud:sendBottomNotification(localPlayer, "Conductor de autobús", "You must be in a Bus or Coach to begin a bus route.")
 			end
 		end
 	else
-		exports.hud:sendBottomNotification(localPlayer, "Notification", "You are not a Bus Driver. Go to City Hall to obtain this job.")
+		exports.hud:sendBottomNotification(localPlayer, "Notificación", "Tu no eres el conductor del autobus. Ve a la ciudad para obtener el trabajo.")
 	end
 end
 addCommandHandler("startbus", startBusJob, false, false)
