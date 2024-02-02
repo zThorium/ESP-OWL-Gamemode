@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<meta>
+     <info author="$PIK" type="misc" name="Modelagem" description="Base-Pc" />
+     <script src="script.lua" type="client" />
+     <file src="aero.txd" />
+     <file src="aero.dff" />
+     <file src="aero.col" />
+</meta>

@@ -1,0 +1,10 @@
+<meta>   
+    <info 
+        author="Atomix" 
+        version="1.0.0" 
+        name="Sistema de Anuncios"
+        type="script" 
+    />
+    <oop>true</oop>
+    <script src="c_Anuncio.lua" type="client"/>
+</meta>

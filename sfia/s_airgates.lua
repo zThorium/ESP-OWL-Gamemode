@@ -23,7 +23,7 @@ addEventHandler("onResourceStart", getResourceRootElement(),
 		for k, v in ipairs(fuelSpots) do
 			--local shape = createColSphere(v[1][1],v[1][2],v[1][3], v[1][4])
 			--fuelShapes[k] = shape
-			local object = createObject(v[2][1], v[2][2], v[2][3], v[2][4])
+			local object = createObject(v[2][1], v[2][2], v[2][3]-130, v[2][4])
 			setElementRotation(object, v[2][5], v[2][6], v[2][7])
 			setElementData(object, "airport.fuel", true)
 		end

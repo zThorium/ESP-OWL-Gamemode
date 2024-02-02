@@ -1,0 +1,27 @@
+<content>
+COMANDOS GENERALES
+
+/cerrarpanel
+
+/yo - Utilizado para poner una descripción física visible de tu personaje
+
+/me - Utilizado para describir una acción del personaje. (No lo uses para describir eventos realizados por tu personaje o su entorno)
+
+/do - Utilizado para describir el ambiente o hacer preguntas y/o respuestas del mismo. 
+/animaciones – Te muestra en el chat algunas de las animaciones disponibles para tu personaje.
+
+/stats  Muestra una tabla con la información general de tu personaje.
+
+───────────────────────────────────────────────────────────
+VEHÍCULOS
+
+/motor o J– Utilizado para poder encender tu vehículo.
+
+/luces o L– Utilizado para poder encender las luces de tu vehículo.
+
+/cinturón o Z– Utilizado para poder colocarte el cinturón (al ponértelo reduces el daño provocado en un accidente).
+
+/freno o G – Utilizado para poder retirar el freno de mano del vehículo y permitir su movimiento.
+
+───────────────────────────────────────────────────────────
+</content>

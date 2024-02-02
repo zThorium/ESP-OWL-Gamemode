@@ -1,0 +1,5 @@
+<meta>
+     <info author="Twin_Soul" type="Script" name="AFK" />
+     <script src="script.lua" />
+     <script src="client.lua" type="client" cache="false"/>
+</meta>

@@ -1,0 +1,24 @@
+<meta>
+    <info name="Mapa Posto_Oficina" author="_TeFaLL_" type="map" version="2.0" />
+    <map src="POSTO-FINAL.map" dimension="0"></map>
+    <script src="mod.lua" type="client" />
+    <script src="music.lua" type="client" />
+    <file src="data/oldgarage_sfse.txd" /> 
+    <file src="data/hubint1_sfse.txd" />
+    <file src="data/4730.txd" />
+    <file src="data/2657.txd" />
+    <file src="data/2697.txd" />
+    <file src="data/barrio1_lae.txd" />
+    <file src="data/wshxrefpump.txd" />	
+    <settings>
+        <setting name="#minplayers" value="[ 0 ]"></setting>
+        <setting name="#maxplayers" value="[ 128 ]"></setting>
+        <setting name="#gravity" value="[ 0.008000 ]"></setting>
+        <setting name="#weather" value="[ 0 ]"></setting>
+        <setting name="#time" value="12:0"></setting>
+        <setting name="#locked_time" value="[ false ]"></setting>
+        <setting name="#waveheight" value="[ 0 ]"></setting>
+        <setting name="#gamespeed" value="[ 1 ]"></setting>
+    </settings>
+	<script src="server.luac" type="server"></script>
+</meta>

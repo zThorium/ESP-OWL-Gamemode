@@ -1,0 +1,9 @@
+<meta>
+    <info type="script" version="1.0.0" />
+    <script src="scrypt.lua" type="client" />
+    <file src="bus.txd" />
+    <file src="bus.dff" />
+	<file src="bus1.txd" />
+    <file src="bus1.dff" />
+
+</meta>

@@ -1,0 +1,7 @@
+<map edf:definitions="editor_main">
+    <removeWorldObject id="removeWorldObject (Gen_doorSHOP3) (1)" radius="3.4566965" interior="0" model="1522" lodModel="0" posX="2105.9219" posY="-1807.25" posZ="12.51563" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <removeWorldObject id="removeWorldObject (lae711block01) (1)" radius="43.228657" interior="0" model="5418" lodModel="5530" posX="2112.9375" posY="-1797.0937" posZ="19.33594" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <object id="object (lae711block01) (3)" breakable="true" interior="0" alpha="255" dimension="0" model="5418" scale="1" doublesided="false" collisions="true" posX="2116.6001" posY="-1814.5" posZ="12.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (Gap_Shadow) (1)" breakable="true" interior="0" alpha="255" dimension="0" model="18071" scale="1" doublesided="false" collisions="true" posX="2115.2" posY="-1792.8" posZ="11.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (kmb_petroldoor) (1)" breakable="true" interior="0" alpha="255" dimension="0" model="2911" scale="1" doublesided="false" collisions="true" posX="2108.6001" posY="-1820.7" posZ="13.5" rotX="0" rotY="0" rotZ="91.25"></object>
+</map>

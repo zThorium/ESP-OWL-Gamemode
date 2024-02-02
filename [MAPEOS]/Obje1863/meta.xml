@@ -1,0 +1,6 @@
+<meta>
+<script src="client.lua" type="client"/>
+<file src="bomberos.txd" type="client"/>
+<file src="coll.dff" type="client"/>
+<file src="bomberos.col" type="client"/>
+</meta>

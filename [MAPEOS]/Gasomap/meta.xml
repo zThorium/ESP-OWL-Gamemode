@@ -1,0 +1,8 @@
+<meta>
+	<info author="KYFTH38" version="1.0" type="script" description="" />
+	<script src="mod.lua" type="client" /> 
+	<script src="santamonicalaw2a.txd" type="client" /> 
+	<script src="otogar.dff" type="client" /> 
+	<script src="otogar.col" type="client" /> 
+                                                
+</meta>

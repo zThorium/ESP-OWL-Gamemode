@@ -1,0 +1,10 @@
+<meta>
+
+		<info author="Atomix" version="1.0.0" name="Barra yo" type="script" />
+
+		<script type="server" src="server.lua"/>
+		<script type="client" src="client.lua"/>
+		
+		<file src="tajoma.ttf"/>
+
+</meta>

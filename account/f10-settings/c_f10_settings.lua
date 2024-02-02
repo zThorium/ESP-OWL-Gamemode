@@ -984,7 +984,7 @@ function applyGameSettings(name, value)
 			triggerEvent("accounts:settings:graphic_shaderveh", localPlayer)
 		elseif name == "hide_hud" then
 			if value == "0" then
-				setPlayerHudComponentVisible("radar", false)
+				setPlayerHudComponentVisible("radar", true)
 			elseif exports.global:hasItem(localPlayer, 111) then
 				setPlayerHudComponentVisible("radar", true)
 			end
