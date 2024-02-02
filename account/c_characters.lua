@@ -710,8 +710,10 @@ function Characters_onClientClick(mouseButton, state, alsoluteX, alsoluteY, worl
 			cFadeOutTime = 254
 			addEventHandler("onClientRender", getRootElement(), Characters_FadeOut)
 			fadeCamera ( false, 2, 0,0,0 )
+			
 			setTimer(function()
 				triggerServerEvent("accounts:characters:spawn", localPlayer, characterSelected)
+				setPlayerHudComponentVisible("radar",true)
 			end, 2000,1)
 		end
 	end

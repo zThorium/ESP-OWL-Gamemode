@@ -77,7 +77,7 @@ addEvent("vehicleManager:forceSellInt", true)
 addEventHandler("vehicleManager:forceSellInt", getRootElement(), forceSellInt)
 
 function openAdminNote(thePlayer, vehID )
-	executeCommandHandler ( "checkveh", thePlayer, vehID )
+	executeCommandHandler ( "checarveh", thePlayer, vehID )
 end
 addEvent("vehicleManager:openAdminNote", true)
 addEventHandler("vehicleManager:openAdminNote", getRootElement(), openAdminNote)

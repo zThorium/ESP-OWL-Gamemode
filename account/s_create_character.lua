@@ -84,6 +84,7 @@ function newCharacter_create(characterName, characterDescription, race, gender, 
 		exports.global:giveItem( client, 17, 1 )
 		exports.global:giveItem( client, 262, 1 ) -- Tokens
 		exports.global:giveItem( client, 263, 1 )
+		exports.global:giveItem( client, 111, 1 ) -- Radar
 		-- ID CARD
 		exports.global:giveItem( client, 152, characterName..";"..(gender==0 and "Male" or "Female")..";"..exports.global:numberToMonth(month).." "..exports.global:formatDate(day)..", "..year..";"..fingerprint)
 		-- Briefcase

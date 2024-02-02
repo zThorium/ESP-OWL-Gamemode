@@ -1,0 +1,10 @@
+<meta>
+	 <info author="Gangsta" version="1.0" description="Advance_Help_Sys" name="F1 Help System" type="script" />
+
+	<config src="serverrules.xml" type="client" />
+	<config src="overview.xml" type="client" />
+	<config src="server.xml" type="client" />
+	
+	<script src="c_help.lua" type="client"/>
+	
+</meta>

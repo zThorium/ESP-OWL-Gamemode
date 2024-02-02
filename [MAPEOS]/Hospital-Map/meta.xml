@@ -1,0 +1,46 @@
+<meta>
+    <info author="GameLight" name="Hospital Map For MTA" version="1.5.6" type="script" />
+    <script src="script.lua" type="client" cache="false" />
+	<script src="config.luac" type="shared" cache="false" />
+    <script src="dec_client.luac" type="client" cache="false" />
+    <script src="dec_server.luac" type="server" />
+	<file src="Files/hospital.dff" />
+	<file src="Files/hospital.col" />
+	<file src="Files/hospital.txd" />
+	<file src="models/1491.txdRF" />
+    <file src="models/1491.dffRF" />
+    <file src="models/1491.colRF" />
+    <file src="models/1492.txdRF" />
+    <file src="models/1492.dffRF" />
+    <file src="models/1492.colRF" />
+    <file src="models/1494.txdRF" />
+    <file src="models/1494.dffRF" />
+    <file src="models/1494.colRF" />
+    <file src="models/1499.txdRF" />
+    <file src="models/1499.dffRF" />
+    <file src="models/1499.colRF" />
+    <file src="models/1502.txdRF" />
+    <file src="models/1502.dffRF" />
+    <file src="models/1502.colRF" />
+    <file src="models/1523.txdRF" />
+    <file src="models/1523.dffRF" />
+    <file src="models/1523.colRF" />
+	<oop>true</oop>
+    <info type="map" version="1.0.0"></info>
+    <map src="Map/HS-Map.map" dimension="0"></map>
+    <settings>
+        <setting name="#maxplayers" value="[ 128 ]"></setting>
+        <setting name="#useLODs" value="[ false ]"></setting>
+        <setting name="#gamespeed" value="[ 1 ]"></setting>
+        <setting name="#minplayers" value="[ 0 ]"></setting>
+        <setting name="#gravity" value="[ 0.0080000004 ]"></setting>
+        <setting name="#waveheight" value="[ 0 ]"></setting>
+        <setting name="#locked_time" value="[ false ]"></setting>
+        <setting name="#weather" value="[ 0 ]"></setting>
+        <setting name="#time" value="12:0"></setting>
+    </settings>
+    <script src="Map/mapEditorScriptingExtension_s.lua" type="server"></script>
+    <script src="Map/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
+</meta>
+
+

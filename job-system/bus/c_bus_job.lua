@@ -41,7 +41,7 @@ end
 
 function displayBusJob()
 	blip = createBlip(1787.1259765625, -1903.591796875, 13.394536972046, 0, 4, 255, 255, 0)  --0 0 1787.1259765625 -1903.591796875 13.394536972046
-	exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "Approach the yellow blip on your radar and enter a Bus to start working.")
+	exports.hud:sendBottomNotification(localPlayer, "Conductor", "Acércate al punto amarillo en tu radar y entra en un autobús para empezar a trabajar..")
 end
 
 function startBusJob()
@@ -52,7 +52,7 @@ function startBusJob()
 			blip = nil
 		end
 		if busMarker then
-			exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You have already started a bus route.")
+			exports.hud:sendBottomNotification(localPlayer, "Conductor", "Estas listo, ve ala ruta.")
 		else
 			local vehicle = getPedOccupiedVehicle(getLocalPlayer())
 			if vehicle and getVehicleController(vehicle) == getLocalPlayer() and bus[getElementModel(vehicle)] then
@@ -96,13 +96,13 @@ function startBusJob()
 				
 				setVehicleLocked(vehicle, true)
 				
-				exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "Follow the bus route, stopping at the bus stops (red marker).")
+				exports.hud:sendBottomNotification(localPlayer, "Conductor de autobús", "Sigue la ruta del autobús, deteniéndote en las paradas (marcador rojo).")
 			else
-				exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You must be in a Bus or Coach to begin a bus route.")
+				exports.hud:sendBottomNotification(localPlayer, "Conductor de autobús", "Debes estar en un autobús o autocar para comenzar una ruta de autobús..")
 			end
 		end
 	else
-		exports.hud:sendBottomNotification(localPlayer, "Notification", "You are not a Bus Driver. Go to City Hall to obtain this job.")
+		exports.hud:sendBottomNotification(localPlayer, "Notificación", "Tu no eres el conductor del autobus. Ve a la ciudad para obtener el trabajo.")
 	end
 end
 addCommandHandler("startbus", startBusJob, false, false)
@@ -113,19 +113,19 @@ function updateBusCheckpointCheck(thePlayer)
 		if vehicle and bus[getElementModel(vehicle)] then
 			if curCpType == 3 then
 				busStopTimer = setTimer(updateBusCheckpointAfterStop, 5000, 1, true)
-				triggerEvent("hudOverlay:drawOverlayTopRight", thePlayer, { {"Bus Driver"}, {""}, {"Wait at the bus stop for a moment until the marker disappears."}, }, false, false, false, 5)
+				triggerEvent("hudOverlay:drawOverlayTopRight", thePlayer, { {"Conductor"}, {""}, {"Espere un momento en la parada de autobús hasta que desaparezca el marcador.."}, }, false, false, false, 5)
 				triggerServerEvent("busAdNextStop", getLocalPlayer(), line, route.points[m_number][5])
 			elseif curCpType == 2 then
 				endOfTheLine()
 			elseif curCpType == 1 then
 				busStopTimer = setTimer(updateBusCheckpointAfterStop, 5000, 1, false)
-				triggerEvent("hudOverlay:drawOverlayTopRight", thePlayer, { {"Bus Driver"}, {""}, {"Wait at the bus stop for a moment until the marker disappears."}, }, false, false, false, 5)
+				triggerEvent("hudOverlay:drawOverlayTopRight", thePlayer, { {"Conductor"}, {""}, {"Espere un momento en la parada de autobús hasta que desaparezca el marcador.."}, }, false, false, false, 5)
 				triggerServerEvent("busAdNextStop", getLocalPlayer(), line, route.points[m_number][5])
 			else
 				updateBusCheckpoint()
 			end
 		else
-			exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You must be in a bus or coach to drive the bus route.") -- Wrong car type.
+			exports.hud:sendBottomNotification(localPlayer, "Conductor", "Debes estar en un autobús o autocar para recorrer la ruta del autobús..") -- Wrong car type.
 		end
 	end
 end
@@ -199,7 +199,7 @@ end
 function checkWaitAtStop(thePlayer)
 	if thePlayer == getLocalPlayer() then
 		if busStopTimer then
-			exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "You didn't wait at the bus stop.")
+			exports.hud:sendBottomNotification(localPlayer, "Conductor", "No esperaste en la parada del autobús.")
 			if isTimer(busStopTimer) then
 				killTimer(busStopTimer)
 				busStopTimer = nil
@@ -251,7 +251,7 @@ function endOfTheLine()
 		end
 		triggerServerEvent("payBusDriver", getLocalPlayer(), line, -2)
 		setVehicleLocked(vehicle, false)
-		exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "End of the Line. Use /startbus to begin the route again.") --if line is finished
+		exports.hud:sendBottomNotification(localPlayer, "Conductor", "Final de la línea. Utilice /startbus para comenzar la ruta nuevamente.") --if line is finished
 	end
 end
 
@@ -264,14 +264,14 @@ function enterBus ( thePlayer, seat, jacked )
 				if driver then -- you can only pay the driver if the bus has a driver
 					if not exports.global:hasMoney(getLocalPlayer(), 5)then
 						triggerServerEvent("removePlayerFromBus", getLocalPlayer())
-						outputChatBox("You can't afford the $5 bus fare.", 255, 0, 0)
+						outputChatBox("No puedes pagar el billete de autobús de cinco dólares.", 255, 0, 0)
 					else
 						triggerServerEvent("payBusFare", getLocalPlayer(), driver)
-						outputChatBox("You have paid $5 to ride the bus", 0, 255, 0)
+						outputChatBox("Has pagado $5 para viajar en el autobús.", 0, 255, 0)
 					end
 				end
 			elseif not busMarker and getElementData(getLocalPlayer(), "job") == 3 then
-				exports.hud:sendBottomNotification(localPlayer, "Bus Driver", "Use /startbus to begin the bus route.")
+				exports.hud:sendBottomNotification(localPlayer, "Conductor", "Utilice /startbus para comenzar la ruta del autobús.")
 			end
 		end
 	end
@@ -283,7 +283,7 @@ function startEnterBus(thePlayer, seat)
 		if getVehicleController(source) then -- if someone try to jack the driver stop him
 			cancelEvent()
 			if thePlayer == getLocalPlayer() then
-				exports.hud:sendBottomNotification(localPlayer, "Notification", "The drivers door is locked.")
+				exports.hud:sendBottomNotification(localPlayer, "Notificación", "La puerta del conductor está cerrada.")
 			end
 		else
 			setVehicleLocked(source, false)

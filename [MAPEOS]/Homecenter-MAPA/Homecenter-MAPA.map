@@ -1,0 +1,6 @@
+<map edf:definitions="editor_main">
+    <object id="object (pkr_chp_med02) (1)" breakable="true" interior="0" alpha="255" dimension="0" model="1863" scale="1" doublesided="false" collisions="true" posX="2145.0059" posY="-1737.1217" posZ="18.1002" rotX="0" rotY="0" rotZ="180"></object>
+    <removeWorldObject id="removeWorldObject (laecumpstreet) (1)" radius="40.036636" interior="0" model="5410" lodModel="5551" posX="2140.5156" posY="-1735.1406" posZ="15.89063" rotX="0" rotY="0" rotZ="0"></removeWorldObject>
+    <object id="object (bistrogarden) (1)" breakable="true" interior="0" alpha="255" dimension="0" model="3948" scale="1" doublesided="false" collisions="true" posX="2171.0193" posY="-1732.7544" posZ="21.5206" rotX="0" rotY="0" rotZ="250"></object>
+    <object id="object (bistrogarden) (2)" breakable="true" interior="0" alpha="255" dimension="0" model="3948" scale="1" doublesided="false" collisions="true" posX="2120.3457" posY="-1735.8793" posZ="21.5206" rotX="0" rotY="0" rotZ="249.999"></object>
+</map>

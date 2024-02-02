@@ -142,7 +142,7 @@ function changeVehicleUpgrade( veh, upgrade )
 		end
 		name = u[1]
 		local mechcost = u[2]
-		if (getElementData(source,"faction")[4]) then
+		if (getElementData(source,"faction")[3]) then
 			mechcost = mechcost / btrdiscountratio
 		end
 		if exports.global:hasItem( source, 114, upgrade ) then
@@ -180,7 +180,7 @@ addEventHandler("changeVehicleUpgrade", getRootElement(), changeVehicleUpgrade)
 function changeVehicleColour(veh, col1, col2, col3, col4)
 	if (veh) then
 		local mechcost = 100
-		if (getElementData(source,"faction")[4]) then
+		if (getElementData(source,"faction")[3]) then
 			mechcost = mechcost / btrdiscountratio
 		end
 		if not (exports.global:hasMoney(source, mechcost) or exports.integration:isPlayerTrialAdmin(source, true)) then

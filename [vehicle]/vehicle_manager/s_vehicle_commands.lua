@@ -32,16 +32,16 @@ function reloadVehicleByAdmin(thePlayer, commandName, vehID)
 			if veh then
 				vehID = getElementData(veh, "dbid") or false
 				if not vehID then
-					outputChatBox( "You must be in a vehicle.", thePlayer, 255, 194, 14)
-					outputChatBox("Or use SYNTAX: /"..commandName.." [Vehicle ID]", thePlayer, 255, 194, 14)
+					outputChatBox( "Debes estar en un vehículo.", thePlayer, 255, 194, 14)
+					outputChatBox("O usa SYNTAX: /"..commandName.." [ID del vehículo]", thePlayer, 255, 194, 14)
 					return false
 				end
 			end
 		end
 
 		if not vehID or not tonumber(vehID) or (tonumber(vehID) % 1 ~= 0 ) then
-			outputChatBox( "You must be in a vehicle.", thePlayer, 255, 194, 14)
-			outputChatBox("Or use SYNTAX: /"..commandName.." [Vehicle ID]", thePlayer, 255, 194, 14)
+			outputChatBox( "Debes estar en un vehículo.", thePlayer, 255, 194, 14)
+			outputChatBox("O usa SYNTAX: /"..commandName.." [ID del vehículo]", thePlayer, 255, 194, 14)
 			return false
 		end
 
@@ -56,21 +56,21 @@ function reloadVehicleByAdmin(thePlayer, commandName, vehID)
 		]]
 
 		exports.vehicle:reloadVehicle(tonumber(vehID))
-		outputChatBox("[VEHICLE MANAGER] Vehicle ID#"..vehID.." reloaded.", thePlayer)
+		outputChatBox("[VEHICLE MANAGER] El vehículo ID#"..vehID.." fue recargado.", thePlayer)
 
 		addVehicleLogs(tonumber(vehID), commandName, thePlayer)
 		exports.logs:dbLog(thePlayer, 4, { veh, thePlayer }, commandName)
 		return true
 	end
 end
-addCommandHandler("reloadveh", reloadVehicleByAdmin)
-addCommandHandler("reloadvehicle", reloadVehicleByAdmin)
+addCommandHandler("regargarveh", reloadVehicleByAdmin)
+addCommandHandler("recargarvehiculo", reloadVehicleByAdmin)
 
 
 function togVehReg(admin, command, target, status)
 	if (exports.integration:isPlayerTrialAdmin(admin)) then
 		if not (target) or not (status) then
-			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Off, 1- On]", admin, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Apagado, 1- Encendido]", admin, 255, 194, 14)
 		else
 			local username = getPlayerName(admin):gsub("_"," ")
 			local pv = exports.pool:getElement("vehicle", tonumber(target))
@@ -84,20 +84,20 @@ function togVehReg(admin, command, target, status)
 					if (stat == 0) then
 						mysql:query_free("UPDATE vehicles SET registered = '0' WHERE id='" .. mysql:escape_string(vid) .. "'")
 						exports.anticheat:changeProtectedElementDataEx(pv, "registered", 0)
-						outputChatBox("You have toggled the registration to unregistered on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Ha cambiado el registro a no registrado en el vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." OFF", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." OFF")
 					elseif (stat == 1) then
 						mysql:query_free("UPDATE vehicles SET registered = '1' WHERE id='" .. mysql:escape_string(vid) .. "'")
 						exports.anticheat:changeProtectedElementDataEx(pv, "registered", 1)
-						outputChatBox("You have toggled the registration to registered on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Ha cambiado el registro a registrado en el vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." ON", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." ON")
 					end
 				else
-					outputChatBox("That's not a vehicle.", admin, 255, 194, 14)
+					outputChatBox("Ese no es un vehículo.", admin, 255, 194, 14)
 				end
 			end
 		end
@@ -107,7 +107,7 @@ addCommandHandler("togreg", togVehReg)
 function togVehPlate(admin, command, target, status)
 	if (exports.integration:isPlayerTrialAdmin(admin)) then
 		if not (target) or not (status) then
-			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Off, 1- On]", admin, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Apagado, 1- Encendido]", admin, 255, 194, 14)
 		else
 			local username = getPlayerName(admin):gsub("_"," ")
 			local pv = exports.pool:getElement("vehicle", tonumber(target))
@@ -123,30 +123,30 @@ function togVehPlate(admin, command, target, status)
 
 						exports.anticheat:changeProtectedElementDataEx(pv, "show_plate", 0)
 
-						outputChatBox("You have toggled the plates to off, on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Has cambiado las placas a apagado, en el vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." OFF", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." OFF")
 					elseif (stat == 1) then
 						mysql:query_free("UPDATE vehicles SET show_plate = '1' WHERE id='" .. mysql:escape_string(vid) .. "'")
 						exports.anticheat:changeProtectedElementDataEx(pv, "show_plate", 1)
-						outputChatBox("You have toggled the plates to on, on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Ha activado las placas, en el vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." ON", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." ON")
 					end
 				else
-					outputChatBox("That's not a vehicle.", admin, 255, 194, 14)
+					outputChatBox("Ese no es un vehiculo.", admin, 255, 194, 14)
 				end
 			end
 		end
 	end
-addCommandHandler("togplate", togVehPlate)
+addCommandHandler("togmatricula", togVehPlate)
 
 function togVehVin(admin, command, target, status)
 	if (exports.integration:isPlayerTrialAdmin(admin)) then
 		if not (target) or not (status) then
-			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Off, 1- On]", admin, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. command .. " [Veh ID] [0- Apagado, 1- Encendido]", admin, 255, 194, 14)
 		else
 			local username = getPlayerName(admin):gsub("_"," ")
 			local pv = exports.pool:getElement("vehicle", tonumber(target))
@@ -162,7 +162,7 @@ function togVehVin(admin, command, target, status)
 
 						exports.anticheat:changeProtectedElementDataEx(pv, "show_vin", 0)
 
-						outputChatBox("You have toggled the VIN to off, on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Has cambiado el VIN a apagado, en el vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." OFF", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." OFF")
@@ -170,13 +170,13 @@ function togVehVin(admin, command, target, status)
 						mysql:query_free("UPDATE vehicles SET show_vin = '1' WHERE id='" .. mysql:escape_string(vid) .. "'")
 						exports.anticheat:changeProtectedElementDataEx(pv, "show_vin", 1)
 
-						outputChatBox("You have toggled the VIN to on, on vehicle #" .. vid .. ".", admin)
+						outputChatBox("Has cambiado el VIN a activado, en vehículo #" .. vid .. ".", admin)
 
 						addVehicleLogs(getElementData(pv, "dbid"), command.." ON", admin)
 						exports.logs:dbLog(admin, 4, { pv, admin }, command.." ON")
 					end
 				else
-					outputChatBox("That's not a vehicle.", admin, 255, 194, 14)
+					outputChatBox("Ese no es un vehículo.", admin, 255, 194, 14)
 				end
 			end
 		end
@@ -186,7 +186,7 @@ addCommandHandler("togvin", togVehVin)
 function spinCarOut(thePlayer, commandName, targetPlayer, round)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not targetPlayer then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Player Partial Name/ID] [Rounds]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID / Nombre Parcial] [Rondas]", thePlayer, 255, 194, 14)
 		else
 			if not round or not tonumber(round) or tonumber( round ) % 1 ~= 0 or tonumber( round ) > 100 then
 				round = 1
@@ -194,9 +194,9 @@ function spinCarOut(thePlayer, commandName, targetPlayer, round)
 			local targetPlayer = exports.global:findPlayerByPartialNick(thePlayer, targetPlayer)
 			local targetVehicle = getPedOccupiedVehicle(targetPlayer)
 			if targetVehicle == false then
-				outputChatBox("This player isn't in a vehicle!", thePlayer, 255, 0, 0)
+				outputChatBox("Este jugador no está en un vehículo!", thePlayer, 255, 0, 0)
 			else
-				outputChatBox("You've spun out "..getPlayerName(targetPlayer).."'s vehicle "..tostring(round).." round(s).", thePlayer)
+				outputChatBox("Has girado el vehículo de "..getPlayerName(targetPlayer).." unas "..tostring(round).." ronda(s).", thePlayer)
 				local delay = 50
 				setTimer(function()
 					setElementAngularVelocity ( targetVehicle, 0, 0, 0.2 )
@@ -213,12 +213,12 @@ function unflipCar(thePlayer, commandName, targetPlayer)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.factions:isPlayerInFaction(thePlayer, 4) or exports.integration:isPlayerSupporter(thePlayer) then
 		if not targetPlayer or not exports.integration:isPlayerTrialAdmin(thePlayer) then
 			if not (isPedInVehicle(thePlayer)) then
-				outputChatBox("You are not in vehicle.", thePlayer, 255, 0, 0)
+				outputChatBox("No estás en el vehículo.", thePlayer, 255, 0, 0)
 			else
 				local veh = getPedOccupiedVehicle(thePlayer)
 				local rx, ry, rz = getVehicleRotation(veh)
 				setVehicleRotation(veh, 0, ry, rz)
-				outputChatBox("Your car was unflipped!", thePlayer, 0, 255, 0)
+				outputChatBox("Su coche fue desvolcado!", thePlayer, 0, 255, 0)
 				addVehicleLogs(getElementData(veh, "dbid"), commandName, thePlayer)
 			end
 		else
@@ -228,43 +228,43 @@ function unflipCar(thePlayer, commandName, targetPlayer)
 				local username = getPlayerName(thePlayer):gsub("_"," ")
 
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local pveh = getPedOccupiedVehicle(targetPlayer)
 					if pveh then
 						local rx, ry, rz = getVehicleRotation(pveh)
 						setVehicleRotation(pveh, 0, ry, rz)
 						if getElementData(thePlayer, "hiddenadmin") == 1 then
-							outputChatBox("Your car was unflipped by a Hidden Admin.", targetPlayer, 0, 255, 0)
+							outputChatBox("Su coche fue desinflado por un Admin Oculto.", targetPlayer, 0, 255, 0)
 						else
-							outputChatBox("Your car was unflipped by " .. username .. ".", targetPlayer, 0, 255, 0)
+							outputChatBox("Tu coche fue volcado por " .. username .. ".", targetPlayer, 0, 255, 0)
 						end
-						outputChatBox("You unflipped " .. targetPlayerName:gsub("_"," ") .. "'s car.", thePlayer, 0, 255, 0)
+						outputChatBox("Usted desvolcó el vehículo de " .. targetPlayerName:gsub("_"," ") .. ".", thePlayer, 0, 255, 0)
 
 						addVehicleLogs(getElementData(pveh, "dbid"), commandName, thePlayer)
 						exports.logs:dbLog(thePlayer, 4, { pveh, thePlayer }, command)
 					else
-						outputChatBox(targetPlayerName:gsub("_"," ") .. " is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox(targetPlayerName:gsub("_"," ") .. " no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("unflip", unflipCar, false, false)
+addCommandHandler("desvolcar", unflipCar, false, false)
 
 -- /flip
 function flipCar(thePlayer, commandName, targetPlayer)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.factions:isPlayerInFaction(thePlayer, 4) or exports.integration:isPlayerSupporter(thePlayer) then -- SFTR, working on motorbikes etc
 		if not targetPlayer or not exports.integration:isPlayerTrialAdmin(thePlayer) then
 			if not (isPedInVehicle(thePlayer)) then
-				outputChatBox("You are not in a vehicle.", thePlayer, 255, 0, 0)
+				outputChatBox("No estas en un vehículo.", thePlayer, 255, 0, 0)
 			else
 				local veh = getPedOccupiedVehicle(thePlayer)
 				local rx, ry, rz = getVehicleRotation(veh)
 				setVehicleRotation(veh, 180, ry, rz)
 				fixVehicle (veh)
-				outputChatBox("Your car was flipped!", thePlayer, 0, 255, 0)
+				outputChatBox("Su coche fue volcado!", thePlayer, 0, 255, 0)
 				addVehicleLogs(getElementData(veh, "dbid"), commandName, thePlayer)
 			end
 		else
@@ -274,30 +274,30 @@ function flipCar(thePlayer, commandName, targetPlayer)
 				local username = getPlayerName(thePlayer):gsub("_"," ")
 
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local pveh = getPedOccupiedVehicle(targetPlayer)
 					if pveh then
 						local rx, ry, rz = getVehicleRotation(pveh)
 						setVehicleRotation(pveh, 180, ry, rz)
 						if getElementData(thePlayer, "hiddenadmin") == 1 then
-							outputChatBox("Your car was flipped by a Hidden Admin.", targetPlayer, 0, 255, 0)
+							outputChatBox("Su coche fue volteado por un Admin oculto.", targetPlayer, 0, 255, 0)
 						else
-							outputChatBox("Your car was flipped by " .. username .. ".", targetPlayer, 0, 255, 0)
+							outputChatBox("Su coche fue volcado por " .. username .. ".", targetPlayer, 0, 255, 0)
 						end
-						outputChatBox("You flipped " .. targetPlayerName:gsub("_"," ") .. "'s car.", thePlayer, 0, 255, 0)
+						outputChatBox("Usted volcó el vehículo " .. targetPlayerName:gsub("_"," ") .. ".", thePlayer, 0, 255, 0)
 
 						addVehicleLogs(getElementData(pveh, "dbid"), commandName, thePlayer)
 						exports.logs:dbLog(thePlayer, 4, { pveh, thePlayer }, command)
 					else
-						outputChatBox(targetPlayerName:gsub("_"," ") .. " is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox(targetPlayerName:gsub("_"," ") .. " no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("flip", flipCar, false, false)
+addCommandHandler("volcar", flipCar, false, false)
 
 -- /unlockcivcars
 function unlockAllCivilianCars(thePlayer, commandName)
@@ -317,20 +317,20 @@ function unlockAllCivilianCars(thePlayer, commandName)
 				end
 			end
 		end
-		outputChatBox("Unlocked " .. count .. " civilian vehicles.", thePlayer, 255, 194, 14)
+		outputChatBox("Ha abierto " .. count .. " vehículos civiles.", thePlayer, 255, 194, 14)
 		--addVehicleLogs(getElementData(pveh, "dbid"), commandName, thePlayer)
 		exports.logs:dbLog(thePlayer, 4, { thePlayer }, commandName)
 	end
 end
-addCommandHandler("unlockcivcars", unlockAllCivilianCars, false, false)
+addCommandHandler("abrircivvehs", unlockAllCivilianCars, false, false)
 
 -- /veh
 local leadplus = { [425] = true, [520] = true, [447] = true, [432] = true, [444] = true, [556] = true, [557] = true, [441] = true, [464] = true, [501] = true, [465] = true, [564] = true, [476] = true }
 function createTempVehicle(thePlayer, commandName, vehShopID)
 	if exports["integration"]:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer) then
 		if not vehShopID or not tonumber(vehShopID) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [ID from Vehicle Lib] [color1] [color2]", thePlayer, 255, 194, 14)
-			outputChatBox("SYNTAX: /vehlib for IDs.", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehlib] [color1] [color2]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /vehlib para las IDs.", thePlayer, 255, 194, 14)
 			return false
 		else
 			vehShopID = tonumber(vehShopID)
@@ -339,8 +339,8 @@ function createTempVehicle(thePlayer, commandName, vehShopID)
 		local vehShopData = getInfoFromVehShopID(vehShopID)
 		if not vehShopData then
 			outputDebugString("VEHICLE MANAGER / createTempVehicle / FAILED TO FETCH VEHSHOP DATA")
-			outputChatBox("SYNTAX: /" .. commandName .. " [ID from Vehicle Lib] [color1] [color2]", thePlayer, 255, 194, 14)
-			outputChatBox("SYNTAX: /vehlib for IDs.", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehlib] [color1] [color2]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /vehlib para las IDs.", thePlayer, 255, 194, 14)
 			return false
 		end
 
@@ -348,7 +348,7 @@ function createTempVehicle(thePlayer, commandName, vehShopID)
 		local vehicleID = vehShopData.vehmtamodel
 		if not vehicleID or not tonumber(vehicleID) then -- vehicle is specified as name
 			outputDebugString("VEHICLE MANAGER / createTempVehicle / FAILED TO FETCH VEHSHOP DATA")
-			outputChatBox("Ops.. Something went wrong.", thePlayer, 255, 0, 0)
+			outputChatBox("Ops..algo salió mal.", thePlayer, 255, 0, 0)
 			return false
 		else
 			vehicleID = tonumber(vehicleID)
@@ -374,7 +374,7 @@ function createTempVehicle(thePlayer, commandName, vehShopID)
 
 		if not (veh) then
 			outputDebugString("VEHICLE MANAGER / createTempVehicle / FAILED TO FETCH VEHSHOP DATA")
-			outputChatBox("Ops.. Something went wrong.", thePlayer, 255, 0, 0)
+			outputChatBox("Ops.. algo salió mal.", thePlayer, 255, 0, 0)
 			return false
 		end
 
@@ -417,7 +417,7 @@ function createTempVehicle(thePlayer, commandName, vehShopID)
 		loadHandlingToVeh(veh, vehShopData.handling)
 
 		exports.logs:dbLog(thePlayer, 6, thePlayer, "VEH ".. vehShopID .. " created with ID " .. dbid)
-		outputChatBox(getVehicleName(veh) .. " spawned with TEMP ID " .. dbid .. ".", thePlayer, 255, 194, 14)
+		outputChatBox(getVehicleName(veh) .. " generado con ID Temporal " .. dbid .. ".", thePlayer, 255, 194, 14)
 	end
 end
 addCommandHandler("veh", createTempVehicle, false, false)
@@ -431,7 +431,7 @@ function getOldCarID(thePlayer, commandName, targetPlayerName)
 			if getElementData(targetPlayer, "loggedin") == 1 then
 				thePlayer = targetPlayer
 			else
-				outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+				outputChatBox("El jugador no ha iniciado sesión..", thePlayer, 255, 0, 0)
 				return
 			end
 		else
@@ -442,13 +442,13 @@ function getOldCarID(thePlayer, commandName, targetPlayerName)
 	local oldvehid = getElementData(thePlayer, "lastvehid")
 
 	if not (oldvehid) then
-		outputChatBox("You have not been in a vehicle yet.", showPlayer, 255, 0, 0)
+		outputChatBox("Aún no se ha subido a un vehículo.", showPlayer, 255, 0, 0)
 	else
-		outputChatBox("Old Vehicle ID: " .. tostring(oldvehid) .. ".", showPlayer, 255, 194, 14)
+		outputChatBox("ID de vehículo anterior: " .. tostring(oldvehid) .. ".", showPlayer, 255, 194, 14)
 		exports.anticheat:changeProtectedElementDataEx(showPlayer, "vehicleManager:oldCar", oldvehid, false)
 	end
 end
-addCommandHandler("oldcar", getOldCarID, false, false)
+addCommandHandler("antveh", getOldCarID, false, false)
 
 -- /thiscar
 function getCarID(thePlayer, commandName)
@@ -456,13 +456,13 @@ function getCarID(thePlayer, commandName)
 
 	if (veh) then
 		local dbid = getElementData(veh, "dbid")
-		outputChatBox("Current Vehicle ID: " .. dbid, thePlayer, 255, 194, 14)
+		outputChatBox("ID actual del vehículo: " .. dbid, thePlayer, 255, 194, 14)
 		exports.anticheat:changeProtectedElementDataEx(showPlayer, "vehicleManager:oldCar", dbid, false)
 	else
-		outputChatBox("You are not in a vehicle.", thePlayer, 255, 0, 0)
+		outputChatBox("No estás en un vehículo.", thePlayer, 255, 0, 0)
 	end
 end
-addCommandHandler("thiscar", getCarID, false, false)
+addCommandHandler("esteveh", getCarID, false, false)
 
 -- /gotocar
 function gotoCar(thePlayer, commandName, id)
@@ -490,15 +490,15 @@ function gotoCar(thePlayer, commandName, id)
 
 				addVehicleLogs(id, commandName, thePlayer)
 
-				outputChatBox("Teleported you to vehicle " .. id .. ".", thePlayer, 100, 255, 100)
+				outputChatBox("Te has teletransportado al vehículo " .. id .. ".", thePlayer, 100, 255, 100)
 			else
-				outputChatBox("Invalid Vehicle ID.", thePlayer, 255, 0, 0)
+				outputChatBox("ID de vehículo no válida.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("gotocar", gotoCar, false, false)
-addCommandHandler("gotoveh", gotoCar, false, false)
+addCommandHandler("iravehiculo", gotoCar, false, false)
+addCommandHandler("iraveh", gotoCar, false, false)
 
 -- /getcar
 function getCar(thePlayer, commandName, id)
@@ -531,21 +531,21 @@ function getCar(thePlayer, commandName, id)
 
 				addVehicleLogs(id, commandName, thePlayer)
 
-				outputChatBox("Vehicle " .. id .. " teleported to your location.", thePlayer, 100, 255, 100)
+				outputChatBox("Vehículo " .. id .. " teletransportado a su ubicación.", thePlayer, 100, 255, 100)
 			else
-				outputChatBox("Invalid Vehicle ID.", thePlayer, 255, 0, 0)
+				outputChatBox("ID de vehículo no válida.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("getcar", getCar, false, false)
-addCommandHandler("getveh", getCar, false, false)
+addCommandHandler("traervehiculo", getCar, false, false)
+addCommandHandler("traerveh", getCar, false, false)
 
 -- This command teleports the specified vehicle to the specified player, /sendcar
 function sendCar(thePlayer, commandName, id, toPlayer)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer) then
 		if not (id) or not (toPlayer) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [vehicle id] [player ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehículo] [ID del jugador]", thePlayer, 255, 194, 14)
 		else
 			local theVehicle = exports.pool:getElement("vehicle", tonumber(id))
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, toPlayer)
@@ -569,26 +569,26 @@ function sendCar(thePlayer, commandName, id, toPlayer)
 
 				addVehicleLogs(id, commandName, thePlayer)
 
-				outputChatBox("Vehicle teleported to the player "..targetPlayerName, thePlayer, 255, 194, 14)
+				outputChatBox("Vehículo teletransportado al jugador "..targetPlayerName, thePlayer, 255, 194, 14)
 				if getElementData(thePlayer, "hiddenadmin") == 1 then
-					outputChatBox("An hidden admin has teleported a vehicle to you.", targetPlayer, 255, 194, 14)
+					outputChatBox("Un Admin Oculto te ha teletransportado un vehículo.", targetPlayer, 255, 194, 14)
 				else
-					outputChatBox(exports.global:getPlayerFullIdentity(thePlayer).." has teleported a vehicle to you.", targetPlayer, 255, 194, 14)
+					outputChatBox(exports.global:getPlayerFullIdentity(thePlayer).." te ha teletransportado un vehículo.", targetPlayer, 255, 194, 14)
 				end
 			else
-				outputChatBox("Invalid Vehicle ID.", thePlayer, 255, 0, 0)
+				outputChatBox("ID de vehículo no válida.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("sendcar", sendCar, false, false)
-addCommandHandler("sendvehto", sendCar, false, false)
-addCommandHandler("sendveh", sendCar, false, false)
+addCommandHandler("mandarveh", sendCar, false, false)
+addCommandHandler("mandarveha", sendCar, false, false)
+addCommandHandler("mandarvehiculoa", sendCar, false, false)
 
 function sendPlayerToVehicle(thePlayer, commandName, toPlayer, id)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) then
 		if not (id) or not (toPlayer) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [player ID] [vehicle id]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del jugador] [ID del jugador]", thePlayer, 255, 194, 14)
 		else
 			local theVehicle = exports.pool:getElement("vehicle", tonumber(id))
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, toPlayer)
@@ -597,8 +597,8 @@ function sendPlayerToVehicle(thePlayer, commandName, toPlayer, id)
 				local playerAdmLvl = getElementData( thePlayer, "admin_level" ) or 0
 				local targetAdmLvl = getElementData( targetPlayer, "admin_level" ) or 0
 				if (playerAdmLvl < targetAdmLvl) then
-					outputChatBox("Sending "..targetPlayerName.." teleporting request as they're higher rank than you.", thePlayer, 255, 194, 14)
-					outputChatBox(getPlayerName(thePlayer):gsub("_", " ").." wants to teleport you to them. /atp to accept, /dtp to deny.", targetPlayer, 255, 194, 14)
+					outputChatBox("Enviando a "..targetPlayerName.." solicitud de teletransporte ya que son de mayor rango que tú.", thePlayer, 255, 194, 14)
+					outputChatBox(getPlayerName(thePlayer):gsub("_", " ").." quiere teletransportarte a ellos. /atp para aceptar, /dtp para denegar.", targetPlayer, 255, 194, 14)
 					setElementData(targetPlayer, "teleport:targetPlayer", thePlayer)
 					return
 				end
@@ -617,11 +617,11 @@ function sendPlayerToVehicle(thePlayer, commandName, toPlayer, id)
 
 				addVehicleLogs(id, commandName, thePlayer)
 
-				outputChatBox("Player "..targetPlayerName.." teleported to vehicle.", thePlayer, 255, 194, 14)
+				outputChatBox("Jugador "..targetPlayerName.." teletransportado al vehículo.", thePlayer, 255, 194, 14)
 				if getElementData(thePlayer, "hiddenadmin") == 1 then
-					outputChatBox("An hidden admin has teleported you to a vehicle.", targetPlayer, 255, 194, 14)
+					outputChatBox("Un Admin Oculto te ha teletransportado a un vehículo.", targetPlayer, 255, 194, 14)
 				else
-					outputChatBox(exports.global:getPlayerFullIdentity(thePlayer).." has teleported a you to a vehicle.", targetPlayer, 255, 194, 14)
+					outputChatBox(exports.global:getPlayerFullIdentity(thePlayer).." te ha teletransportado a un vehículo.", targetPlayer, 255, 194, 14)
 				end
 			else
 				outputChatBox("Invalid Vehicle ID.", thePlayer, 255, 0, 0)
@@ -629,11 +629,11 @@ function sendPlayerToVehicle(thePlayer, commandName, toPlayer, id)
 		end
 	end
 end
-addCommandHandler("sendtoveh", sendPlayerToVehicle, false, false)
+addCommandHandler("mandaraveh", sendPlayerToVehicle, false, false)
 
 function getNearbyVehicles(thePlayer, commandName)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) then
-		outputChatBox("Nearby Vehicles:", thePlayer, 255, 126, 0)
+		outputChatBox("Vehículo cercanos:", thePlayer, 255, 126, 0)
 		local count = 0
 
 		for index, nearbyVehicle in ipairs( exports.global:getNearbyElements(thePlayer, "vehicle") ) do
@@ -654,18 +654,18 @@ function getNearbyVehicles(thePlayer, commandName)
 							ownerName = getTeamName(theTeam)
 						end
 					elseif (owner==-1) then
-						ownerName = "Admin Temp Vehicle"
+						ownerName = "Admin veh temporal"
 					elseif (owner>0) then
 						ownerName = exports['cache']:getCharacterName(owner, true)
 					else
-						ownerName = "Civilian"
+						ownerName = "Civil"
 					end
 				else
-					ownerName = "Car Dealership"
+					ownerName = "Concesionaria"
 				end
 
 				if (thisvehid) then
-					outputChatBox("   " .. vehicleName .. " (" .. vehicleID ..") with ID: " .. thisvehid .. ". Owner: " .. ownerName, thePlayer, 255, 126, 0)
+					outputChatBox("   " .. vehicleName .. " (" .. vehicleID ..") con ID: " .. thisvehid .. ". Dueño: " .. ownerName, thePlayer, 255, 126, 0)
 				end
 			end
 		end
@@ -675,12 +675,12 @@ function getNearbyVehicles(thePlayer, commandName)
 		end
 	end
 end
-addCommandHandler("nearbyvehicles", getNearbyVehicles, false, false)
-addCommandHandler("nearbyvehs", getNearbyVehicles, false, false)
+addCommandHandler("vehiculoscercanos", getNearbyVehicles, false, false)
+addCommandHandler("vehcerca", getNearbyVehicles, false, false)
 
 function delNearbyVehicles(thePlayer, commandName)
 	if exports.integration:isPlayerAdmin(thePlayer)  then
-		outputChatBox("Deleting Nearby Vehicles:", thePlayer, 255, 126, 0)
+		outputChatBox("Borrando de vehículos cercanos:", thePlayer, 255, 126, 0)
 		local count = 0
 
 		for index, nearbyVehicle in ipairs( exports.global:getNearbyElements(thePlayer, "vehicle") ) do
@@ -701,14 +701,14 @@ function delNearbyVehicles(thePlayer, commandName)
 							ownerName = getTeamName(theTeam)
 						end
 					elseif (owner==-1) then
-						ownerName = "Admin Temp Vehicle"
+						ownerName = "Admin Veh temporal"
 					elseif (owner>0) then
 						ownerName = exports['cache']:getCharacterName(owner, true)
 					else
-						ownerName = "Civilian"
+						ownerName = "Civil"
 					end
 				else
-					ownerName = "Car Dealership"
+					ownerName = "Concesionaria"
 				end
 
 				if (thisvehid) then
@@ -726,13 +726,13 @@ function delNearbyVehicles(thePlayer, commandName)
 		end
 	end
 end
-addCommandHandler("delnearbyvehs", delNearbyVehicles, false, false)
-addCommandHandler("delnearbyvehicles", delNearbyVehicles, false, false)
+addCommandHandler("borrarvehiculoscercanos", delNearbyVehicles, false, false)
+addCommandHandler("borrarvehcerca", delNearbyVehicles, false, false)
 
 function respawnCmdVehicle(thePlayer, commandName, id)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) or exports.integration:isPlayerScripter(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer)) then
 		if not (id) then
-			outputChatBox("SYNTAX: /respawnveh [id]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /reaparecerveh [id]", thePlayer, 255, 194, 14)
 		else
 			local theVehicle = exports.pool:getElement("vehicle", tonumber(id))
 			if theVehicle then
@@ -760,14 +760,14 @@ function respawnCmdVehicle(thePlayer, commandName, id)
 						setVehicleLocked(theVehicle, false)
 					end
 				end
-				outputChatBox("Vehicle respawned.", thePlayer, 255, 194, 14)
+				outputChatBox("Vehiculo reaparecido.", thePlayer, 255, 194, 14)
 			else
-				outputChatBox("Invalid Vehicle ID.", thePlayer, 255, 0, 0)
+				outputChatBox("ID de vehículo no válida.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("respawnveh", respawnCmdVehicle, false, false)
+addCommandHandler("reaparecerveh", respawnCmdVehicle, false, false)
 
 function respawnGuiVehicle(theVehicle) --Exciter
 	local thePlayer = source
@@ -811,7 +811,7 @@ function respawnAllVehicles(thePlayer, commandName, timeToRespawn)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if commandName then
 			if isTimer(respawnTimer) then
-				outputChatBox("There is already a Vehicle Respawn active, /respawnstop to stop it first.", thePlayer, 255, 0, 0)
+				outputChatBox("Ya hay un Reaparición de Vehículo activo, /pararrespawn para detenerlo primero.", thePlayer, 255, 0, 0)
 			else
 				timeToRespawn = tonumber(timeToRespawn) or 30
 				timeToRespawn = timeToRespawn < 10 and 10 or timeToRespawn
@@ -819,13 +819,13 @@ function respawnAllVehicles(thePlayer, commandName, timeToRespawn)
 					local logged = getElementData(arrayPlayer, "loggedin")
 					if (logged) then
 						if exports.integration:isPlayerAdmin(arrayPlayer) then
-							outputChatBox( "LeadAdmWarn: " .. getPlayerName(thePlayer) .. " executed a vehicle respawn.", arrayPlayer, 255, 194, 14)
+							outputChatBox( "LeadAdmWarn: " .. getPlayerName(thePlayer) .. " ejecutado un respawn de vehículos.", arrayPlayer, 255, 194, 14)
 						end
 					end
 				end
 
-				outputChatBox("*** All vehicles will be respawned in "..timeToRespawn.." seconds! ***", getRootElement(), 255, 194, 14)
-				outputChatBox("You can stop it by typing /respawnstop!", thePlayer)
+				outputChatBox("*** Todos los vehículos se reaparecerán en "..timeToRespawn.." segundos! ***", getRootElement(), 255, 194, 14)
+				outputChatBox("Puedes detenerlo escribiendo /pararrespawn!", thePlayer)
 				respawnTimer = setTimer(respawnAllVehicles, timeToRespawn*1000, 1, thePlayer)
 			end
 			return
@@ -965,16 +965,16 @@ function respawnAllVehicles(thePlayer, commandName, timeToRespawn)
 			end
 		end
 		local timeTaken = (getTickCount() - tick)/1000
-		outputChatBox(" =-=-=-=-=-=- All Vehicles Respawned =-=-=-=-=-=-=", getRootElement(), 255, 194, 14)
-		outputChatBox("Respawned " .. counter .. "/" .. counter + notmoved .. " vehicles. (" .. occupiedcounter .. " Occupied) .", thePlayer)
-		outputChatBox("Deleted " .. tempcounter .. " temporary vehicles. (" .. tempoccupied .. " Occupied).", thePlayer)
-		outputChatBox("Reset " .. radioCounter .. " car radios.", thePlayer)
-		outputChatBox("Unlocked and Respawned " .. unlockedcivs .. " civilian vehicles.", thePlayer)
-		outputChatBox("Deleted " .. deleted .. " vehicles parked in carshops.", thePlayer)
-		outputChatBox("All that in " .. timeTaken .." seconds.", thePlayer)
+		outputChatBox(" =-=-=-=-=-=- Todos los vehículos reaparecidos =-=-=-=-=-=-=", getRootElement(), 255, 194, 14)
+		outputChatBox("Reaparecidos " .. counter .. "/" .. counter + notmoved .. " vehículos. (" .. occupiedcounter .. " Ocupados) .", thePlayer)
+		outputChatBox("Borrado  " .. tempcounter .. " vehículos temporales. (" .. tempoccupied .. " Ocupados).", thePlayer)
+		outputChatBox("Reiniciar " .. radioCounter .. " radios de coche.", thePlayer)
+		outputChatBox("Desbloqueado y reaparecido " .. unlockedcivs .. " vehículos civiles.", thePlayer)
+		outputChatBox("Borrado " .. deleted .. " vehículos estacionados en concesionarios.", thePlayer)
+		outputChatBox("Todo eso en " .. timeTaken .." segundos.", thePlayer)
 	end
 end
-addCommandHandler("respawnall", respawnAllVehicles, false, false)
+addCommandHandler("reaparecervehs", respawnAllVehicles, false, false)
 
 function respawnVehiclesStop(thePlayer, commandName)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) and isTimer(respawnTimer) then
@@ -983,13 +983,13 @@ function respawnVehiclesStop(thePlayer, commandName)
 		if commandName then
 			local name = getPlayerName(thePlayer):gsub("_", " ")
 			if getElementData(thePlayer, "hiddenadmin") == 1 then
-				name = "Hidden Admin"
+				name = "Admin Oculto"
 			end
-			outputChatBox( "*** " .. name .. " cancelled the vehicle respawn ***", getRootElement(), 255, 194, 14)
+			outputChatBox( "*** " .. name .. " ha cancelado el respawn del vehículo ***", getRootElement(), 255, 194, 14)
 		end
 	end
 end
-addCommandHandler("respawnstop", respawnVehiclesStop, false, false)
+addCommandHandler("pararrespawn", respawnVehiclesStop, false, false)
 
 function respawnAllCivVehicles(thePlayer, commandName)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
@@ -1015,8 +1015,8 @@ function respawnAllCivVehicles(thePlayer, commandName)
 				end
 			end
 		end
-		outputChatBox(" =-=-=-=-=-=- All Civilian Vehicles Respawned =-=-=-=-=-=-=", getRootElement(), 255, 194, 14)
-		outputChatBox("Respawned " .. counter .. " civilian vehicles.", thePlayer)
+		outputChatBox(" =-=-=-=-=-=- Vehículos civiles reaparecidos =-=-=-=-=-=-=", getRootElement(), 255, 194, 14)
+		outputChatBox("Reaparecidos " .. counter .. " vehículos civiles.", thePlayer)
 	end
 end
 addCommandHandler("respawnciv", respawnAllCivVehicles, false, false)
@@ -1059,15 +1059,15 @@ function respawnAllInteriorVehicles(thePlayer, commandName, repair)
 								counter = counter + 1
 							end
 						else
-							exports.global:sendMessageToAdmins("[Respawn] There's something wrong with vehicle "..dbid)
+							exports.global:sendMessageToAdmins("[Respawn] Algo le pasa al vehículo "..dbid)
 						end
 					end
 				end
 			end
 		end
-		outputChatBox("Respawned " .. counter .. " district vehicles.", thePlayer)
+		outputChatBox("Reaparecidos " .. counter .. " vehículos de distrito.", thePlayer)
 	else
-		outputChatBox( "Ain't your place, is it?", thePlayer, 255, 0, 0 )
+		outputChatBox( "No es tu lugar, ¿verdad?", thePlayer, 255, 0, 0 )
 	end
 end
 addCommandHandler("respawnint", respawnAllInteriorVehicles, false, false)
@@ -1130,25 +1130,25 @@ function respawnDistrictVehicles(thePlayer, commandName)
 				end
 			end
 		end
-		exports.global:sendMessageToAdmins("AdmWrn: ".. getPlayerName(thePlayer) .." respawned " .. counter .. " and deleted " .. deleted .. " district vehicles in '"..zoneName.."'.", thePlayer)
+		exports.global:sendMessageToAdmins("AdmWrn: ".. getPlayerName(thePlayer) .." a reaparecido " .. counter .. " y eliminado " .. deleted .. "vehículos de distrito en '"..zoneName.."'.", thePlayer)
 	end
 end
-addCommandHandler("respawndistrict", respawnDistrictVehicles, false, false)
+addCommandHandler("respawndistrito", respawnDistrictVehicles, false, false)
 
 function addUpgrade(thePlayer, commandName, target, upgradeID)
 	if exports.integration:isPlayerTrialAdmin(thePlayer)  then
 		if not (target) or not (upgradeID) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick] [Upgrade ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador] [ID de mejora]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
 
 			if targetPlayer then
 				if not (isPedInVehicle(targetPlayer)) then
-					outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+					outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 				else
 					if upgradeID and tonumber(upgradeID) and exports.npc:getDisabledUpgrades()[tonumber(upgradeID)] then
-						outputChatBox("This item is temporarily disabled.", thePlayer, 255, 0, 0)
+						outputChatBox("Este elemento está desactivado temporalmente.", thePlayer, 255, 0, 0)
 						return false
 					end
 					local theVehicle = getPedOccupiedVehicle(targetPlayer)
@@ -1159,18 +1159,18 @@ function addUpgrade(thePlayer, commandName, target, upgradeID)
 
 						addVehicleLogs(getElementData(theVehicle,"dbid"), commandName.." "..upgradeID, thePlayer)
 
-						outputChatBox(getVehicleUpgradeSlotName(upgradeID) .. " upgrade added to " .. targetPlayerName .. "'s vehicle.", thePlayer)
-						outputChatBox("Admin " .. username .. " added upgrade " .. getVehicleUpgradeSlotName(upgradeID) .. " to your vehicle.", targetPlayer)
+						outputChatBox(getVehicleUpgradeSlotName(upgradeID) .. " mejora añadida al vehículo de  " .. targetPlayerName .. ".", thePlayer)
+						outputChatBox("Admin " .. username .. "  añadió la mejora " .. getVehicleUpgradeSlotName(upgradeID) .. "  a su vehículo.", targetPlayer)
 						exports.vehicle:saveVehicleMods(theVehicle)
 					else
-						outputChatBox("Invalid Upgrade ID, or this vehicle doesn't support this upgrade.", thePlayer, 255, 0, 0)
+						outputChatBox("ID de actualización no válido o este vehículo no admite esta actualización..", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("addupgrade", addUpgrade, false, false)
+addCommandHandler("agregarmejora", addUpgrade, false, false)
 --[[
 -- START of Vehicle Customization by Anthony
 
@@ -1296,19 +1296,19 @@ addCommandHandler("resetdt", resetdriveType, false, false)
 function addPaintjob(thePlayer, commandName, target, paintjobID)
 	if exports.integration:isPlayerTrialAdmin(thePlayer)  then
 		if not (target) or not (paintjobID) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick] [Paintjob ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador] [Paintjob ID]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
 
 			if targetPlayer then
 				if not (isPedInVehicle(targetPlayer)) then
-					outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+					outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 				else
 					local theVehicle = getPedOccupiedVehicle(targetPlayer)
 					paintjobID = tonumber(paintjobID)
 					if paintjobID == getVehiclePaintjob(theVehicle) then
-						outputChatBox("This Vehicle already has this paintjob.", thePlayer, 255, 0, 0)
+						outputChatBox("Este vehículo ya tiene este paintjob.", thePlayer, 255, 0, 0)
 					else
 						local success = setVehiclePaintjob(theVehicle, paintjobID)
 
@@ -1317,11 +1317,11 @@ function addPaintjob(thePlayer, commandName, target, paintjobID)
 							addVehicleLogs(getElementData(theVehicle,"dbid"), commandName.." "..paintjobID, thePlayer)
 
 							exports.logs:dbLog(thePlayer, 6, { targetPlayer, theVehicle  }, "PAINTJOB ".. paintjobID )
-							outputChatBox("Paintjob #" .. paintjobID .. " added to " .. targetPlayerName .. "'s vehicle.", thePlayer)
-							outputChatBox("Admin " .. username .. " added Paintjob #" .. paintjobID .. " to your vehicle.", targetPlayer)
+							outputChatBox("Paintjob #" .. paintjobID .. " añadido al vehículo de " .. targetPlayerName .. ".", thePlayer)
+							outputChatBox("Admin " .. username .. " ha añadido #" .. paintjobID .. " a tu vehículo.", targetPlayer)
 							exports.vehicle:saveVehicleMods(theVehicle)
 						else
-							outputChatBox("Invalid Paintjob ID, or this vehicle doesn't support this paintjob.", thePlayer, 255, 0, 0)
+							outputChatBox("ID de paintjob no válido, o este vehículo no admite este paintjob..", thePlayer, 255, 0, 0)
 						end
 					end
 				end
@@ -1330,19 +1330,19 @@ function addPaintjob(thePlayer, commandName, target, paintjobID)
 	end
 
 end
-addCommandHandler("setpaintjob", addPaintjob, false, false)
+addCommandHandler("agregarpaintjob", addPaintjob, false, false)
 
 function resetUpgrades(thePlayer, commandName, target)
 	if exports.integration:isPlayerTrialAdmin(thePlayer)  then
 		if not (target) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
 
 			if targetPlayer then
 				if not (isPedInVehicle(targetPlayer)) then
-					outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+					outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 				else
 					local theVehicle = getPedOccupiedVehicle(targetPlayer)
 					exports.logs:dbLog(thePlayer, 6, { targetPlayer, theVehicle  }, "RESETUPGRADES" )
@@ -1353,26 +1353,26 @@ function resetUpgrades(thePlayer, commandName, target)
 						removeVehicleUpgrade(theVehicle, value)
 					end
 					setVehiclePaintjob(theVehicle, 3)
-					outputChatBox("Removed all upgrades from " .. targetPlayerName .. "'s vehicle.", thePlayer, 0, 255, 0)
+					outputChatBox("Retiradas todas las mejoras del vehículo de " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
 					exports.vehicle:saveVehicleMods(theVehicle)
 				end
 			end
 		end
 	end
 end
-addCommandHandler("resetupgrades", resetUpgrades, false, false)
+addCommandHandler("restablecermejoras", resetUpgrades, false, false)
 
 function deleteUpgrade(thePlayer, commandName, target, id)
 	if exports.integration:isPlayerTrialAdmin(thePlayer)   then
 		if not (target) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
 
 			if targetPlayer then
 				if not (isPedInVehicle(targetPlayer)) then
-					outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+					outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 				else
 					local theVehicle = getPedOccupiedVehicle(targetPlayer)
 					exports.logs:dbLog(thePlayer, 6, { targetPlayer, theVehicle  }, "DELETEUPGRADE ".. id )
@@ -1381,23 +1381,23 @@ function deleteUpgrade(thePlayer, commandName, target, id)
 
 					local result = removeVehicleUpgrade(theVehicle, id)
 					if result then
-						outputChatBox("Removed upgrade ".. id .." from " .. targetPlayerName .. "'s vehicle.", thePlayer, 0, 255, 0)
+						outputChatBox("Mejora eliminada ".. id .." del vehículo de " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
 						exports.vehicle:saveVehicleMods(theVehicle)
 					else
-						outputChatBox("Something went wrong with removing upgrade ".. id .." from " .. targetPlayerName .. "'s vehicle.", thePlayer, 0, 255, 0)
+						outputChatBox("Algo salió mal al eliminar la mejora ".. id .." del vehículo de " .. targetPlayerName .. ".", thePlayer, 0, 255, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("deleteupgrade", deleteUpgrade, false, false)
-addCommandHandler("delupgrade", deleteUpgrade, false, false)
+addCommandHandler("eliminarmejora", deleteUpgrade, false, false)
+addCommandHandler("elimej", deleteUpgrade, false, false)
 
 function setVariant(thePlayer, commandName, id, variant1, variant2)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer) then
 		if not tonumber(id) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Vehicle ID] [Variant 1] [Variant 2]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehículo] [Variante 1] [Variante 2]", thePlayer, 255, 194, 14)
 		else
 			for i,c in ipairs(exports.pool:getPoolElementsByType("vehicle")) do
 				if (getElementData(c, "dbid") == tonumber(id)) then
@@ -1414,35 +1414,35 @@ function setVariant(thePlayer, commandName, id, variant1, variant2)
 				if exports.vehicle:isValidVariant(getElementModel(theVehicle), variant1, variant2) then
 					local a, b = getVehicleVariant(theVehicle)
 					if a == variant1 and b == variant2 then
-						outputChatBox("This Vehicle already has this variant.", thePlayer, 255, 0, 0)
+						outputChatBox("Este Vehículo ya tiene esta variante.", thePlayer, 255, 0, 0)
 					else
 						local success = setVehicleVariant(theVehicle, variant1, variant2)
 
 						if (success) then
 							exports.logs:dbLog(thePlayer, 6, {  theVehicle  }, "VARIANT ".. variant1 .. " " .. variant2 )
-							outputChatBox("Variant " .. variant1 .. "/" .. variant2.. " added to vehicle #" .. getElementData(theVehicle,"dbid") .. ".", thePlayer)
+							outputChatBox("Variante " .. variant1 .. "/" .. variant2.. " añadido al vehículo ID #" .. getElementData(theVehicle,"dbid") .. ".", thePlayer)
 							exports.vehicle:saveVehicleMods(theVehicle)
 
 							addVehicleLogs(getElementData(theVehicle,"dbid"), commandName.." "..variant1 or ""..variant2 or "", thePlayer)
 						else
-							outputChatBox("Invalid Variant ID, or this vehicle doesn't support this paintjob.", thePlayer, 255, 0, 0)
+							outputChatBox("ID de variante no válido o este vehículo no admite esta paintjob..", thePlayer, 255, 0, 0)
 						end
 					end
 				else
-					outputChatBox(variant1 .. "/" .. variant2 .. " is not a valid variant for this " .. getVehicleName(theVehicle) .. ".", thePlayer, 255, 0, 0)
+					outputChatBox(variant1 .. "/" .. variant2 .. " no es una variante válida para este " .. getVehicleName(theVehicle) .. ".", thePlayer, 255, 0, 0)
 				end
 			else
-				outputChatBox("Vehicle is not found. Is it a permanent vehicle?", thePlayer, 255, 0, 0)
+				outputChatBox("No se encuentra el vehículo. ¿Es un vehículo permanente?", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 
 end
-addCommandHandler("setvariant", setVariant, false, false)
+addCommandHandler("establecervariante", setVariant, false, false)
 
 function findVehID(thePlayer, commandName, ...)
 	if not (...) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Partial Name]", thePlayer, 255, 194, 14)
+		outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial]", thePlayer, 255, 194, 14)
 	else
 		local vehicleName = table.concat({...}, " ")
 		local carID = getVehicleModelFromName(vehicleName)
@@ -1451,17 +1451,17 @@ function findVehID(thePlayer, commandName, ...)
 			local fullName = getVehicleNameFromModel(carID)
 			outputChatBox(fullName .. ": ID " .. carID .. ".", thePlayer)
 		else
-			outputChatBox("Vehicle not found.", thePlayer, 255, 0 , 0)
+			outputChatBox("Vehículo no encontrado.", thePlayer, 255, 0 , 0)
 		end
 	end
 end
-addCommandHandler("findvehid", findVehID, false, false)
+addCommandHandler("encontrarvehid", findVehID, false, false)
 
 -----------------------------[FIX VEH]---------------------------------
 function fixPlayerVehicle(thePlayer, commandName, target)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer) or exports.integration:isPlayerScripter(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer)) then
 		if not (target) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
@@ -1469,7 +1469,7 @@ function fixPlayerVehicle(thePlayer, commandName, target)
 			if targetPlayer then
 				local logged = getElementData(targetPlayer, "loggedin")
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local veh = getPedOccupiedVehicle(targetPlayer)
 					if (veh) then
@@ -1491,26 +1491,26 @@ function fixPlayerVehicle(thePlayer, commandName, target)
 						addVehicleLogs(getElementData(veh,"dbid"), commandName, thePlayer)
 
 						if thePlayer == targetPlayer then
-							outputChatBox("You repaired your vehicle.", thePlayer, 100, 255, 100)
+							outputChatBox("Ha reparado su vehículo.", thePlayer, 100, 255, 100)
 						else
-							outputChatBox("You repaired " .. targetPlayerName .. "'s vehicle.", thePlayer, 100, 255, 100)
-							outputChatBox("Your vehicle was repaired by admin " .. username:gsub("_", " ") .. ".", targetPlayer, 100, 255, 100)
+							outputChatBox("Has reparado el vehículo de " .. targetPlayerName .. ".", thePlayer, 100, 255, 100)
+							outputChatBox("Su vehículo fue reparado por Admin " .. username:gsub("_", " ") .. ".", targetPlayer, 100, 255, 100)
 						end
 					else
-						outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("fixveh", fixPlayerVehicle, false, false)
+addCommandHandler("arreglarveh", fixPlayerVehicle, false, false)
 
 -----------------------------[FIX VEH VIS]---------------------------------
 function fixPlayerVehicleVisual(thePlayer, commandName, target)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerSupporter(thePlayer)) then
 		if not (target) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
@@ -1518,7 +1518,7 @@ function fixPlayerVehicleVisual(thePlayer, commandName, target)
 			if targetPlayer then
 				local logged = getElementData(targetPlayer, "loggedin")
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local veh = getPedOccupiedVehicle(targetPlayer)
 					if (veh) then
@@ -1528,29 +1528,29 @@ function fixPlayerVehicleVisual(thePlayer, commandName, target)
 						exports.logs:dbLog(thePlayer, 6, { targetPlayer, veh  }, "FIXVEHVIS" )
 
 						if thePlayer == targetPlayer then
-							outputChatBox("You repaired your vehicle visually.", thePlayer, 100, 255, 100)
+							outputChatBox("Ha reparado su vehículo visualmente.", thePlayer, 100, 255, 100)
 						else
-							outputChatBox("You repaired " .. targetPlayerName .. "'s vehicle visually.", thePlayer, 100, 255, 100)
-							outputChatBox("Your vehicle was visually repaired by admin " .. username:gsub("_", " ") .. ".", targetPlayer, 100, 255, 100)
+							outputChatBox("Has reparado el vehículo de " .. targetPlayerName .. " visualmente.", thePlayer, 100, 255, 100)
+							outputChatBox("Su vehículo fue reparado visualmente por admin " .. username:gsub("_", " ") .. ".", targetPlayer, 100, 255, 100)
 						end
 
 						addVehicleLogs(getElementData(veh,"dbid"), commandName, thePlayer)
 
 					else
-						outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("fixvehvis", fixPlayerVehicleVisual, false, false)
+addCommandHandler("arreglarvehvis", fixPlayerVehicleVisual, false, false)
 
 -----------------------------[BLOW CAR]---------------------------------
 function blowPlayerVehicle(thePlayer, commandName, target)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not (target) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
@@ -1558,31 +1558,31 @@ function blowPlayerVehicle(thePlayer, commandName, target)
 			if targetPlayer then
 				local logged = getElementData(targetPlayer, "loggedin")
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local veh = getPedOccupiedVehicle(targetPlayer)
 					if (veh) then
 						blowVehicle(veh)
-						outputChatBox("You blew up " .. targetPlayerName .. "'s vehicle.", thePlayer)
+						outputChatBox("Hiciste explotar el vehículo de " .. targetPlayerName .. ".", thePlayer)
 						exports.logs:dbLog(thePlayer, 6, { targetPlayer, veh  }, "BLOWVEH" )
 
 						addVehicleLogs(getElementData(veh,"dbid"), commandName, thePlayer)
 
 					else
-						outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("blowveh", blowPlayerVehicle, false, false)
+addCommandHandler("explotarveh", blowPlayerVehicle, false, false)
 
 -----------------------------[SET CAR HP]---------------------------------
 function setCarHP(thePlayer, commandName, target, hp)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not (target) or not (hp) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Partial Player Nick] [Health]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Nombre Parcial del jugador] [Vida]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, target)
@@ -1590,29 +1590,29 @@ function setCarHP(thePlayer, commandName, target, hp)
 			if targetPlayer then
 				local logged = getElementData(targetPlayer, "loggedin")
 				if (logged==0) then
-					outputChatBox("Player is not logged in.", thePlayer, 255, 0, 0)
+					outputChatBox("El jugador no ha iniciado sesión.", thePlayer, 255, 0, 0)
 				else
 					local veh = getPedOccupiedVehicle(targetPlayer)
 					if (veh) then
 						local sethp = setElementHealth(veh, tonumber(hp))
 
 						if (sethp) then
-							outputChatBox("You set " .. targetPlayerName .. "'s vehicle health to " .. hp .. ".", thePlayer)
+							outputChatBox("Usted establece la vida del vehículo de " .. targetPlayerName .. " a " .. hp .. ".", thePlayer)
 							exports.logs:dbLog(thePlayer, 6, { targetPlayer, veh  }, "SETVEHHP ".. hp )
 
 							addVehicleLogs(getElementData(veh,"dbid"), commandName.." "..hp, thePlayer)
 						else
-							outputChatBox("Invalid health value.", thePlayer, 255, 0, 0)
+							outputChatBox("Valor de vida no válido.", thePlayer, 255, 0, 0)
 						end
 					else
-						outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("setcarhp", setCarHP, false, false)
+addCommandHandler("setvidaveh", setCarHP, false, false)
 
 function fixAllVehicles(thePlayer, commandName)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
@@ -1629,11 +1629,11 @@ function fixAllVehicles(thePlayer, commandName)
 			end
 		end
 		--outputChatBox("All vehicles repaired by Admin " .. username .. ".")
-		executeCommandHandler("ann", thePlayer, "All vehicles repaired by Admin " .. username .. ".")
+		executeCommandHandler("ann", thePlayer, "Todos los vehículos reparados por Admin " .. username .. ".")
 		exports.logs:dbLog(thePlayer, 6, { targetPlayer }, "FIXALLVEHS")
 	end
 end
-addCommandHandler("fixvehs", fixAllVehicles)
+addCommandHandler("arreglarvehs", fixAllVehicles)
 
 -----------------------------[FUEL VEH]---------------------------------
 function fuelPlayerVehicle(thePlayer, commandName, target, amount)
@@ -1657,21 +1657,21 @@ function fuelPlayerVehicle(thePlayer, commandName, target, amount)
 						end
 						exports.anticheat:setEld( veh, "fuel", amount )
 						triggerClientEvent( targetPlayer, "syncFuel", veh, getElementData( veh, "fuel" ), getElementData( veh, "battery" ) or 100 )
-						outputChatBox("You refueled " .. targetPlayerName .. "'s vehicle.", thePlayer, 100, 255, 100)
+						outputChatBox("Has repostado el vehículo de " .. targetPlayerName .. ".", thePlayer, 100, 255, 100)
 						outputChatBox("Your vehicle was refueled by admin " .. username:gsub("_", " ") .. ".", targetPlayer, 100, 255, 100)
 						exports.logs:dbLog(thePlayer, 6, { targetPlayer, veh  }, "FUELVEH")
 
 						addVehicleLogs(getElementData(veh,"dbid"), commandName, thePlayer)
 
 					else
-						outputChatBox("That player is not in a vehicle.", thePlayer, 255, 0, 0)
+						outputChatBox("Ese jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 					end
 				end
 			end
 		end
 	end
 end
-addCommandHandler("fuelveh", fuelPlayerVehicle, false, false)
+addCommandHandler("repostarveh", fuelPlayerVehicle, false, false)
 
 function fuelAllVehicles(thePlayer, commandName)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
@@ -1680,11 +1680,11 @@ function fuelAllVehicles(thePlayer, commandName)
 			exports.anticheat:setEld( value, "fuel", exports.vehicle_fuel:getMaxFuel(getElementModel(value)) )
 		end
 		--outputChatBox("All vehicles refuelled by Admin " .. username .. ".")
-		executeCommandHandler("ann", thePlayer, "All vehicles refuelled by Admin " .. username .. ".")
+		executeCommandHandler("ann", thePlayer, "Todos los vehículos repostados por Admin " .. username .. ".")
 		exports.logs:dbLog(thePlayer, 6, { thePlayer  }, "FUELVEHS" )
 	end
 end
-addCommandHandler("fuelvehs", fuelAllVehicles, false, false)
+addCommandHandler("repostarvehs", fuelAllVehicles, false, false)
 
 -----------------------------[SET COLOR]---------------------------------
 function setPlayerVehicleColor(thePlayer, commandName, target, ...)
@@ -1695,7 +1695,7 @@ function setPlayerVehicleColor(thePlayer, commandName, target, ...)
 		end
 
 		if not tonumber(target) or not (...) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Vehicle ID] [Colors ...]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehículo] [Colores ...]", thePlayer, 255, 194, 14)
 		else
 			local username = getPlayerName(thePlayer)
 			for i,c in ipairs(exports.pool:getPoolElementsByType("vehicle")) do
@@ -1732,17 +1732,17 @@ function setPlayerVehicleColor(thePlayer, commandName, target, ...)
 				end
 
 				if set then
-					outputChatBox("Vehicle's color was set.", thePlayer, 0, 255, 0)
+					outputChatBox("El color del vehículo fue establecido.", thePlayer, 0, 255, 0)
 					exports.vehicle:saveVehicleMods(theVehicle)
 					exports.logs:dbLog(thePlayer, 6, {  theVehicle  }, "SETVEHICLECOLOR ".. table.concat({...}, " ") )
 
 					addVehicleLogs(getElementData(theVehicle,"dbid"), commandName..table.concat({...}, " "), thePlayer)
 
 				else
-					outputChatBox("Invalid Color ID.", thePlayer, 255, 194, 14)
+					outputChatBox("ID de color no válido.", thePlayer, 255, 194, 14)
 				end
 			else
-				outputChatBox("Vehicle is not found. Is it a permanent vehicle?", thePlayer, 255, 0, 0)
+				outputChatBox("No se encuentra el vehículo. ¿Es un vehículo permanente?", thePlayer, 255, 0, 0)
 			end
 		end
 	end
@@ -1752,7 +1752,7 @@ addCommandHandler("setcolor", setPlayerVehicleColor, false, false)
 function getAVehicleColor(thePlayer, commandName, carid)
 	if (exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer)) then
 		if not (carid) then
-			outputChatBox("SYNTAX: /" .. commandName .. " [Car ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID del vehículo]", thePlayer, 255, 194, 14)
 		else
 			local acar = nil
 			for i,c in ipairs(getElementsByType("vehicle")) do
@@ -1762,7 +1762,7 @@ function getAVehicleColor(thePlayer, commandName, carid)
 			end
 			if acar then
 				local col =  { getVehicleColor(acar, true) }
-				outputChatBox("Vehicle's colors are:", thePlayer)
+				outputChatBox("Los colores del vehículo son:", thePlayer)
 				outputChatBox("1. " .. col[1].. "," .. col[2] .. "," .. col[3] .. " = " .. ("#%02X%02X%02X"):format(col[1], col[2], col[3]), thePlayer)
 				outputChatBox("2. " .. col[4].. "," .. col[5] .. "," .. col[6] .. " = " .. ("#%02X%02X%02X"):format(col[4], col[5], col[6]), thePlayer)
 				outputChatBox("3. " .. col[7].. "," .. col[8] .. "," .. col[9] .. " = " .. ("#%02X%02X%02X"):format(col[7], col[8], col[9]), thePlayer)
@@ -1773,7 +1773,7 @@ function getAVehicleColor(thePlayer, commandName, carid)
 		end
 	end
 end
-addCommandHandler("getcolor", getAVehicleColor, false, false)
+addCommandHandler("obtenercolor", getAVehicleColor, false, false)
 
 local function removeOne( id )
 	dbExec( exports.mysql:getConn('mta'), "DELETE FROM vehicles WHERE id=? ", id )
@@ -1803,23 +1803,23 @@ function removeVehicle(thePlayer, commandName, id)
 					if rows > 0 then
 						if res[1].deleted ~= 0 then
 							removeOne( dbid )
-							exports.global:sendMessageToAdmins( "[VEHICLE] "..exports.global:getPlayerFullIdentity( thePlayer ).." has removed vehicle ID: #" .. dbid .. " completely from SQL." )
+							exports.global:sendMessageToAdmins( "[VEHÍCULO] "..exports.global:getPlayerFullIdentity( thePlayer ).." ha eliminado el vehículo ID: #" .. dbid .. " completamente de SQL." )
 						else
-							outputChatBox(" Vehicle is still in game. Please use /delveh "..dbid.." first.", thePlayer, 255, 0, 0)
+							outputChatBox("El vehículo sigue en el juego. Por favor, utilice /borrarveh "..dbid.." primero.", thePlayer, 255, 0, 0)
 						end
 					else
-						outputChatBox(" No such vehicle with ID #"..dbid.." found in Database.", thePlayer, 255, 0, 0)
+						outputChatBox(" No hay tal vehículo con ID #"..dbid.." encontrado en la base de datos.", thePlayer, 255, 0, 0)
 					end
 				end
 			end, { thePlayer, dbid }, exports.mysql:getConn('mta'), "SELECT deleted FROM vehicles WHERE id=? ", dbid )
 		else
 			exports.data:save( dbid, 'removeVehicle:'..getElementData( thePlayer, 'dbid' ) )
-			outputChatBox(" Are you sure? Type /"..commandName.." "..dbid.." again.", thePlayer )
+			outputChatBox(" ¿Está seguro? Escriba /"..commandName.." "..dbid.." de nuevo.", thePlayer )
 		end
 	end
 end
-addCommandHandler("removeveh", removeVehicle, false, false)
-addCommandHandler("removevehicle", removeVehicle, false, false)
+addCommandHandler("removerveh", removeVehicle, false, false)
+addCommandHandler("removervehiculo", removeVehicle, false, false)
 
 local threads_remove = { }
 local timer_remove
@@ -1830,7 +1830,7 @@ function removeVehs( p, c )
 			dbQuery( function( qh, p )
 				local res, rows, err = dbPoll( qh, 0 )
 				if res and rows > 0 then
-					exports.global:sendMessageToAdmins( "[VEHICLE] "..exports.global:getPlayerFullIdentity( p ).." has started removing "..exports.global:formatMoney( rows ).." deleted vehicles from SQL. Will be done in approximately "..exports.global:round( rows*50/mult_remove/1000, 2 ).." seconds." )
+					exports.global:sendMessageToAdmins( "[VEHÍCULO] "..exports.global:getPlayerFullIdentity( p ).." ha empezado a remover "..exports.global:formatMoney( rows ).." vehículos borrados de SQL. Se hará en aproximadamente "..exports.global:round( rows*50/mult_remove/1000, 2 ).." seconds." )
 					threads_remove = { }
 					for _, veh in ipairs( res ) do
 						local co = coroutine.create( removeOne )
@@ -1843,12 +1843,12 @@ function removeVehs( p, c )
 			end, { p }, exports.mysql:getConn('mta'), "SELECT id FROM vehicles WHERE deleted!=0 " )
 		else
 			exports.data:save( true, 'removeVehs:'..getElementData( p, 'dbid') )
-			outputChatBox(" Are you sure? Type /"..c.." again.", p )
+			outputChatBox(" ¿Está seguro? Escriba /"..c.." de nuevo.", p )
 		end
 	end
 end
-addCommandHandler( 'removevehs', removeVehs, false, false )
-addCommandHandler( 'removevehicles', removeVehs, false, false )
+addCommandHandler( 'removervehs', removeVehs, false, false )
+addCommandHandler( 'removervehiculos', removeVehs, false, false )
 
 function resumeThreads_remove( )
 	for i, co in ipairs( threads_remove ) do
@@ -1896,19 +1896,19 @@ function adminClearVehicleInventory(thePlayer, commandName, vehicle)
 		end
 
 		if not vehicle then
-			outputChatBox("SYNTAX: /" .. commandName .. " [ID]     -> Clear all items in a vehicle inventory.", thePlayer, 255, 194, 14)
-			outputChatBox("SYNTAX: /" .. commandName .. "          -> Clear all items in current vehicle inventory.", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [ID]     -> Borrar todos los items del inventario de un vehículo.", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. "          -> Borrar todos los items del inventario actual del vehículo.", thePlayer, 255, 194, 14)
 			return false
 		end
 
-		outputChatBox("Deleted "..(clearVehicleInventory(vehicle) or "0").." item(s) from vehicle's inventory.",thePlayer)
+		outputChatBox("Eliminado "..(clearVehicleInventory(vehicle) or "0").." item(s) del inventario del vehículo.",thePlayer)
 
 	else
-		outputChatBox("Only Admins can perform this command. Operation cancelled.", thePlayer, 255,0,0)
+		outputChatBox("Sólo los administradores pueden ejecutar este comando. Operación cancelada.", thePlayer, 255,0,0)
 	end
 end
-addCommandHandler("clearvehinv", adminClearVehicleInventory, false, false)
-addCommandHandler("clearvehicleinventory", adminClearVehicleInventory, false, false)
+addCommandHandler("borrarinvveh", adminClearVehicleInventory, false, false)
+addCommandHandler("borrarinventariovehiculo", adminClearVehicleInventory, false, false)
 
 function restoreVehicle(thePlayer, commandName, id)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) 	then
@@ -1943,34 +1943,34 @@ function restoreVehicle(thePlayer, commandName, id)
 									ownerName = getTeamName(theTeam)
 								end
 							elseif (owner==-1) then
-								ownerName = "Admin Temp Vehicle"
+								ownerName = "Admin vehículo temporal"
 							elseif (owner>0) then
 								ownerName = exports['cache']:getCharacterName(owner, true)
 							else
-								ownerName = "Civilian"
+								ownerName = "Civil"
 							end
 						else
-							ownerName = "Car Dealership"
+							ownerName = "Concesionaria"
 						end
 
 						if hiddenAdmin == 0 then
-						exports.global:sendMessageToAdmins("[VEHICLE]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") has restore a " .. vehicleName .. " (ID: #" .. dbid .. " - Owner: " .. ownerName..").")
+						exports.global:sendMessageToAdmins("[VEHÍCULO]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") ha restaurado un " .. vehicleName .. " (ID: #" .. dbid .. " - Dueño: " .. ownerName..").")
 						else
-							exports.global:sendMessageToAdmins("[VEHICLE]: A hidden admin has restore a " .. vehicleName .. " (ID: #" .. dbid .. " - Owner: " .. ownerName..").")
+							exports.global:sendMessageToAdmins("[VEHÍCULO]: Un Admin Oculto ha restaurado un " .. vehicleName .. " (ID: #" .. dbid .. " - Dueño: " .. ownerName..").")
 						end
 					end, 2000,1)
 
 				else
-					outputChatBox(" Database Error!", thePlayer, 255, 0, 0)
+					outputChatBox(" Error de base de datos!", thePlayer, 255, 0, 0)
 				end
 			else
-				outputChatBox(" Vehicle ID #"..dbid.." is existed in game, please use /delveh first.", thePlayer, 255, 0, 0)
+				outputChatBox("  Vehículo ID#"..dbid.." existe en el juego, por favor use /borrarveh primero.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("restoreveh", restoreVehicle, false, false)
-addCommandHandler("restorevehicle", restoreVehicle, false, false)
+addCommandHandler("restaurarveh", restoreVehicle, false, false)
+addCommandHandler("restaurarvehiculo", restoreVehicle, false, false)
 
 function deleteVehicle(thePlayer, commandName, id)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer) or exports.integration:isPlayerVehicleConsultant( thePlayer ) then
@@ -1986,7 +1986,7 @@ function deleteVehicle(thePlayer, commandName, id)
 			if theVehicle then
 				local protected, details = exports.vehicle:isProtected(theVehicle)
 	            if protected and not exports.integration.isPlayerLeadAdmin(thePlayer) then
-	                outputChatBox("This vehicle is protected and can not be deleted. Protection remaining: "..details..".", thePlayer, 255,0,0)
+	                outputChatBox("Este vehículo está protegido y no se puede eliminar. Protección restante: "..details..".", thePlayer, 255,0,0)
 	                return false
 	            end
 	            local active, details2, secs = exports.vehicle:isActive(theVehicle)
@@ -1996,22 +1996,22 @@ function deleteVehicle(thePlayer, commandName, id)
 	                local owner_last_login = getElementData(theVehicle, "owner_last_login")
 					if owner_last_login and tonumber(owner_last_login) then
 						local owner_last_login_text, owner_last_login_sec = exports.datetime:formatTimeInterval(owner_last_login)
-						inactiveText = inactiveText.." Owner last seen "..owner_last_login_text.." "
+						inactiveText = inactiveText.." Propietario visto por última vez "..owner_last_login_text.." "
 					else
-						inactiveText = inactiveText.." Owner last seen is irrelevant, "
+						inactiveText = inactiveText.." El último propietario visto es irrelevante, "
 					end
 	                local lastused = getElementData(theVehicle, "lastused")
 					if lastused and tonumber(lastused) then
 						local lastusedText, lastusedSeconds = exports.datetime:formatTimeInterval(lastused)
-						inactiveText = inactiveText.."Last used "..lastusedText..", "
+						inactiveText = inactiveText.."Última vez utilizado "..lastusedText..", "
 					else
-						inactiveText = inactiveText.."Last used is irrelevant, "
+						inactiveText = inactiveText.."El último uso es irrelevante, "
 					end
-					outputChatBox("This vehicle is still active. "..inactiveText.." Please /"..commandName.." "..dbid.." again to proceed.", thePlayer, 255, 0, 0)
+					outputChatBox("Este vehículo sigue activo. "..inactiveText.." Por favor, escriba /"..commandName.." "..dbid.." de nuevo para continuar.", thePlayer, 255, 0, 0)
 					exports.data:save(dbid, getElementData(thePlayer, "account:id").."/"..commandName)
 					return false
 				elseif protected then
-					outputChatBox("This vehicle is protected are you sure you want it deleted? Protection remaining: "..details..". Please /"..commandName.." "..dbid.." again to proceed.", thePlayer, 255,0,0)
+					outputChatBox("Este vehículo está protegido ¿Está seguro de que desea eliminarlo? Protección restante: "..details..". Por favor, escriba /"..commandName.." "..dbid.." de nuevo para continuar.", thePlayer, 255,0,0)
 					exports.data:save(dbid, getElementData(thePlayer, "account:id").."/"..commandName)
 					return false
 	            end
@@ -2027,14 +2027,14 @@ function deleteVehicle(thePlayer, commandName, id)
 							ownerName = getTeamName(theTeam)
 						end
 					elseif (owner==-1) then
-						ownerName = "Admin Temp Vehicle"
+						ownerName = "Admin vehículo temporal"
 					elseif (owner>0) then
 						ownerName = exports['cache']:getCharacterName(owner, true)
 					else
-						ownerName = "Civilian"
+						ownerName = "Civil"
 					end
 				else
-					ownerName = "Car Dealership"
+					ownerName = "Concesionaria"
 				end
 
 				if (dbid<0) then -- TEMP vehicle
@@ -2051,9 +2051,9 @@ function deleteVehicle(thePlayer, commandName, id)
 					end
 
 					if hiddenAdmin == 0 then
-						exports.global:sendMessageToAdmins("[VEHICLE]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") has deleted a " .. vehicleName .. " (ID: #" .. dbid .. " - Owner: " .. ownerName..").")
+						exports.global:sendMessageToAdmins("[VEHÍCULO]: "..adminTitle.." ".. getPlayerName(thePlayer):gsub("_", " ").. " ("..adminUsername..") ha borrado un " .. vehicleName .. " (ID: #" .. dbid .. " - Dueño: " .. ownerName..").")
 					else
-						exports.global:sendMessageToAdmins("[VEHICLE]: A hidden admin has deleted a " .. vehicleName .. " (ID: #" .. dbid .. " - Owner: " .. ownerName..").")
+						exports.global:sendMessageToAdmins("[VEHÍCULO]: Un Admin Oculto ha borrado un " .. vehicleName .. " (ID: #" .. dbid .. " - Dueño: " .. ownerName..").")
 					end
 					addVehicleLogs(dbid, commandName, thePlayer)
 
@@ -2071,15 +2071,15 @@ function deleteVehicle(thePlayer, commandName, id)
 
 					exports.anticheat:changeProtectedElementDataEx(thePlayer, "vehicleManager:deletedVeh", dbid, false)
 				end
-				outputChatBox("   Deleted a " .. vehicleName .. " (ID: #" .. dbid .. " - Owner: " .. ownerName..").", thePlayer, 255, 126, 0)
+				outputChatBox("   Borrado a " .. vehicleName .. " (ID: #" .. dbid .. " - Dueño: " .. ownerName..").", thePlayer, 255, 126, 0)
 			else
-				outputChatBox("No vehicles with that ID found.", thePlayer, 255, 0, 0)
+				outputChatBox("No se han encontrado vehículos con ese ID.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("delveh", deleteVehicle, false, false)
-addCommandHandler("deletevehicle", deleteVehicle, false, false)
+addCommandHandler("borrarveh", deleteVehicle, false, false)
+addCommandHandler("borrarvehiculo", deleteVehicle, false, false)
 
 -- DELTHISVEH
 function deleteThisVehicle(thePlayer, commandName)
@@ -2087,21 +2087,21 @@ function deleteThisVehicle(thePlayer, commandName)
 	local dbid = getElementData(veh, "dbid")
 	if (exports.integration:isPlayerTrialAdmin(thePlayer)) then
 		if not (isPedInVehicle(thePlayer)) then
-			outputChatBox("You are not in a vehicle.", thePlayer, 255, 0, 0)
+			outputChatBox("Usted no está en un vehículo.", thePlayer, 255, 0, 0)
 		else
 			deleteVehicle(thePlayer, "delveh", dbid)
 		end
 	else
-		outputChatBox("You do not have the permission to delete permanent vehicles.", thePlayer, 255, 0, 0)
+		outputChatBox("No tiene permiso para eliminar vehículos permanentes.", thePlayer, 255, 0, 0)
 	return
 	end
 end
-addCommandHandler("delthisveh", deleteThisVehicle, false, false)
+addCommandHandler("borraresteveh", deleteThisVehicle, false, false)
 
 function setVehicleFaction(thePlayer, theCommand, vehicleID, factionID)
 	if exports.integration:isPlayerTrialAdmin(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer) then
 		if not (vehicleID) or not (factionID) then
-			outputChatBox("SYNTAX: /" .. theCommand .. " [vehicleID] [factionID, -1 for removal]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. theCommand .. " [ID del vehículo] [ID facción, -1 para remover]", thePlayer, 255, 194, 14)
 		else
 			local owner = -1
 			local theVehicle = exports.pool:getElement("vehicle", vehicleID)
@@ -2111,7 +2111,7 @@ function setVehicleFaction(thePlayer, theCommand, vehicleID, factionID)
 					owner = getElementData(thePlayer, "account:character:id")
 				else
 					if not factionElement then
-						outputChatBox("No faction with that ID found.", thePlayer, 255, 0, 0)
+						outputChatBox("No se ha encontrado ninguna facción con esa ID.", thePlayer, 255, 0, 0)
 						return
 					end
 				end
@@ -2123,9 +2123,9 @@ function setVehicleFaction(thePlayer, theCommand, vehicleID, factionID)
 				local vehSlots = getElementData(factionElement, "max_vehicles")
 				if result and result[1].vehs >= vehSlots then 
 					if not exports.integration:isPlayerLeadAdmin(thePlayer) then
-						return outputChatBox("This faction has hit the max vehicle limit, lead admin's and above can overide this.", thePlayer, 255, 0, 0)
+						return outputChatBox("Esta facción ha alcanzado el límite máximo de vehículos, los administradores principales y superiores pueden anularlo..", thePlayer, 255, 0, 0)
 					else
-						outputChatBox("This faction has hit the max vehicle limit, due to your admin rank the vehicle was still added.", thePlayer, 255, 0, 0)
+						outputChatBox("Esta facción ha alcanzado el límite máximo de vehículos, debido a su rango de administrador el vehículo todavía se añade.", thePlayer, 255, 0, 0)
 					end
 				else
 					dbFree(qh)
@@ -2137,18 +2137,18 @@ function setVehicleFaction(thePlayer, theCommand, vehicleID, factionID)
 				local int = getElementInterior(theVehicle)
 				local dim = getElementDimension(theVehicle)
 				exports.vehicle:reloadVehicle(tonumber(vehicleID))
-				outputChatBox("Vehicle ID #"..vehicleID.." has been set to faction ID #"..factionID, thePlayer)
+				outputChatBox("Vehículo ID #"..vehicleID.." se ha asignado a la facción ID #"..factionID, thePlayer)
 
 				exports.logs:dbLog(thePlayer, 4, { pveh, theVehicle }, theCommand.." "..factionID)
 				addVehicleLogs(vehicleID, theCommand.." "..factionID, thePlayer)
 			else
-				outputChatBox("No vehicle with that ID found.", thePlayer, 255, 0, 0)
+				outputChatBox("No se ha encontrado ningún vehículo con ese ID.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("setvehiclefaction", setVehicleFaction)
-addCommandHandler("setvehfaction", setVehicleFaction)
+addCommandHandler("asignarfaccionveh", setVehicleFaction)
+addCommandHandler("asigfacveh", setVehicleFaction)
 
 local itemsForTint = {
 	[186] = true, -- Edge Cutter
@@ -2169,7 +2169,7 @@ function setVehTint(admin, command, target, status)
 	local job = getElementData(admin, "job")
 	if exports.integration:isPlayerTrialAdmin(admin) or (job==5) then
 		if not (target) or not (status) then
-			outputChatBox("SYNTAX: /" .. command .. " [player] [0- Off, 1- On]", admin, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. command .. " [Jugador] [0- Sin, 1- Con]", admin, 255, 194, 14)
 		else
 			local username = getPlayerName(admin):gsub("_"," ")
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(admin, target)
@@ -2180,7 +2180,7 @@ function setVehTint(admin, command, target, status)
 
 					if (job == 5) and not exports.integration:isPlayerTrialAdmin(admin) then
 						if targetPlayer ~= admin then
-							outputChatBox("You can only apply tint to yourself.", admin, 255, 0, 0)
+							outputChatBox("Sólo puedes aplicarte tinte a ti mismo.", admin, 255, 0, 0)
 							return
 						end
 					end
@@ -2191,13 +2191,13 @@ function setVehTint(admin, command, target, status)
 						if (job == 5) and not exports.integration:isPlayerTrialAdmin(admin) then
 							for k,v in pairs(itemsForTint) do
 								if not exports["item-system"]:hasItem(admin, k) then
-									outputChatBox("You are missing the necessary items to complete this tint.", admin, 255, 0, 0)
+									outputChatBox("Le faltan los objetos necesarios para completar este tinte.", admin, 255, 0, 0)
 									return
 								end
 							end
 							for k,v in pairs(itemsForTint) do
 								if not exports["item-system"]:takeItem(admin, k) then
-									outputChatBox("There was an error taking the item. Please report this bug.", admin, 255, 0, 0)
+									outputChatBox("Se ha producido un error al tomar el objeto. Por favor, informa de este error.", admin, 255, 0, 0)
 									return
 								end
 							end
@@ -2213,7 +2213,7 @@ function setVehTint(admin, command, target, status)
 
 						exports.anticheat:changeProtectedElementDataEx(pv, "tinted", true, true)
 						triggerClientEvent("tintWindows", pv)
-						outputChatBox("You have added tint to vehicle #" .. vid .. ".", admin)
+						outputChatBox("Ha añadido tinte al vehículo #" .. vid .. ".", admin)
 
 						exports.logs:dbLog(admin, 6, {pv, targetPlayer}, "SETVEHTINT 1" )
 
@@ -2223,13 +2223,13 @@ function setVehTint(admin, command, target, status)
 						if (job == 5) and not exports.integration:isPlayerTrialAdmin(admin) then
 							for k,v in pairs(itemsForTintRemove) do
 								if not exports["item-system"]:hasItem(admin, k) then
-									outputChatBox("You are missing the necessary items to remove this tint.", admin, 255, 0, 0)
+									outputChatBox("Le faltan los objetos necesarios para eliminar este tinte.", admin, 255, 0, 0)
 									return
 								end
 							end
 							for k,v in pairs(itemsForTintRemove) do
 								if not exports["item-system"]:takeItem(admin, k) then
-									outputChatBox("There was an error taking the item. Please report this bug.", admin, 255, 0, 0)
+									outputChatBox("Se ha producido un error al tomar el objeto. Por favor, informe de este error.", admin, 255, 0, 0)
 									return
 								end
 							end
@@ -2243,26 +2243,26 @@ function setVehTint(admin, command, target, status)
 						end
 						exports.anticheat:changeProtectedElementDataEx(pv, "tinted", false, true)
 						triggerClientEvent("tintWindows", pv)
-						outputChatBox("You have removed tint from vehicle #" .. vid .. ".", admin)
+						outputChatBox("Ha quitado el tinte del vehículo #" .. vid .. ".", admin)
 
 						exports.logs:dbLog(admin, 4, {pv, targetPlayer}, "SETVEHTINT 0" )
 						addVehicleLogs(vid, command.." off", admin)
 					end
 				else
-					outputChatBox("Player not in a vehicle.", admin, 255, 194, 14)
+					outputChatBox("Jugador que no está en un vehículo.", admin, 255, 194, 14)
 				end
 			end
 		end
 	end
 end
-addCommandHandler("setvehtint", setVehTint)
+addCommandHandler("asigtinteveh", setVehTint)
 addEvent("setvehtint", true)
 addEventHandler("setvehtint", root, setVehTint)
 
 function setVehiclePlate(thePlayer, theCommand, vehicleID, ...)
 	if exports.integration:isPlayerTrialAdmin(thePlayer)  then
 		if not (vehicleID) or not (...) then
-			outputChatBox("SYNTAX: /" .. theCommand .. " [vehicleID] [Text]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. theCommand .. " [ID del vehículo] [Texto]", thePlayer, 255, 194, 14)
 		else
 			local theVehicle = exports.pool:getElement("vehicle", vehicleID)
 			if theVehicle then
@@ -2284,22 +2284,22 @@ function setVehiclePlate(thePlayer, theCommand, vehicleID, ...)
 
 							addVehicleLogs(vehicleID, theCommand.." "..plateText, thePlayer)
 						else
-							outputChatBox("This plate is already in use! =( umadbro?", thePlayer, 255, 0, 0)
+							outputChatBox("Esta matrícula ya está en uso.", thePlayer, 255, 0, 0)
 						end
 					else
-						outputChatBox("Invalid plate text specified.", thePlayer, 255, 0, 0)
+						outputChatBox("Texto de matrícula especificado no válido.", thePlayer, 255, 0, 0)
 					end
 				--else
 				--	outputChatBox("This vehicle doesn't have any plates.", thePlayer, 255, 0, 0)
 				--end
 			else
-				outputChatBox("No vehicles with that ID found.", thePlayer, 255, 0, 0)
+				outputChatBox("No se han encontrado vehículos con ese ID.", thePlayer, 255, 0, 0)
 			end
 		end
 	end
 end
-addCommandHandler("setvehicleplate", setVehiclePlate)
-addCommandHandler("setvehplate", setVehiclePlate)
+addCommandHandler("asignarmatriculaveh", setVehiclePlate)
+addCommandHandler("asigmatriveh", setVehiclePlate)
 
 -- /entercar
 function warpPedIntoVehicle2(player, car, ...)
@@ -2335,16 +2335,16 @@ function enterCar(thePlayer, commandName, targetPlayerName, targetVehicle, seat)
 						local occupant = getVehicleOccupant(theVehicle, seat)
 						if occupant then
 							removePedFromVehicle(occupant)
-							outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " has put " .. targetPlayerName .. " onto your seat.", occupant)
+							outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " ha puesto " .. targetPlayerName .. " en tu asiento.", occupant)
 							exports.anticheat:changeProtectedElementDataEx(occupant, "realinvehicle", 0, false)
 						end
 
 						if warpPedIntoVehicle2(targetPlayer, theVehicle, seat) then
 
-							outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " has warped you into this " .. getVehicleName(theVehicle) .. ".", targetPlayer)
-							outputChatBox("You warped " .. targetPlayerName .. " into " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer)
+							outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " te ha metido en este " .. getVehicleName(theVehicle) .. ".", targetPlayer)
+							outputChatBox("Has metido a  " .. targetPlayerName .. " en este  " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer)
 						else
-							outputChatBox("Unable to warp " .. targetPlayerName .. " into " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer, 255, 0, 0)
+							outputChatBox("No se puede meter a " .. targetPlayerName .. " en este " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer, 255, 0, 0)
 						end
 					else
 						local found = false
@@ -2354,41 +2354,41 @@ function enterCar(thePlayer, commandName, targetPlayerName, targetVehicle, seat)
 							if not occupant then
 								found = true
 								if warpPedIntoVehicle2(targetPlayer, theVehicle, seat) then
-									outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " has warped you into this " .. getVehicleName(theVehicle) .. ".", targetPlayer)
-									outputChatBox("You warped " .. targetPlayerName .. " into " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer)
+									outputChatBox("Admin " .. getPlayerName(thePlayer):gsub("_", " ") .. " te ha metido en este " .. getVehicleName(theVehicle) .. ".", targetPlayer)
+									outputChatBox("Has metido a " .. targetPlayerName .. " en este " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer)
 								else
-									outputChatBox("Unable to warp " .. targetPlayerName .. " into " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer, 255, 0, 0)
+									outputChatBox("No se puede meter a " .. targetPlayerName .. " en este " .. getVehicleName(theVehicle) .. " #" .. targetVehicle .. ".", thePlayer, 255, 0, 0)
 								end
 								break
 							end
 						end
 
 						if not found then
-							outputChatBox("No free seats.", thePlayer, 255, 0, 0)
+							outputChatBox("No hay asientos libres.", thePlayer, 255, 0, 0)
 						end
 					end
 
 					addVehicleLogs(targetVehicle, commandName.." "..targetPlayerName, thePlayer)
 				else
-					outputChatBox("Vehicle not found", thePlayer, 255, 0, 0)
+					outputChatBox("Vehículo no encontrado", thePlayer, 255, 0, 0)
 				end
 			end
 		else
-			outputChatBox("SYNTAX: /" .. commandName .. " [player] [car ID] [seat]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. commandName .. " [Jugador] [ID vehículo] [Asiento]", thePlayer, 255, 194, 14)
 		end
 	end
 end
-addCommandHandler("entercar", enterCar, false, false)
-addCommandHandler("enterveh", enterCar, false, false)
-addCommandHandler("entervehicle", enterCar, false, false)
+addCommandHandler("entrarveh", enterCar, false, false)
+addCommandHandler("entrarvehiculo", enterCar, false, false)
+addCommandHandler("meteraveh", enterCar, false, false)
 
 function switchSeat(thePlayer, commandName, seat)
 	if true then
-		outputChatBox("This command is temporarily disabled.", thePlayer, 255, 0, 0)
+		outputChatBox("Este comando está temporalmente desactivado.", thePlayer, 255, 0, 0)
 		return false
 	end
 	if not tonumber(seat) then
-		outputChatBox("SYNTAX: /" .. commandName .. " [Seat]" ,thePlayer, 255, 194, 14)
+		outputChatBox("SYNTAX: /" .. commandName .. " [Asiento]" ,thePlayer, 255, 194, 14)
 	else
 		seat = tonumber(seat)
 		local theVehicle = getPedOccupiedVehicle(thePlayer)
@@ -2400,36 +2400,36 @@ function switchSeat(thePlayer, commandName, seat)
 				if not occupant then
 					if seat == 0 then
 						if not getElementData(thePlayer, "license.car.cangetin") and getElementData(theVehicle, "owner") == -2 then -- Fixed your script, Maxime. - Adams
-							outputChatBox("(( This DoL Car is for the Driving Test only. ))", thePlayer, 255, 194, 14)
+							outputChatBox("(( Este coche DoL es sólo para el examen de conducir. ))", thePlayer, 255, 194, 14)
 							return false
 						end
 
 						local job = getElementData(theVehicle, "job")
 						if job ~= 0 then -- Fixed your script, Maxime. - Adams
-							outputChatBox("(( This vehicle is for Job System only. ))", thePlayer, 255, 194, 14)
+							outputChatBox("(( Este vehículo es sólo para el sistema de trabajos. ))", thePlayer, 255, 194, 14)
 							return false
 						end
 					end
 
 					warpPedIntoVehicle2(thePlayer, theVehicle, seat)
-					outputChatBox("You switched into seat "..seat..".", thePlayer, 0, 255, 0)
+					outputChatBox("Cambiaste de asiento "..seat..".", thePlayer, 0, 255, 0)
 				else
-					outputChatBox("Unable to switch seats.", thePlayer, 255, 0, 0)
+					outputChatBox("No se puede cambiar de asiento.", thePlayer, 255, 0, 0)
 				end
 			else
-				outputChatBox("Unable to switch seats.", thePlayer, 255, 0, 0)
+				outputChatBox("No se puede cambiar de asiento.", thePlayer, 255, 0, 0)
 			end
 		else
-			outputChatBox("Unable to switch seats.", thePlayer, 255, 0, 0)
+			outputChatBox("No se puede cambiar de asiento.", thePlayer, 255, 0, 0)
 		end
 	end
 end
-addCommandHandler("switchseat", switchSeat, false, false)
+addCommandHandler("cambiarasiento", switchSeat, false, false)
 
 function setOdometer(thePlayer, theCommand, vehicleID, odometer)
 	if exports.integration:isPlayerSeniorAdmin(thePlayer) or exports.integration:isPlayerScripter(thePlayer) or exports.integration:isPlayerVehicleConsultant(thePlayer) then
 		if not tonumber(vehicleID) or not tonumber(odometer) then
-			outputChatBox("SYNTAX: /" .. theCommand .. " [vehicleID] [odometer]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. theCommand .. " [ID vehículo] [Cuentakilómetros]", thePlayer, 255, 194, 14)
 			--outputChatBox("Remember to add three extra digits at the end. If desired odometer value is 222, write 222000", thePlayer, 255, 194, 14)
 		else
 			local theVehicle = exports.pool:getElement("vehicle", vehicleID)
@@ -2441,7 +2441,7 @@ function setOdometer(thePlayer, theCommand, vehicleID, odometer)
 
 					exports.anticheat:changeProtectedElementDataEx(theVehicle, 'odometer', actualOdometer, false )
 
-					outputChatBox("Vehicle odometer set to " .. odometer .. ".", thePlayer, 0, 255, 0)
+					outputChatBox("Cuentakilómetros del vehículo puesto en " .. odometer .. ".", thePlayer, 0, 255, 0)
 					for _, v in pairs(getVehicleOccupants(theVehicle)) do
 						triggerClientEvent(v, "realism:distance", theVehicle, actualOdometer)
 					end
@@ -2450,18 +2450,18 @@ function setOdometer(thePlayer, theCommand, vehicleID, odometer)
 		end
 	end
 end
-addCommandHandler("setodometer", setOdometer)
-addCommandHandler("setmilage", setOdometer)
+addCommandHandler("asigcuentkm", setOdometer)
+addCommandHandler("asignarcuentakilometros", setOdometer)
 
 function damageproofVehicle(thePlayer, theCommand, theFaggot)
 	if exports.integration:isPlayerLeadAdmin(thePlayer) then
 		if not (theFaggot) then
-			outputChatBox("SYNTAX: /" .. theCommand .. " [Target Player Nick / ID]", thePlayer, 255, 194, 14)
+			outputChatBox("SYNTAX: /" .. theCommand .. " [Nombre del jugador / ID]", thePlayer, 255, 194, 14)
 		else
 			local targetPlayer, targetPlayerName = exports.global:findPlayerByPartialNick(thePlayer, theFaggot)
 			local targetVehicle = getPedOccupiedVehicle(targetPlayer)
 			if not targetVehicle then
-				outputChatBox("This player is not in a vehicle.", thePlayer, 255, 0, 0)
+				outputChatBox("Este jugador no está en un vehículo.", thePlayer, 255, 0, 0)
 				return
 			end
 			if targetVehicle then
@@ -2470,25 +2470,25 @@ function damageproofVehicle(thePlayer, theCommand, theFaggot)
 					exports.mysql:query_free("UPDATE `vehicles` SET `bulletproof`='0' WHERE `id`='"..vehID.."'")
 					setVehicleDamageProof(targetVehicle, false)
 					exports.anticheat:setEld(targetVehicle, "bulletproof", 0 )
-					outputChatBox("This vehicle is no longer damageproof.", targetPlayer)
-					outputChatBox("Vehicle ID " .. vehID .. " is no longer damageproof.", thePlayer)
+					outputChatBox("Este vehículo ya no es a prueba de daños.", targetPlayer)
+					outputChatBox("Vehículo ID " .. vehID .. " ya no es a prueba de daños.", thePlayer)
 					exports.logs:dbLog("ac"..tostring(getElementData(thePlayer, "dbid")), 4, "ve"..vehID, " Removed vehicle damage proof ")
 				else
 					setVehicleDamageProof(targetVehicle, true)
 					exports.anticheat:setEld(targetVehicle, "bulletproof", 1 )
 					exports.mysql:query_free("UPDATE `vehicles` SET `bulletproof`='1' WHERE `id`='"..vehID.."'")
-					outputChatBox("This vehicle is now damageproof.", targetPlayer)
-					outputChatBox("Vehicle ID " .. vehID .. " is now damageproof.", thePlayer)
+					outputChatBox("Este vehículo es ahora a prueba de daños.", targetPlayer)
+					outputChatBox("Vehículo ID " .. vehID .. " es ahora a prueba de daños.", thePlayer)
 					exports.logs:dbLog("ac"..tostring(getElementData(thePlayer, "dbid")), 4, "ve"..vehID, " Enabled vehicle damage proof ")
 				end
 			end
 		end
 	end
 end
-addCommandHandler("setdamageproof", damageproofVehicle)
-addCommandHandler("setbulletproof", damageproofVehicle)
-addCommandHandler("sbp", damageproofVehicle)
-addCommandHandler("sdp", damageproofVehicle)
+addCommandHandler("asigapruebadaños", damageproofVehicle)
+addCommandHandler("asigapruebabalas", damageproofVehicle)
+addCommandHandler("aad", damageproofVehicle)
+addCommandHandler("aab", damageproofVehicle)
 
 function setVehicleTire(thePlayer, commandName, ...)
 	if not exports.integration:isPlayerTrialAdmin(thePlayer) then
@@ -2496,8 +2496,8 @@ function setVehicleTire(thePlayer, commandName, ...)
 	end
 
 	if not (...) then 
-		outputChatBox("SYNTAX: /" .. commandName .. " [vehicleID] [1st wheel] [2nd wheel] [3rd wheel] [4th wheel]", thePlayer, 255, 194, 14)
-		outputChatBox("If you're unsure how to use this command please refer to: https://wiki.multitheftauto.com/wiki/SetVehicleWheelStates", thePlayer, 255, 194, 14)
+		outputChatBox("SYNTAX: /" .. commandName .. " [ID vehículo] [Rueda 1] [Rueda 2] [Rueda 3] [Rueda 4]", thePlayer, 255, 194, 14)
+		outputChatBox("Si no está seguro de cómo utilizar este comando, consulte: https://wiki.multitheftauto.com/wiki/SetVehicleWheelStates", thePlayer, 255, 194, 14)
 		return false
 	end
 		
@@ -2505,12 +2505,12 @@ function setVehicleTire(thePlayer, commandName, ...)
 	local vehicle = exports.pool:getElement("vehicle", args[1])
 	if vehicle then 
 		setVehicleWheelStates(vehicle, args[2] or -1, args[3] or -1, args[4] or -1, args[5] or -1)
-		outputChatBox("The wheel states have been set for vehicle ID #" .. args[1], thePlayer, 100, 255, 100)
+		outputChatBox("Se han establecido los estados de las ruedas para la identificación del vehículo #" .. args[1], thePlayer, 100, 255, 100)
 	else
-		outputChatBox("Vehicle #"..args[1].." doesn't exist.", thePlayer, 255, 0, 0)
+		outputChatBox("Vehículo #"..args[1].."no existe.", thePlayer, 255, 0, 0)
 	end
 end
-addCommandHandler("setwheelstate", setVehicleTire)
+addCommandHandler("asigestadoruedas", setVehicleTire)
 
 function setVehicleAsHotwired(thePlayer, commandName, vin)
 	if not exports.integration:isPlayerTrialAdmin(thePlayer) then
@@ -2523,14 +2523,14 @@ function setVehicleAsHotwired(thePlayer, commandName, vin)
 
 	local vehicle = exports.pool:getElement("vehicle", vin)
 	if not vehicle then 
-		return outputChatBox("Vehicle doesn't exist.", thePlayer, 255, 0, 0)
+		return outputChatBox("El vehículo no existe.", thePlayer, 255, 0, 0)
 	end
 
 	local hotwiredData = getElementData(vehicle, "hotwired")
 	if hotwiredData then 
-		outputChatBox("You've made this vehicle no longer hotwireable", thePlayer, 255, 255, 128)
+		outputChatBox("Has hecho que este vehículo ya no sea puenteable", thePlayer, 255, 255, 128)
 	else
-		outputChatBox("You've made this vehicle hotwireable", thePlayer, 255, 255, 128)
+		outputChatBox("Usted ha hecho este vehículo puenteable", thePlayer, 255, 255, 128)
 	end
 
 	setElementData(vehicle, "hotwired", not hotwiredData)
@@ -2538,4 +2538,4 @@ function setVehicleAsHotwired(thePlayer, commandName, vin)
 	addVehicleLogs(vin , "SET TO " .. (hotwiredData and "NO LONGER ALLOW HOTWIRE START." or "ALLOW HOTWIRE START."), thePlayer )
 	exports.logs:dbLog(thePlayer, 4, { vehicle, thePlayer } , "SET VEHICLE TO " .. (hotwiredData and "NO LONGER ALLOW HOTWIRE START." or "ALLOW HOTWIRE START."))
 end
-addCommandHandler("sethotwired", setVehicleAsHotwired)
+addCommandHandler("asigpuenteable", setVehicleAsHotwired)

@@ -19,13 +19,13 @@ function openEditVehicleWindow()
 	if exports.integration:isPlayerVehicleConsultant( localPlayer ) or exports.integration:isPlayerLeadAdmin( localPlayer ) or exports.integration:isPlayerVCTMember( localPlayer ) then
 		local theVehicle = getPedOccupiedVehicle( localPlayer )
 		if not theVehicle then
-			outputChatBox( "You must be in a vehicle.", 255, 194, 14)
+			outputChatBox( "Debe estar en un vehículo.", 255, 194, 14)
 			return false
 		end
 		
 		local vehdbid = getElementData(theVehicle, "dbid")
 		if not vehdbid or vehdbid <=0 then
-			outputChatBox( "This vehicle can not have custom properties.", 255, 194, 14)
+			outputChatBox( "Este vehículo no puede tener propiedades personalizadas.", 255, 194, 14)
 			return false
 		end
 		

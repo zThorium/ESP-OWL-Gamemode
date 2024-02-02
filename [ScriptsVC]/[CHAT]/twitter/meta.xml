@@ -1,0 +1,5 @@
+﻿<meta>
+	<info author="K1ng" version="1.0" name="Chat" description="Sistema de chat RP" type="script" />
+	<script src="chat1.lua" type="server" />
+	 
+</meta>

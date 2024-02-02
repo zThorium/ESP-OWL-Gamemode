@@ -1,0 +1,13 @@
+<meta>
+	<info author="#Tasi, MrDante" name="Health Point / Ponto de Cura" description="Health Point / Ponto de Cura para seu servidor, mais especializado em RPG" type="script" version="2.0" />
+
+	<script src="C_HealthPoint.lua" type="client" cache="false" />
+	<script src="C_HealthPoint-Util.lua" type="client" cache="false" />
+	<file src="sfx/health.mp3" />
+	<file src="gfx/healthpoint.png" />
+	<file src="gfx/close1.png" />
+	<file src="gfx/close2.png" />
+	<file src="gfx/Swansea.ttf" />
+	<file src="gfx/OpenSans.ttf" />
+	<file src="gfx/Blackwhite.fx" />
+</meta>

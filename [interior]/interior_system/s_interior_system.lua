@@ -560,8 +560,8 @@ function buyInteriorCash(pickup, cost, isHouse, isRentable, furniture)
 			outputChatBox("Congratulations! You are now renting this property for $" .. exports.global:formatMoney(cost) .. ".", client, 255, 194, 14)
 		else
 			outputChatBox("Congratulations! You have just bought this business for $" .. exports.global:formatMoney(cost) .. ".", client, 255, 194, 14)
-			exports.global:giveMoney( getTeamFromName("Government of Los Santos"), cost )
-			exports.bank:addBankTransactionLog(charid, -(getElementData(gov, "id")), cost, 5 , "Interior Purchase", intName.." (ID: "..pickupid..")" )
+			--exports.global:giveMoney( getTeamFromName("Government of Los Santos"), cost )
+			--exports.bank:addBankTransactionLog(charid, -(getElementData(gov, "id")), cost, 5 , "Interior Purchase", intName.." (ID: "..pickupid..")" )
 		end
 
 		mysql:query_free( "UPDATE interiors SET owner='" .. charid .. "', locked=0, tokenUsed=0, lastused=NOW(), furniture="..(furniture and 1 or 0).." WHERE id='" .. pickupid .. "'")

@@ -131,19 +131,7 @@ function applyMods()
 	-- Objects --
 	-------------
 	local txd = engineLoadTXD('mods/objects/all_walls.txd',true)
-	engineImportTXD(txd, 1008)
-	engineImportTXD(txd, 1009)
-	engineImportTXD(txd, 1010)
-	engineImportTXD(txd, 3060)
-
-	engineReplaceModel(engineLoadDFF("mods/objects/wall017.dff", 1008), 1008) -- Custom Wall
-	engineReplaceCOL(engineLoadCOL("mods/objects/wall017.col"), 1008)	
 	
-	engineReplaceModel(engineLoadDFF("mods/objects/wall045.dff", 1009), 1009) -- Custom Doorway
-	engineReplaceCOL(engineLoadCOL("mods/objects/wall045.col"), 1009)	
-
-	engineReplaceModel(engineLoadDFF("mods/objects/wall063.dff", 1010), 1010) -- Custom Window
-	engineReplaceCOL(engineLoadCOL("mods/objects/wall063.col"), 1010)		
 	
 	engineReplaceModel(engineLoadDFF("mods/objects/wall101.dff", 3060), 3060) -- Custom Large Wall
 	engineReplaceCOL(engineLoadCOL("mods/objects/wall101.col"), 3060)	

@@ -10,7 +10,7 @@
 function reload(dbid, duty)
 	triggerEvent('global:playSound3D', client, ':weapon/sounds/reload_1.mp3', false, 20, 100, false, false)
 	if not (isPedDucked(client)) and not isPedInVehicle(client) then
-		exports.global:applyAnimation(client, "BUDDY", "buddy_reload", 4000, true, true, true)
+		exports.global:applyAnimation(client, "BUDDY", "buddy_reload", 2500, true, true, true)
 	end
 
 	refreshWeaponsAndAmmoTables(client)
@@ -89,7 +89,7 @@ function unload(dbid, client_ammo)
 			return
 		end
 	end
-	outputChatBox( "Errors occurred while unloading weapon.", client, 255, 0, 0 )
+	outputChatBox( "Un error ha ocurrido mientras se recargaba.", client, 255, 0, 0 )
 	triggerClientEvent(client, 'weapon:reload:callback', resourceRoot)
 end
 addEvent('weapon:unload', true)
