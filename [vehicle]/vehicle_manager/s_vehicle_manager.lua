@@ -47,25 +47,25 @@ addEvent("vehicleManager:openit", true)
 addEventHandler("vehicleManager:openit", getRootElement(), getAllVehs)
 
 function delVehCmd(thePlayer, vehID )
-	executeCommandHandler ( "delveh", thePlayer, vehID )
+	executeCommandHandler ( "borrarveh", thePlayer, vehID )
 end
 addEvent("vehicleManager:delVeh", true)
 addEventHandler("vehicleManager:delVeh", getRootElement(), delVehCmd)
 
 function gotoVeh(thePlayer, vehID )
-	executeCommandHandler ( "gotocar", thePlayer, vehID )
+	executeCommandHandler ( "iraveh", thePlayer, vehID )
 end
 addEvent("vehicleManager:gotoVeh", true)
 addEventHandler("vehicleManager:gotoVeh", getRootElement(), gotoVeh)
 
 function restoreVeh(thePlayer, vehID )
-	executeCommandHandler ( "restoreveh", thePlayer, vehID )
+	executeCommandHandler ( "restaurarveh", thePlayer, vehID )
 end
 addEvent("vehicleManager:restoreVeh", true)
 addEventHandler("vehicleManager:restoreVeh", getRootElement(), restoreVeh)
 
 function removeVeh(thePlayer, vehID )
-	executeCommandHandler ( "removeveh", thePlayer, vehID )
+	executeCommandHandler ( "removerveh", thePlayer, vehID )
 end
 addEvent("vehicleManager:removeVeh", true)
 addEventHandler("vehicleManager:removeVeh", getRootElement(), removeVeh)
@@ -109,7 +109,7 @@ function checkVeh(thePlayer, commandName, vehID)
 				outputChatBox("O utilice SYNTAX: /"..commandName.." [ID del Vehículo]", thePlayer, 255, 194, 14)
 				return false
 			elseif vehID <= 0 then
-				outputChatBox( "No se puede usar /checkveh en un vehículo temporal.", thePlayer, 255, 0, 0)
+				outputChatBox( "No se puede usar /checarveh en un vehículo temporal.", thePlayer, 255, 0, 0)
 				return false
 			end
 		end
@@ -125,7 +125,7 @@ function checkVeh(thePlayer, commandName, vehID)
 			end
 
 			if row["vjob"] ~= "-1" then
-				outputChatBox("No se puede /checkveh en un vehículo de trabajo del ayuntamiento.", thePlayer, 255, 0, 0)
+				outputChatBox("No se puede /checarveh en un vehículo de trabajo del ayuntamiento.", thePlayer, 255, 0, 0)
 				return false
 			end
 
@@ -161,12 +161,12 @@ function checkVeh(thePlayer, commandName, vehID)
 			mysql:free_result(mQuery2)
 			triggerClientEvent(thePlayer, "createCheckVehWindow", thePlayer, result, exports.global:getPlayerAdminTitle(thePlayer), result2, notes)
 		else
-			outputChatBox("Database Error!", thePlayer, 255, 0, 0)
+			outputChatBox("Error de base de datos!", thePlayer, 255, 0, 0)
 		end
 	end
 end
-addCommandHandler("checkveh", checkVeh)
-addCommandHandler("checkvehicle", checkVeh)
+addCommandHandler("checarveh", checkVeh)
+addCommandHandler("checarvehiculo", checkVeh)
 addEvent("vehicleManager:checkveh", true)
 addEventHandler("vehicleManager:checkveh", getRootElement(), checkVeh)
 
@@ -205,7 +205,7 @@ function getVehicleWeight (thePlayer, commandName, specifiedVehicle)
 		if not specifiedVehicle then
 			local vehicle = getPedOccupiedVehicle(thePlayer) or false
 			if not vehicle then
-				outputChatBox("Necesitas estar sentado en un vehículo para usar este comando, o puedes usar /getvehweight <veh ID>..", thePlayer, 255, 194, 14)
+				outputChatBox("Necesitas estar sentado en un vehículo para usar este comando, o puedes usar /obtenerpesoveh <veh ID>..", thePlayer, 255, 194, 14)
 				return false
 			else
 				local mass = getVehicleHandling(vehicle).mass or false
@@ -235,7 +235,7 @@ function getVehicleWeight (thePlayer, commandName, specifiedVehicle)
 		end
 	end
 end
-addCommandHandler("getvehweight", getVehicleWeight)
+addCommandHandler("obtenerpesoveh", getVehicleWeight)
 
 function systemDeleteVehicle(vehid, reason) --This function is meant to be used by the system or to be triggered from UCP remotely. Works similarly to the delveh however, it's simplier and doesn't use mta elements. / MAXIME / 2015.1.11
 	if vehid and tonumber(vehid) then
